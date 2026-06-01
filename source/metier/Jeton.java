@@ -3,6 +3,8 @@ package source.metier;
 public class Jeton
 {
 	private char symbole;
+
+	// Ajout d'un paramètre boolean base pour savoir si le jeton est une base ou non
 	
 	public static Jeton creerJetons(char symbole)
 	{
