@@ -2,7 +2,7 @@ package metier;
 
 public class Base extends Jeton
 {
-	String espece;
+	private String espece;
 	
 	public Base(char symbole, String espece)
 	{
