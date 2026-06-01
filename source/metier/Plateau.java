@@ -1,4 +1,5 @@
 package source.metier;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,8 @@ public class Plateau
 	
 	public Plateau()
 	{
+		this.lstJetons   = new ArrayList<Jeton  >();
+		this.lstLiaisons = new ArrayList<Liaison>();
 
-		
 	}
 }

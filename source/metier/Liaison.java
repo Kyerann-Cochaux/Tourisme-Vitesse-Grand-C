@@ -14,20 +14,21 @@ public class Liaison
 		this.espece             = espece;
 	}
 	
-	public Jeton getPlaneteSource(){return this.planeteSource;}
-	public Jeton getPlaneteDestination(){return this.planeteDestination;}
-	public String getEspece(){return this.espece;}
+	public Jeton getPlaneteSource     () {return this.planeteSource     ;}
+	public Jeton getPlaneteDestination() {return this.planeteDestination;}
+	public String getEspece           () {return this.espece            ;}
 	
 	public boolean setEspece(String espece)
 	{
-		if(espece == null){return false;}
+		if( espece == null || espece.equals("") ) return false;
+		
 		this.espece = espece;
 		return true;
 	}
 	
 	public String toString()
 	{
-		return "Planete source : "      + this.planetSource       +
+		return "Planete source : "      + this.planeteSource      +
 		       "Planete destination : " + this.planeteDestination +
 		       "Espece :              " + this.espece;
 	}
