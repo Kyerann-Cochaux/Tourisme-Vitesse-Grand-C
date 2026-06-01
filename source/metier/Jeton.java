@@ -8,9 +8,7 @@ public class Jeton
 	{
 		symbole = Character.toUpperCase(symbole);
 
-		if(symbole != 'G' && symbole != 'O' && symbole != 'T' && symbole != 'V')
-			return null;
-		
+		if(!Jeton.parametresValide(symbole) ) return null;	
 		return new Jeton(symbole);
 	}
 
@@ -20,6 +18,12 @@ public class Jeton
 	}
 	
 	public char getSymbole() {return this.symbole;}
+
+	protected static boolean parametresValide(char symbole)
+	{
+		return (symbole != 'G' && symbole != 'O' && symbole != 'T' && symbole != 'V');
+	}
+	
 	
 	public String toString()
 	{

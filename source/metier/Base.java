@@ -6,7 +6,7 @@ public class Base extends Jeton
 
 	public static Base creerBase(char symbole, String espece)
 	{
-		if (Jeton.creerJetons(symbole) == null) return null;
+		if (!Jeton.parametresValide(symbole) ) return null;
 		return new Base(symbole, espece);
 	}
 	

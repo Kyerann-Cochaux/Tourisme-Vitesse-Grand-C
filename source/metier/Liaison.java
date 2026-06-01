@@ -21,7 +21,7 @@ public class Liaison
 	public boolean setEspece(String espece)
 	{
 		if( espece == null || espece.equals("") ) return false;
-		
+
 		this.espece = espece;
 		return true;
 	}
