@@ -1,3 +1,8 @@
+package source;
+
+
+import source.metier.Jeton;
+
 public class TestJeton
 {
 	public static void main(String[] args) 

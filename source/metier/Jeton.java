@@ -1,4 +1,4 @@
-package metier;
+package source.metier;
 
 public class Jeton
 {
@@ -14,7 +14,7 @@ public class Jeton
 		return new Jeton(symbole);
 	}
 
-	private Jeton(char symbole)
+	protected Jeton(char symbole)
 	{
 		this.symbole = symbole;
 	}
