@@ -1,10 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Plateau
 {
-	ArrayList<Jeton> lstJetons;
-	ArrayList<Liaison> lstLiaisons;
+	List<Jeton>   lstJetons;
+	List<Liaison> lstLiaisons;
 	
 	public Plateau()
 	{
+		
 		
 	}
 }
