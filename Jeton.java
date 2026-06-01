@@ -1,3 +1,5 @@
+package metier;
+
 public class Jeton
 {
 	private char symbole;
