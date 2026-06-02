@@ -10,19 +10,19 @@ public class TestJeton
 
 		Jeton j;
 
-		j = Jeton.creerJetons('A',null);
+		j = Jeton.creerJeton('A',null);
 		System.out.println( (j == null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJetons('G',null);
+		j = Jeton.creerJeton('G',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 
-		j = Jeton.creerJetons('O',null);
+		j = Jeton.creerJeton('O',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 
-		j = Jeton.creerJetons('T',null);
+		j = Jeton.creerJeton('T',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 
-		j = Jeton.creerJetons('V',null);
+		j = Jeton.creerJeton('V',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 
 

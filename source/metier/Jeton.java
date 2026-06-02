@@ -3,11 +3,11 @@ package source.metier;
 public class Jeton
 {
 	private char   symbole;
-	private String espece ;
+	private String espece  ;
 
 	// Ajout d'un paramètre boolean base pour savoir si le jeton est une base ou non
 	
-	public static Jeton creerJetons(char symbole, String espece)
+	public static Jeton creerJeton(char symbole, String espece)
 	{
 		symbole = Character.toUpperCase(symbole);
 

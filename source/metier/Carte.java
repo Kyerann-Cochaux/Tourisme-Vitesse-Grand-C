@@ -13,18 +13,18 @@ public class Carte
 				return new Carte(symbole, premium);
 			
 		}
-		
+		 
 		return null;
 	}
 	
-	public Carte(String symbole, boolean premium)
+	private Carte(String symbole, boolean premium)
 	{
 		this.symbole = symbole;
 		this.premium = premium;
 	}
 	
 	public String  getSymbole() {return this.symbole;}
-	public boolean getpremium() {return this.premium;}
+	public boolean gePremium () {return this.premium;}
 	
 	public String toString()
 	{

@@ -65,10 +65,25 @@ public class Plateau
 
 	public Jeton getJeton   (int indice) { return this.lstJetons.get(indice);}
 	public int   getNbJeton ()           { return this.lstJetons.size()     ;}
-	public void retirerJeton(Jeton j)    { this.lstJetons       .remove(j)  ;}
 
 	public Liaison getLiaison  (int indice) { return this.lstLiaisons.get(indice);}
 	public int     getNbLiaison()           { return this.lstLiaisons.size()     ;}
+
+	/* ---------------------------------- */
+	/*               Setters              */
+	/* ---------------------------------- */
+
+	/* ---------------------------------- */
+	/*           Autres méthodes          */
+	/* ---------------------------------- */
+
+	public void ajouterJeton(Jeton j)
+	{
+
+	}
+
+	public void retirerJeton(Jeton j)    { this.lstJetons       .remove(j)  ;}
+
 
 
 

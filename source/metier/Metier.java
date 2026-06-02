@@ -14,4 +14,6 @@ public class Metier
 	{
 		this.plateauJeu = Plateau.creerPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
+
+	
 }
