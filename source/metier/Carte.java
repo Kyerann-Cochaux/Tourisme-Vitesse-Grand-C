@@ -5,6 +5,8 @@ public class Carte
 	private String symbole;
 	private boolean premium;
 	
+	/*Factory pour verifier si le symbole en paramètre fait partie des symbole
+	  du tableau TAB_FORMES*/
 	public static Carte creerCarte(String symbole, boolean premium)
 	{
 		for(String esp : Plateau.TAB_FORMES)
@@ -23,8 +25,16 @@ public class Carte
 		this.premium = premium;
 	}
 	
+	/* ---------------------------------- */
+	/*               Getters              */
+	/* ---------------------------------- */
+	
 	public String  getSymbole() {return this.symbole;}
 	public boolean gePremium () {return this.premium;}
+	
+	/* ---------------------------------- */
+	/*          méthodes standard         */
+	/* ---------------------------------- */
 	
 	public String toString()
 	{
