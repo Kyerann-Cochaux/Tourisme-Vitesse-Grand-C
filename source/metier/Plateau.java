@@ -12,6 +12,8 @@ public class Plateau
 	private   static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
 												   // Vert           BLeu       Rouge    Magenta
 
+
+	private Case[][]      plateau;
 	private List<Liaison> lstLiaisons;
 	private List<Zone>    lstZones;
 
@@ -19,6 +21,10 @@ public class Plateau
 
 	private String[] ensEspeces; // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
 	private String[] ensFormes;  // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
+
+	// rajouter une liste de cases dans Plateau, car au début il n'y a pas de zone, mais il y a des cases
+
+	// Permettre l'ajout des cases dans une Zone uniquement à partir des cases qui ne sont pas encore affectées dans une zone.
 
 	public static Plateau creerPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
@@ -48,6 +54,12 @@ public class Plateau
 		for (int cpt = 0; cpt < this.ensEspeces.length; cpt++) 
 			this.ensEspeces[cpt] = Plateau.TAB_ESPECES[cpt];
 
+		this.plateau = new Case[this.nbLignes][this.nbColonnes];
+
+		for (int lig = 0; lig < this.nbLignes; lig++) 
+			for (int col = 0; col < this.nbColonnes; col++) 
+			
+				plateau[lig][col] = new Case();
 	}
 
 	/* ---------------------------------- */
@@ -62,11 +74,11 @@ public class Plateau
 	public String[] getNomFormes () {return this.ensFormes  ;}
 	public String[] getNomEspeces() { return this.ensEspeces;}
 
-	public Liaison getJeton   (int indice) { return this.lstLiaisons.get(indice);}
-	public int     getNbJeton ()           { return this.lstLiaisons.size()     ;}
+	public Liaison getLiaison (int indice) { return this.lstLiaisons.get(indice);}
+	public Zone    getZone    (int indice) { return this.lstZones   .get(indice);}
 
-	public Zone getZone  (int indice) { return this.lstZones.get(indice);}
-	public int  getNbZone()           { return this.lstZones.size()     ;}
+	public int  getNbLiaisons() { return this.lstLiaisons.size();}
+	public int  getNbZone    () { return this.lstZones   .size();}
 
 	/* ---------------------------------- */
 	/*               Setters              */
@@ -81,19 +93,16 @@ public class Plateau
 
 		boolean estIdentique = false;
 
-
-		
 		if (z == null)                  return false;
 		if (this.lstZones.contains(z) ) return false;
 
 		for (Zone zTemp : this.lstZones) 
-		{
-			for (Case c : zTemp.getEnsCases() ) 
-			{
-				if (zTemp.getCase(c) == z.getCase(c) ) estIdentique = true;
-				
-			}
-		}
+			if (zTemp.getEnsCases().equals(z.getEnsCases() ) ) 
+
+				return false;
+	
+
+		if (estIdentique) return false;
 
 		this.lstZones.add(z);
 

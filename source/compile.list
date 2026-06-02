@@ -1,7 +1,13 @@
-./metier/Base.java
+./metier/Carte.java
+./metier/Case.java
 ./metier/Jeton.java
 ./metier/Liaison.java
+./metier/Metier.java
+./metier/Pioche.java
 ./metier/Plateau.java
+./metier/Zone.java
+
+.
 
 ./Controleur.java
 ./TestJeton.java

@@ -12,7 +12,7 @@ public class Jeton
 		symbole = Character.toUpperCase(symbole);
 
 		if(!Jeton.parametresValide         (symbole     ) ) return null;	
-		if (espece == null || espece.equals("") ) return new Jeton(symbole);
+		if (espece == null || espece.equals("") ) return null;
 
 		return new Jeton(symbole, espece);
 

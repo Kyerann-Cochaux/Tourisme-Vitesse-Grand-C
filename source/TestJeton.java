@@ -15,6 +15,7 @@ public class TestJeton
 		
 		j = Jeton.creerJeton('G',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
+		System.out.println(j);
 
 		j = Jeton.creerJeton('O',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");

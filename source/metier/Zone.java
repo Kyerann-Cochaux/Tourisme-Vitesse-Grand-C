@@ -24,6 +24,9 @@ public class Zone
 	/*           Autres Méthodes          */
 	/* ---------------------------------- */
 
+
+	// Vérifier que les cases sélectionnées soient adjacentes entre-elles
+
 	public boolean ajouterCase(Case c) 
 	{
 		if (c == null || this.ensCase.contains(c) ) return false;
@@ -37,7 +40,7 @@ public class Zone
     {
         if (!this.ensCase.contains(c) ) return false;
         this.ensCase.remove(c);
-		
+
         return true;
     }
     

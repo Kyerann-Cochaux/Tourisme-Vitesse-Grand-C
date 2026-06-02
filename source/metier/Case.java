@@ -21,6 +21,19 @@ public class Case
 	public Jeton getJeton() {return this.jeton;}
 
 	/* ---------------------------------- */
+	/*               Setters              */
+	/* ---------------------------------- */
+
+	public boolean setJeton(Jeton jeton)
+	{
+		if (jeton == null && jeton == this.jeton) return false;
+		
+		this.jeton = jeton;
+
+		return true;
+	}
+
+	/* ---------------------------------- */
 	/*          méthodes standard         */
 	/* ---------------------------------- */
 
