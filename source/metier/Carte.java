@@ -3,31 +3,31 @@ package source.metier;
 public class Carte
 {
 	private String symbole;
-	private Boolean type;
+	private boolean premium;
 	
-	public static Carte creerCarte(String symbole, Boolean type)
+	public static Carte creerCarte(String symbole, boolean premium)
 	{
-		for(elem : Plateau.TAB_FORMES)
+		for(String esp : Plateau.TAB_FORMES)
 		{
-			if(elem.equals(symbole))
-			{
-				return Carte(symbole, type);
-			}
+			if(esp.equals(symbole) )
+				return new Carte(symbole, premium);
+			
 		}
+		
 		return null;
 	}
 	
-	public Carte(String symbole, String type)
+	public Carte(String symbole, boolean premium)
 	{
 		this.symbole = symbole;
-		this.type    = type;
+		this.premium = premium;
 	}
 	
-	public String  getSymbole(){return this.symbole;}
-	public Boolean getType()   {return this.type;   }
+	public String  getSymbole() {return this.symbole;}
+	public boolean getpremium() {return this.premium;}
 	
 	public String toString()
 	{
-		return "Symbole : " + this.symbole + ", type : " + this.type;
+		return "Symbole : " + this.symbole + ", premium : " + this.premium;
 	}
 }

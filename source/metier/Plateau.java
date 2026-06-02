@@ -10,9 +10,8 @@ public class Plateau
 	private static final int NB_TYPE_MAX = 4;
 
 	protected static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
-	
-	private static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
-												 // Vert           BLeu       Rouge    Magenta
+	private   static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
+												   // Vert           BLeu       Rouge    Magenta
 
 	private List<Jeton>   lstJetons;
 	private List<Liaison> lstLiaisons;
