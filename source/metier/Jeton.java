@@ -3,7 +3,7 @@ package source.metier;
 public class Jeton
 {
 	private char   symbole;
-	private String espece  ;
+	private String espece ;
 
 	// Ajout d'un paramètre boolean base pour savoir si le jeton est une base ou non
 	
@@ -18,13 +18,13 @@ public class Jeton
 
 	}
 
-	protected Jeton(char symbole, String espece)
+	private Jeton(char symbole, String espece)
 	{
 		this.symbole = symbole;
 		this.espece  = espece;
 	}
 
-	protected Jeton(char symbole)
+	private Jeton(char symbole)
 	{
 		this(symbole, null);
 	}
