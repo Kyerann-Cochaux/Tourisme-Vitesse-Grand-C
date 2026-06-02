@@ -12,15 +12,14 @@ public class Plateau
 	private   static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
 												   // Vert           BLeu       Rouge    Magenta
 
-
-	private Case[][]      plateau;
+	private Case[][]      ensCasesNeutre;
 	private List<Liaison> lstLiaisons;
 	private List<Zone>    lstZones;
 
-	private int nbLignes, nbColonnes;
-
 	private String[] ensEspeces; // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
 	private String[] ensFormes;  // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
+
+	private int nbLignes, nbColonnes;
 
 	// rajouter une liste de cases dans Plateau, car au début il n'y a pas de zone, mais il y a des cases
 
@@ -48,18 +47,24 @@ public class Plateau
 		this.ensFormes  = new String[nbFormes ];
 		this.ensEspeces = new String[nbEspeces];
 
+		/* Ces tableaux permettent de savoir quels valeurs sont utilisés lors d'une partie 
+
+			Si il y a 3 formes, on prends les 3 premières dans le tableau de constantes.
+			S'il y a 4 couleurs, on prends les 4 couleurs dans le tableau de constantes.
+		*/
+
 		for (int cpt = 0; cpt < this.ensFormes.length; cpt++) 
 			this.ensFormes[cpt] = Plateau.TAB_FORMES[cpt];
 
 		for (int cpt = 0; cpt < this.ensEspeces.length; cpt++) 
 			this.ensEspeces[cpt] = Plateau.TAB_ESPECES[cpt];
 
-		this.plateau = new Case[this.nbLignes][this.nbColonnes];
+		this.ensCasesNeutre = new Case[this.nbLignes][this.nbColonnes];
 
 		for (int lig = 0; lig < this.nbLignes; lig++) 
 			for (int col = 0; col < this.nbColonnes; col++) 
 			
-				plateau[lig][col] = new Case();
+				ensCasesNeutre[lig][col] = new Case(lig, col);
 	}
 
 	/* ---------------------------------- */
@@ -73,9 +78,11 @@ public class Plateau
 
 	public String[] getNomFormes () {return this.ensFormes  ;}
 	public String[] getNomEspeces() { return this.ensEspeces;}
-
-	public Liaison getLiaison (int indice) { return this.lstLiaisons.get(indice);}
-	public Zone    getZone    (int indice) { return this.lstZones   .get(indice);}
+	
+	public String  getEspece (int indice) { return this.ensEspeces[indice]     ;}
+	public String  getForme  (int indice) { return this.ensFormes [indice]     ;}
+	public Liaison getLiaison(int indice) { return this.lstLiaisons.get(indice);}
+	public Zone    getZone   (int indice) { return this.lstZones   .get(indice);}
 
 	public int  getNbLiaisons() { return this.lstLiaisons.size();}
 	public int  getNbZone    () { return this.lstZones   .size();}
@@ -117,5 +124,24 @@ public class Plateau
 
 		return true;
 	}
+
+	public String afficherPlateau()
+	{
+		String sRet = "";
+
+		for (int lig = 0; lig < this.ensCasesNeutre.length; lig++) 
+		{
+			for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
+			{
+				sRet += (this.ensCasesNeutre[lig][col].getJeton() != null ) ? this.ensCasesNeutre[lig][col].getJeton().getSymbole() : '.';		
+			}
+
+			sRet += "\n";
+			
+		}
+
+		return sRet;
+	}
+
 
 }

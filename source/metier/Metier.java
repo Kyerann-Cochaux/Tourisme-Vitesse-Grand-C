@@ -2,8 +2,8 @@ package source.metier;
 
 public class Metier
 {
-	private Plateau plateauJeu  ;
-	private Pioche  pioche;
+	private Plateau plateauJeu;
+	private Pioche  pioche    ;
 
 	public Metier()
 	{
@@ -15,6 +15,15 @@ public class Metier
 	{
 		this.plateauJeu = Plateau.creerPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
+
+	/* ---------------------------------- */
+	/*               Getters              */
+	/* ---------------------------------- */
+
+	public Plateau getPlateau() { return this.plateauJeu;}
+	public Pioche  getPioche () { return this.pioche    ;}
+
+	
 
 	
 }

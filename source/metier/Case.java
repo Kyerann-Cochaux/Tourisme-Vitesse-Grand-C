@@ -3,15 +3,16 @@ package source.metier;
 public class Case 
 {
 	private Jeton jeton;
+	private int   posX, posY;
 
-	public Case(Jeton jeton)
+	public Case(int posX, int posY, Jeton jeton)
 	{
 		this.jeton = jeton;
 	}
 
-	public Case()
+	public Case(int posX, int posY)
 	{
-		this(null);
+		this(posX, posY, null);
 	}
 
 	/* ---------------------------------- */
