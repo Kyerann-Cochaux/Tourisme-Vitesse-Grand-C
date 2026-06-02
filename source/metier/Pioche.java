@@ -36,18 +36,17 @@ public class Pioche
 	
 	public boolean enleverCarte(String symbole, boolean premium)
 	{
-		int cpt = 0;
 		
 		for(Carte carte : this.pioche)
 		{
 			if(carte.getSymbole().equals(symbole) && 
 			   carte.getPremium() == premium)
 			{
-				this.pioche.remove(cpt);
+				this.pioche.remove(carte);
 				return true;
 			}
-			cpt++;
 		}
+		
 		return false;
 	}
 	
