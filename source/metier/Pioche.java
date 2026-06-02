@@ -20,6 +20,20 @@ public class Pioche
 		this.pioche.add(Carte.creerCarte("Joker", true ));
 	}
 	
+	/* ---------------------------------- */
+	/*               Getters              */
+	/* ---------------------------------- */
+	
+	public Carte getCarte(int indice)
+	{
+		if(indice >= this.pioche.size() || indice < 0){return null;}
+		return this.pioche.get(indice);
+	}
+
+	/* ---------------------------------- */
+	/*           Autres méthodes          */
+	/* ---------------------------------- */
+	
 	public Boolean enleverCarte(String symbole, boolean premium)
 	{
 		int cpt = 0;
@@ -37,11 +51,9 @@ public class Pioche
 		return false;
 	}
 	
-	public Carte getCarte(int indice)
-	{
-		if(indice >= this.pioche.size() || indice < 0){return null;}
-		return this.pioche.get(indice);
-	}
+	/* ---------------------------------- */
+	/*          méthodes standard         */
+	/* ---------------------------------- */
 	
 	public String toString()
 	{
