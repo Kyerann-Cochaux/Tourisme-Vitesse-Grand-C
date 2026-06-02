@@ -9,8 +9,10 @@ public class Plateau
 	private static final int TAILLE_MAX = 30;
 	private static final int NB_TYPE_MAX = 4;
 
-	private static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique"};
-	private static final String[] TAB_ESPECES = {}; // À définir avec les espèces
+	private static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
+	
+	private static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
+												 // Vert           BLeu       Rouge    Magenta
 
 	private List<Jeton>   lstJetons;
 	private List<Liaison> lstLiaisons;
@@ -18,7 +20,7 @@ public class Plateau
 	private int nbLignes, nbColonnes;
 
 	private String[] ensEspeces; // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
-	private String[] ensFormes; // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
+	private String[] ensFormes;  // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
 
 	public static Plateau creerPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
@@ -64,7 +66,7 @@ public class Plateau
 
 	public Jeton getJeton   (int indice) { return this.lstJetons.get(indice);}
 	public int   getNbJeton ()           { return this.lstJetons.size()     ;}
-	public void retirerJeton(Jeton j)   { this.lstJetons       .remove(j)  ;}
+	public void retirerJeton(Jeton j)    { this.lstJetons       .remove(j)  ;}
 
 	public Liaison getLiaison  (int indice) { return this.lstLiaisons.get(indice);}
 	public int     getNbLiaison()           { return this.lstLiaisons.size()     ;}
