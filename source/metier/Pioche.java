@@ -13,11 +13,11 @@ public class Pioche
 		
 		for(String esp : Plateau.TAB_FORMES)
 		{
-			this.pioche.add(Carte.creerCarte(esp, false));
-			this.pioche.add(Carte.creerCarte(esp, true ));
+			this.pioche.add(Carte.creerCarte(esp, false) );
+			this.pioche.add(Carte.creerCarte(esp, true ) );
 		}
-		this.pioche.add(Carte.creerCarte("Joker", false));
-		this.pioche.add(Carte.creerCarte("Joker", true ));
+		this.pioche.add(Carte.creerCarte("Joker", false) );
+		this.pioche.add(Carte.creerCarte("Joker", true ) );
 	}
 	
 	/* ---------------------------------- */
@@ -26,7 +26,7 @@ public class Pioche
 	
 	public Carte getCarte(int indice)
 	{
-		if(indice >= this.pioche.size() || indice < 0){return null;}
+		if(indice >= this.pioche.size() || indice < 0) return null;
 		return this.pioche.get(indice);
 	}
 
@@ -34,7 +34,7 @@ public class Pioche
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 	
-	public Boolean enleverCarte(String symbole, boolean premium)
+	public boolean enleverCarte(String symbole, boolean premium)
 	{
 		int cpt = 0;
 		
@@ -46,7 +46,7 @@ public class Pioche
 				this.pioche.remove(cpt);
 				return true;
 			}
-			cpt ++;
+			cpt++;
 		}
 		return false;
 	}

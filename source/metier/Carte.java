@@ -30,7 +30,7 @@ public class Carte
 	/* ---------------------------------- */
 	
 	public String  getSymbole() {return this.symbole;}
-	public boolean gePremium () {return this.premium;}
+	public boolean getPremium () {return this.premium;}
 	
 	/* ---------------------------------- */
 	/*          méthodes standard         */
