@@ -22,7 +22,7 @@ public class TestMetier
 		lstCases.add(new Case(0, 0) );
 		lstCases.add(new Case(1, 0) );
 		lstCases.add(new Case(2, 0) );
-		lstCases.add(new Case(3, 0,Plateau.get) );
+		lstCases.add(p.getCase(0, 0) ) ;
 
 		System.out.println(p.afficherPlateau() );
 

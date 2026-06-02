@@ -5,16 +5,18 @@ public class Jeton
 	private char   symbole;
 	private String espece ;
 
-	/*Factory pour verifier si le symbole du jeton fait partie des symbole autoriser 
-	  et si l'espece n'est pas null ou vide*/
+	/*Factory pour vérifier si le symbole du jeton fait partie des symbole autorisés */
+
 	public static Jeton creerJeton(char symbole, String espece)
 	{
-		symbole = Character.toUpperCase(symbole);
 
-		if(!Jeton.parametresValide         (symbole     ) ) return null;	
-		if (espece == null || espece.equals("") ) return null;
+		if(!Jeton.parametresValide(symbole) ) return null;	
 
-		return new Jeton(symbole, espece);
+		// L'espèce est null, donc le Jeton ne possède qu'un symbole
+		if (espece == null || espece.equals("") ) return new Jeton(symbole); 
+
+		// L'espèce est non null, le Jeton est donc une base
+		return new Jeton(Character.toUpperCase(symbole), espece);
 
 	}
 
@@ -40,17 +42,20 @@ public class Jeton
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 	
-	protected static boolean parametresValide(char symbole)
+	private static boolean parametresValide(char symbole)
 	{
-		return (symbole != 'G' && symbole != 'O' && symbole != 'T' && symbole != 'V');
+		return (symbole != 'g' && symbole != 'o' && symbole != 't' && symbole != 'v');
 	}
-	
+
+	public boolean estBase() { return this.espece != null && !this.espece.equals("");}
+
 	/* ---------------------------------- */
 	/*          méthodes standard         */
 	/* ---------------------------------- */
-	
+
 	public String toString()
 	{
-		return "Symbole : " + this.symbole;
+		return "Symbole : " + this.symbole + ( (this.estBase() ) ? "\n" + 
+			   "Base    :"  + this.espece : "");
 	}
 }

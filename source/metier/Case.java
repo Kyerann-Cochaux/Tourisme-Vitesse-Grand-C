@@ -27,7 +27,7 @@ public class Case
 
 	public boolean setJeton(Jeton jeton)
 	{
-		if (jeton == null && jeton == this.jeton) return false;
+		if (jeton == null || jeton == this.jeton) return false;
 		
 		this.jeton = jeton;
 
@@ -40,7 +40,7 @@ public class Case
 
 	public String toString()
 	{
-		return "Case : " + this.jeton.toString();
+		return "Case : " + ( this.getJeton() != null ? this.getJeton().getSymbole() : "Aucun") + " [" + this.posX + ":" + this.posY + "]";
 	}
 	
 }

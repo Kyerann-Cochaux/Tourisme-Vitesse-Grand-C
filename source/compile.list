@@ -1,3 +1,6 @@
+./ihm/FrameInit.java
+./ihm/PanelInit.java
+
 ./metier/Carte.java
 ./metier/Case.java
 ./metier/Jeton.java
@@ -6,9 +9,6 @@
 ./metier/Pioche.java
 ./metier/Plateau.java
 ./metier/Zone.java
-
-./ihm/FrameInit.java
-./ihm/PanelInit.java
 
 ./Controleur.java
 ./TestJeton.java

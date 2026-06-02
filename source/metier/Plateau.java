@@ -47,7 +47,7 @@ public class Plateau
 		this.ensFormes  = new String[nbFormes ];
 		this.ensEspeces = new String[nbEspeces];
 
-		/* Ces tableaux permettent de savoir quels valeurs sont utilisés lors d'une partie 
+		/* Ces tableaux permettent de savoir quelles valeurs sont utilisés lors d'une partie 
 
 			Si il y a 3 formes, on prends les 3 premières dans le tableau de constantes.
 			S'il y a 4 couleurs, on prends les 4 couleurs dans le tableau de constantes.
@@ -83,6 +83,9 @@ public class Plateau
 	public String  getForme  (int indice) { return this.ensFormes [indice]     ;}
 	public Liaison getLiaison(int indice) { return this.lstLiaisons.get(indice);}
 	public Zone    getZone   (int indice) { return this.lstZones   .get(indice);}
+
+	public Case     getCase    (int ligne, int colonne) {return this.ensCasesNeutre[ligne][colonne];}
+	public Case[][] getEnsCases()                       { return this.ensCasesNeutre;}
 
 	public int  getNbLiaisons() { return this.lstLiaisons.size();}
 	public int  getNbZone    () { return this.lstZones   .size();}
@@ -132,10 +135,9 @@ public class Plateau
 		for (int lig = 0; lig < this.ensCasesNeutre.length; lig++) 
 		{
 			for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
-			{
+			
 				sRet += (this.ensCasesNeutre[lig][col].getJeton() != null ) ? this.ensCasesNeutre[lig][col].getJeton().getSymbole() : '.';		
-			}
-
+	
 			sRet += "\n";
 			
 		}
