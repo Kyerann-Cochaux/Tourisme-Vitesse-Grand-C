@@ -33,7 +33,8 @@ public class Jeton
 	/*               Getters              */
 	/* ---------------------------------- */
 	
-	public char getSymbole() {return this.symbole;}
+	public char   getSymbole() {return this.symbole;}
+	public String getEspece () {return this.espece ;}
 
 	/* ---------------------------------- */
 	/*           Autres méthodes          */

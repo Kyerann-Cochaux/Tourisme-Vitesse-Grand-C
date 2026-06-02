@@ -2,12 +2,13 @@ package source.metier;
 
 public class Metier
 {
-	private Plateau plateauJeu;
-	// private Pioche piocheFerme;
+	private Plateau plateauJeu  ;
+	private Pioche  pioche;
 
 	public Metier()
 	{
 		this.plateauJeu = null;
+		this.pioche     = new Pioche();
 	}
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)

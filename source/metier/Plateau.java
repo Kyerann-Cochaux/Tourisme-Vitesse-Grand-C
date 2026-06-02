@@ -7,14 +7,13 @@ public class Plateau
 {
 
 	private static final int TAILLE_MAX = 30;
-	private static final int NB_TYPE_MAX = 4;
 
 	protected static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
 	private   static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
 												   // Vert           BLeu       Rouge    Magenta
 
-	private List<Jeton>   lstJetons;
 	private List<Liaison> lstLiaisons;
+	private List<Zone>    lstZones;
 
 	private int nbLignes, nbColonnes;
 
@@ -34,8 +33,8 @@ public class Plateau
 	
 	private Plateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
-		this.lstJetons   = new ArrayList<Jeton  >();
 		this.lstLiaisons = new ArrayList<Liaison>();
+		this.lstZones    = new ArrayList<Zone>   ();
 
 		this.nbLignes   = nbLignes;
 		this.nbColonnes = nbColonnes;
@@ -63,11 +62,11 @@ public class Plateau
 	public String[] getNomFormes () {return this.ensFormes  ;}
 	public String[] getNomEspeces() { return this.ensEspeces;}
 
-	public Jeton getJeton   (int indice) { return this.lstJetons.get(indice);}
-	public int   getNbJeton ()           { return this.lstJetons.size()     ;}
+	public Liaison getJeton   (int indice) { return this.lstLiaisons.get(indice);}
+	public int     getNbJeton ()           { return this.lstLiaisons.size()     ;}
 
-	public Liaison getLiaison  (int indice) { return this.lstLiaisons.get(indice);}
-	public int     getNbLiaison()           { return this.lstLiaisons.size()     ;}
+	public Zone getZone  (int indice) { return this.lstZones.get(indice);}
+	public int  getNbZone()           { return this.lstZones.size()     ;}
 
 	/* ---------------------------------- */
 	/*               Setters              */
@@ -77,16 +76,37 @@ public class Plateau
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
-	public void ajouterJeton(Jeton j)
+	public boolean ajouterZone(Zone z)
 	{
+
+		boolean estIdentique = false;
+
+
+		
+		if (z == null)                  return false;
+		if (this.lstZones.contains(z) ) return false;
+
+		for (Zone zTemp : this.lstZones) 
+		{
+			for (Case c : zTemp.getEnsCases() ) 
+			{
+				if (zTemp.getCase(c) == z.getCase(c) ) estIdentique = true;
+				
+			}
+		}
+
+		this.lstZones.add(z);
+
+		return true;
 
 	}
 
-	public void retirerJeton(Jeton j)    { this.lstJetons       .remove(j)  ;}
+	public boolean supprimerZone(Zone z) 
+	{
+		if (!this.lstZones.contains(z) ) return false;
+		this.lstZones.remove(z);
 
-
-
-
-
+		return true;
+	}
 
 }

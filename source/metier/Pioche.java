@@ -60,9 +60,8 @@ public class Pioche
 		
 		sRet += "Pioche :\n";
 		for(Carte carte : this.pioche)
-		{
 			sRet += carte.toString() + "\n";
-		}
+		
 		return sRet;
 	}
 }
