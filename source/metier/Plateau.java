@@ -62,9 +62,9 @@ public class Plateau
 	public String[] getNomFormes () {return this.ensFormes  ;}
 	public String[] getNomEspeces() { return this.ensEspeces;}
 
-	public Jeton getJeton  (int indice) { return this.lstJetons.get(indice);}
-	public int   getNbJeton()           { return this.lstJetons.size()     ;}
-	public void retirerJeton() {}
+	public Jeton getJeton   (int indice) { return this.lstJetons.get(indice);}
+	public int   getNbJeton ()           { return this.lstJetons.size()     ;}
+	public void retirerJeton(Jeton j)   { this.lstJetons       .remove(j)  ;}
 
 	public Liaison getLiaison  (int indice) { return this.lstLiaisons.get(indice);}
 	public int     getNbLiaison()           { return this.lstLiaisons.size()     ;}
