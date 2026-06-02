@@ -5,8 +5,8 @@ public class Jeton
 	private char   symbole;
 	private String espece ;
 
-	// Ajout d'un paramètre boolean base pour savoir si le jeton est une base ou non
-	
+	/*Factory pour verifier si le symbole du jeton fait partie des symbole autoriser 
+	  et si l'espece n'est pas null ou vide*/
 	public static Jeton creerJeton(char symbole, String espece)
 	{
 		symbole = Character.toUpperCase(symbole);
@@ -29,14 +29,24 @@ public class Jeton
 		this(symbole, null);
 	}
 
+	/* ---------------------------------- */
+	/*               Getters              */
+	/* ---------------------------------- */
 	
 	public char getSymbole() {return this.symbole;}
 
+	/* ---------------------------------- */
+	/*           Autres méthodes          */
+	/* ---------------------------------- */
+	
 	protected static boolean parametresValide(char symbole)
 	{
 		return (symbole != 'G' && symbole != 'O' && symbole != 'T' && symbole != 'V');
 	}
 	
+	/* ---------------------------------- */
+	/*          méthodes standard         */
+	/* ---------------------------------- */
 	
 	public String toString()
 	{
