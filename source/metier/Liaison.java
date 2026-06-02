@@ -14,9 +14,17 @@ public class Liaison
 		this.espece             = espece;
 	}
 	
+	/* ---------------------------------- */
+	/*               Getters              */
+	/* ---------------------------------- */
+	
 	public Jeton getPlaneteSource     () {return this.planeteSource     ;}
 	public Jeton getPlaneteDestination() {return this.planeteDestination;}
 	public String getEspece           () {return this.espece            ;}
+	
+	/* ---------------------------------- */
+	/*               Setters              */
+	/* ---------------------------------- */
 	
 	public boolean setEspece(String espece)
 	{
@@ -25,6 +33,10 @@ public class Liaison
 		this.espece = espece;
 		return true;
 	}
+	
+	/* ---------------------------------- */
+	/*          méthodes standard         */
+	/* ---------------------------------- */
 	
 	public String toString()
 	{
