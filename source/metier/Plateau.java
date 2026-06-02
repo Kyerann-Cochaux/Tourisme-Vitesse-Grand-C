@@ -9,7 +9,7 @@ public class Plateau
 	private static final int TAILLE_MAX = 30;
 	private static final int NB_TYPE_MAX = 4;
 
-	private static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
+	protected static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
 	
 	private static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
 												 // Vert           BLeu       Rouge    Magenta
