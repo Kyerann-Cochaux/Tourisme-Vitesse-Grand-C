@@ -82,7 +82,7 @@ public class PanelInit extends JPanel implements ActionListener
 
 		this.tabLbl[0].setFont( new Font(this.tabLbl[0].getFont().getName(), this.tabLbl[0].getFont().getStyle(),100) );
 
-		/*--- CONFIGURATION ET CENTRAGE DES JTEXTFIELD ---*/
+		/*--- CO3NFIGURATION ET CENTRAGE DES JTEXTFIELD ---*/
 
 		for (JTextField txtF : this.tabTxt)
 		{
@@ -111,6 +111,9 @@ public class PanelInit extends JPanel implements ActionListener
 	
 		this.add(panelSaisie, BorderLayout.CENTER);
 		this.add(panelAction, BorderLayout.SOUTH );
+
+		this.btnLancer.addActionListener(this);
+		this.btnRenitialiser.addActionListener(this);
 	}
 
 	/*
@@ -168,8 +171,35 @@ public class PanelInit extends JPanel implements ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-		
+		if(e.getSource() == this.btnLancer)
+		{
+			try
+			{
+				int nbLignes    = Integer.parseInt(this.tabTxt[0].getText());
+				int nbColonnes  = Integer.parseInt(this.tabTxt[1].getText());
+				int nbEspece    = Integer.parseInt(this.tabTxt[2].getText());
+				int nbPlanete   = Integer.parseInt(this.tabTxt[3].getText());
+
+
+			}
+			catch(NumberFormatException ex)
+			{
+				this.rinitialiserTexte();
+			}
+		}
+
+		if(e.getSource() == this.btnRenitialiser)
+		{
+			this.rinitialiserTexte();
+		}
 	}
 	
+	private void rinitialiserTexte()
+	{
+		this.tabTxt[0].setText("Valeur entre 1 et 30");
+		this.tabTxt[1].setText("Valeur entre 1 et 30");
+		this.tabTxt[2].setText("Valeur entre 2 et 4" );
+		this.tabTxt[3].setText("Valeur entre 2 et 4" );
+	}
 	
 }
