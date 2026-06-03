@@ -1,5 +1,8 @@
 package source.metier;
 
+import java.io.FileInputStream;
+import java.util.Scanner;
+
 public class Metier
 {
 	private Plateau plateauJeu;
@@ -25,5 +28,27 @@ public class Metier
 
 	
 
+
+	/* ---------------------------------- */
+	/*          Autres méthodes           */
+	/* ---------------------------------- */
+	
+	// le numero des sauvegardes commence a 0
+	public boolean sauvegardeExiste(int numSauvegarde)
+	{
+		String chemin = String.format("../source/metier/sauvegardes/sauvegarde-%03d.data", numSauvegarde);
+		
+		try
+		{
+			Scanner sc = new Scanner ( new FileInputStream ( chemin ), "UTF8" );
+			sc.close();
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+		
+		return true;
+	}
 	
 }
