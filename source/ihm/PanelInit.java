@@ -1,9 +1,13 @@
 package source.ihm;
 
 import javax.swing.*;
+
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import source.Controleur ;
 
 public class PanelInit extends JPanel implements ActionListener
 {
@@ -23,13 +27,17 @@ public class PanelInit extends JPanel implements ActionListener
 
 	private JButton btnLancer       ;
 	private JButton btnRenitialiser ;
+	
+	private Controleur ctrl ;
 
 	public PanelInit(Controleur ctrl)
 	{
 
 		JPanel panelAction;
 		JPanel panelSaisie;
-
+		
+		this.ctrl = ctrl ;
+		
 		this.setLayout(new BorderLayout() );
 		this.setBackground(PanelInit.COULEUR_FOND);
 
@@ -180,7 +188,7 @@ public class PanelInit extends JPanel implements ActionListener
 				int nbEspece    = Integer.parseInt(this.tabTxt[2].getText());
 				int nbPlanete   = Integer.parseInt(this.tabTxt[3].getText());
 
-				this.Controleur.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
+				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
 
 
 			}
