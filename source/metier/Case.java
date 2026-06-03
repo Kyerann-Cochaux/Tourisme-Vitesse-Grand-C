@@ -22,6 +22,11 @@ public class Case
 	
 	public Jeton getJeton() {return this.jeton;}
 	
+	public boolean estVide()
+	{
+		return this.getJeton() == null;
+	}
+	
 	/* ---------------------------------- */
 	/*           Modificateurs            */
 	/* ---------------------------------- */
@@ -41,7 +46,7 @@ public class Case
 
 	public String toString()
 	{
-		return "Case : " + ( this.getJeton() != null ? this.getJeton().getSymbole() : "Aucun") + " [" + this.posX + ":" + this.posY + "]";
+		return "Case : " + ( this.estVide() ? "Aucun" : this.getJeton().getSymbole() ) + " [" + this.posX + ":" + this.posY + "]";
 	}
 	
 }
