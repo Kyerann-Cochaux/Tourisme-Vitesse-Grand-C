@@ -82,6 +82,8 @@ public class TestMetier
 		System.out.println("/*           Ajout de bases           */");
 		System.out.println("/* ---------------------------------- */");
 
+		p.ajouterForme(5, 5, Planete.creerPlanete('T', null) );
+
 		System.out.println(p);
 
 		
