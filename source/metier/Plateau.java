@@ -13,7 +13,7 @@ public class Plateau
 	                                               // Marron        BLeu      Rouge     Vert
 	
 	private Case[][]      ensCasesNeutre;
-	private List<Liaison> lstLiaisons;
+	private List<Voyage> lstVoyages;
 	private List<Zone>    lstZones;
 	
 	private String[] ensEspeces; // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
@@ -38,7 +38,7 @@ public class Plateau
 	
 	private Plateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
-		this.lstLiaisons = new ArrayList<Liaison>();
+		this.lstVoyages = new ArrayList<Voyage>();
 		this.lstZones    = new ArrayList<Zone>   ();
 		
 		this.nbLignes   = nbLignes;
@@ -79,13 +79,13 @@ public class Plateau
 	public String[] getNomFormes () {return this.ensFormes  ;}
 	public String[] getNomEspeces() { return this.ensEspeces;}
 	
-	public Liaison getLiaison(int indice) { return this.lstLiaisons.get(indice);}
-	public Zone    getZone   (int indice) { return this.lstZones   .get(indice);}
+	public Voyage getVoyage(int indice) { return this.lstVoyages.get(indice);}
+	public Zone    getZone (int indice) { return this.lstZones.get(indice);}
 	
 	public Case     getCase    (int ligne, int colonne) {return this.ensCasesNeutre[ligne][colonne];}
 	public Case[][] getEnsCases()                       {return this.ensCasesNeutre;}
 	
-	public int  getNbLiaisons() { return this.lstLiaisons.size();}
+	public int  getNbVoyages() { return this.lstVoyages.size();}
 	public int  getNbZone    () { return this.lstZones   .size();}
 	
 	/* ---------------------------------- */
@@ -96,19 +96,19 @@ public class Plateau
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
-	public boolean ajouterForme(int posX, int posY, Jeton j) 
+	public boolean ajouterForme(int posX, int posY, Planete j) 
 	{
 		if (!coordonneesValide(posX, posY) ) return false;
-		if (!jetonValide   (j, posX, posY) ) return false;
+		if (!planeteValide   (j, posX, posY) ) return false;
 
-		this.ensCasesNeutre[posX][posY].setJeton(j);
+		this.ensCasesNeutre[posX][posY].setPlanete(j);
 
 		return true;
 	}
 
 	public boolean retirerForme(int posX, int posY)
 	{
-		
+		return true;
 	}
 	
 	public boolean ajouterZone(Zone z)
@@ -124,7 +124,6 @@ public class Plateau
 
 				return false;
 	
-
 		if (estIdentique) return false;
 
 		this.lstZones.add(z);
@@ -150,8 +149,8 @@ public class Plateau
 			for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
 			{
 
-				if (this.ensCasesNeutre[lig][col].getJeton() != null) 
-					sRet += " " + this.ensCasesNeutre[lig][col].getJeton().getSymbole() + " ";	
+				if (this.ensCasesNeutre[lig][col].getPlanete() != null) 
+					sRet += " " + this.ensCasesNeutre[lig][col].getPlanete().getSymbole() + " ";	
 				else
 				sRet += " . ";	
 			}
@@ -169,10 +168,10 @@ public class Plateau
 		       (posY < 0  || posY > this.ensCasesNeutre[posX].length ); 
 	}
 
-	private boolean jetonValide(Jeton j, int posX, int posY)
+	private boolean planeteValide(Planete j, int posX, int posY)
 	{
-		return j != null && j != this.ensCasesNeutre [posX][posY].getJeton()  &&
-		                         this.ensCasesNeutre [posX][posY].getJeton() == null ;
+		return j != null && j != this.ensCasesNeutre [posX][posY].getPlanete()  &&
+		                         this.ensCasesNeutre [posX][posY].getPlanete() == null ;
 	}
 
 

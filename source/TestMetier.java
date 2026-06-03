@@ -9,7 +9,7 @@ public class TestMetier
 	public static void main(String[] args) 
 	{
 		
-		Jeton j;
+		Planete j;
 
 		Metier m = new Metier();
 		Plateau p = null;
@@ -22,19 +22,19 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println();
 		
-		j = Jeton.creerJeton('A',null);
+		j = Planete.creerPlanete('A',null);
 		System.out.println( (j == null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJeton('G',null);
+		j = Planete.creerPlanete('G',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJeton('o',null);
+		j = Planete.creerPlanete('o',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJeton('t',null);
+		j = Planete.creerPlanete('t',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJeton('v',null);
+		j = Planete.creerPlanete('v',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 
 		System.out.println();
@@ -43,20 +43,20 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println();
 
-		j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[0] );
+		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[0] );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
-		j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[1] );
+		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[1] );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
-		j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[2] );
+		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[2] );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
-		j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[3] );
+		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[3] );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
 
-		try { j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[4] );}
+		try { j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[4] );}
 		catch (Exception e) {System.out.println("OK");}
 
 		System.out.println("/* ------------------------------------------- */");
-		System.out.println("/*   Ajout de Jetons simples dans le plateau   */");
+		System.out.println("/*   Ajout de Planetes simples dans le plateau   */");
 		System.out.println("/* ------------------------------------------- */");
 		System.out.println();
 		System.out.println("/* ------- Ajouts impossibles ------- */");
@@ -81,8 +81,6 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println("/*           Ajout de bases           */");
 		System.out.println("/* ---------------------------------- */");
-
-		p.aj
 		
 		
 	}

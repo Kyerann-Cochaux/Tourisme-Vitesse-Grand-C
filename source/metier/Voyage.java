@@ -1,6 +1,6 @@
 package source.metier;
 
-public class Liaison
+public class Voyage
 {
 	private Case planeteSource;
 	private Case planeteDestination;
@@ -9,16 +9,16 @@ public class Liaison
 	
 	/*Factory pour verifier si les parametres ne sont pas null et si la planete de destination n'est pas egale a celle de départ */
 
-	public static Liaison creerLiaison(Case planeteSource, Case planeteDestination, String espece)
+	public static Voyage creerVOyage(Case planeteSource, Case planeteDestination, String espece)
 	{
 		if (planeteDestination == null         ) return null;
 		if (planeteSource      == null         ) return null; 
 		if (planeteDestination == planeteSource) return null;
 
-		return new Liaison(planeteSource,  planeteDestination, espece);
+		return new Voyage(planeteSource,  planeteDestination, espece);
 	}
 
-	public Liaison(Case planeteSource, Case planeteDestination, String espece)
+	public Voyage(Case planeteSource, Case planeteDestination, String espece)
 	{
 		this.planeteSource      = planeteSource;
 		this.planeteDestination = planeteDestination;
