@@ -16,7 +16,7 @@ public class Controleur
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
-		this.metier.creerPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
+		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
 
 	public static void main(String[] args) 
