@@ -57,7 +57,7 @@ public class Jeton
 
 	public String toString()
 	{
-		return "Symbole : " + this.symbole + ( (this.estBase() ) ? "\n" + 
-			   "Base    :"  + this.espece : "");
+		return "Symbole  : " + this.symbole + ( (this.estBase() ) ? "\n" + 
+			   "Base    : " + this.espece : "");
 	}
 }
