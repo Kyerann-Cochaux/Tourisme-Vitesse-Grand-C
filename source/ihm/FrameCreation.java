@@ -25,7 +25,7 @@ public class FrameCreation extends JFrame
 		/*       Création des composants      */
 		/* ---------------------------------- */
 
-		this.ctrl      = ctrl;
+		this.ctrl          = ctrl;
 		this.panelCreation = new PanelCreation(ctrl);
 
 		/* ---------------------------------- */

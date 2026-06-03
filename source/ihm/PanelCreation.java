@@ -10,48 +10,47 @@ import source.Controleur ;
 
 public class PanelCreation extends JPanel implements ActionListener
 {
-	private JPanel panelAcceuil;
+	private Controleur ctrl;
+	
+	private JPanel panelAccueil;
 
-	private JLabel lblMenu   ;
+	private JLabel lblMenu  ;
 
 	private JButton btnNouveau;
 	private JButton btnOuvrir ;
 
-	private Controleur ctrl;
+
 
 	public PanelCreation(Controleur ctrl)
 	{
-		this.panelAcceuil  = new JPanel();
 
 		this.ctrl = ctrl;
-
-		this.panelAcceuil.setLayout(new GridLayout(3, 1) );
 
 		/* ---------------------------------- */
 		/*       Création des composants      */
 		/* ---------------------------------- */
 
-		this.panelAcceuil = new JPanel();
-		this.panelAcceuil = new JPanel();
+		this.panelAccueil = new JPanel();
+		this.panelAccueil.setLayout(new GridLayout(3, 1) );
 
-		this.lblMenu = new JLabel("MENU", SwingConstants.CENTER);
-		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE);
-		this.lblMenu.setForeground(FrameCreation.COULEUR_ZONE);
+		this.lblMenu = new JLabel ("MENU", SwingConstants.CENTER);
+		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE        );
+		this.lblMenu.setForeground(FrameCreation.COULEUR_ZONE        );
 
-		this.btnNouveau   = new JButton("Jouer");
-		this.btnOuvrir    = new JButton("Edition");
+		this.btnNouveau = new JButton("Jouer"  );
+		this.btnOuvrir  = new JButton("Edition");
 
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
-		this.panelAcceuil.add(this.btnNouveau);
-		this.panelAcceuil.add(this.btnOuvrir);
+		this.panelAccueil.add(this.btnNouveau);
+		this.panelAccueil.add(this.btnOuvrir);
 
 		this.add(this.lblMenu);
 		this.add( new JPanel() );
-		this.add(this.panelAcceuil, new GridBagConstraints() );
+		this.add(this.panelAccueil, new GridBagConstraints() );
 
 	}
 
@@ -59,9 +58,10 @@ public class PanelCreation extends JPanel implements ActionListener
 	{
 		if(e.getSource() == this.btnNouveau)
 		{
-			this.remove(this.panelAcceuil);
-			this.add(new PanelInit(this.ctrl));
+			this.remove(this.panelAccueil);
+			this.add(new PanelInit(this.ctrl) );
 		}
+
 		if (e.getSource() == this.btnOuvrir)
 		{
 			
