@@ -19,19 +19,25 @@ public class Case
 	/*            Accesseurs              */
 	/* ---------------------------------- */
 	
-	public Planete getPlanete() {return this.planete;}
-	public boolean estVide   () { return this.getPlanete() == null;}
+	public int     getPosX      () { return this.posX;}
+	public int     getPosY      () { return this.posY;}
+	public Planete getPlanete   () { return this.planete   ;}
+	public int     getNumSysteme() { return this.numSysteme;}	
 	
 	/* ---------------------------------- */
 	/*           Modificateurs            */
 	/* ---------------------------------- */
-
-	public void setPlanete(Planete planete) { this.planete = planete;}
-
+	
+	public void setPlanete   (Planete planete) { this.planete    = planete   ;}
+	public void setNumSysteme(int  numSysteme) { this.numSysteme = numSysteme;}
+	
+	
 	/* ---------------------------------- */
-	/*          Méthodes standard         */
+	/*           Autres Méthodes          */
 	/* ---------------------------------- */
-
+	public boolean estVide  () { return this.getPlanete() == null;}
+	public boolean estNeutre() { return this.numSysteme   == -1  ;}
+	
 	public String toString()
 	{
 		return "Case : " + ( this.estVide() ? "Aucun" : this.getPlanete().getSymbole() ) + " [" + this.posX + ":" + this.posY + "]";

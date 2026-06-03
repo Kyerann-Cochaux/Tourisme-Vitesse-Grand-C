@@ -76,7 +76,7 @@ public class TestMetier
 		b = p.ajouterForme(0, 0, j);
 		System.out.println("Forme déjà présent --> " + (!b ? " OK " : " Erreur ") );
 
-		System.out.println(p);
+		System.out.println(p.afficherPlanetes() );
 
 		System.out.println("/* ---------------------------------- */");
 		System.out.println("/*           Ajout de bases           */");
@@ -94,7 +94,38 @@ public class TestMetier
 		p.ajouterForme(5, 5, Planete.creerPlanete('T',  null) ); 
 		p.ajouterForme(0, 0, Planete.creerPlanete('V',  null) ); 
 
-		System.out.println(p);
+		System.out.println(p.afficherPlanetes() );
+
+		System.out.println("/* ---------------------------------- */");
+		System.out.println("/*           Ajout des Zones          */");
+		System.out.println("/* ---------------------------------- */");
+
+		//p.setNumSysteme(p.getCase(1, 1), 0);
+		
+		
+		
+		//System.out.println(p.afficherPlanetes() );
+
+		
+
+		p.setNumSysteme(p.getCase(0, 1), 0); 
+		p.setNumSysteme(p.getCase(0, 0), 0); 
+		
+
+		//p.setNumSysteme(p.getCase(0, 8), 0);
+		//p.setNumSysteme(p.getCase(0, 9), 0);
+
+		//p.setNumSysteme(p.getCase(0, 0), 0);
+		//p.setNumSysteme(p.getCase(1, 0), 0);
+
+
+		
+
+		//p.setNumSysteme(p.getCase(1, 0), 2);
+
+		//System.out.println(p.getNbSysteme() );
+		System.out.println(p.afficherSystemes() );
+
 
 		
 

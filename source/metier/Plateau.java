@@ -12,11 +12,12 @@ public class Plateau
 	public static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
 	                                               // Marron        BLeu      Rouge     Vert
 	
-	private Case[][]      ensCasesNeutre;
-	private List<Voyage>  lstVoyages;
-
+	private Case[][] ensCases;
 	private String[] ensEspeces; // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
 	private String[] ensFormes;  // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
+
+	private List<Voyage>  lstVoyages;
+	private List<Integer> lstNumSystemes;
 	
 	private int nbLignes, nbColonnes;
 	
@@ -37,7 +38,8 @@ public class Plateau
 	
 	private Plateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
-		this.lstVoyages  = new ArrayList<Voyage >();
+		this.lstVoyages     = new ArrayList<Voyage >();
+		this.lstNumSystemes = new ArrayList<Integer>();
 		
 		this.nbLignes   = nbLignes;
 		this.nbColonnes = nbColonnes;
@@ -57,11 +59,11 @@ public class Plateau
 		for (int cpt = 0; cpt < this.ensEspeces.length; cpt++)
 			this.ensEspeces[cpt] = Plateau.TAB_ESPECES[cpt];
 		
-		this.ensCasesNeutre = new Case[this.nbLignes][this.nbColonnes];
+		this.ensCases = new Case[this.nbLignes][this.nbColonnes];
 		
 		for (int lig = 0; lig < this.nbLignes; lig++)
 			for (int col = 0; col < this.nbColonnes; col++)
-				ensCasesNeutre[lig][col] = new Case(lig, col);
+				ensCases[lig][col] = new Case(lig, col);
 	}
 	
 	/* ---------------------------------- */
@@ -77,16 +79,116 @@ public class Plateau
 	public String[] getNomFormes () {return this.ensFormes  ;}
 	public String[] getNomEspeces() { return this.ensEspeces;}
 	
-	public Voyage  getVoyage (int indice) { return this.lstVoyages .get(indice);}
+	public Voyage getVoyage   (int indice) { return this.lstVoyages .get(indice);}
+	public int    getNbVoyages()           { return this.lstVoyages.size()      ;}
 	
-	public Case     getCase    (int ligne, int colonne) {return this.ensCasesNeutre[ligne][colonne];}
-	public Case[][] getEnsCases()                       {return this.ensCasesNeutre                ;}
+	public Case     getCase    (int ligne, int colonne) {return this.ensCases[ligne][colonne];}
+	public Case[][] getEnsCases()                       {return this.ensCases                ;}
+
+	// Cette méthode retourne le nombre de système différents présents sur le plateau
+
+	public int getNbSysteme()
+	{
+		boolean numExiste = false;
+
+
+		// On parcours les lignes
+		for (int lig = 0; lig < this.ensCases.length; lig++) 
+		{
+			// On parcours les colonnes
+			for (int col = 0; col < this.ensCases[lig].length; col++) 
+			{
+				// On regarde si la case appartient à un système
+				if (!this.ensCases[lig][col].estNeutre() )
+				{
+					int numSysteme = this.ensCases[lig][col].getNumSysteme();
+
+					// Cette boucle vérifie si le numéro du système de la case testé est déjà dans la liste
+					for (Integer numTemp : this.lstNumSystemes) 
+						// Si le numéro existe déjà, on ne l'ajoute pas
+						if (numSysteme == numTemp) numExiste = true;
+
+					// S'il n'est pas présent dans la liste, on l'ajoute, et on remet le booléen à faux
+					if (!numExiste ) 
+					{
+						this.lstNumSystemes.add(numSysteme);
+						numExiste = false;
+					}
+				}	
+			}	
+		}
+
+		return this.lstNumSystemes.size();
+	}
 	
-	public int  getNbVoyages() { return this.lstVoyages .size();}
 	
 	/* ---------------------------------- */
 	/*         Modificateurs              */
 	/* ---------------------------------- */
+
+	/*
+	 Cette méthode vérifie s'il est possible d'associer la case fournie en paramètre avec le numéro du système 
+	 Si le numéro du système existe déjà et qu'aucune Case portant ce dit numéro n'est à proximité de la case en paramètre,
+	 on ne peut pas attribuer ce numéro du système à la case en paramètre.
+	 
+	*/
+
+	// TODO: Finir méthode setNumSysteme(), ne fonctionne pas entièrement selon la case en paramètre
+
+	public boolean setNumSysteme(Case c, int numSysteme)
+	{
+		//System.out.println(c.getPosX() + " " + c.getPosY() );
+
+		// Si la liste ne contient pas le numéro
+		if (!this.lstNumSystemes.contains(numSysteme) )
+		{
+			if (c.estNeutre() )
+			{
+				c.setNumSysteme(numSysteme);
+				this.lstNumSystemes.add(numSysteme);
+				return true;
+			}
+		}
+		// Si la liste contient le numéro...
+		else
+		{
+			// ... On regarde les cases autour de la case en paramètre
+
+			// sur l'axe horizontal
+
+			System.out.println(c.getPosX() - 1 >= 0); // à gauche
+			System.out.println(c.getPosX() + 1 >= 0); // à droite
+
+			System.out.println(c.getPosY() - 1 <= 0); // en haut
+			System.out.println(c.getPosY() + 1 <= 0); // en bas
+
+
+			if (c.getPosY() -1 >= 0 &&    c.getPosY()                      < this.nbColonnes  && 
+			    this.getCase(c.getPosX(), c.getPosY() - 1).getNumSysteme() == numSysteme        ||
+			    this.getCase(c.getPosX(), c.getPosY() ).getNumSysteme() == numSysteme)
+			{
+				c.setNumSysteme(numSysteme);
+				return true;
+			}
+
+			// Puis sur l'axe vertical
+
+			/*if (c.getPosX() - 1 >= 0 && c.getPosX()  +1                    < this.nbLignes +1 &&
+		       this.getCase(c.getPosX() + 1, c.getPosY() ).getNumSysteme() == numSysteme || 
+			   this.getCase(c.getPosX() - 1, c.getPosY() ).getNumSysteme() == numSysteme)
+			{
+				c.setNumSysteme(numSysteme);
+				return true;
+			}*/
+
+
+		}
+				
+		
+
+		return false;
+
+	}
 	
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
@@ -106,12 +208,12 @@ public class Plateau
 		if (j.estBase() )
 		{
 			// On parcours les lignes
-			for (int lig = 0; lig < this.ensCasesNeutre.length; lig++) 
+			for (int lig = 0; lig < this.ensCases.length; lig++) 
 			{
 				// On parcours les colonnes
-				for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
+				for (int col = 0; col < this.ensCases[lig].length; col++) 
 				{
-					Case cTemp = this.ensCasesNeutre[lig][col];
+					Case cTemp = this.ensCases[lig][col];
 
 					if (!cTemp.estVide() )
 					{
@@ -131,43 +233,36 @@ public class Plateau
 
 		if (baseExiste) return false;
 
-		this.ensCasesNeutre[posX][posY].setPlanete(j);
+		this.ensCases[posX][posY].setPlanete(j);
 
 		return true;
 	}
 
 	public boolean retirerForme(int posX, int posY)
 	{
-		if (this.ensCasesNeutre[posX][posY].getPlanete() == null) return false;
+		if (this.ensCases[posX][posY].getPlanete() == null) return false;
 
-		this.ensCasesNeutre[posX][posY].setPlanete(null);
+		this.ensCases[posX][posY].setPlanete(null);
 
 		return true;
 	}
-	
-	public boolean ajouterSysteme()
-	{
 
-		return true;
-
-	}
-
-	public String toString()
+	public String afficherPlanetes()
 	{
 		String sRet = "";
 
-		for (int lig = 0; lig < this.ensCasesNeutre.length; lig++) 
+		for (int lig = 0; lig < this.ensCases.length; lig++) 
 		{
-			for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
+			for (int col = 0; col < this.ensCases[lig].length; col++) 
 			{
 
-				if (this.ensCasesNeutre[lig][col].getPlanete() != null)
+				if (this.ensCases[lig][col].getPlanete() != null)
 				{
 
-					Planete p = this.ensCasesNeutre[lig][col].getPlanete();
+					Planete p = this.ensCases[lig][col].getPlanete();
 
 					sRet += "" + (p.estBase() ? Character.toLowerCase(p.getEspece().charAt(0) ) : ' ') + 
-					             this.ensCasesNeutre[lig][col].getPlanete().getSymbole() + ' ';	
+					             this.ensCases[lig][col].getPlanete().getSymbole() + ' ';	
 				}
 
 				else sRet += " . ";	
@@ -180,16 +275,31 @@ public class Plateau
 		return sRet;
 	}
 
+	public String afficherSystemes()
+	{
+		String sRet = "";
+
+		for (int lig = 0; lig < this.ensCases.length; lig++) 
+		{
+			for (int col = 0; col < this.ensCases[lig].length; col++) 
+				sRet += String.format("%4d",this.ensCases[lig][col].getNumSysteme() );
+
+			sRet += "\n";	
+		}
+
+		return sRet;
+	}
+
 	private boolean coordonneesValide(int posX, int  posY)
 	{
-		return (posX >= 0 && posX < this.ensCasesNeutre      .length ) && 
-		       (posY >= 0 && posY < this.ensCasesNeutre[posX].length ); 
+		return (posX >= 0 && posX < this.ensCases      .length ) && 
+		       (posY >= 0 && posY < this.ensCases[posX].length ); 
 	}
 
 	private boolean planeteValide(Planete j, int posX, int posY)
 	{
-		return j != null && j != this.ensCasesNeutre [posX][posY].getPlanete()  &&
-		                         this.ensCasesNeutre [posX][posY].getPlanete() == null ;
+		return j != null && j != this.ensCases [posX][posY].getPlanete()  &&
+		                         this.ensCases [posX][posY].getPlanete() == null ;
 	}
 
 
