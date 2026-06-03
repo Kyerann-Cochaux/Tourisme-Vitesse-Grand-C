@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class PanelInit extends JPanel
+public class PanelInit extends JPanel implements ActionListener
 {
 
 	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 25);
@@ -162,6 +162,11 @@ public class PanelInit extends JPanel
 
 		panelTemp.setOpaque(false);
 		return panelTemp;
+	}
+
+	public void actionPerformed(ActionEvent e)
+	{
+		
 	}
 	
 	
