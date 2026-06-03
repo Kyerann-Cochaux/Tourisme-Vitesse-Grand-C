@@ -30,7 +30,7 @@ public class PanelEdition extends JPanel
 		this.ctrl = ctrl ;
 		
 		this.setLayout( new BorderLayout() );
-		this.setBackground(PanelEdition.COULEUR_FOND);
+		this.setBackground(FrameAppli.COULEUR_FOND);
 		
 		/*-------------------------------*/
 		/*    Création des Composants    */

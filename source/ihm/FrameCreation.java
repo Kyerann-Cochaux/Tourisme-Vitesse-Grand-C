@@ -16,7 +16,7 @@ public class FrameCreation extends JFrame
 	private Controleur ctrl;
 	private PanelCreation  panelCreation;
 
-	public FrameAppli(Controleur ctrl) 
+	public FrameCreation(Controleur ctrl) 
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
