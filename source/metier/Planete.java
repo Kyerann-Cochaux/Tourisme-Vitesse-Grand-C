@@ -16,28 +16,21 @@ public class Planete
 
 		// Test espèce invalide
 		if (espece != null && !espece.equals("") )
-		{
-			boolean estEspeceValide = false;
+			if ( !Planete.especeValide(espece) ) 
 
-			for (int cpt = 0; cpt < Plateau.TAB_ESPECES.length; cpt++)
-			{
-				if ( Plateau.TAB_ESPECES[cpt].equals(espece) )
-					estEspeceValide = true;
-			}
-			if ( !estEspeceValide ) return null;
-		}
+				return null;
 		
-		
-		
-		// L'espèce est null, donc le Jeton ne possède qu'un symbole
+		// L'espèce est null, donc la Planète ne possède uniquement un symbole
 		if (espece == null || espece.equals("") ) return new Planete(symbole); 
 		
-		// L'espèce est non null, le Jeton est donc une base
+		// L'espèce est non null, la Planète est donc une base
 		return new Planete(symbole, espece);
 		
 	}
-	 //############## \\
-	// Constructeurs  \\
+	 
+	/* ---------------------------------- */
+	/*            Constructeurs           */
+	/* ---------------------------------- */
 	
 	private Planete(char symbole, String espece)
 	{
@@ -58,8 +51,35 @@ public class Planete
 	public String getEspece () {return this.espece ;}
 
 	/* ---------------------------------- */
+	/*            Modificateurs           */
+	/* ---------------------------------- */
+
+	public boolean setEspece(String espece) 
+	{
+		if (!especeValide(espece) ) return false;
+		
+		this.espece = espece;
+		return true;
+	}
+
+	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
+
+	private static boolean especeValide(String espece)
+	{
+		
+		boolean estEspeceValide = false;
+
+		for (int cpt = 0; cpt < Plateau.TAB_ESPECES.length; cpt++)
+		{
+			if ( Plateau.TAB_ESPECES[cpt].equals(espece) )
+				estEspeceValide = true;
+		}
+
+		return estEspeceValide;
+
+	}
 	
 	private static boolean symboleValide(char symbole)
 	{

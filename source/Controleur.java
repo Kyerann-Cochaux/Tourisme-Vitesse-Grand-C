@@ -6,12 +6,12 @@ import source.ihm.*;
 public class Controleur
 {
 	private Metier    metier;
-	private FrameInit frameInit;
+	private FrameAppli frameAppli;
 
 	public Controleur()
 	{
 		this.metier    = new Metier   ();
-		this.frameInit = new FrameInit(this);
+		this.frameAppli = new FrameAppli(this);
 	}
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
