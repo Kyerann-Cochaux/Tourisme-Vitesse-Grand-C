@@ -22,12 +22,10 @@ public class PanelCreation extends JPanel implements ActionListener
 	public PanelCreation(Controleur ctrl)
 	{
 		this.panelAcceuil  = new JPanel();
-		this.panelChoix = new JPanel();
 
 		this.ctrl = ctrl;
 
 		this.panelAcceuil.setLayout(new GridLayout(3, 1) );
-		this.panelChoix.setLayout(new GridLayout(4, 1) );
 
 		/* ---------------------------------- */
 		/*       Création des composants      */
@@ -37,8 +35,8 @@ public class PanelCreation extends JPanel implements ActionListener
 		this.panelAcceuil = new JPanel();
 
 		this.lblMenu = new JLabel("MENU", SwingConstants.CENTER);
-		this.lblMenu.setFont      (FrameAppli.POLICE_TEXTE);
-		this.lblMenu.setForeground(FrameAppli.COULEUR_ZONE);
+		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE);
+		this.lblMenu.setForeground(FrameCreation.COULEUR_ZONE);
 
 		this.btnNouveau   = new JButton("Jouer");
 		this.btnOuvrir    = new JButton("Edition");

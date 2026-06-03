@@ -11,7 +11,7 @@ public class Controleur
 	public Controleur()
 	{
 		this.metier    = new Metier   ();
-		this.frameCreation = new frameCreation(this);
+		this.frameCreation = new FrameCreation(this);
 	}
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)

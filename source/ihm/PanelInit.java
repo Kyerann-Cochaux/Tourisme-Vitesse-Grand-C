@@ -42,7 +42,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		this.ctrl = ctrl ;
 		
 		this.setLayout(new BorderLayout() );
-		this.setBackground(FrameAppli.COULEUR_FOND);
+		this.setBackground(FrameCreation.COULEUR_FOND);
 
 		/* ---------------------------------- */
 		/*       création des composants      */
@@ -85,8 +85,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 		for (JLabel label : tabLbl) 
 		{
-			label.setFont      (FrameAppli.POLICE_TEXTE);
-			label.setForeground(FrameAppli.COULEUR_FOND);
+			label.setFont      (FrameCreation.POLICE_TEXTE);
+			label.setForeground(FrameCreation.COULEUR_FOND);
 		}
 
 		// Modification individuelle de la police du Titre, car c'est le seul JLabel où la police est différente des autres
@@ -97,8 +97,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 		for (JTextField txtF : this.tabTxt)
 		{
-			txtF.setFont               (FrameAppli.POLICE_TEXTE);
-			txtF.setForeground         (FrameAppli.COULEUR_ZONE);
+			txtF.setFont               (FrameCreation.POLICE_TEXTE);
+			txtF.setForeground         (FrameCreation.COULEUR_ZONE);
 			txtF.setHorizontalAlignment(JTextField.CENTER      );
 		}
 		
