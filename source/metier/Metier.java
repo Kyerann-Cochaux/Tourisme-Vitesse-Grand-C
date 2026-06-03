@@ -93,7 +93,7 @@ public class Metier
 			
 			
 			// ajout des systèmes solaires
-			String sLigne = "";
+			String  sLigne  = "";
 			Systeme tempSys = new Systeme();
 			
 			int numZone = sLigne.charAt(0);
