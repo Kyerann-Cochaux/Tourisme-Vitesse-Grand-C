@@ -11,4 +11,8 @@
 ./metier/Zone.java
 
 ./Controleur.java
+<<<<<<< HEAD
 ./TestMetier.java
+=======
+./TestMetier.java
+>>>>>>> 419d9083a8c2aa54d69ba0abecdaa84ec12e4eef

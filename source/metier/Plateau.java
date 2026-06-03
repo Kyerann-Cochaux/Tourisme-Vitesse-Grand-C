@@ -10,7 +10,7 @@ public class Plateau
 	
 	protected static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
 	protected static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
-	                                               // Vert           BLeu       Rouge    Magenta
+	                                               // Marron        BLeu      Rouge     Vert
 	
 	private Case[][]      ensCasesNeutre;
 	private List<Liaison> lstLiaisons;
@@ -72,14 +72,13 @@ public class Plateau
 	
 	public int getNbLignes  () { return this.nbLignes         ;}
 	public int getNbColonnes() { return this.nbColonnes       ;}
+
 	public int getNbEspeces () { return this.ensEspeces.length;}
 	public int getNbFormes  () { return this.ensFormes .length;}
 	
 	public String[] getNomFormes () {return this.ensFormes  ;}
 	public String[] getNomEspeces() { return this.ensEspeces;}
 	
-	public String  getEspece (int indice) { return this.ensEspeces[indice]     ;}
-	public String  getForme  (int indice) { return this.ensFormes [indice]     ;}
 	public Liaison getLiaison(int indice) { return this.lstLiaisons.get(indice);}
 	public Zone    getZone   (int indice) { return this.lstZones   .get(indice);}
 	

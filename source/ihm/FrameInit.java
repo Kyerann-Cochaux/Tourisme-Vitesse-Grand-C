@@ -19,7 +19,7 @@ public class FrameInit extends JFrame
 		/* ---------------------------------- */
 
 		this.ctrl      = ctrl;
-		this.panelInit = new PanelInit();
+		this.panelInit = new PanelInit(ctrl);
 
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */

@@ -10,7 +10,7 @@ public class Jeton
 	public static Jeton creerJeton(char symbole, String espece)
 	{
 		symbole = Character.toUpperCase(symbole);
-		
+
 		// Test symbole invalide
 		if(!Jeton.symboleValide(symbole) ) return null;
 
@@ -63,7 +63,7 @@ public class Jeton
 	
 	private static boolean symboleValide(char symbole)
 	{
-		return (symbole != 'G' && symbole != 'O' && symbole != 'T' && symbole != 'V');
+		return (symbole == 'G' || symbole == 'O' || symbole == 'T' || symbole == 'V');
 	}
 
 	public boolean estBase() { return this.espece != null && !this.espece.equals("");}

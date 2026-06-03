@@ -10,14 +10,25 @@ public class TestMetier
 	{
 		
 		Jeton j;
+
 		
-		j = Jeton.creerJeton('a',null);
+		Metier m = new Metier();
+		Plateau p = null;
+		
+		List<Case> lstCases = new ArrayList<Case>();
+		
+		
+		m.initialiserPlateau(10,10,3,3);
+		p = m.getPlateau();
+
+		System.out.println("/* ---------------------------------- */");
+		System.out.println("/*          Test des symboles         */");
+		System.out.println("/* ---------------------------------- */");
+		System.out.println();
+		
+		j = Jeton.creerJeton('A',null);
 		System.out.println( (j == null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJeton('g',null);
-		System.out.println( (j != null) ? "OK" : "Erreur");
-		System.out.println(" -> " + j);
-
 		j = Jeton.creerJeton('G',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 		
@@ -30,22 +41,22 @@ public class TestMetier
 		j = Jeton.creerJeton('v',null);
 		System.out.println( (j != null) ? "OK" : "Erreur");
 
+		System.out.println();
+		System.out.println("/* ---------------------------------- */");
+		System.out.println("/*          Test des espèces          */");
+		System.out.println("/* ---------------------------------- */");
+		System.out.println();
 
-		/*Metier m = new Metier();
-		Plateau p = null;
-		
-		List<Case> lstCases = new ArrayList<Case>();
-		
-		
-		m.initialiserPlateau(10,10,3,3);
-		p = m.getPlateau();
+	//	j = Jeton.creerJeton('G', )
+
+
 		
 		lstCases.add(p.getCase(0, 0) );
 		lstCases.add(p.getCase(1, 0) );
 		lstCases.add(p.getCase(2, 0) );
 		lstCases.add(p.getCase(3, 0) );
 		
-		System.out.println(p.afficherPlateau() );*/	
+		System.out.println(p.afficherPlateau() );
 		
 	}
 	

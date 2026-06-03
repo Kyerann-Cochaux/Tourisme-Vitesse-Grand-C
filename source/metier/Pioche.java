@@ -5,17 +5,18 @@ import java.util.List;
 
 public class Pioche
 {
-	private ArrayList<Carte> pioche;
+	private List<Carte> pioche;
 	
 	public Pioche()
 	{
 		this.pioche = new ArrayList<Carte>();
 		
-		for(String esp : Plateau.TAB_FORMES)
+		for (int cpt = 0; cpt < Plateau.TAB_ESPECES.length; cpt++) 
 		{
-			this.pioche.add(Carte.creerCarte(esp, false) );
-			this.pioche.add(Carte.creerCarte(esp, true ) );
+			this.pioche.add(Carte.creerCarte(Plateau.TAB_ESPECES[cpt], false) );
+			this.pioche.add(Carte.creerCarte(Plateau.TAB_ESPECES[cpt], true ) );
 		}
+
 		this.pioche.add(Carte.creerCarte("Joker", false) );
 		this.pioche.add(Carte.creerCarte("Joker", true ) );
 	}
@@ -26,7 +27,7 @@ public class Pioche
 	
 	public Carte getCarte(int indice)
 	{
-		if(indice >= this.pioche.size() || indice < 0) return null;
+		if (indice >= this.pioche.size() || indice < 0) return null;
 		return this.pioche.get(indice);
 	}
 
