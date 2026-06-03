@@ -212,15 +212,13 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				{
 					this.tabTxt[i].setText("Erreur : Valeur Invalide");
 				}
-
-				int nbLignes    = Integer.parseInt(this.tabTxt[0].getText());
-				int nbColonnes  = Integer.parseInt(this.tabTxt[1].getText());
-				int nbEspece    = Integer.parseInt(this.tabTxt[2].getText());
-				int nbPlanete   = Integer.parseInt(this.tabTxt[3].getText());
-
-				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
-
 			}
+			
+			int nbLignes   = this.tabParametreEntrer[0] ;
+			int nbColonnes = this.tabParametreEntrer[1] ;
+			int nbPlanete  = this.tabParametreEntrer[2] ;
+			int nbEspece   = this.tabParametreEntrer[3] ;
+			this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
 		}
 		
 		if(e.getSource() == this.btnRenitialiser)
@@ -260,8 +258,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		}
 		
 		String txtActuelle = unfocusTxtField.getText() ;
-		
-		System.out.println( "Texte de la Zone " + indTxtClc + " : " + txtActuelle);
 		
 		if ( (indTxtClc == 0 || indTxtClc == 1) && txtActuelle.equals( PanelInit.TEXTE_TAILLE ) )
 		{

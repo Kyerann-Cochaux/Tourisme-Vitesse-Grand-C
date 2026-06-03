@@ -11,7 +11,7 @@ public class FrameInit extends JFrame
 
 	public FrameInit(Controleur ctrl) 
 	{
-		this.setTitle("Tourisme à VitesseC");
+		this.setTitle("Tourisme à Vitesse Grand C");
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		/* ---------------------------------- */
