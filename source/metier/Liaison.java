@@ -31,7 +31,7 @@ public class Liaison
 	
 	public Case getPlaneteSource     () {return this.planeteSource     ;}
 	public Case getPlaneteDestination() {return this.planeteDestination;}
-	public String getEspece           () {return this.espece            ;}
+	public String getEspece          () {return this.espece            ;}
 	
 	/* ---------------------------------- */
 	/*               Modificateurs        */
@@ -51,7 +51,7 @@ public class Liaison
 	
 	public String toString()
 	{
-		return "Planete source : "      + this.planeteSource      +
+		return "Planete source      : " + this.planeteSource      +
 		       "Planete destination : " + this.planeteDestination +
 		       "Espece :              " + this.espece;
 	}
