@@ -1,5 +1,6 @@
 ./ihm/FrameInit.java
 ./ihm/PanelInit.java
+./ihm/PanelMenu.java
 
 ./metier/Carte.java
 ./metier/Case.java
