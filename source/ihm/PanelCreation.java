@@ -19,7 +19,7 @@ public class panelCreation extends JPanel implements ActionListener
 
 	private Controleur ctrl;
 
-	public PanelMenu(Controleur ctrl)
+	public PanelCreation(Controleur ctrl)
 	{
 		this.panelAcceuil  = new JPanel();
 		this.panelChoix = new JPanel();
