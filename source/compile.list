@@ -11,5 +11,4 @@
 ./metier/Zone.java
 
 ./Controleur.java
-./TestJeton.java
 ./TestMetier.java
