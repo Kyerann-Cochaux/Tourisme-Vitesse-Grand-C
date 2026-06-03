@@ -29,6 +29,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 	private JLabel    [] tabLbl;
 	private JTextField[] tabTxt;
+	
+	private int[] tabParametreEntrer ;
 
 	private JButton btnLancer       ;
 	private JButton btnRenitialiser ;
@@ -198,8 +200,19 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	{
 		if(e.getSource() == this.btnLancer)
 		{
-			try
+			this.tabParametreEntrer = new int[this.tabTxt.length] ;
+			
+			for ( int i=0 ; i < this.tabTxt.length ; i++ )
 			{
+				try
+				{
+					this.tabParametreEntrer[i] = Integer.parseInt(this.tabTxt[i].getText());
+				}
+				catch(NumberFormatException ex)
+				{
+					this.tabTxt[i].setText("Erreur : Valeur Invalide");
+				}
+
 				int nbLignes    = Integer.parseInt(this.tabTxt[0].getText());
 				int nbColonnes  = Integer.parseInt(this.tabTxt[1].getText());
 				int nbEspece    = Integer.parseInt(this.tabTxt[2].getText());
@@ -207,11 +220,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
 
-
-			}
-			catch(NumberFormatException ex)
-			{
-				this.reinitialiserTexte();
 			}
 		}
 		
@@ -232,9 +240,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	// Méthodes liée aux Zone d'entrée de Texte
 	public void focusGained( FocusEvent e )
 	{
-		JTextField txtFldCliquer = (JTextField) e.getSource() ;
+		JTextField focusTxtField = (JTextField) e.getSource() ;
 		
-		txtFldCliquer.setText("");
+		focusTxtField.setText("");
 	}
 	
 	public void focusLost( FocusEvent e )
@@ -256,10 +264,12 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		System.out.println( "Texte de la Zone " + indTxtClc + " : " + txtActuelle);
 		
 		if ( (indTxtClc == 0 || indTxtClc == 1) && txtActuelle.equals( PanelInit.TEXTE_TAILLE ) )
+		{
 			unfocusTxtField.setText( PanelInit.TEXTE_TAILLE );
-		
+		}
 		if ( (indTxtClc == 2 || indTxtClc == 3) && txtActuelle.equals( PanelInit.TEXTE_QUANTITE ) )
+		{
 			unfocusTxtField.setText( PanelInit.TEXTE_QUANTITE );
-		
+		}
 	}
 }
