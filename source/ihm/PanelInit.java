@@ -24,7 +24,7 @@ public class PanelInit extends JPanel implements ActionListener
 	private JButton btnLancer       ;
 	private JButton btnRenitialiser ;
 
-	public PanelInit()
+	public PanelInit(Controleur ctrl)
 	{
 
 		JPanel panelAction;
