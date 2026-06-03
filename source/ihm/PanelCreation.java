@@ -8,7 +8,7 @@ import javax.swing.*;
 
 import source.Controleur ;
 
-public class panelCreation extends JPanel implements ActionListener
+public class PanelCreation extends JPanel implements ActionListener
 {
 	private JPanel panelAcceuil;
 
