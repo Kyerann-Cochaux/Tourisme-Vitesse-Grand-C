@@ -56,9 +56,9 @@ public class Metier
 		return true;
 	}
 	
-	public Plateau chargerPlateau(int numSauvegarde)
+	public boolean chargerPlateau(int numSauvegarde)
 	{
-		if ( !sauvegardeExiste(numSauvegarde) ) return null;
+		if ( !sauvegardeExiste(numSauvegarde) ) return false;
 		
 		
 		String nomFichier = Metier.NOM_SAUVEGARDES    + String.format("%03d", numSauvegarde) + Metier.EXTENSION_SAUVEGARDES;
@@ -78,7 +78,7 @@ public class Metier
 			String premiereLigne       = sc.nextLine();
 			
 			String[] creationArguments = premiereLigne.split(" ");
-			String[] creationTaille    = creationArguments[0].split("x");
+			String[] creationTaille    = creationArguments[0].split("*");
 			
 			
 			nbLignes   = Integer.parseInt(creationTaille[0]);
@@ -87,15 +87,42 @@ public class Metier
 			nbFormes   = Integer.parseInt(creationArguments[1]);
 			nbEspeces  = Integer.parseInt(creationArguments[2]);
 			
+			
+			// initialisation du plateau
+			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
+			
+			
+			// ajout des systèmes solaires
+			String sLigne = "";
+			Systeme tempSys = new Systeme();
+			
+			int numZone = sLigne.charAt(0);
+			
+			for (int cptLig = 0; cptLig < creationTaille.length; cptLig++)
+			{
+				sLigne = sc.nextLine();
+				for (int cptCol = 0; cptCol < creationTaille.length; cptCol++)
+				{
+					numZone = sLigne.charAt(cptCol);
+					tempSys.ajouterCase(this.plateauJeu.getCase(cptLig, cptCol));
+					
+					
+				}
+			}
+			
+			this.plateauJeu.ajouterSysteme(tempSys);
+			this.plateauJeu.getCase(nbLignes, nbColonnes).getPlanete();
+			
+			
+			// fermeture du scanner
 			sc.close();
 		}
 		catch (Exception e)
 		{
 			System.out.println("Erreur lors du chargement du plateau\""+ nomFichier +"\"");
-			return null;
+			return false;
 		}
 		
-		return Plateau.creerPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
+		return true;
 	}
-	
 }
