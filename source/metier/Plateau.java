@@ -8,8 +8,8 @@ public class Plateau
 	
 	private static final int TAILLE_MAX = 30;
 	
-	protected static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
-	protected static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
+	public static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
+	public static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
 	                                               // Marron        BLeu      Rouge     Vert
 	
 	private Case[][]      ensCasesNeutre;

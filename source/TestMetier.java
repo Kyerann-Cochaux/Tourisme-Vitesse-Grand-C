@@ -17,7 +17,6 @@ public class TestMetier
 		
 		List<Case> lstCases = new ArrayList<Case>();
 		
-		
 		m.initialiserPlateau(10,10,3,3);
 		p = m.getPlateau();
 
@@ -47,16 +46,28 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println();
 
-	//	j = Jeton.creerJeton('G', )
+		j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[0] );
+		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
+		j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[1] );
+		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
+		j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[2] );
+		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
+		j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[3] );
+		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
+
+		try { j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[4] );}
+		catch (Exception e) {System.out.println("OK");}
 
 
-		
-		lstCases.add(p.getCase(0, 0) );
+
+
+	
+	/*	lstCases.add(p.getCase(0, 0) );
 		lstCases.add(p.getCase(1, 0) );
 		lstCases.add(p.getCase(2, 0) );
 		lstCases.add(p.getCase(3, 0) );
 		
-		System.out.println(p.afficherPlateau() );
+		System.out.println(p.afficherPlateau() );	*/
 		
 	}
 	

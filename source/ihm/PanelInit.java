@@ -20,7 +20,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	private static final Color COULEUR_TEXTE2 = Color.decode("#f3f3f3");
 	private static final Color COULEUR_FOND  = new Color (37, 37, 37);
 	
-	private static final String TEXTE_TAILLE   = "Valeur entre 1 et 30" ;
+	private static final String TEXTE_TAILLE   = "Valeur entre 1 et 30";
 	private static final String TEXTE_QUANTITE = "Valeur entre 2 et 4" ;
 
 	private static final int NB_CARA = 50;
@@ -110,7 +110,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 		panelSaisie.add(this.tabLbl[0]); // Titre
 
-		// On part de 1 car on ajoute pas le titre, déjà ajouté au dessus, et que le titre n'a pas besoin d'être sur un sous panel
+		// On part de 1 car on ajoute pas le titre, déjà ajouté au dessus, et qu'il n'a pas besoin d'être sur un sous panel
 		// Car il ne possède pas de JTextField associé.
 
 
@@ -193,7 +193,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		return panelTemp;
 	}
 	
-	// Méthodes liée au Boutons d'Actions
+	// Méthodes liée aux boutons d'Actions
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == this.btnLancer)
@@ -204,30 +204,24 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				int nbColonnes  = Integer.parseInt(this.tabTxt[1].getText());
 				int nbEspece    = Integer.parseInt(this.tabTxt[2].getText());
 				int nbPlanete   = Integer.parseInt(this.tabTxt[3].getText());
-<<<<<<< HEAD
 
-				//this.Controleur.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
-
-
-=======
-				
 				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
-				
->>>>>>> 419d9083a8c2aa54d69ba0abecdaa84ec12e4eef
+
+
 			}
 			catch(NumberFormatException ex)
 			{
-				this.rinitialiserTexte();
+				this.reinitialiserTexte();
 			}
 		}
 		
 		if(e.getSource() == this.btnRenitialiser)
 		{
-			this.rinitialiserTexte();
+			this.reinitialiserTexte();
 		}
 	}
 	
-	private void rinitialiserTexte()
+	private void reinitialiserTexte()
 	{
 		this.tabTxt[0].setText( PanelInit.TEXTE_TAILLE   );
 		this.tabTxt[1].setText( PanelInit.TEXTE_TAILLE   );
@@ -245,29 +239,27 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	
 	public void focusLost( FocusEvent e )
 	{
-		JTextField txtFldPlusFocus = (JTextField) e.getSource() ;
+		JTextField unfocusTxtField = (JTextField) e.getSource() ;
 		
-		// On trouve quelle Zone de Texte n'est plus cliquer
+		// On cerche quelle zone de texte n'est plus cliquée
 		int indTxtClc = -1 ;
-		for ( int i=0 ; i < tabTxt.length ; i++ )
+		for ( int cpt = 0 ; cpt < tabTxt.length ; cpt++ )
 		{
-			if ( tabTxt[i].equals(txtFldPlusFocus) )
+			if ( tabTxt[cpt].equals(unfocusTxtField) )
 			{
-				indTxtClc = i ;
+				indTxtClc = cpt ;
 			}
 		}
 		
-		String txtActuelle = txtFldPlusFocus.getText() ;
+		String txtActuelle = unfocusTxtField.getText() ;
 		
 		System.out.println( "Texte de la Zone " + indTxtClc + " : " + txtActuelle);
 		
 		if ( (indTxtClc == 0 || indTxtClc == 1) && txtActuelle.equals( PanelInit.TEXTE_TAILLE ) )
-		{
-			txtFldPlusFocus.setText( PanelInit.TEXTE_TAILLE );
-		}
+			unfocusTxtField.setText( PanelInit.TEXTE_TAILLE );
+		
 		if ( (indTxtClc == 2 || indTxtClc == 3) && txtActuelle.equals( PanelInit.TEXTE_QUANTITE ) )
-		{
-			txtFldPlusFocus.setText( PanelInit.TEXTE_QUANTITE );
-		}
+			unfocusTxtField.setText( PanelInit.TEXTE_QUANTITE );
+		
 	}
 }
