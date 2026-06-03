@@ -6,10 +6,12 @@ import java.awt.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import source.Controleur ;
 
-public class PanelInit extends JPanel implements ActionListener
+public class PanelInit extends JPanel implements ActionListener, FocusListener
 {
 
 	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 25);
@@ -17,6 +19,9 @@ public class PanelInit extends JPanel implements ActionListener
 	private static final Color COULEUR_TEXTE = Color.decode("#f1c232");
 	private static final Color COULEUR_TEXTE2 = Color.decode("#f3f3f3");
 	private static final Color COULEUR_FOND  = new Color (37, 37, 37);
+	
+	private static final String TEXTE_TAILLE   = "Valeur entre 1 et 30" ;
+	private static final String TEXTE_QUANTITE = "Valeur entre 2 et 4" ;
 
 	private static final int NB_CARA = 50;
 	
@@ -98,7 +103,7 @@ public class PanelInit extends JPanel implements ActionListener
 			txtF.setForeground(PanelInit.COULEUR_TEXTE2);
 			txtF.setHorizontalAlignment(JTextField.CENTER);
 		}
-			
+		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
@@ -119,7 +124,18 @@ public class PanelInit extends JPanel implements ActionListener
 	
 		this.add(panelSaisie, BorderLayout.CENTER);
 		this.add(panelAction, BorderLayout.SOUTH );
-
+		
+		/* ------------------------------- */
+		/*    Activation des Composants    */
+		/* ------------------------------- */
+		
+		// Activation des Zone d'entrée de texte
+		for (JTextField txtF : this.tabTxt)
+		{
+			txtF.addFocusListener(this);
+		}
+		
+		// Activation des Boutons d'Action
 		this.btnLancer.addActionListener(this);
 		this.btnRenitialiser.addActionListener(this);
 	}
@@ -176,7 +192,8 @@ public class PanelInit extends JPanel implements ActionListener
 		panelTemp.setOpaque(false);
 		return panelTemp;
 	}
-
+	
+	// Méthodes liée au Boutons d'Actions
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == this.btnLancer)
@@ -187,17 +204,16 @@ public class PanelInit extends JPanel implements ActionListener
 				int nbColonnes  = Integer.parseInt(this.tabTxt[1].getText());
 				int nbEspece    = Integer.parseInt(this.tabTxt[2].getText());
 				int nbPlanete   = Integer.parseInt(this.tabTxt[3].getText());
-
+				
 				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
-
-
+				
 			}
 			catch(NumberFormatException ex)
 			{
 				this.rinitialiserTexte();
 			}
 		}
-
+		
 		if(e.getSource() == this.btnRenitialiser)
 		{
 			this.rinitialiserTexte();
@@ -206,10 +222,45 @@ public class PanelInit extends JPanel implements ActionListener
 	
 	private void rinitialiserTexte()
 	{
-		this.tabTxt[0].setText("Valeur entre 1 et 30");
-		this.tabTxt[1].setText("Valeur entre 1 et 30");
-		this.tabTxt[2].setText("Valeur entre 2 et 4" );
-		this.tabTxt[3].setText("Valeur entre 2 et 4" );
+		this.tabTxt[0].setText( PanelInit.TEXTE_TAILLE   );
+		this.tabTxt[1].setText( PanelInit.TEXTE_TAILLE   );
+		this.tabTxt[2].setText( PanelInit.TEXTE_QUANTITE );
+		this.tabTxt[3].setText( PanelInit.TEXTE_QUANTITE );
 	}
 	
+	// Méthodes liée aux Zone d'entrée de Texte
+	public void focusGained( FocusEvent e )
+	{
+		JTextField txtFldCliquer = (JTextField) e.getSource() ;
+		
+		txtFldCliquer.setText("");
+	}
+	
+	public void focusLost( FocusEvent e )
+	{
+		JTextField txtFldPlusFocus = (JTextField) e.getSource() ;
+		
+		// On trouve quelle Zone de Texte n'est plus cliquer
+		int indTxtClc = -1 ;
+		for ( int i=0 ; i < tabTxt.length ; i++ )
+		{
+			if ( tabTxt[i].equals(txtFldPlusFocus) )
+			{
+				indTxtClc = i ;
+			}
+		}
+		
+		String txtActuelle = txtFldPlusFocus.getText() ;
+		
+		System.out.println( "Texte de la Zone " + indTxtClc + " : " + txtActuelle);
+		
+		if ( (indTxtClc == 0 || indTxtClc == 1) && txtActuelle.equals( PanelInit.TEXTE_TAILLE ) )
+		{
+			txtFldPlusFocus.setText( PanelInit.TEXTE_TAILLE );
+		}
+		if ( (indTxtClc == 2 || indTxtClc == 3) && txtActuelle.equals( PanelInit.TEXTE_QUANTITE ) )
+		{
+			txtFldPlusFocus.setText( PanelInit.TEXTE_QUANTITE );
+		}
+	}
 }
