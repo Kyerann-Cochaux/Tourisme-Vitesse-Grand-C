@@ -1,11 +1,12 @@
 clear
 
-echo Compilation...
+cd ../source
 
+echo Compilation...
 javac @compile.list -d ../class
 cd ../class
 
 echo Execution...
 java source.Controleur
 
-cd ../source
+cd ../lanceurs
