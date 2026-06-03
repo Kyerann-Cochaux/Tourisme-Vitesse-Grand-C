@@ -46,8 +46,8 @@ public class PanelCreation extends JPanel implements ActionListener
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
-		this.panelAcceuil.add(this.btnJouer);
-		this.panelAcceuil.add(this.btnEdition);
+		this.panelAcceuil.add(this.btnNouveau);
+		this.panelAcceuil.add(this.btnOuvrir);
 
 		this.add(this.lblMenu);
 		this.add( new JPanel() );

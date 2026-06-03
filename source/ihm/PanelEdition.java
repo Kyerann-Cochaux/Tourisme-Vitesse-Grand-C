@@ -7,7 +7,6 @@ import java.awt.Color ;
 import java.awt.BorderLayout ;
 
 import source.Controleur ;
-import source.ihm.FrameAppli ;
 
 /**
  * Panel Edition
@@ -30,7 +29,7 @@ public class PanelEdition extends JPanel
 		this.ctrl = ctrl ;
 		
 		this.setLayout( new BorderLayout() );
-		this.setBackground(FrameAppli.COULEUR_FOND);
+		this.setBackground(FrameCreation.COULEUR_FOND);
 		
 		/*-------------------------------*/
 		/*    Création des Composants    */

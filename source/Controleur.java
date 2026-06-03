@@ -5,7 +5,7 @@ import source.ihm.*;
 
 public class Controleur
 {
-	private Metier    metier;
+	private Metier        metier;
 	private FrameCreation frameCreation;
 
 	public Controleur()

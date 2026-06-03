@@ -15,10 +15,7 @@ public class Planete
 		if(!Planete.symboleValide(symbole) ) return null;
 
 		// Test espèce invalide
-		if (espece != null && !espece.equals("") )
-			if ( !Planete.especeValide(espece) ) 
-
-				return null;
+		if (espece != null && !espece.equals("") && !Planete.especeValide(espece) ) return null;
 		
 		// L'espèce est null, donc la Planète ne possède uniquement un symbole
 		if (espece == null || espece.equals("") ) return new Planete(symbole); 

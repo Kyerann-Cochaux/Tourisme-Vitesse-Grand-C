@@ -1,4 +1,6 @@
-public class Nom
+package source;
+
+public class TestIHM
 {
 	public static void main(String[] args)
 	{
@@ -17,7 +19,7 @@ public class Nom
 		/*  Instructions  */
 		/*----------------*/
 		
-		// Initialisations
+		// Initialisation
 		
 		
 		
