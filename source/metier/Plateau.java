@@ -13,17 +13,17 @@ public class Plateau
 	                                               // Marron        BLeu      Rouge     Vert
 	
 	private Case[][]      ensCasesNeutre;
-	private List<Voyage> lstVoyages;
-	private List<Zone>    lstZones;
+	private List<Voyage>  lstVoyages;
+	private List<Systeme> lstSystemes;
 	
 	private String[] ensEspeces; // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
 	private String[] ensFormes;  // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
 	
 	private int nbLignes, nbColonnes;
 	
-	// rajouter une liste de cases dans Plateau, car au début il n'y a pas de zone, mais il y a des cases
+	// rajouter une liste de cases dans Plateau, car au début il n'y a pas de Systeme, mais il y a des cases
 	
-	// Permettre l'ajout des cases dans une Zone uniquement à partir des cases qui ne sont pas encore affectées dans une zone.
+	// Permettre l'ajout des cases dans une Systeme uniquement à partir des cases qui ne sont pas encore affectées dans une Systeme.
 	
 	public static Plateau creerPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
@@ -38,8 +38,8 @@ public class Plateau
 	
 	private Plateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
-		this.lstVoyages = new ArrayList<Voyage>();
-		this.lstZones    = new ArrayList<Zone>   ();
+		this.lstVoyages  = new ArrayList<Voyage >();
+		this.lstSystemes = new ArrayList<Systeme>();
 		
 		this.nbLignes   = nbLignes;
 		this.nbColonnes = nbColonnes;
@@ -79,14 +79,14 @@ public class Plateau
 	public String[] getNomFormes () {return this.ensFormes  ;}
 	public String[] getNomEspeces() { return this.ensEspeces;}
 	
-	public Voyage getVoyage(int indice) { return this.lstVoyages.get(indice);}
-	public Zone    getZone (int indice) { return this.lstZones.get(indice);}
+	public Voyage  getVoyage (int indice) { return this.lstVoyages .get(indice);}
+	public Systeme getSysteme(int indice) { return this.lstSystemes.get(indice);}
 	
 	public Case     getCase    (int ligne, int colonne) {return this.ensCasesNeutre[ligne][colonne];}
-	public Case[][] getEnsCases()                       {return this.ensCasesNeutre;}
+	public Case[][] getEnsCases()                       {return this.ensCasesNeutre                ;}
 	
-	public int  getNbVoyages() { return this.lstVoyages.size();}
-	public int  getNbZone    () { return this.lstZones   .size();}
+	public int  getNbVoyages() { return this.lstVoyages .size();}
+	public int  getNbSysteme() { return this.lstSystemes.size();}
 	
 	/* ---------------------------------- */
 	/*         Modificateurs              */
@@ -98,8 +98,8 @@ public class Plateau
 
 	public boolean ajouterForme(int posX, int posY, Planete j) 
 	{
-		if (!coordonneesValide(posX, posY) ) return false;
-		if (!planeteValide   (j, posX, posY) ) return false;
+		if (!coordonneesValide(   posX, posY) ) return false;
+		if (!planeteValide    (j, posX, posY) ) return false;
 
 		this.ensCasesNeutre[posX][posY].setPlanete(j);
 
@@ -111,31 +111,31 @@ public class Plateau
 		return true;
 	}
 	
-	public boolean ajouterZone(Zone z)
+	public boolean ajouterSysteme(Systeme z)
 	{
 
 		boolean estIdentique = false;
 
-		if (z == null)                  return false;
-		if (this.lstZones.contains(z) ) return false;
+		if (z == null)                    return false;
+		if (this.lstSystemes.contains(z) ) return false;
 
-		for (Zone zTemp : this.lstZones) 
+		for (Systeme zTemp : this.lstSystemes) 
 			if (zTemp.getEnsCases().equals(z.getEnsCases() ) ) 
 
 				return false;
 	
 		if (estIdentique) return false;
 
-		this.lstZones.add(z);
+		this.lstSystemes.add(z);
 
 		return true;
 
 	}
 
-	public boolean supprimerZone(Zone z) 
+	public boolean supprimerSysteme(Systeme z) 
 	{
-		if (!this.lstZones.contains(z) ) return false;
-		this.lstZones.remove(z);
+		if (!this.lstSystemes.contains(z) ) return false;
+		this.lstSystemes.remove(z);
 
 		return true;
 	}

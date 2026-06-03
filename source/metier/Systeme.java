@@ -3,11 +3,11 @@ package source.metier;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Zone
+public class Systeme
 {
 	private List<Case> ensCase;
 
-	public Zone()
+	public Systeme()
 	{
 		this.ensCase = new ArrayList<Case>();
 	}
@@ -52,7 +52,7 @@ public class Zone
 	{
 		String sRet = "";
 		
-		sRet += "Zone :\n";
+		sRet += "Système :\n";
 		for(Case c : this.ensCase)
 			sRet += c.toString() + "\n";
 		
