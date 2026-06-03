@@ -2,13 +2,14 @@ package source.metier;
 
 public class Liaison
 {
-	private Jeton planeteSource;
-	private Jeton planeteDestination;
+	private Case planeteSource;
+	private Case planeteDestination;
 	
 	private String espece;
 	
 	/*Factory pour verifier si les parametres ne sont pas null et si la planete de destination n'est pas egale a celle de départ */
-	public static Liaison creerLiaison(Jeton planeteSource, Jeton planeteDestination, String espece)
+
+	public static Liaison creerLiaison(Case planeteSource, Case planeteDestination, String espece)
 	{
 		if (planeteDestination == null         ) return null;
 		if (planeteSource      == null         ) return null; 
@@ -18,7 +19,7 @@ public class Liaison
 		return new Liaison(planeteSource,  planeteDestination, espece);
 	}
 
-	public Liaison(Jeton planeteSource, Jeton planeteDestination, String espece)
+	public Liaison(Case planeteSource, Case planeteDestination, String espece)
 	{
 		this.planeteSource      = planeteSource;
 		this.planeteDestination = planeteDestination;
@@ -29,8 +30,8 @@ public class Liaison
 	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
-	public Jeton getPlaneteSource     () {return this.planeteSource     ;}
-	public Jeton getPlaneteDestination() {return this.planeteDestination;}
+	public Case getPlaneteSource     () {return this.planeteSource     ;}
+	public Case getPlaneteDestination() {return this.planeteDestination;}
 	public String getEspece           () {return this.espece            ;}
 	
 	/* ---------------------------------- */

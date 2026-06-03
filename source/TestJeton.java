@@ -1,6 +1,5 @@
 package source;
 
-
 import source.metier.Jeton;
 
 public class TestJeton
