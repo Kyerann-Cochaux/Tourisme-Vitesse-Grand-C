@@ -14,7 +14,7 @@ public class FrameAppli extends JFrame
 	protected static final Color COULEUR_FOND  = new Color (37, 37, 37);
 
 	private Controleur ctrl;
-	private PanelInit  panelInit;
+	private PanelAcceuil  panelAcceuil;
 
 	public FrameAppli(Controleur ctrl) 
 	{
@@ -26,13 +26,13 @@ public class FrameAppli extends JFrame
 		/* ---------------------------------- */
 
 		this.ctrl      = ctrl;
-		this.panelInit = new PanelInit(ctrl);
+		this.panelAcceuil = new PanelAcceuil(ctrl);
 
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 
-		this.add(this.panelInit);
+		this.add(this.panelAcceuil);
 
 		/* ---------------------------------- */
 		/*      Activation des composants     */
