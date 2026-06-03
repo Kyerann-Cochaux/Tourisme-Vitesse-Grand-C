@@ -14,6 +14,11 @@ public class Controleur
 		this.frameInit = new FrameInit(this);
 	}
 
+	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
+	{
+		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
+	}
+
 	public static void main(String[] args) 
 	{
 		new Controleur();
