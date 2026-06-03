@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class PanelInit extends JPanel
+public class PanelInit extends JPanel implements ActionListener
 {
 
 	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 25);
@@ -20,8 +20,8 @@ public class PanelInit extends JPanel
 	private JLabel    [] tabLbl;
 	private JTextField[] tabTxt;
 
-	private JButton btnStart ;
-	private JButton btnReset ;
+	private JButton btnLancer       ;
+	private JButton btnRenitialiser ;
 
 	public PanelInit()
 	{
@@ -59,8 +59,8 @@ public class PanelInit extends JPanel
 			else         this.tabTxt[cpt] = new JTextField("Valeur entre 2 et 4" , PanelInit.NB_CARA);
 		}
 
-		this.btnStart = new JButton("Start");
-		this.btnReset = new JButton("Reset");
+		this.btnLancer       = new JButton("Lancer"      );
+		this.btnRenitialiser = new JButton("Renitialiser");
 
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -105,8 +105,8 @@ public class PanelInit extends JPanel
 													// JTextfield         JLabel
 													// Dans l'ordre des tableaux définis au dessus.
 
-		panelAction.add(btnStart);
-		panelAction.add(btnReset);
+		panelAction.add(btnLancer);
+		panelAction.add(btnRenitialiser);
 	
 		this.add(panelSaisie, BorderLayout.CENTER);
 		this.add(panelAction, BorderLayout.SOUTH );
@@ -162,6 +162,11 @@ public class PanelInit extends JPanel
 
 		panelTemp.setOpaque(false);
 		return panelTemp;
+	}
+
+	public void actionPerformed(ActionEvent e)
+	{
+		
 	}
 	
 	
