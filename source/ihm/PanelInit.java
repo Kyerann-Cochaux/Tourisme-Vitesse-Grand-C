@@ -14,11 +14,7 @@ import source.Controleur ;
 public class PanelInit extends JPanel implements ActionListener, FocusListener
 {
 
-	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 25);
 
-	private static final Color COULEUR_TEXTE = Color.decode("#f1c232");
-	private static final Color COULEUR_TEXTE2 = Color.decode("#f3f3f3");
-	private static final Color COULEUR_FOND  = new Color (37, 37, 37);
 	
 	private static final String TEXTE_TAILLE   = "Valeur entre 1 et 30";
 	private static final String TEXTE_QUANTITE = "Valeur entre 2 et 4" ;
@@ -46,7 +42,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		this.ctrl = ctrl ;
 		
 		this.setLayout(new BorderLayout() );
-		this.setBackground(PanelInit.COULEUR_FOND);
+		this.setBackground(FrameAppli.COULEUR_FOND);
 
 		/* ---------------------------------- */
 		/*       création des composants      */
@@ -89,8 +85,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 		for (JLabel label : tabLbl) 
 		{
-			label.setFont      (PanelInit.POLICE_TEXTE );
-			label.setForeground(PanelInit.COULEUR_TEXTE);
+			label.setFont      (FrameAppli.POLICE_TEXTE);
+			label.setForeground(FrameAppli.COULEUR_FOND);
 		}
 
 		// Modification individuelle de la police du Titre, car c'est le seul JLabel où la police est différente des autres
@@ -101,9 +97,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 		for (JTextField txtF : this.tabTxt)
 		{
-			txtF.setFont(PanelInit.POLICE_TEXTE);
-			txtF.setForeground(PanelInit.COULEUR_TEXTE2);
-			txtF.setHorizontalAlignment(JTextField.CENTER);
+			txtF.setFont               (FrameAppli.POLICE_TEXTE);
+			txtF.setForeground         (FrameAppli.COULEUR_ZONE);
+			txtF.setHorizontalAlignment(JTextField.CENTER      );
 		}
 		
 		/* ---------------------------------- */
@@ -121,7 +117,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 													// JTextfield         JLabel
 													// Dans l'ordre des tableaux définis au dessus.
 
-		panelAction.add(btnLancer);
+		panelAction.add(   btnLancer   );
 		panelAction.add(btnRenitialiser);
 	
 		this.add(panelSaisie, BorderLayout.CENTER);
@@ -138,7 +134,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		}
 		
 		// Activation des Boutons d'Action
-		this.btnLancer.addActionListener(this);
+		this.btnLancer      .addActionListener(this);
 		this.btnRenitialiser.addActionListener(this);
 	}
 

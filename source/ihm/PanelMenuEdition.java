@@ -1,6 +1,14 @@
 package source.ihm;
 
-public class PanelMenuEdition
+import javax.swing.*;
+
+import java.awt.Font ;
+import java.awt.Color;
+import java.awt.GridLayout;
+
+import source.Controleur;
+
+public class PanelMenuEdition extends JPanel
 {
 	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 100);
 	private static final Color COULEUR_TEXTE = Color.decode("#f1c232");

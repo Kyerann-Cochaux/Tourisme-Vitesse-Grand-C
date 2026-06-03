@@ -7,8 +7,7 @@ import source.Controleur ;
 
 public class PanelMenu extends JPanel
 {
-	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 100);
-	private static final Color COULEUR_TEXTE = Color.decode("#f1c232");
+
 
 	private JLabel  lblMenu   ;
 
@@ -32,8 +31,8 @@ public class PanelMenu extends JPanel
 		sPanelAction = new JPanel();
 
 		this.lblMenu = new JLabel("MENU", SwingConstants.CENTER);
-		this.lblMenu.setFont(PanelMenu.POLICE_TEXTE);
-		this.lblMenu.setForeground(PanelMenu.COULEUR_TEXTE);
+		this.lblMenu.setFont      (FrameAppli.POLICE_TEXTE);
+		this.lblMenu.setForeground(FrameAppli.COULEUR_ZONE);
 
 		this.btnJouer   = new JButton("Jouer");
 		this.btnEdition = new JButton("Edition");
