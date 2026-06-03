@@ -55,6 +55,9 @@ public class Metier
 		
 		return true;
 	}
+
+	// TODO: Finir méthode chargerPlateau et sauvegarderPlateau
+
 	
 	public boolean chargerPlateau(int numSauvegarde)
 	{
@@ -94,7 +97,6 @@ public class Metier
 			
 			// ajout des systèmes solaires
 			String  sLigne  = "";
-			Systeme tempSys = new Systeme();
 			
 			int numZone = sLigne.charAt(0);
 			
@@ -104,13 +106,10 @@ public class Metier
 				for (int cptCol = 0; cptCol < creationTaille.length; cptCol++)
 				{
 					numZone = sLigne.charAt(cptCol);
-					tempSys.ajouterCase(this.plateauJeu.getCase(cptLig, cptCol));
 					
 					
 				}
 			}
-			
-			this.plateauJeu.ajouterSysteme(tempSys);
 			this.plateauJeu.getCase(nbLignes, nbColonnes).getPlanete();
 			
 			

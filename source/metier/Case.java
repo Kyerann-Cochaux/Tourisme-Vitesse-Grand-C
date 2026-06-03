@@ -4,15 +4,14 @@ public class Case
 {
 	private Planete planete;
 	private int     posX, posY;
-
-	public Case(int posX, int posY, Planete planete)
-	{
-		this.planete = planete;
-	}
+	private int     numSysteme;
 
 	public Case(int posX, int posY)
 	{
-		this(posX, posY, null);
+		this.posX       = posX;
+		this.posY       = posY;
+		this.numSysteme = -1;
+		this.planete    = null;
 	}
 	
 	

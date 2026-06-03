@@ -14,8 +14,7 @@ public class Plateau
 	
 	private Case[][]      ensCasesNeutre;
 	private List<Voyage>  lstVoyages;
-	private List<Systeme> lstSystemes;
-	
+
 	private String[] ensEspeces; // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
 	private String[] ensFormes;  // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
 	
@@ -39,7 +38,6 @@ public class Plateau
 	private Plateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.lstVoyages  = new ArrayList<Voyage >();
-		this.lstSystemes = new ArrayList<Systeme>();
 		
 		this.nbLignes   = nbLignes;
 		this.nbColonnes = nbColonnes;
@@ -80,13 +78,11 @@ public class Plateau
 	public String[] getNomEspeces() { return this.ensEspeces;}
 	
 	public Voyage  getVoyage (int indice) { return this.lstVoyages .get(indice);}
-	public Systeme getSysteme(int indice) { return this.lstSystemes.get(indice);}
 	
 	public Case     getCase    (int ligne, int colonne) {return this.ensCasesNeutre[ligne][colonne];}
 	public Case[][] getEnsCases()                       {return this.ensCasesNeutre                ;}
 	
 	public int  getNbVoyages() { return this.lstVoyages .size();}
-	public int  getNbSysteme() { return this.lstSystemes.size();}
 	
 	/* ---------------------------------- */
 	/*         Modificateurs              */
@@ -142,33 +138,11 @@ public class Plateau
 		return true;
 	}
 	
-	public boolean ajouterSysteme(Systeme z)
+	public boolean ajouterSysteme()
 	{
-
-		boolean estIdentique = false;
-
-		if (z == null)                     return false;
-		if (this.lstSystemes.contains(z) ) return false;
-
-		for (Systeme zTemp : this.lstSystemes) 
-			if (zTemp.getEnsCases().equals(z.getEnsCases() ) ) 
-
-				return false;
-	
-		if (estIdentique) return false;
-
-		this.lstSystemes.add(z);
 
 		return true;
 
-	}
-
-	public boolean supprimerSysteme(Systeme z) 
-	{
-		if (!this.lstSystemes.contains(z) ) return false;
-		this.lstSystemes.remove(z);
-
-		return true;
 	}
 
 	public String toString()

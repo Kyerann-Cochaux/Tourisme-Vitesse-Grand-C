@@ -56,7 +56,7 @@ public class TestMetier
 		catch (Exception e) {System.out.println("OK");}
 
 		System.out.println("/* ------------------------------------------- */");
-		System.out.println("/*   Ajout de Planetes simples dans le plateau   */");
+		System.out.println("/*   Ajout de planètes simples dans le plateau */");
 		System.out.println("/* ------------------------------------------- */");
 		System.out.println();
 		System.out.println("/* ------- Ajouts impossibles ------- */");
