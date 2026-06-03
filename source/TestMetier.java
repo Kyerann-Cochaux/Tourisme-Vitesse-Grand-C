@@ -52,7 +52,7 @@ public class TestMetier
 		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[3] );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
 
-		try { j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[4] );}
+		try { j = Planete.creerPlanete('G', null );}
 		catch (Exception e) {System.out.println("OK");}
 
 		System.out.println("/* ------------------------------------------- */");
@@ -76,11 +76,18 @@ public class TestMetier
 		b = p.ajouterForme(0, 0, j);
 		System.out.println("Forme déjà présent --> " + (!b ? " OK " : " Erreur ") );
 
-		System.out.println(p.afficherPlateau() );
+		System.out.println(p);
 
 		System.out.println("/* ---------------------------------- */");
 		System.out.println("/*           Ajout de bases           */");
 		System.out.println("/* ---------------------------------- */");
+
+		System.out.println(p);
+
+		
+
+
+
 		
 		
 	}

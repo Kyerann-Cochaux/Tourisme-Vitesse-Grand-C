@@ -20,8 +20,8 @@ public class Case
 	/*            Accesseurs              */
 	/* ---------------------------------- */
 	
-	public Planete   getPlanete() {return this.planete;}
-	public boolean estVide () { return this.getPlanete() == null;}
+	public Planete getPlanete() {return this.planete;}
+	public boolean estVide   () { return this.getPlanete() == null;}
 	
 	/* ---------------------------------- */
 	/*           Modificateurs            */

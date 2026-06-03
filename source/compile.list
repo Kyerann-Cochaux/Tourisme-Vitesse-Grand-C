@@ -4,8 +4,8 @@
 
 ./metier/Carte.java
 ./metier/Case.java
-./metier/Jeton.java
-./metier/Liaison.java
+./metier/Planete.java
+./metier/Voyage.java
 ./metier/Metier.java
 ./metier/Pioche.java
 ./metier/Plateau.java

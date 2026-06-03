@@ -140,7 +140,7 @@ public class Plateau
 		return true;
 	}
 
-	public String afficherPlateau()
+	public String toString()
 	{
 		String sRet = "";
 
@@ -149,10 +149,16 @@ public class Plateau
 			for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
 			{
 
-				if (this.ensCasesNeutre[lig][col].getPlanete() != null) 
-					sRet += " " + this.ensCasesNeutre[lig][col].getPlanete().getSymbole() + " ";	
-				else
-				sRet += " . ";	
+				if (this.ensCasesNeutre[lig][col].getPlanete() != null)
+				{
+
+					Planete p = this.ensCasesNeutre[lig][col].getPlanete();
+
+					sRet += "" + (p.estBase() ? Character.toLowerCase(p.getEspece().charAt(0) ) : ' ') + 
+					             this.ensCasesNeutre[lig][col].getPlanete().getSymbole() + ' ';	
+				}
+
+				else sRet += " . ";	
 			}
 	
 			sRet += "\n";
@@ -164,8 +170,8 @@ public class Plateau
 
 	private boolean coordonneesValide(int posX, int  posY)
 	{
-		return (posX < 0  || posX > this.ensCasesNeutre      .length ) && 
-		       (posY < 0  || posY > this.ensCasesNeutre[posX].length ); 
+		return (posX >= 0 && posX < this.ensCasesNeutre      .length ) && 
+		       (posY >= 0 && posY < this.ensCasesNeutre[posX].length ); 
 	}
 
 	private boolean planeteValide(Planete j, int posX, int posY)
