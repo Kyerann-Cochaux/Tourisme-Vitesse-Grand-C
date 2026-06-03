@@ -11,20 +11,24 @@ public class TestMetier
 		
 		Jeton j;
 		
-		j = Jeton.creerJeton('A',null);
+		j = Jeton.creerJeton('a',null);
 		System.out.println( (j == null) ? "OK" : "Erreur");
 		
+		j = Jeton.creerJeton('g',null);
+		System.out.println( (j != null) ? "OK" : "Erreur");
+		System.out.println(" -> " + j);
+
 		j = Jeton.creerJeton('G',null);
-		System.out.println( (j.getEspece() == null) ? "OK" : "Erreur");
+		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJeton('O',null);
-		System.out.println( (j.getEspece() == null) ? "OK" : "Erreur");
+		j = Jeton.creerJeton('o',null);
+		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJeton('T',null);
-		System.out.println( (j.getEspece() == null) ? "OK" : "Erreur");
+		j = Jeton.creerJeton('t',null);
+		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Jeton.creerJeton('V',null);
-		System.out.println( (j.getEspece() == null) ? "OK" : "Erreur");
+		j = Jeton.creerJeton('v',null);
+		System.out.println( (j != null) ? "OK" : "Erreur");
 
 
 		/*Metier m = new Metier();

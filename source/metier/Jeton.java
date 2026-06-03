@@ -10,18 +10,24 @@ public class Jeton
 	public static Jeton creerJeton(char symbole, String espece)
 	{
 		symbole = Character.toUpperCase(symbole);
-		// Test espèce invalide
-		boolean estEspeceValide = false;
-		for (int i = 0; i < Plateau.TAB_ESPECES.length; i++)
-		{
-			String tempEspece = Plateau.TAB_ESPECES[i];
-			if ( tempEspece.equals(espece) )
-				estEspeceValide = true;
-		}
-		if ( !estEspeceValide ) return null;
 		
 		// Test symbole invalide
-		if(!Jeton.parametresValide(symbole) ) return null;
+		if(!Jeton.symboleValide(symbole) ) return null;
+
+		// Test espèce invalide
+		if (espece != null && !espece.equals("") )
+		{
+			boolean estEspeceValide = false;
+
+			for (int cpt = 0; cpt < Plateau.TAB_ESPECES.length; cpt++)
+			{
+				if ( Plateau.TAB_ESPECES[cpt].equals(espece) )
+					estEspeceValide = true;
+			}
+			if ( !estEspeceValide ) return null;
+		}
+		
+		
 		
 		// L'espèce est null, donc le Jeton ne possède qu'un symbole
 		if (espece == null || espece.equals("") ) return new Jeton(symbole); 
@@ -55,9 +61,9 @@ public class Jeton
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 	
-	private static boolean parametresValide(char symbole)
+	private static boolean symboleValide(char symbole)
 	{
-		return (symbole != 'g' && symbole != 'o' && symbole != 't' && symbole != 'v');
+		return (symbole != 'G' && symbole != 'O' && symbole != 'T' && symbole != 'V');
 	}
 
 	public boolean estBase() { return this.espece != null && !this.espece.equals("");}

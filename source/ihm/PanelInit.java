@@ -180,7 +180,7 @@ public class PanelInit extends JPanel implements ActionListener
 				int nbEspece    = Integer.parseInt(this.tabTxt[2].getText());
 				int nbPlanete   = Integer.parseInt(this.tabTxt[3].getText());
 
-				this.Controleur.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
+				//this.Controleur.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
 
 
 			}
