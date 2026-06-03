@@ -14,15 +14,16 @@ public class Case
 	{
 		this(posX, posY, null);
 	}
-
+	
+	
 	/* ---------------------------------- */
-	/*               Getters              */
+	/*            Accesseurs              */
 	/* ---------------------------------- */
-
+	
 	public Jeton getJeton() {return this.jeton;}
-
+	
 	/* ---------------------------------- */
-	/*               Setters              */
+	/*           Modificateurs            */
 	/* ---------------------------------- */
 
 	public boolean setJeton(Jeton jeton)
@@ -30,12 +31,12 @@ public class Case
 		if (jeton == null || jeton == this.jeton) return false;
 		
 		this.jeton = jeton;
-
+		
 		return true;
 	}
 
 	/* ---------------------------------- */
-	/*          méthodes standard         */
+	/*          Méthodes standard         */
 	/* ---------------------------------- */
 
 	public String toString()

@@ -17,7 +17,7 @@ public class Metier
 	}
 
 	/* ---------------------------------- */
-	/*               Getters              */
+	/*               Accesseurs           */
 	/* ---------------------------------- */
 
 	public Plateau getPlateau() { return this.plateauJeu;}

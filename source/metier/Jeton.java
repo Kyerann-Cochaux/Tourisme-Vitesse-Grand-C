@@ -10,7 +10,7 @@ public class Jeton
 	public static Jeton creerJeton(char symbole, String espece)
 	{
 
-		if(!Jeton.parametresValide(symbole) ) return null;	
+		if(!Jeton.parametresValide(symbole) ) return null;
 
 		// L'espèce est null, donc le Jeton ne possède qu'un symbole
 		if (espece == null || espece.equals("") ) return new Jeton(symbole); 
@@ -32,7 +32,7 @@ public class Jeton
 	}
 
 	/* ---------------------------------- */
-	/*               Getters              */
+	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
 	public char   getSymbole() {return this.symbole;}
@@ -50,7 +50,7 @@ public class Jeton
 	public boolean estBase() { return this.espece != null && !this.espece.equals("");}
 
 	/* ---------------------------------- */
-	/*          méthodes standard         */
+	/*          Méthodes standard         */
 	/* ---------------------------------- */
 
 	public String toString()

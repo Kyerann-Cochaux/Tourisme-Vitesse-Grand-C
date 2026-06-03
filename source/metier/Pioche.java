@@ -21,7 +21,7 @@ public class Pioche
 	}
 	
 	/* ---------------------------------- */
-	/*               Getters              */
+	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
 	public Carte getCarte(int indice)
@@ -51,7 +51,7 @@ public class Pioche
 	}
 	
 	/* ---------------------------------- */
-	/*          méthodes standard         */
+	/*          Méthodes standard         */
 	/* ---------------------------------- */
 	
 	public String toString()

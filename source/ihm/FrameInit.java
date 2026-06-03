@@ -1,27 +1,37 @@
 package source.ihm;
 
-import java.awt.Frame;
-import java.awt.*;
-import javax.swing.JFrame;
+import source.Controleur;
+
+import javax.swing.*;
 
 public class FrameInit extends JFrame
 {
-	private PanelInit panel = new PanelInit();
+	private Controleur ctrl;
+	private PanelInit  panelInit;
 
-    public FrameInit() 
-    {
-    	this.setTitle("Tourisme à VitesseC");
-		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+	public FrameInit(Controleur ctrl) 
+	{
+		this.setTitle("Tourisme à VitesseC");
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+		/* ---------------------------------- */
+		/*       Création des composants      */
+		/* ---------------------------------- */
+
+		this.ctrl      = ctrl;
+		this.panelInit = new PanelInit();
+
+		/* ---------------------------------- */
+		/*    Positionnement des composants   */
+		/* ---------------------------------- */
+
+		this.add(this.panelInit);
+
+		/* ---------------------------------- */
+		/*      Activation des composants     */
+		/* ---------------------------------- */
+
 		this.setVisible(true);
-		
-		this.setLayout(new GridLayout(1, 1));
 
-		this.add(this.panel);
-		this.setVisible(true);
-	}
-
-	public static void main(String[] args)
-    {
-		new FrameInit();
 	}
 }

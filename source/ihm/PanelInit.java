@@ -6,13 +6,13 @@ import java.awt.*;
 public class PanelInit extends JPanel
 {
 
-	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 100);
+	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 25);
 
 	private static final Color COULEUR_TEXTE = Color.decode("#f1c232");
 	private static final Color COULEUR_FOND  = new Color (37, 37, 37);
 
 	private static final int NB_CARA = 50;
-
+	
 	// Création de 2 tableaux pour faciliter la modification des composants
 
 	private JLabel    [] tabLbl;
@@ -46,25 +46,26 @@ public class PanelInit extends JPanel
 		this.tabLbl[3] = new JLabel("Nombre d'espèces différentes :"  , SwingConstants.CENTER); // nbEspece
 		this.tabLbl[4] = new JLabel("Nombre de planètes différentes :", SwingConstants.CENTER); // nbPlanete
 
-		/* 
+		/*
 			Si le compteur vaut 0 ou 1, le texte est "valeur entre 1 et 30", sinon c'est "valeur entre 2 et 4"
 			La boucle permet d'éviter de répéter 4 fois la même instruction, sachant qu'il y a 2 fois 2 textes identiques
 		*/
 
-		for (int cpt = 0; cpt < tabLbl.length ; cpt++) 
+		for (int cpt = 0; cpt < tabTxt.length ; cpt++) 
 		{
 			if (cpt < 2) this.tabTxt[cpt] = new JTextField("Valeur entre 1 et 30", PanelInit.NB_CARA);
 			else         this.tabTxt[cpt] = new JTextField("Valeur entre 2 et 4" , PanelInit.NB_CARA);
 		}
 
-        this.btnStart = new JButton("Start");
-	    this.btnReset = new JButton("Reset");
+		this.btnStart = new JButton("Start");
+		this.btnReset = new JButton("Reset");
 
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
 		/* ---------------------------------- */
 
 		panelAction.setOpaque(false);
+		panelSaisie.setOpaque(false);
 
 		/*--- COULEURS ET POLICES ---*/
 
@@ -94,7 +95,7 @@ public class PanelInit extends JPanel
 
 
 		for (int cpt = 1; cpt < tabLbl.length; cpt++) 
-			panelSaisie.add(this.creerPanelCentre(this.tabLbl[cpt], this.tabTxt[cpt]) );
+			panelSaisie.add(this.creerPanelCentre(this.tabLbl[cpt], this.tabTxt[cpt -1]) );
 													// JTextfield         JLabel
 													// Dans l'ordre des tableaux définis au dessus.
 
@@ -118,7 +119,7 @@ public class PanelInit extends JPanel
 		return panel;
 	}*/
 
-	/* 
+	/*
 		Méthode utilitaire permettant d'encapsuler dans un panel les 2 composants fournis en paramètres
 
 		Le panel renvoyé contient 2 sous panel contenant chacun un des composants fournis
@@ -128,6 +129,7 @@ public class PanelInit extends JPanel
 
 	private JPanel creerPanelCentre(JLabel lbl,JTextField txtField)
 	{
+
 		// Création d'un panel qui contiendra 2 sous-panels
 		JPanel panelTemp = new JPanel(new GridLayout(2,1) );
 
@@ -135,6 +137,11 @@ public class PanelInit extends JPanel
 
 		JPanel sPanelLbl = new JPanel();
 		JPanel sPanelTxt = new JPanel();
+		sPanelLbl.setOpaque(false);
+		sPanelTxt.setOpaque(false);
+
+		lbl     .setOpaque(false);
+		txtField.setOpaque(false);
 
 		// Ajout du JLabel sur le premier sous-panel
 		sPanelLbl.add(lbl);

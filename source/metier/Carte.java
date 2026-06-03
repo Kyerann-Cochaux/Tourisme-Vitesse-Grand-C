@@ -15,7 +15,7 @@ public class Carte
 				return new Carte(symbole, premium);
 			
 		}
-		 
+		
 		return null;
 	}
 	
@@ -26,14 +26,14 @@ public class Carte
 	}
 	
 	/* ---------------------------------- */
-	/*               Getters              */
+	/*            Accesseurs              */
 	/* ---------------------------------- */
 	
 	public String  getSymbole() {return this.symbole;}
 	public boolean getPremium () {return this.premium;}
 	
 	/* ---------------------------------- */
-	/*          méthodes standard         */
+	/*          Méthodes standard         */
 	/* ---------------------------------- */
 	
 	public String toString()

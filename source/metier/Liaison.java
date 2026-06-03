@@ -26,7 +26,7 @@ public class Liaison
 	}
 	
 	/* ---------------------------------- */
-	/*               Getters              */
+	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
 	public Jeton getPlaneteSource     () {return this.planeteSource     ;}
@@ -34,7 +34,7 @@ public class Liaison
 	public String getEspece           () {return this.espece            ;}
 	
 	/* ---------------------------------- */
-	/*               Setters              */
+	/*               Modificateurs        */
 	/* ---------------------------------- */
 	
 	public boolean setEspece(String espece)
@@ -46,7 +46,7 @@ public class Liaison
 	}
 	
 	/* ---------------------------------- */
-	/*          méthodes standard         */
+	/*          Méthodes standard         */
 	/* ---------------------------------- */
 	
 	public String toString()
