@@ -7,6 +7,7 @@ import java.awt.Color ;
 import java.awt.BorderLayout ;
 
 import source.Controleur ;
+import source.ihm.FrameAppli ;
 
 /**
  * Panel Edition
@@ -19,12 +20,6 @@ import source.Controleur ;
 
 public class PanelEdition extends JPanel
 {
-	private static final Font  POLICE_TEXTE   = new Font("Goldman", Font.BOLD, 25);
-	
-	private static final Color COULEUR_TEXTE  = Color.decode("#f1c232");
-	private static final Color COULEUR_TEXTE2 = Color.decode("#f3f3f3");
-	private static final Color COULEUR_FOND   = new Color (37, 37, 37);
-	
 	private Controleur ctrl ;
 	
 	public PanelEdition(Controleur ctrl)
