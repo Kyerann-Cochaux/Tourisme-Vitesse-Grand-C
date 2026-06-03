@@ -259,8 +259,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		String txtActuelle = unfocusTxtField.getText() ;
 		
-		System.out.println( "Texte de la Zone " + indTxtClc + " : " + txtActuelle);
-		
 		if ( (indTxtClc == 0 || indTxtClc == 1) && txtActuelle.equals( PanelInit.TEXTE_TAILLE ) )
 		{
 			unfocusTxtField.setText( PanelInit.TEXTE_TAILLE );
