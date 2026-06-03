@@ -9,14 +9,25 @@ public class Jeton
 
 	public static Jeton creerJeton(char symbole, String espece)
 	{
+		symbole = Character.toUpperCase(symbole);
+		// Test espèce invalide
+		boolean estEspeceValide = false;
+		for (int i = 0; i < Plateau.TAB_ESPECES.length; i++)
+		{
+			String tempEspece = Plateau.TAB_ESPECES[i];
+			if ( tempEspece.equals(espece) )
+				estEspeceValide = true;
+		}
+		if ( !estEspeceValide ) return null;
 		
+		// Test symbole invalide
 		if(!Jeton.parametresValide(symbole) ) return null;
 		
 		// L'espèce est null, donc le Jeton ne possède qu'un symbole
 		if (espece == null || espece.equals("") ) return new Jeton(symbole); 
 		
 		// L'espèce est non null, le Jeton est donc une base
-		return new Jeton(Character.toUpperCase(symbole), espece);
+		return new Jeton(symbole, espece);
 		
 	}
 	 //##############\\
