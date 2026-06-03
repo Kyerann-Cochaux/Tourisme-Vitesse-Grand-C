@@ -7,6 +7,7 @@ public class Carte
 	
 	/*Factory pour verifier si le symbole en paramètre fait partie des symbole
 	  du tableau TAB_FORMES*/
+	  
 	public static Carte creerCarte(String symbole, boolean premium)
 	{
 		for(String esp : Plateau.TAB_FORMES)

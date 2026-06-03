@@ -20,9 +20,8 @@ public class Case
 	/*            Accesseurs              */
 	/* ---------------------------------- */
 	
-	public Jeton getJeton() {return this.jeton;}
-	
-	public boolean estVide() { return this.getJeton() == null;}
+	public Jeton   getJeton() {return this.jeton;}
+	public boolean estVide () { return this.getJeton() == null;}
 	
 	/* ---------------------------------- */
 	/*           Modificateurs            */
