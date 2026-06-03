@@ -32,6 +32,7 @@ public class FrameInit extends JFrame
 		/* ---------------------------------- */
 
 		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 
 	}
 }

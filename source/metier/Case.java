@@ -22,10 +22,7 @@ public class Case
 	
 	public Jeton getJeton() {return this.jeton;}
 	
-	public boolean estVide()
-	{
-		return this.getJeton() == null;
-	}
+	public boolean estVide() { return this.getJeton() == null;}
 	
 	/* ---------------------------------- */
 	/*           Modificateurs            */
