@@ -1,4 +1,4 @@
-./ihm/FrameInit.java
+./ihm/FrameAppli.java
 ./ihm/PanelInit.java
 ./ihm/PanelMenu.java
 
@@ -9,7 +9,7 @@
 ./metier/Metier.java
 ./metier/Pioche.java
 ./metier/Plateau.java
-./metier/Zone.java
+./metier/Systeme.java
 
 ./Controleur.java
 ./TestMetier.java
