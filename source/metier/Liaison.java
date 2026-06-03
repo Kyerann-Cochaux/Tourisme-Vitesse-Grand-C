@@ -13,7 +13,6 @@ public class Liaison
 	{
 		if (planeteDestination == null         ) return null;
 		if (planeteSource      == null         ) return null; 
-		if (espece             == null         ) return null;
 		if (planeteDestination == planeteSource) return null;
 
 		return new Liaison(planeteSource,  planeteDestination, espece);

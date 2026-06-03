@@ -149,6 +149,7 @@ public class PanelInit extends JPanel implements ActionListener
 
 		lbl     .setOpaque(false);
 		txtField.setOpaque(false);
+	
 
 		// Ajout du JLabel sur le premier sous-panel
 		sPanelLbl.add(lbl);
