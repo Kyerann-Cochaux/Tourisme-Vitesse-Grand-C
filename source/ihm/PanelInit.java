@@ -2,6 +2,7 @@ package source.ihm;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class PanelInit extends JPanel
 {
@@ -9,6 +10,7 @@ public class PanelInit extends JPanel
 	private static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 25);
 
 	private static final Color COULEUR_TEXTE = Color.decode("#f1c232");
+	private static final Color COULEUR_TEXTE2 = Color.decode("#f3f3f3");
 	private static final Color COULEUR_FOND  = new Color (37, 37, 37);
 
 	private static final int NB_CARA = 50;
@@ -81,8 +83,12 @@ public class PanelInit extends JPanel
 
 		/*--- CONFIGURATION ET CENTRAGE DES JTEXTFIELD ---*/
 
-		for (JTextField txtF : this.tabTxt) 
+		for (JTextField txtF : this.tabTxt)
+		{
+			txtF.setFont(PanelInit.POLICE_TEXTE);
+			txtF.setForeground(PanelInit.COULEUR_TEXTE2);
 			txtF.setHorizontalAlignment(JTextField.CENTER);
+		}
 			
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
@@ -157,4 +163,6 @@ public class PanelInit extends JPanel
 		panelTemp.setOpaque(false);
 		return panelTemp;
 	}
+	
+	
 }
