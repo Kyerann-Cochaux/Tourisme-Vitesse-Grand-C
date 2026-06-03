@@ -1,3 +1,5 @@
+clear
+
 echo Compilation...
 
 javac @compile.list -d ../class

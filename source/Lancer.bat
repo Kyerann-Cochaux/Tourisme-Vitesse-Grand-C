@@ -1,4 +1,5 @@
 @echo off
+cls
 
 echo Compilation...
 javac @compile.list -d ../class
