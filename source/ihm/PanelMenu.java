@@ -1,10 +1,5 @@
 package source.ihm;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
-import java.awt.GridLayout;
-
 import java.awt.*;
 import javax.swing.*;
 
@@ -24,33 +19,36 @@ public class PanelMenu extends JPanel
 
 	public PanelMenu(Controleur ctrl)
 	{
+		JPanel sPanelAction;
 		this.ctrl = ctrl;
 
-		this.setLayout(new GridLayout(20, 1));
+		this.setLayout(new GridLayout(3, 1) );
+
+		/* ---------------------------------- */
+		/*       Création des composants      */
+		/* ---------------------------------- */
+
+		sPanelAction = new JPanel();
+		sPanelAction = new JPanel();
 
 		this.lblMenu = new JLabel("MENU", SwingConstants.CENTER);
 		this.lblMenu.setFont(PanelMenu.POLICE_TEXTE);
 		this.lblMenu.setForeground(PanelMenu.COULEUR_TEXTE);
 
-		JPanel panel1 = new JPanel();
-
-		this.btnJouer   = new JButton("Jouer  ");
-		panel1.add(this.btnJouer);
-		
-		JPanel panel2 = new JPanel();
-
+		this.btnJouer   = new JButton("Jouer");
 		this.btnEdition = new JButton("Edition");
-		panel2.add(this.btnEdition);
+
+		
+		/* ---------------------------------- */
+		/*    Positionnement des composants   */
+		/* ---------------------------------- */
+		
+		sPanelAction.add(this.btnJouer);
+		sPanelAction.add(this.btnEdition);
 
 		this.add(this.lblMenu);
-
-		JPanel panelVide = new JPanel();
-		this.add(panelVide);
-
-
-		this.add(panel1);
-
-		this.add(panel2);
+		this.add( new JPanel() );
+		this.add(sPanelAction, new GridBagConstraints() );
 
 	}
 }

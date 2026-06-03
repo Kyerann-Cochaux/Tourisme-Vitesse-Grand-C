@@ -27,14 +27,7 @@ public class Case
 	/*           Modificateurs            */
 	/* ---------------------------------- */
 
-	public boolean setJeton(Jeton jeton)
-	{
-		if (jeton == null || jeton == this.jeton) return false;
-		
-		this.jeton = jeton;
-		
-		return true;
-	}
+	public void setJeton(Jeton jeton) { this.jeton = jeton;}
 
 	/* ---------------------------------- */
 	/*          Méthodes standard         */

@@ -11,11 +11,8 @@ public class TestMetier
 		
 		Jeton j;
 
-		
 		Metier m = new Metier();
 		Plateau p = null;
-		
-		List<Case> lstCases = new ArrayList<Case>();
 		
 		m.initialiserPlateau(10,10,3,3);
 		p = m.getPlateau();
@@ -58,16 +55,35 @@ public class TestMetier
 		try { j = Jeton.creerJeton('G', Plateau.TAB_ESPECES[4] );}
 		catch (Exception e) {System.out.println("OK");}
 
+		System.out.println("/* ------------------------------------------- */");
+		System.out.println("/*   Ajout de Jetons simples dans le plateau   */");
+		System.out.println("/* ------------------------------------------- */");
+		System.out.println();
+		System.out.println("/* ------- Ajouts impossibles ------- */");
+		System.out.println();
 
+		boolean b = false;
 
+		b = p.ajouterForme(-1, 0, j);
+		System.out.println("x négatif --> " + (!b ? " OK " : " Erreur ") );
 
-	
-	/*	lstCases.add(p.getCase(0, 0) );
-		lstCases.add(p.getCase(1, 0) );
-		lstCases.add(p.getCase(2, 0) );
-		lstCases.add(p.getCase(3, 0) );
+		b = p.ajouterForme(0, -1, j);
+		System.out.println( "y négatif --> " + (!b ? " OK " : " Erreur ") );
+		b = p.ajouterForme(0, 0, null);
+		System.out.println( "Forme null --> " + (!b ? " OK " : " Erreur ") );
+
+		p.ajouterForme(0, 0, j);
+		b = p.ajouterForme(0, 0, j);
+		System.out.println("Forme déjà présent --> " + (!b ? " OK " : " Erreur ") );
+
+		System.out.println(p.afficherPlateau() );
+
+		System.out.println("/* ---------------------------------- */");
+		System.out.println("/*           Ajout de bases           */");
+		System.out.println("/* ---------------------------------- */");
+
+		p.aj
 		
-		System.out.println(p.afficherPlateau() );	*/
 		
 	}
 	

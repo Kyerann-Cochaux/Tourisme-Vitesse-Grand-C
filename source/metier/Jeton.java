@@ -36,7 +36,7 @@ public class Jeton
 		return new Jeton(symbole, espece);
 		
 	}
-	 //##############\\
+	 //############## \\
 	// Constructeurs  \\
 	
 	private Jeton(char symbole, String espece)

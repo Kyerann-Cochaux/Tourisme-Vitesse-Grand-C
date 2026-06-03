@@ -83,7 +83,7 @@ public class Plateau
 	public Zone    getZone   (int indice) { return this.lstZones   .get(indice);}
 	
 	public Case     getCase    (int ligne, int colonne) {return this.ensCasesNeutre[ligne][colonne];}
-	public Case[][] getEnsCases()                       { return this.ensCasesNeutre;}
+	public Case[][] getEnsCases()                       {return this.ensCasesNeutre;}
 	
 	public int  getNbLiaisons() { return this.lstLiaisons.size();}
 	public int  getNbZone    () { return this.lstZones   .size();}
@@ -95,6 +95,21 @@ public class Plateau
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
+
+	public boolean ajouterForme(int posX, int posY, Jeton j) 
+	{
+		if (!coordonneesValide(posX, posY) ) return false;
+		if (!jetonValide   (j, posX, posY) ) return false;
+
+		this.ensCasesNeutre[posX][posY].setJeton(j);
+
+		return true;
+	}
+
+	public boolean retirerForme(int posX, int posY)
+	{
+		
+	}
 	
 	public boolean ajouterZone(Zone z)
 	{
@@ -133,14 +148,31 @@ public class Plateau
 		for (int lig = 0; lig < this.ensCasesNeutre.length; lig++) 
 		{
 			for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
-			
-				sRet += (this.ensCasesNeutre[lig][col].getJeton() != null ) ? this.ensCasesNeutre[lig][col].getJeton().getSymbole() : '.';		
+			{
+
+				if (this.ensCasesNeutre[lig][col].getJeton() != null) 
+					sRet += " " + this.ensCasesNeutre[lig][col].getJeton().getSymbole() + " ";	
+				else
+				sRet += " . ";	
+			}
 	
 			sRet += "\n";
 			
 		}
 
 		return sRet;
+	}
+
+	private boolean coordonneesValide(int posX, int  posY)
+	{
+		return (posX < 0  || posX > this.ensCasesNeutre      .length ) && 
+		       (posY < 0  || posY > this.ensCasesNeutre[posX].length ); 
+	}
+
+	private boolean jetonValide(Jeton j, int posX, int posY)
+	{
+		return j != null && j != this.ensCasesNeutre [posX][posY].getJeton()  &&
+		                         this.ensCasesNeutre [posX][posY].getJeton() == null ;
 	}
 
 
