@@ -204,7 +204,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			
 			for ( int i=0 ; i < this.tabTxt.length ; i++ )
 			{
-<<<<<<< HEAD
 				try
 				{
 					this.tabParametreEntrer[i] = Integer.parseInt(this.tabTxt[i].getText());
@@ -213,26 +212,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				{
 					this.tabTxt[i].setText("Erreur : Valeur Invalide");
 				}
-=======
-				int nbLignes    = Integer.parseInt(this.tabTxt[0].getText());
-				int nbColonnes  = Integer.parseInt(this.tabTxt[1].getText());
-				int nbEspece    = Integer.parseInt(this.tabTxt[2].getText());
-				int nbPlanete   = Integer.parseInt(this.tabTxt[3].getText());
-<<<<<<< HEAD
-
-				//this.Controleur.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
-
-
-=======
 				
 				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
-				
->>>>>>> 419d9083a8c2aa54d69ba0abecdaa84ec12e4eef
-			}
-			catch(NumberFormatException ex)
-			{
-				this.rinitialiserTexte();
->>>>>>> c9b4140e991e8ac2c9a3262bb6237488bc63a01f
 			}
 			
 			int nbLignes   = this.tabParametreEntrer[0] ;
