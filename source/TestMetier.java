@@ -83,7 +83,10 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 
 		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[3] );
-
+		p.retirerForme(0, 0);
+		
+		p.ajouterForme(0, 0, j);
+		p.ajouterForme(0, 1, j);
 		p.ajouterForme(5, 5, Planete.creerPlanete('T', null) );
 
 		System.out.println(p);

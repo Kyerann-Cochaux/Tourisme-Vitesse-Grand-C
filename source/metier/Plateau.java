@@ -98,8 +98,35 @@ public class Plateau
 
 	public boolean ajouterForme(int posX, int posY, Planete j) 
 	{
+		boolean baseExiste = false;
+
 		if (!coordonneesValide(   posX, posY) ) return false;
 		if (!planeteValide    (j, posX, posY) ) return false;
+
+		// Dans le cas où la planète fournie en paramètre est une base, il faut vérifier qu'elle n'est pas 
+		// déjà présente sur le plateau.
+		
+		// On regarde si le jeton en paramètres est une base.
+		if (j.estBase() )
+		{
+			// On parcours les lignes
+			for (int lig = 0; lig < this.ensCasesNeutre.length; lig++) 
+			{
+				// On parcours les colonnes
+				for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
+				{
+					if (this.ensCasesNeutre[lig][col].getPlanete().estBase()                             &&
+						j.getEspece().equals(this.ensCasesNeutre[lig][col].getPlanete().getEspece() ) )
+					
+						baseExiste = true;
+					
+					
+				}
+				
+			}
+		}
+
+		if (baseExiste) return false;
 
 		this.ensCasesNeutre[posX][posY].setPlanete(j);
 
@@ -108,6 +135,10 @@ public class Plateau
 
 	public boolean retirerForme(int posX, int posY)
 	{
+		if (this.ensCasesNeutre[posX][posY].getPlanete() == null) return false;
+
+		this.ensCasesNeutre[posX][posY].setPlanete(null);
+
 		return true;
 	}
 	
@@ -116,7 +147,7 @@ public class Plateau
 
 		boolean estIdentique = false;
 
-		if (z == null)                    return false;
+		if (z == null)                     return false;
 		if (this.lstSystemes.contains(z) ) return false;
 
 		for (Systeme zTemp : this.lstSystemes) 
