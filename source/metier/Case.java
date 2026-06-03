@@ -2,12 +2,12 @@ package source.metier;
 
 public class Case 
 {
-	private Jeton jeton;
+	private Planete planete;
 	private int   posX, posY;
 
-	public Case(int posX, int posY, Jeton jeton)
+	public Case(int posX, int posY, Planete planete)
 	{
-		this.jeton = jeton;
+		this.planete = planete;
 	}
 
 	public Case(int posX, int posY)
@@ -20,21 +20,14 @@ public class Case
 	/*            Accesseurs              */
 	/* ---------------------------------- */
 	
-	public Jeton   getJeton() {return this.jeton;}
-	public boolean estVide () { return this.getJeton() == null;}
+	public Planete   getPlanete() {return this.planete;}
+	public boolean estVide () { return this.getPlanete() == null;}
 	
 	/* ---------------------------------- */
 	/*           Modificateurs            */
 	/* ---------------------------------- */
 
-	public boolean setJeton(Jeton jeton)
-	{
-		if (jeton == null || jeton == this.jeton) return false;
-		
-		this.jeton = jeton;
-		
-		return true;
-	}
+	public void setPlanete(Planete planete) { this.planete = planete;}
 
 	/* ---------------------------------- */
 	/*          Méthodes standard         */
@@ -42,7 +35,7 @@ public class Case
 
 	public String toString()
 	{
-		return "Case : " + ( this.estVide() ? "Aucun" : this.getJeton().getSymbole() ) + " [" + this.posX + ":" + this.posY + "]";
+		return "Case : " + ( this.estVide() ? "Aucun" : this.getPlanete().getSymbole() ) + " [" + this.posX + ":" + this.posY + "]";
 	}
 	
 }

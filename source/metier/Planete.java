@@ -1,18 +1,18 @@
 package source.metier;
 
-public class Jeton
+public class Planete
 {
 	private char   symbole;
 	private String espece ;
 
-	/*Factory pour vérifier si le symbole du jeton fait partie des symbole autorisés */
+	/*Factory pour vérifier si le symbole de la planète fait partie des symboles autorisés */
 
-	public static Jeton creerJeton(char symbole, String espece)
+	public static Planete creerPlanete(char symbole, String espece)
 	{
 		symbole = Character.toUpperCase(symbole);
 
 		// Test symbole invalide
-		if(!Jeton.symboleValide(symbole) ) return null;
+		if(!Planete.symboleValide(symbole) ) return null;
 
 		// Test espèce invalide
 		if (espece != null && !espece.equals("") )
@@ -30,22 +30,22 @@ public class Jeton
 		
 		
 		// L'espèce est null, donc le Jeton ne possède qu'un symbole
-		if (espece == null || espece.equals("") ) return new Jeton(symbole); 
+		if (espece == null || espece.equals("") ) return new Planete(symbole); 
 		
 		// L'espèce est non null, le Jeton est donc une base
-		return new Jeton(symbole, espece);
+		return new Planete(symbole, espece);
 		
 	}
-	 //##############\\
+	 //############## \\
 	// Constructeurs  \\
 	
-	private Jeton(char symbole, String espece)
+	private Planete(char symbole, String espece)
 	{
 		this.symbole = symbole;
 		this.espece  = espece;
 	}
 
-	private Jeton(char symbole)
+	private Planete(char symbole)
 	{
 		this(symbole, null);
 	}
