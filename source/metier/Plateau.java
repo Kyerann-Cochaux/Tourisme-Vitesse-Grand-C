@@ -111,10 +111,17 @@ public class Plateau
 				// On parcours les colonnes
 				for (int col = 0; col < this.ensCasesNeutre[lig].length; col++) 
 				{
-					if (this.ensCasesNeutre[lig][col].getPlanete().estBase()                             &&
-						j.getEspece().equals(this.ensCasesNeutre[lig][col].getPlanete().getEspece() ) )
-					
-						baseExiste = true;
+					Case cTemp = this.ensCasesNeutre[lig][col];
+
+					if (!cTemp.estVide() )
+					{
+
+						if (cTemp.getPlanete().estBase()                            &&
+							j.getEspece().equals(cTemp.getPlanete().getEspece() ) )
+						
+							baseExiste = true;
+					}
+
 					
 					
 				}

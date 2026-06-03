@@ -86,8 +86,13 @@ public class TestMetier
 		p.retirerForme(0, 0);
 		
 		p.ajouterForme(0, 0, j);
-		p.ajouterForme(0, 1, j);
-		p.ajouterForme(5, 5, Planete.creerPlanete('T', null) );
+		p.ajouterForme(0, 1, Planete.creerPlanete('G', Plateau.TAB_ESPECES[0] ) ); // Ajoute       : OK
+		p.ajouterForme(0, 2, Planete.creerPlanete('V', Plateau.TAB_ESPECES[1] ) ); // Ajoute       : OK
+		p.ajouterForme(0, 3, Planete.creerPlanete('O', Plateau.TAB_ESPECES[2] ) ); // Ajoute       : OK
+		p.ajouterForme(0, 4, Planete.creerPlanete('T', Plateau.TAB_ESPECES[3] ) ); // N'ajoute pas : OK
+
+		p.ajouterForme(5, 5, Planete.creerPlanete('T',  null) ); 
+		p.ajouterForme(0, 0, Planete.creerPlanete('V',  null) ); 
 
 		System.out.println(p);
 

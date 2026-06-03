@@ -80,7 +80,7 @@ public class Metier
 			
 			String premiereLigne       = sc.nextLine();
 			
-			String[] creationArguments = premiereLigne.split(" ");
+			String[] creationArguments = premiereLigne       .split(" ");
 			String[] creationTaille    = creationArguments[0].split("*");
 			
 			
