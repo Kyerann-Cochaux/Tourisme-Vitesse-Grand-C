@@ -5,10 +5,13 @@ import java.util.ArrayList;
 
 public class Systeme
 {
+	private static int nbSysteme;
+	private int numSysteme;
 	private List<Case> ensCase;
 
 	public Systeme()
 	{
+		this.numSysteme = this.nbSysteme++;
 		this.ensCase = new ArrayList<Case>();
 	}
 	

@@ -1,6 +1,6 @@
-./ihm/FrameInit.java
+./ihm/FrameCreation.java
 ./ihm/PanelInit.java
-./ihm/PanelMenu.java
+./ihm/PanelCreation.java
 
 ./metier/Carte.java
 ./metier/Case.java
@@ -9,7 +9,7 @@
 ./metier/Metier.java
 ./metier/Pioche.java
 ./metier/Plateau.java
-./metier/Zone.java
+./metier/Systeme.java
 
 ./Controleur.java
 ./TestMetier.java

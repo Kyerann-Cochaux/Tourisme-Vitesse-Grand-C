@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 
-public class FrameAppli extends JFrame
+public class FrameCreation extends JFrame
 {
 	protected static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 25);
 	protected static final Color COULEUR_TITRE = Color.decode("#f1c232");
@@ -14,9 +14,9 @@ public class FrameAppli extends JFrame
 	protected static final Color COULEUR_FOND  = new Color (37, 37, 37);
 
 	private Controleur ctrl;
-	private PanelAcceuil  panelAcceuil;
+	private PanelCreation  panelCreation;
 
-	public FrameAppli(Controleur ctrl) 
+	public FrameCreation(Controleur ctrl) 
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -26,13 +26,13 @@ public class FrameAppli extends JFrame
 		/* ---------------------------------- */
 
 		this.ctrl      = ctrl;
-		this.panelAcceuil = new PanelAcceuil(ctrl);
+		this.panelCreation = new PanelCreation(ctrl);
 
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 
-		this.add(this.panelAcceuil);
+		this.add(this.panelCreation);
 
 		/* ---------------------------------- */
 		/*      Activation des composants     */

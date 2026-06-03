@@ -8,7 +8,7 @@ import javax.swing.*;
 
 import source.Controleur ;
 
-public class panelAcceuil extends JPanel implements ActionListener
+public class panelCreation extends JPanel implements ActionListener
 {
 	private JPanel panelAcceuil;
 
@@ -19,7 +19,7 @@ public class panelAcceuil extends JPanel implements ActionListener
 
 	private Controleur ctrl;
 
-	public PanelMenu(Controleur ctrl)
+	public PanelCreation(Controleur ctrl)
 	{
 		this.panelAcceuil  = new JPanel();
 		this.panelChoix = new JPanel();

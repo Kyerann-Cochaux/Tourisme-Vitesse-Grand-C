@@ -3,7 +3,7 @@ package source.metier;
 public class Case 
 {
 	private Planete planete;
-	private int   posX, posY;
+	private int     posX, posY;
 
 	public Case(int posX, int posY, Planete planete)
 	{
