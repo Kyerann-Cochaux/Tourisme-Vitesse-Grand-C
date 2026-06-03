@@ -10,7 +10,11 @@ public class Controleur
 
 	public Controleur()
 	{
+<<<<<<< HEAD
 		this.metier    = new Metier   ();
+=======
+		this.metier        = new Metier   ();
+>>>>>>> 75d3aac3fb39ae1831f4120a316ad555dc16c07e
 		this.frameCreation = new FrameCreation(this);
 	}
 
