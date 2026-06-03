@@ -9,17 +9,19 @@ public class Jeton
 
 	public static Jeton creerJeton(char symbole, String espece)
 	{
-
+		
 		if(!Jeton.parametresValide(symbole) ) return null;
-
+		
 		// L'espèce est null, donc le Jeton ne possède qu'un symbole
 		if (espece == null || espece.equals("") ) return new Jeton(symbole); 
-
+		
 		// L'espèce est non null, le Jeton est donc une base
 		return new Jeton(Character.toUpperCase(symbole), espece);
-
+		
 	}
-
+	 //##############\\
+	// Constructeurs  \\
+	
 	private Jeton(char symbole, String espece)
 	{
 		this.symbole = symbole;
