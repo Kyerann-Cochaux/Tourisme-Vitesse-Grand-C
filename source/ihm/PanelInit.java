@@ -212,8 +212,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				{
 					this.tabTxt[i].setText("Erreur : Valeur Invalide");
 				}
-				
-				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
 			}
 			
 			int nbLignes   = this.tabParametreEntrer[0] ;
