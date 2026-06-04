@@ -1,7 +1,9 @@
 ./ihm/FrameCreation.java
-./ihm/PanelInit.java
+./ihm/FrameJeu.java
 ./ihm/PanelCreation.java
 ./ihm/PanelEdition.java
+./ihm/PanelInit.java
+./ihm/PanelMenu.java
 
 ./metier/Carte.java
 ./metier/Case.java
@@ -13,3 +15,5 @@
 
 ./Controleur.java
 ./TestMetier.java
+./TestIHM.java
+./TestSauvegardes.java

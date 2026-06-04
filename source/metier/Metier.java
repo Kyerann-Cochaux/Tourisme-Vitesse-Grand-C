@@ -41,17 +41,9 @@ public class Metier
 	
 	
 	// TODO: Finir methode chargerPlateau
-	public boolean sauvegardeCorrompue(String cheminSauvegarde)
-	{
-		return false;
-	}
 	
-	
-	// retourne l'erreur
-	public int chargerPlateau(String cheminSauvegarde)
+	public boolean chargerPlateau(String cheminSauvegarde)
 	{
-		if ( this.sauvegardeCorrompue(cheminSauvegarde) ) return 1;
-		
 		int nbLignes   = 0;
 		int nbColonnes = 0;
 		int nbFormes   = 0;
@@ -77,35 +69,17 @@ public class Metier
 			// initialisation du plateau
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			
-			
-			// ajout des systèmes solaires
-			String  sLigne  = "";
-			
-			int numZone = sLigne.charAt(0);
-			
-			for (int cptLig = 0; cptLig < creationTaille.length; cptLig++)
-			{
-				sLigne = sc.nextLine();
-				for (int cptCol = 0; cptCol < creationTaille.length; cptCol++)
-				{
-					numZone = sLigne.charAt(cptCol);
-					
-					
-				}
-			}
-			this.plateauJeu.getCase(nbLignes, nbColonnes).getPlanete();
-			
-			
 			// fermeture du scanner
 			sc.close();
 		}
 		catch (Exception e)
 		{
 			System.out.println("Erreur lors du chargement du plateau \""+ cheminSauvegarde +"\"");
-			return 2;
+			e.printStackTrace();
+			return false;
 		}
 		
-		return 0;
+		return true;
 	}
 	
 	// TODO : faire la methode sauvegarderPlateau

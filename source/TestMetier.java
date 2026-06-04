@@ -175,6 +175,11 @@ public class TestMetier
 		System.out.println(p.afficherSystemes() );
 
 		System.out.println();
+		System.out.println("/* ---------------------------------- */");
+		System.out.println("/*          Test des liaisons         */");
+		System.out.println("/* ---------------------------------- */");
+		System.out.println();
+
 		
 		
 	}
