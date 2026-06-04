@@ -207,17 +207,30 @@ public class Plateau
 
 	public boolean ajouterVoyage(Case source, Case destination)
 	{
+
 		if (source     .estVide() ) return false;
 		if (destination.estVide() ) return false;
 
-		Voyage v = Voyage.creerVoyage(source, destination);
+		int dX =  Math.abs(destination.getPosX() - source.getPosX() );
+		int dY =  Math.abs(destination.getPosY() - source.getPosY() );
 
-		System.out.println(source.getPosY() ==         destination.getPosY() );
-		System.out.println(source.getPosY() + "<==>" + destination.getPosY() );
-		//if (destination.getPosY() == source.getPosY() )
+			//    Orthogonal      Diagonal
+		if ( dX == 0 ^ dY == 0 || dX == dY)
 
-		//if (v != null)
-		//	this.lstVoyages.add(v);
+			for (int cpt = 0; cpt < Math.max(dX, dY); cpt++) 
+			{
+				if (this.getCase(dX, dY).getPlanete() != null)
+					this.lstVoyages.add(Voyage.creerVoyage(source, destination));
+			}
+		
+	
+		System.out.println( );
+		System.out.println(source.getPosX() + " <==> " + destination.getPosX() );
+
+		System.out.println(source);
+		System.out.println(destination);
+
+
 
 		return true;
 	}
