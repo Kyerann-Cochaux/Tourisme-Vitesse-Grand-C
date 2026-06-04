@@ -27,7 +27,7 @@ public class FrameJeu extends JFrame
 		/* ---------------------------------- */
 		
 		this.ctrl          = ctrl;
-		this.panelActuelle = new PanelMenu(this.ctrl, this);
+		//this.panelActuelle = new PanelMenu(this.ctrl, this);
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */

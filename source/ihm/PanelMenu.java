@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import source.Controleur ;
 
-public class PanelCreation extends JPanel implements ActionListener
+public class PanelMenu extends JPanel implements ActionListener
 {
 	private Controleur    ctrl;
 	private FrameCreation frame;
@@ -22,7 +22,7 @@ public class PanelCreation extends JPanel implements ActionListener
 	
 	
 	
-	public PanelCreation(Controleur ctrl, FrameCreation frame)
+	public PanelMenu(Controleur ctrl, FrameCreation frame)
 	{
 		this.ctrl  = ctrl;
 		this.frame = frame;

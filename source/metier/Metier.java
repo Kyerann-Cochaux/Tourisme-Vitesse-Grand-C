@@ -40,7 +40,7 @@ public class Metier
 	// le numero des sauvegardes commence a 0
 	
 	
-	// TODO: Finir methode chargerPlateau
+	// TODO: Finir methode chargerPlateau et sauvegardeCorrompue
 	public boolean sauvegardeCorrompue(String cheminSauvegarde)
 	{
 		return false;
@@ -101,6 +101,7 @@ public class Metier
 		}
 		catch (Exception e)
 		{
+			System.out.println(e.getStackTrace());
 			System.out.println("Erreur lors du chargement du plateau \""+ cheminSauvegarde +"\"");
 			return 2;
 		}
