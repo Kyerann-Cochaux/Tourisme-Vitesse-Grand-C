@@ -72,6 +72,8 @@ public class Metier
 			// initialisation du plateau
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			
+			
+			// placement des systèmes
 			for (int numLig = 0; numLig < nbLignes; numLig++)
 			{
 				String ligne = sc.nextLine();
@@ -79,10 +81,54 @@ public class Metier
 				for (int numCol = 0; numCol < nbColonnes; numCol++)
 				{
 					int numZone = Integer.parseInt( "" + ligne.charAt(numCol) );
-					this.plateauJeu.setNumSysteme(numZone, numCol, numLig);
+					this.plateauJeu.setNumSysteme(numZone, numCol, numLig, true);
 				}
 			}
 			
+			
+			// placement des planetes
+			for (int numLig = 0; numLig < nbLignes; numLig++)
+			{
+				String ligne = sc.nextLine();
+				
+				for (int numCol = 0; numCol < nbColonnes; numCol++)
+				{
+					
+					char sIndPlanete = ligne.charAt(numCol);
+					
+					if( sIndPlanete != '.' )
+					{
+						int indPlanete = Integer.parseInt("" + sIndPlanete);
+						
+						Planete tempPlanete = Planete.creerPlanete(Plateau.TAB_FORMES[indPlanete].charAt(0), null);
+						
+						this.plateauJeu.getCase(numLig, numCol).setPlanete(tempPlanete);
+					}
+					
+				}
+			}
+			
+			
+			// placement des bases
+			for (int numLig = 0; numLig < nbLignes; numLig++)
+			{
+				String ligne = sc.nextLine();
+				
+				for (int numCol = 0; numCol < nbColonnes; numCol++)
+				{
+					
+					char sIndEspece = ligne.charAt(numCol);
+					
+					if( sIndEspece != '-' )
+					{
+						int indEspece = Integer.parseInt("" + sIndEspece);
+						String typeEspece = Plateau.TAB_ESPECES[indEspece];
+						
+						this.plateauJeu.getCase(numLig, numCol).getPlanete().setEspece(typeEspece);
+					}
+					
+				}
+			}
 			
 			// fermeture du scanner
 			sc.close();
@@ -91,6 +137,7 @@ public class Metier
 		{
 			System.out.println("Erreur lors du chargement du fichier de sauvegarde.");
 			e.printStackTrace();
+			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			return false;
 		}
 		
