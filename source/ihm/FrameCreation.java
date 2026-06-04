@@ -49,7 +49,8 @@ public class FrameCreation extends JFrame
 		this.remove(this.panelActuelle);
 		this.panelActuelle = new PanelInit(this.ctrl);
 		this.add(this.panelActuelle);
-		this.setSize(500, 1080);
+		this.setSize(800, 1080);
+		this.setLocation(550, 450);
 		this.revalidate();
 	}
 }
