@@ -12,7 +12,7 @@ import source.Controleur ;
 public class PanelMenu extends JPanel implements ActionListener
 {
 	private Controleur    ctrl;
-	
+
 	private FrameJeu frameJeu;
 	
 	private JPanel panelAccueil;
@@ -28,7 +28,7 @@ public class PanelMenu extends JPanel implements ActionListener
 		this.ctrl  = ctrl;
 		this.frameJeu = frameJeu;
 
-		this.setBackground(FrameCreation.COULEUR_FOND);
+		this.setBackground(FrameJeu.COULEUR_FOND);
 		
 		/* ---------------------------------- */
 		/* Création des composants      */
@@ -37,11 +37,11 @@ public class PanelMenu extends JPanel implements ActionListener
 		this.panelAccueil = new JPanel();
 		this.panelAccueil.setLayout(new GridLayout(4, 1, 0, 20) );
 		
-		this.lblMenu = new JLabel ("Edition de Plateau", SwingConstants.CENTER);
-		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE        );
-		this.lblMenu.setForeground(FrameCreation.COULEUR_TITRE        );
+		this.lblMenu = new JLabel ("Tourisme à Vitesse Grand C", SwingConstants.CENTER);
+		this.lblMenu.setFont      (FrameJeu.POLICE_TEXTE         );
+		this.lblMenu.setForeground(FrameJeu.COULEUR_TITRE        );
 		
-		this.btnCharger  = new JButton("Ouvrir" );
+		this.btnCharger  = new JButton("Charger un plateau" );
 		
 		
 		/* ---------------------------------- */
@@ -75,7 +75,7 @@ public class PanelMenu extends JPanel implements ActionListener
 
 			explorateur.setCurrentDirectory(new File("."));
 
-			int resultat = explorateur.showOpenDialog(this.frame);
+			int resultat = explorateur.showOpenDialog(this.frameJeu);
 
 			if (resultat == JFileChooser.APPROVE_OPTION)
 			{

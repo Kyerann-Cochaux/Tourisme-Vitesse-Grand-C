@@ -19,14 +19,14 @@ public class FrameJeu extends JFrame
 	public FrameJeu(Controleur ctrl) 
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
-		this.setSize(300, 250);
-		this.setLocation(800, 450);
+		this.setSize(500, 250);
+		this.setLocation(700, 450);
 		
 		/* ---------------------------------- */
 		/*       Création des composants      */
 		/* ---------------------------------- */
 		
-		this.ctrl          = ctrl;
+		//this.ctrl          = ctrl;
 		this.panelActuelle = new PanelMenu(this.ctrl, this);
 		
 		/* ---------------------------------- */
@@ -42,5 +42,9 @@ public class FrameJeu extends JFrame
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+	}
+
+	public static void main(String[] args) {
+		new FrameJeu();
 	}
 }
