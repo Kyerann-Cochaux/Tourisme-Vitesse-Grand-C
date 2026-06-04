@@ -1,4 +1,4 @@
-package source.ihm ;
+package source.ihm;
 
 import javax.swing.*;
 
@@ -35,7 +35,7 @@ public class PanelEdition extends JPanel
 		/*-------------------------------*/
 		/*    Création des Composants    */
 		/*-------------------------------*/
-		
+/* 
 		this.panelCentre = new JPanel();
 
 		this.panelDroit = new JPanel();
@@ -43,7 +43,7 @@ public class PanelEdition extends JPanel
 
 		this.panelGauche = new JPanel();
 		this.panelGauche.setLayout(new GridLayout());
-
+*/
 		
 		/*------------------------------------*/
 		/*    Configuration des Composants    */
