@@ -32,11 +32,11 @@ public class PanelCreation extends JPanel implements ActionListener
 		/* ---------------------------------- */
 		
 		this.panelAccueil = new JPanel();
-		this.panelAccueil.setLayout(new GridLayout(3, 1) );
+		this.panelAccueil.setLayout(new GridLayout(4, 1, 0, 20) );
 		
-		this.lblMenu = new JLabel ("MENU", SwingConstants.CENTER);
+		this.lblMenu = new JLabel ("Edition de Plateau", SwingConstants.CENTER);
 		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE        );
-		this.lblMenu.setForeground(FrameCreation.COULEUR_ZONE        );
+		this.lblMenu.setForeground(FrameCreation.COULEUR_TITRE        );
 		
 		this.btnNouveau = new JButton("Nouveau");
 		this.btnOuvrir  = new JButton("Ouvrir" );
@@ -46,12 +46,13 @@ public class PanelCreation extends JPanel implements ActionListener
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
+		this.panelAccueil.add( this.lblMenu );
+		this.panelAccueil.add( new JPanel() );
 		this.panelAccueil.add( this.btnNouveau);
 		this.panelAccueil.add( this.btnOuvrir );
 		
-		this.add( this.lblMenu );
-		this.add( new JPanel() );
-		this.add(this.panelAccueil, new GridBagConstraints() );
+		
+		this.add(this.panelAccueil);
 		
 		/* ------------------------------- */
 		/*    Activation des Composants    */

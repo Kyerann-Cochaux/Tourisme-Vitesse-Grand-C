@@ -19,7 +19,8 @@ public class FrameCreation extends JFrame
 	public FrameCreation(Controleur ctrl) 
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.setSize(300, 250);
+		this.setLocation(800, 450);
 		
 		/* ---------------------------------- */
 		/*       Création des composants      */
@@ -48,6 +49,7 @@ public class FrameCreation extends JFrame
 		this.remove(this.panelActuelle);
 		this.panelActuelle = new PanelInit(this.ctrl);
 		this.add(this.panelActuelle);
+		this.setSize(500, 1080);
 		this.revalidate();
 	}
 }
