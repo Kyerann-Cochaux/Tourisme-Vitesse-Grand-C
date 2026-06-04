@@ -2,11 +2,11 @@ clear
 
 cd ../source
 
+echo ____Tests____
 echo Compilation...
 javac @compile.list -d ../class
 cd ../class
 
 echo Execution...
-java source.AppliCreation
-
+java source.TestSauvegardes
 cd ../lanceurs

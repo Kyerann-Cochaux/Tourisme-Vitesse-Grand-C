@@ -7,12 +7,12 @@ import java.io.File;
 
 import javax.swing.*;
 
-import source.Controleur ;
+import source.AppliCreation ;
 
 public class PanelMenu extends JPanel implements ActionListener
 {
-	private Controleur    ctrl;
-
+	private AppliCreation    ctrl;
+	
 	private FrameJeu frameJeu;
 	
 	private JPanel panelAccueil;
@@ -23,7 +23,7 @@ public class PanelMenu extends JPanel implements ActionListener
 	
 	
 	
-	public PanelMenu(Controleur ctrl, FrameJeu frameJeu)
+	public PanelMenu(AppliCreation ctrl, FrameJeu frameJeu)
 	{
 		this.ctrl  = ctrl;
 		this.frameJeu = frameJeu;

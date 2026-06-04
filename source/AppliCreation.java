@@ -3,14 +3,14 @@ package source;
 import source.metier.*;
 import source.ihm.*;
 
-public class Controleur
+public class AppliCreation
 {
 	private Metier        metier;
 	private FrameCreation frameCreation;
 
-	public Controleur()
+	public AppliCreation()
 	{
-		this.metier        = new Metier   ();
+		this.metier        = new Metier();
 		this.frameCreation = new FrameCreation(this);
 	}
 
@@ -21,6 +21,6 @@ public class Controleur
 
 	public static void main(String[] args) 
 	{
-		new Controleur();
+		new AppliCreation();
 	}
 }
