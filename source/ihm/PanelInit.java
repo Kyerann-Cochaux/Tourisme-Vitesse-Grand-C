@@ -40,12 +40,12 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	private JButton btnRetour;
 	
 	private Controleur    ctrl ;
-	private FrameCreation frame ;
+	private FrameCreation frameCreation ;
 	
-	public PanelInit( Controleur ctrl, FrameCreation frame )
+	public PanelInit( Controleur ctrl, FrameCreation frameCreation )
 	{
 		this.ctrl  = ctrl;
-		this.frame = frame;
+		this.frameCreation = frameCreation;
 		
 		this.setLayout(new BorderLayout() );
 		this.setBackground(FrameCreation.COULEUR_FOND);
@@ -201,13 +201,13 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				int nbFormes   = Integer.parseInt( this.tabZoneTxt[2].getText() );
 				int nbEspeces  = Integer.parseInt( this.tabZoneTxt[3].getText() );
 				
-				this.frame.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
+				this.frameCreation.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			}
 		}
 		
 		if ( e.getSource() == this.btnRetour )
 		{
-			this.frame.ouvrirPanelMenu();
+			this.frameCreation.ouvrirPanelMenu();
 		}
 	}
 	

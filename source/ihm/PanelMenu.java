@@ -9,10 +9,11 @@ import javax.swing.*;
 
 import source.Controleur ;
 
-public class PanelCreation extends JPanel implements ActionListener
+public class PanelMenu extends JPanel implements ActionListener
 {
 	private Controleur    ctrl;
-	private FrameCreation frame;
+	
+	private FrameJeu frameJeu;
 	
 	private JPanel panelAccueil;
 	
@@ -22,10 +23,10 @@ public class PanelCreation extends JPanel implements ActionListener
 	
 	
 	
-	public PanelCreation(Controleur ctrl, FrameCreation frame)
+	public PanelMenu(Controleur ctrl, FrameJeu frameJeu)
 	{
 		this.ctrl  = ctrl;
-		this.frame = frame;
+		this.frameJeu = frameJeu;
 
 		this.setBackground(FrameCreation.COULEUR_FOND);
 		
