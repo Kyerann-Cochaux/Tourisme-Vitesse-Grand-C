@@ -3,6 +3,7 @@ package source.ihm;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.*;
 
@@ -30,7 +31,7 @@ public class PanelCreation extends JPanel implements ActionListener
 		this.setBackground(FrameCreation.COULEUR_FOND);
 		
 		/* ---------------------------------- */
-		/*       Création des composants      */
+		/* Création des composants      */
 		/* ---------------------------------- */
 		
 		this.panelAccueil = new JPanel();
@@ -45,7 +46,7 @@ public class PanelCreation extends JPanel implements ActionListener
 		
 		
 		/* ---------------------------------- */
-		/*    Positionnement des composants   */
+		/* Positionnement des composants   */
 		/* ---------------------------------- */
 		
 		this.panelAccueil.add( this.lblMenu );
@@ -61,7 +62,7 @@ public class PanelCreation extends JPanel implements ActionListener
 		this.add(this.panelAccueil);
 		
 		/* ------------------------------- */
-		/*    Activation des Composants    */
+		/* Activation des Composants    */
 		/* ------------------------------- */
 		
 		this.btnNouveau.addActionListener(this);
@@ -77,7 +78,17 @@ public class PanelCreation extends JPanel implements ActionListener
 		
 		if (e.getSource() == this.btnOuvrir)
 		{
-			
+			JFileChooser explorateur = new JFileChooser();
+			explorateur.setDialogTitle("Ouvrir un plateau existant");
+
+			explorateur.setCurrentDirectory(new File("."));
+
+			int resultat = explorateur.showOpenDialog(this.frame);
+
+			if (resultat == JFileChooser.APPROVE_OPTION)
+			{
+				File fichierSelectionne = explorateur.getSelectedFile();
+			}
 		}
 	}
 }
