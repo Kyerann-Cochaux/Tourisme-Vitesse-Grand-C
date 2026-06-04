@@ -58,16 +58,16 @@ public class PanelEdition extends JPanel
 	{
 		this.setLayout( new BorderLayout() );
 		this.setBackground(FrameCreation.COULEUR_FOND);
-
+		
 		/*-------------------------------*/
 		/*    Création des Composants    */
 		/*-------------------------------*/
 /* 
 		this.panelCentre = new JPanel();
-
+		
 		this.panelDroit = new JPanel();
 		this.panelDroit.setLayout(new GridLayout());
-
+		
 		this.panelGauche = new JPanel();
 		this.panelGauche.setLayout(new GridLayout());
 */

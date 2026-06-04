@@ -37,28 +37,25 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	
 	private JButton btnLancer;
 	private JButton btnReset ;
+	private JButton btnRetour;
 	
 	private Controleur    ctrl ;
 	private FrameCreation frame ;
 	
 	public PanelInit( Controleur ctrl, FrameCreation frame )
 	{
-	
-		JPanel panelAction;
-		JPanel panelSaisie;
-		
 		this.ctrl  = ctrl;
 		this.frame = frame;
 		
 		this.setLayout(new BorderLayout() );
 		this.setBackground(FrameCreation.COULEUR_FOND);
-
+		
 		/* ---------------------------------- */
 		/*       création des composants      */
 		/* ---------------------------------- */
 		
-		panelAction = new JPanel();
-		panelSaisie = new JPanel(new GridLayout(5, 1  ) );
+		JPanel panelAction = new JPanel();
+		JPanel panelSaisie = new JPanel(new GridLayout(5, 1  ) );
 		
 		this.tabLbl = new JLabel    [5];
 		this.tabZoneTxt = new JTextField[4];
@@ -82,6 +79,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		this.btnLancer  = new JButton("Lancer");
 		this.btnReset   = new JButton("Réinitialiser" );
+		this.btnRetour  = new JButton("Retour");
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -123,11 +121,12 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		for (int cpt = 1; cpt < tabLbl.length; cpt++) 
 			panelSaisie.add(this.creerPanelCentre(this.tabLbl[cpt], this.tabZoneTxt[cpt -1]) );
-													// JTextfield         JLabel
-													// Dans l'ordre des tableaux définis au dessus.
+			                                       // JTextfield         JLabel
+			                                       // Dans l'ordre des tableaux définis au dessus.
 		
 		panelAction.add(btnLancer);
 		panelAction.add(btnReset );
+		panelAction.add(btnRetour);
 		
 		this.add(panelSaisie, BorderLayout.CENTER);
 		this.add(panelAction, BorderLayout.SOUTH );
@@ -143,6 +142,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		// Activation des Boutons d'Action
 		this.btnLancer.addActionListener(this);
 		this.btnReset .addActionListener(this);
+		this.btnRetour.addActionListener(this);
 	}
 	
 	
@@ -166,7 +166,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		lbl     .setOpaque(false);
 		txtField.setOpaque(false);
-		
 		
 		// Ajout du JLabel sur le premier sous-panel
 		sPanelLbl.add(lbl);
@@ -206,6 +205,10 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			}
 		}
 		
+		if ( e.getSource() == this.btnRetour )
+		{
+			this.frame.ouvrirPanelMenu();
+		}
 	}
 	
 	private void reinitialiserTexte()

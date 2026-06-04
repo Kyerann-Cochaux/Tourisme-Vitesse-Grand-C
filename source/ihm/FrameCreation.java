@@ -46,6 +46,16 @@ public class FrameCreation extends JFrame
 		
 	}
 	
+	public void ouvrirPanelMenu()
+	{
+		this.remove(this.panelActuelle);
+		this.panelActuelle = new PanelCreation(this.ctrl, this);
+		this.add(this.panelActuelle);
+		this.setSize(300, 250);
+		this.setLocation(800, 450);
+		this.revalidate();
+	}
+	
 	public void ouvrirPanelInit()
 	{
 		this.remove(this.panelActuelle);
@@ -55,7 +65,7 @@ public class FrameCreation extends JFrame
 		this.setLocation(550, 450);
 		this.revalidate();
 	}
-
+	
 	public void ouvrirPanelEdition(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.remove(this.panelActuelle);
@@ -64,8 +74,8 @@ public class FrameCreation extends JFrame
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.revalidate();
 	}
-
-	public void ouvrirPanelEdition(File fichier )
+	
+	public void ouvrirPanelEdition( File fichier )
 	{
 		this.remove(this.panelActuelle);
 		this.panelActuelle = new PanelEdition(this.ctrl, fichier);
