@@ -88,6 +88,8 @@ public class PanelCreation extends JPanel implements ActionListener
 			if (resultat == JFileChooser.APPROVE_OPTION)
 			{
 				File fichierSelectionne = explorateur.getSelectedFile();
+
+				this.frame.ouvrirPanelEdition(fichierSelectionne);
 			}
 		}
 	}
