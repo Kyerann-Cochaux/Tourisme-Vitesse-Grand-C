@@ -170,7 +170,7 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println();
 
-		System.out.println(p.ajouterVoyage(p.getCase(0, 0), p.getCase(5, 0) ) == false ? "OK" : "ERREUR" );
+		System.out.println("source inexistante : " + (p.ajouterVoyage(p.getCase(0, 0), p.getCase(5, 0) ) == false ? "OK" : "ERREUR") );
 
 		System.out.println(p.afficherPlanetes() );
 

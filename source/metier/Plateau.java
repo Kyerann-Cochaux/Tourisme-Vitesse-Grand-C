@@ -8,8 +8,8 @@ public class Plateau
 	
 	private static final int TAILLE_MAX = 30;
 	
-	public static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
-	public static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
+	public static final String[] TAB_PLANETES = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
+	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
 	                                          // Marron         BLeu        Rouge     Vert
 	
 	private Case[][] ensCases;
@@ -55,7 +55,7 @@ public class Plateau
 		*/
 		
 		for (int cpt = 0; cpt < this.ensFormes.length; cpt++)
-			this.ensFormes[cpt] = Plateau.TAB_FORMES[cpt];
+			this.ensFormes[cpt] = Plateau.TAB_PLANETES[cpt];
 		
 		for (int cpt = 0; cpt < this.ensEspeces.length; cpt++)
 			this.ensEspeces[cpt] = Plateau.TAB_ESPECES[cpt];
@@ -84,8 +84,8 @@ public class Plateau
 	public Voyage getVoyage   (int indice) { return this.lstVoyages .get(indice);}
 	public int    getNbVoyages()           { return this.lstVoyages.size()      ;}
 	
-	public Case     getCase    (int ligne, int colonne) {return this.ensCases[ligne][colonne];}
-	public Case[][] getEnsCases()                       {return this.ensCases                ;}
+	public Case     getCase    (int x, int y) {return this.ensCases[y][x];}
+	public Case[][] getEnsCases()             {return this.ensCases      ;}
 
 
 
@@ -207,10 +207,8 @@ public class Plateau
 
 	public boolean ajouterVoyage(Case source, Case destination)
 	{
-		if (source     .estNeutre() ) return false;
-		if (destination.estNeutre() ) return false;
-
-
+		if (source     .estVide() ) return false;
+		if (destination.estVide() ) return false;
 
 		Voyage v = Voyage.creerVoyage(source, destination);
 

@@ -10,7 +10,7 @@ public class Carte
 	  
 	public static Carte creerCarte(String symbole, boolean premium)
 	{
-		for(String esp : Plateau.TAB_FORMES)
+		for(String esp : Plateau.TAB_PLANETES)
 		{
 			if(esp.equals(symbole) )
 				return new Carte(symbole, premium);
