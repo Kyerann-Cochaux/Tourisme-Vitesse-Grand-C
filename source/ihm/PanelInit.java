@@ -30,7 +30,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	private JButton btnReset ;
 	
 	private Controleur ctrl ;
-
+	
 	public PanelInit( Controleur ctrl )
 	{
 	
@@ -126,12 +126,10 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		/* ------------------------------- */
 		
 		// Activation des Zone d'entrée de texte
-
 		for (JTextField txtF : this.tabZoneTxt)
 			txtF.addFocusListener(this);
 		
 		// Activation des Boutons d'Action
-
 		this.btnLancer.addActionListener(this);
 		this.btnReset .addActionListener(this);
 	}
@@ -174,82 +172,24 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		return panelTemp;
 	}
 	
-	// Méthodes liée aux boutons d'Actions
-	/*
-	public void actionPerformed(ActionEvent e)
-	{
-		if(e.getSource() == this.btnLancer)
-		{
-			this.tabParametreEntrer = new int[this.tabZoneTxt.length] ;
-			
-			
-			// Vérification des valeurs dans les Zones de Texte
-			boolean valeursValide = true ;
-			for ( int cpt = 0 ; cpt < this.tabZoneTxt.length ; cpt++ )
-			{
-				try
-				{
-					int valActuelle = this.tabParametreEntrer[cpt] = Integer.parseInt(this.tabZoneTxt[cpt].getText() );
-					
-					if ( cpt == 0 || cpt == 1 )
-					{
-						if ( valActuelle < 1 || valActuelle > 30 )
-						{
-							this.tabParametreEntrer[cpt] = -1 ;
-							this.tabZoneTxt[cpt].setText("Erreur : Valeur Invalide");
-							valeursValide = false ;
-						}
-					}
-					
-					if ( cpt == 2 || cpt == 3 )
-					{
-						if ( valActuelle < 2 || valActuelle > 4 )
-						{
-							this.tabParametreEntrer[cpt] = -1;
-							this.tabZoneTxt[cpt].setText("Erreur : Valeur Invalide");
-							valeursValide = false ;
-						}
-					}
-				}
-				catch(NumberFormatException ex)
-				{
-					this.tabZoneTxt[cpt].setText("Erreur : Valeur Invalide");
-					valeursValide = false ;
-				}
-			}
-			
-			if ( valeursValide )
-			{
-				int nbLignes   = this.tabParametreEntrer[0] ;
-				int nbColonnes = this.tabParametreEntrer[1] ;
-				int nbPlanete  = this.tabParametreEntrer[2] ;
-				int nbEspece   = this.tabParametreEntrer[3] ;
-				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbPlanete, nbEspece);
-
-			}
-		}
-		
-		if (e.getSource() == this.btnReset)
-		{
-			this.reinitialiserTexte();
-		}
-	}
-	*/
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if (e.getSource() == this.btnReset) this.reinitialiserTexte();
+		if (e.getSource() == this.btnReset) 
+		{
+			this.reinitialiserTexte();
+		}
+		
 		if (e.getSource() == this.btnLancer )
 		{
-			for (int i=0 ; i < tabZoneTxt.length ; i++ )
+			if ( this.valeursVerifier() )
 			{
-				if ( valeursValide() == 1 )
-				{
-					JOptionPane.showMessageDialog
-					(this, "Certaines valeurs ne sont pas comprises dans les limites indiquées",
-					       "Erreur de saisie"                                           , JOptionPane.ERROR_MESSAGE);
-				}
+				// On ouvre le PanelEdition :
+				/*
+				this.frame.ouvrirPanelEdition()
+				*/
 			}
 		}
 		
@@ -259,47 +199,80 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	{
 		for (int cpt = 0; cpt < tabZoneTxt.length ; cpt++) 
 		{
-			if (cpt < 2) this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_TAILLE  , PanelInit.NB_CARA);
-			else         this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
+			if   (cpt < 2) { this.tabZoneTxt[cpt].setText( PanelInit.TEXTE_TAILLE );   }
+			else           { this.tabZoneTxt[cpt].setText( PanelInit.TEXTE_QUANTITE ); }
 		}
 	}
 	
-	// Méthode privée vérifiant les valeurs saisie dans les JTextField
+	// Méthodes privées vérifiant les valeurs saisie dans les JTextField
 	// Si des valeurs sont erronées, un pop-up indiquant l'erreur est affiché, et la méthode renvoie faux
 	// Dans le cas où aucune erreur n'a été trouvé, la méthode renvoie vrai
-	
-	private int valeursValide()
+	private boolean valeursVerifier()
 	{
-		int val = 0;
+		boolean erreurLimPasTrouver = true ;
+		boolean erreurNumPasTrouver = true ;
 		
-		for ( int cpt = 0; cpt < tabZoneTxt.length; cpt++ )
+		for (int i=0 ; i < this.tabZoneTxt.length ; i++ )
 		{
-			try
+			// Si le texte entrée n'est pas numérique valeurValide retourne 2
+			if ( valeurValide( this.tabZoneTxt[i], i ) == 1 )
 			{
-				// Je regarde si le cast est possible...
-				
-				val = Integer.parseInt(this.tabZoneTxt[cpt].getText() );
-				
-				if ( (cpt <  2 && (val < 0 || val > 30) ) || (cpt >= 2 && (val < 0 || val > 4 ) ) ) 
+				// Il faut éviter d'ouvrir une fenêtre pour la même erreur plusieurs fois.
+				if ( erreurNumPasTrouver == true )
 				{
-					// Si l'un des champs possède une valeur non comprise dans sa plage de valeurs, j'affiche un pop-up
-					return 1;
+					JOptionPane.showMessageDialog
+					(this, "Certaines valeurs ne sont pas numérique",
+					"Erreur de saisie", JOptionPane.ERROR_MESSAGE);
 				}
+				
+				this.tabZoneTxt[i].setText("Erreur : Valeur Invalide");
+				erreurNumPasTrouver = false ;
 			}
 			
-			catch (Exception ex) 
+			// Si une erreur de limite est trouvée valeurValide retourne 1
+			if ( valeurValide( this.tabZoneTxt[i], i ) == 2 )
 			{
+				// Il faut éviter d'ouvrir une fenêtre pour la même erreur plusieurs fois.
+				if ( erreurLimPasTrouver == true && erreurNumPasTrouver == true )
+				{
+					JOptionPane.showMessageDialog
+					(this, "Certaines valeurs ne sont pas comprises dans les limites indiquées",
+					 "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+				}
 				
-				// Si le cast en entier du contenu d'un JTexField n'est pas possible, j'affiche un pop-up
-				
-				JOptionPane.showMessageDialog
-				(this, "Certaines valeurs ne sont pas entières", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-				return 2;
+				this.tabZoneTxt[i].setText("Erreur : Valeur Invalide");
+				erreurLimPasTrouver = false ;
 			}
 		}
 		
-		return 0;
+		return erreurLimPasTrouver && erreurNumPasTrouver ;
+	}
 	
+	private int valeurValide( JTextField zoneTxt, int index )
+	{
+		try
+		{
+			// Je regarde si le cast est possible...
+			int val = Integer.parseInt( zoneTxt.getText() );
+			
+			if (
+			     ( index <  2 && (val < 0 || val > 30) ) ||
+			     ( index >= 2 && (val < 0 || val > 4 ) )
+			   )
+			{
+				// Si l'un des champs possède une valeur non comprise dans sa plage de valeurs,
+				// Je retourne 2
+				return 2;
+			}
+		}
+		catch (Exception ex)
+		{
+			// Si le cast en entier du contenu d'un JTexField n'est pas possible
+			// je retourne 1
+			return 1;
+		}
+		
+		return 0;
 	}
 	
 	// Méthodes liée aux Zone d'entrée de Texte
