@@ -51,12 +51,9 @@ public class Metier
 			Scanner sc = new Scanner ( new FileInputStream ( cheminSauvegarde ), "UTF8" );
 			
 			
-			String premiereLigne       = sc.nextLine();
+			String premiereLigne = sc.nextLine();
 			
 			String[] creationArguments = premiereLigne       .split(" ");
-			
-			System.out.println(creationArguments[0]);
-			
 			String[] creationTaille    = creationArguments[0].split("x");
 			
 			nbLignes   = Integer.parseInt(creationTaille[0]);
@@ -90,7 +87,6 @@ public class Metier
 				
 				for (int numCol = 0; numCol < nbColonnes; numCol++)
 				{
-					
 					char sIndPlanete = ligne.charAt(numCol);
 					
 					if( sIndPlanete != '.' )
@@ -99,7 +95,7 @@ public class Metier
 						
 						Planete tempPlanete = Planete.creerPlanete(Plateau.TAB_PLANETES[indPlanete].charAt(0), null);
 						
-						this.plateauJeu.getCase(numLig, numCol).setPlanete(tempPlanete);
+						this.plateauJeu.getCase(numCol, numLig).setPlanete(tempPlanete);
 					}
 					
 				}
@@ -132,7 +128,7 @@ public class Metier
 		}
 		catch (Exception e)
 		{
-			System.out.println("Erreur lors du chargement du fichier de sauvegarde.");
+			System.out.println("Erreur lors du chargement du fichier sauvegardé.");
 			e.printStackTrace();
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			return false;
@@ -155,7 +151,7 @@ public class Metier
 		}
 		catch (Exception e)
 		{
-			System.out.println("Erreur lors de la sauvegarde du fichier.");
+			System.out.println("Erreur lors de la sauvegarde du plateau.");
 			e.printStackTrace();
 			return false;
 		}
