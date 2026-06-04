@@ -57,7 +57,10 @@ public class Metier
 			String premiereLigne       = sc.nextLine();
 			
 			String[] creationArguments = premiereLigne       .split(" ");
-			String[] creationTaille    = creationArguments[0].split("*");
+			
+			System.out.println(creationArguments[0]);
+			
+			String[] creationTaille    = creationArguments[0].split("x");
 			
 			nbLignes   = Integer.parseInt(creationTaille[0]);
 			nbColonnes = Integer.parseInt(creationTaille[1]);
