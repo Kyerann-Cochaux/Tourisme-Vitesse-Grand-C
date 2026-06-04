@@ -54,10 +54,19 @@ public class FrameCreation extends JFrame
 		this.revalidate();
 	}
 
-	public void ouvrirPanelEdition(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
+	public void ouvrirPanelEdition(Controleur ctrl, int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.remove(this.panelActuelle);
-		this.panelActuelle = new PanelEdition(this.ctrl);
+		this.panelActuelle = new PanelEdition(this.ctrl, nbLignes, nbColonnes, nbFormes, nbEspeces);
+		this.add(this.panelActuelle);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.revalidate();
+	}
+
+	public void ouvrirPanelEdition(Controleur ctrl, File fichier )
+	{
+		this.remove(this.panelActuelle);
+		this.panelActuelle = new PanelEdition(this.ctrl, fichier);
 		this.add(this.panelActuelle);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.revalidate();

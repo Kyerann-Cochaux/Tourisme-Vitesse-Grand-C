@@ -18,20 +18,39 @@ import source.Controleur ;
 public class PanelEdition extends JPanel
 {
 	private Controleur ctrl ;
+
+	private int 
+	private int 
+	private int 
+	private int 
+
 	private JPanel panelGauche;
 	private JPanel panelCentre;
 	private JPanel panelDroit;
 	
-	public PanelEdition(Controleur ctrl)
+	public PanelEdition(Controleur ctrl, int, int, int, int)
 	{
 		/*------------------------------*/
 		/*    Configuration du Panel    */
 		/*------------------------------*/
 		this.ctrl = ctrl ;
 		
+	}
+
+	public PanelEdition(Controleur ctrl, File fichier)
+	{
+		/*------------------------------*/
+		/*    Configuration du Panel    */
+		/*------------------------------*/
+		this.ctrl = ctrl ;
+		
+	}
+
+	public void creationInterfaceEdition()
+	{
 		this.setLayout( new BorderLayout() );
 		this.setBackground(FrameCreation.COULEUR_FOND);
-		
+
 		/*-------------------------------*/
 		/*    Création des Composants    */
 		/*-------------------------------*/
