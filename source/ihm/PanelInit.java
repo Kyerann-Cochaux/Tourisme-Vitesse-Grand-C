@@ -283,7 +283,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		}
 		catch (Exception ex)
 		{
-			// Si le cast en entier du contenu d'un JTexField n'est pas possible
+			// Si le cast en entierJ frame; du contenu d'un JTexField n'est pas possible
 			// je retourne 1
 			return 1;
 		}
