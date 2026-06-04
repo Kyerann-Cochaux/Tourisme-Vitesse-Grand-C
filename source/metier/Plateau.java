@@ -117,16 +117,7 @@ public class Plateau
 		
 		
 		boolean estAdjascent = false;
-		
-		/*
-		
-		-y
-		+y
-		+x
-		-x
-		
-		*/
-		
+
 		// en haut
 		if ( y-1 >= 0                ) estAdjascent |= this.ensCases[y-1][x  ].getNumSysteme() == numSysteme;
 		// en bas
@@ -202,12 +193,23 @@ public class Plateau
 		return true;
 	}
 
-	public void ajouterVoyage(Case source, Case destination)
+	public boolean ajouterVoyage(Case source, Case destination)
 	{
+		if (source     .estNeutre() ) return false;
+		if (destination.estNeutre() ) return false;
+
+
+
 		Voyage v = Voyage.creerVoyage(source, destination);
-		
-		if (v != null)
-			this.lstVoyages.add(v);
+
+		System.out.println(source.getPosY() ==         destination.getPosY() );
+		System.out.println(source.getPosY() + "<==>" + destination.getPosY() );
+		//if (destination.getPosY() == source.getPosY() )
+
+		//if (v != null)
+		//	this.lstVoyages.add(v);
+
+		return true;
 	}
 
 	private boolean coordonneesValide(int posX, int  posY)

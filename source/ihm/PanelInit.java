@@ -100,7 +100,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		this.tabLbl[0].setFont( new Font(this.tabLbl[0].getFont().getName(), this.tabLbl[0].getFont().getStyle(),50) );
 		
-		/*--- CO3NFIGURATION ET CENTRAGE DES JTEXTFIELD ---*/
+		/*--- CONFIGURATION ET CENTRAGE DES JTEXTFIELD ---*/
 		
 		for (JTextField txtF : this.tabZoneTxt)
 		{
