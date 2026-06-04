@@ -7,7 +7,7 @@ public class Voyage
 	
 	private String espece;
 	
-	/*Factory pour verifier si les parametres ne sont pas null et si la planete de destination n'est pas egale a celle de départ */
+	/*Factory pour vérifier si les parametres ne sont pas null et si la planete de destination n'est pas egale a celle de départ */
 
 	public static Voyage creerVoyage(Case planeteSource, Case planeteDestination, String espece)
 	{

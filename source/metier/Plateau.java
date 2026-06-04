@@ -17,7 +17,6 @@ public class Plateau
 	private String[] ensFormes;  // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
 
 	private List<Voyage>  lstVoyages;
-	//private List<Integer> lstNumSystemes;
 	
 	private int nbLignes, nbColonnes;
 	private int nbSysteme;

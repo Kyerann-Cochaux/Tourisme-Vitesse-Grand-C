@@ -2,6 +2,7 @@ package source;
 
 import source.metier.*;
 import java.util.List;
+import java.io.File;
 import java.util.ArrayList;
 
 public class TestSauvegardes
@@ -12,10 +13,11 @@ public class TestSauvegardes
 	{
 		
 		Metier metier = new Metier();
+
+		File f = new File("../../source/metier/sauvegardes/sauvegarde-000.data");
+		System.out.println( f.getAbsolutePath() );
 		
-		metier.chargerPlateau("../source/metier/sauvegardes/sauvegarde-000.data");
-		
-		System.out.println("ok");
+		metier.chargerPlateau("./../../../source/metier/sauvegardes/sauvegarde-000.data");
 		
 		Plateau plateau = metier.getPlateau();
 		
