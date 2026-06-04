@@ -25,10 +25,16 @@ public class TestSauvegardes
 		
 		System.out.println("Sauvegarde et chargement de plateaux");
 		
-		TestSauvegardes.genererPLateau(metier);
+		metier.sauvegarderPlateau("testSave");
+		
+		metier.initialiserPlateau(7, 10, 2, 2);
 		plateau = metier.getPlateau();
 		
-		metier.sauvegarderPlateau("testSave");
+		metier.chargerPlateau("../source/metier/sauvegardes/testSave.data");
+		
+		plateau = metier.getPlateau();
+		
+		System.out.println(plateau);
 		
 		
 		
@@ -39,13 +45,6 @@ public class TestSauvegardes
 		System.out.println( "Test n°" + (TestSauvegardes.nbTests++)                      +
 		                    " Resultat : " + resultat + " = " + resultatAttendu + " => " +
 		                  ( resultat.equals(resultatAttendu) ? "OK" : "ERREUR" ) );
-	}
-	
-	// juste pour test
-	private static void genererPLateau(Metier metier)
-	{
-		metier.initialiserPlateau(7, 10, 2, 3);
-		
 	}
 	
 	

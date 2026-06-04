@@ -146,6 +146,81 @@ public class Metier
 			pw.println ( "" + this.plateauJeu.getNbLignes() + "x" + this.plateauJeu.getNbColonnes() + " " +
 			                  this.plateauJeu.getNbFormes() + " " + this.plateauJeu.getNbEspeces ()         );
 			
+			
+			// sauvegarde des systèmes
+			for (int numLig = 0; numLig < this.getPlateau().getNbLignes(); numLig++)
+			{
+				String ligne = "";
+				
+				for (int numCol = 0; numCol < this.getPlateau().getNbColonnes(); numCol++)
+					ligne += this.getPlateau().getCase(numCol, numLig).getNumSysteme();
+				
+				pw.println ( ligne );
+			}
+			
+			
+			
+			// sauvegarde des planetes
+			for (int numLig = 0; numLig < this.getPlateau().getNbLignes(); numLig++)
+			{
+				String ligne = "";
+				
+				for (int numCol = 0; numCol < this.getPlateau().getNbColonnes(); numCol++)
+				{
+					Planete planete = this.getPlateau().getCase(numCol, numLig).getPlanete();
+					char symolePlanete = 'X';
+					
+					if ( planete == null )
+						symolePlanete = '.';
+					else
+					{
+						for (int numPlanete = 0; numPlanete < Plateau.TAB_PLANETES.length; numPlanete++)
+						{
+							char symoleATest = Plateau.TAB_PLANETES[numPlanete].charAt(0);
+							
+							if ( symoleATest == planete.getSymbole() )
+								symolePlanete = (char)('0' + numPlanete);
+						}
+					}
+					
+					ligne += symolePlanete;
+				}
+				
+				pw.println ( ligne );
+			}
+			
+			
+			
+			// sauvegarde des bases des espèces
+			for (int numLig = 0; numLig < this.getPlateau().getNbLignes(); numLig++)
+			{
+				String ligne = "";
+				
+				for (int numCol = 0; numCol < this.getPlateau().getNbColonnes(); numCol++)
+				{
+					Planete planete = this.getPlateau().getCase(numCol, numLig).getPlanete();
+					char symoleEspece = 'X';
+					
+					if ( planete == null || planete.getEspece() == null )
+						symoleEspece = '-';
+					else
+					{
+						for (int numEspece = 0; numEspece < Plateau.TAB_ESPECES.length; numEspece++)
+						{
+							char symoleATest = Plateau.TAB_ESPECES[numEspece].charAt(0);
+							
+							if ( symoleATest == planete.getEspece().charAt(0) )
+								symoleEspece = (char)('0' + numEspece);
+						}
+					}
+					
+					ligne += symoleEspece;
+				}
+				
+				pw.println ( ligne );
+			}
+			
+			
 			// fermeture du writer
 			pw.close();
 		}
