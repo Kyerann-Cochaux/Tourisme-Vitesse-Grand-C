@@ -207,7 +207,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		if ( e.getSource() == this.btnRetour )
 		{
-			this.frameCreation.ouvrirPanelMenu();
+			this.frameCreation.ouvrirPanelCreation();
 		}
 	}
 	
