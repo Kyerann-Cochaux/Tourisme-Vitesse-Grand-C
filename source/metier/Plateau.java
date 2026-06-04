@@ -202,6 +202,14 @@ public class Plateau
 		return true;
 	}
 
+	public void ajouterVoyage(Case source, Case destination)
+	{
+		Voyage v = Voyage.creerVoyage(source, destination);
+		
+		if (v != null)
+			this.lstVoyages.add(v);
+	}
+
 	private boolean coordonneesValide(int posX, int  posY)
 	{
 		return (posX >= 0 && posX < this.ensCases      .length ) && 
@@ -272,8 +280,8 @@ public class Plateau
 		String sRet = "";
 
 		sRet += "/* --------------------------- */\n" + 
-			   "/*   Affichages des planètes   */\n" + 
-			   "/* --------------------------- */\n" ;
+			    "/*   Affichages des planètes   */\n" + 
+			    "/* --------------------------- */\n" ;
 
 		sRet += this.afficherPlanetes() + "\n";
 
@@ -281,9 +289,8 @@ public class Plateau
 		        "/*   Affichages des Systèmes   */\n" + 
 		        "/* --------------------------- */\n" ;
 
-		sRet += this.afficherSystemes();
+		sRet += "\n" + this.afficherSystemes();
 
 		return sRet;
 	}
-	
 }

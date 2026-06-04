@@ -37,11 +37,11 @@ public class PanelEdition extends JPanel
 		/*------------------------------*/
 		/*    Configuration du Panel    */
 		/*------------------------------*/
-		this.ctrl = ctrl ;
-		this.nbLigne = nbLigne;
+		this.ctrl      = ctrl ;
+		this.nbLigne   = nbLigne;
 		this.nbColonne = nbColonne;
-		this.nbForme = nbForme;
-		this.nbEspece = nbEspece;
+		this.nbForme   = nbForme;
+		this.nbEspece  = nbEspece;
 	}
 
 	public PanelEdition(AppliCreation ctrl, File fichier)
