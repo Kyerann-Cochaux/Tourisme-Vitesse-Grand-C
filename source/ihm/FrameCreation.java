@@ -46,7 +46,7 @@ public class FrameCreation extends JFrame
 		
 	}
 	
-	public void ouvrirPanelMenu()
+	public void ouvrirPanelCreation()
 	{
 		this.remove(this.panelActuelle);
 		this.panelActuelle = new PanelCreation(this.ctrl, this);

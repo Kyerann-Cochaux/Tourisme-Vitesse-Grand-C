@@ -12,7 +12,7 @@ import source.Controleur ;
 public class PanelCreation extends JPanel implements ActionListener
 {
 	private Controleur    ctrl;
-	private FrameCreation frame;
+	private FrameCreation frameCreation;
 	
 	private JPanel panelAccueil;
 	
@@ -23,10 +23,10 @@ public class PanelCreation extends JPanel implements ActionListener
 	
 	
 	
-	public PanelCreation(Controleur ctrl, FrameCreation frame)
+	public PanelCreation(Controleur ctrl, FrameCreation frameCreation)
 	{
 		this.ctrl  = ctrl;
-		this.frame = frame;
+		this.frameCreation = frameCreation;
 
 		this.setBackground(FrameCreation.COULEUR_FOND);
 		
@@ -73,7 +73,7 @@ public class PanelCreation extends JPanel implements ActionListener
 	{
 		if(e.getSource() == this.btnNouveau)
 		{
-			this.frame.ouvrirPanelInit();
+			this.frameCreation.ouvrirPanelInit();
 		}
 		
 		if (e.getSource() == this.btnOuvrir)
@@ -83,13 +83,13 @@ public class PanelCreation extends JPanel implements ActionListener
 
 			explorateur.setCurrentDirectory(new File("."));
 
-			int resultat = explorateur.showOpenDialog(this.frame);
+			int resultat = explorateur.showOpenDialog(this.frameCreation);
 
 			if (resultat == JFileChooser.APPROVE_OPTION)
 			{
 				File fichierSelectionne = explorateur.getSelectedFile();
 
-				this.frame.ouvrirPanelEdition(fichierSelectionne);
+				this.frameCreation.ouvrirPanelEdition(fichierSelectionne);
 			}
 		}
 	}
