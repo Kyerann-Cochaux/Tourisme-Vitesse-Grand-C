@@ -17,11 +17,9 @@ public class PanelMenu extends JPanel implements ActionListener
 	
 	private JPanel panelAccueil;
 	
-	private JLabel lblMenu  ;
+	private JLabel lblMenu;
 	
 	private JButton btnCharger ;
-	
-	
 	
 	public PanelMenu(AppliCreation ctrl, FrameJeu frameJeu)
 	{
@@ -31,7 +29,7 @@ public class PanelMenu extends JPanel implements ActionListener
 		this.setBackground(FrameJeu.COULEUR_FOND_FONCE);
 		
 		/* ---------------------------------- */
-		/* Création des composants      */
+		/*       Création des composants      */
 		/* ---------------------------------- */
 		
 		this.panelAccueil = new JPanel();
@@ -45,22 +43,22 @@ public class PanelMenu extends JPanel implements ActionListener
 		
 		
 		/* ---------------------------------- */
-		/* Positionnement des composants   */
+		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
 		this.panelAccueil.add( this.lblMenu );
 		JPanel panelVide = new JPanel();
 		panelVide.setOpaque(false);
 		this.panelAccueil.add( panelVide );
-	    this.panelAccueil.add( this.btnCharger );
-
+		this.panelAccueil.add( this.btnCharger );
+		
 		this.panelAccueil.setOpaque(false);
 		
 		
 		this.add(this.panelAccueil);
 		
 		/* ------------------------------- */
-		/* Activation des Composants    */
+		/*    Activation des Composants    */
 		/* ------------------------------- */
 		
 		this.btnCharger.addActionListener(this);
@@ -72,11 +70,11 @@ public class PanelMenu extends JPanel implements ActionListener
 		{
 			JFileChooser explorateur = new JFileChooser();
 			explorateur.setDialogTitle("Ouvrir un plateau existant");
-
+			
 			explorateur.setCurrentDirectory(new File("."));
-
+			
 			int resultat = explorateur.showOpenDialog(this.frameJeu);
-
+			
 			if (resultat == JFileChooser.APPROVE_OPTION)
 			{
 				File fichierSelectionne = explorateur.getSelectedFile();

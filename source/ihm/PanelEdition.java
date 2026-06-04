@@ -21,6 +21,7 @@ import source.AppliCreation ;
 public class PanelEdition extends JPanel
 {
 	private AppliCreation ctrl;
+	private FrameCreation frameCreation;
 	
 	private int nbLigne;
 	private int nbColonne;
@@ -54,21 +55,22 @@ public class PanelEdition extends JPanel
 	private JLabel especeType3;
 	private JLabel especeType4;
 	
-	public PanelEdition(AppliCreation ctrl, int nbLigne, int nbColonne, int nbPlanete, int nbEspece)
+	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation, int nbLigne, int nbColonne, int nbPlanete, int nbEspece)
 	{
 		/*------------------------------*/
 		/*    Configuration du Panel    */
 		/*------------------------------*/
-		this.ctrl      = ctrl ;
-		this.nbLigne   = nbLigne;
-		this.nbColonne = nbColonne;
-		this.nbPlanete = nbPlanete;
-		this.nbEspece  = nbEspece;
+		this.ctrl          = ctrl ;
+		this.frameCreation = frameCreation;
+		this.nbLigne       = nbLigne;
+		this.nbColonne     = nbColonne;
+		this.nbPlanete     = nbPlanete;
+		this.nbEspece      = nbEspece;
 		
 		this.creationInterfaceEdition();
 	}
 	
-	public PanelEdition(AppliCreation ctrl, File fichier)
+	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation, File fichier)
 	{
 		/*------------------------------*/
 		/*    Configuration du Panel    */
@@ -87,12 +89,8 @@ public class PanelEdition extends JPanel
 		
 		// Panel des Planètes
 		this.panelPlanete = new JPanel();
-		this.panelPlanete.setLayout(new GridLayout(10,2));
-		this.panelPlanete.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
 		
 		this.lotPlaneteA = new JPanel();
-		this.lotPlaneteA.setLayout( new GridLayout(1,2) );
-		
 		this.planeteType1 = new JLabel("Gazeuze");
 		this.planeteType2 = new JLabel("Océan");
 		
@@ -107,16 +105,12 @@ public class PanelEdition extends JPanel
 		
 		// Panel d'affichage du Plateau
 		this.panelPlateau = new JPanel();
-		this.panelPlateau.setBackground( FrameJeu.COULEUR_FOND_FONCE );
+		
 		
 		// Panel des Espèces
 		this.panelEspece = new JPanel();
-		this.panelEspece.setLayout(new GridLayout(10,1));
-		this.panelEspece.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
 		
-		this.lotEspeceA = new JPanel();
-		this.lotEspeceA.setLayout( new GridLayout(1,2) );
-		
+		this.lotEspeceA  = new JPanel();
 		this.especeType1 = new JLabel("Chlorophite");
 		this.especeType2 = new JLabel("Felinoïd");
 		
@@ -133,7 +127,20 @@ public class PanelEdition extends JPanel
 		/*    Configuration des Composants    */
 		/*------------------------------------*/
 		
+		// Panel des Planètes
+		this.panelPlanete.setLayout(new GridLayout(10,2));
+		this.panelPlanete.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
 		
+		this.lotPlaneteA.setLayout( new GridLayout(1,2) );
+		
+		// Panel d'affichage du Plateau
+		this.panelPlateau.setBackground( FrameJeu.COULEUR_FOND_FONCE );
+		
+		// Panel des Espèces
+		this.panelEspece.setLayout(new GridLayout(10,1));
+		this.panelEspece.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
+		
+		this.lotEspeceA.setLayout( new GridLayout(1,2) );
 		
 		/*-------------------------------------*/
 		/*    Positionnement des Composants    */
