@@ -11,62 +11,46 @@ public class Metier
 	
 	private Plateau plateauJeu;
 	private Pioche  pioche    ;
-
+	
 	public Metier()
 	{
 		this.plateauJeu = null;
 		this.pioche     = new Pioche();
 	}
-
+	
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.plateauJeu = Plateau.creerPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
-
+	
 	/* ---------------------------------- */
 	/*               Accesseurs           */
 	/* ---------------------------------- */
-
+	
 	public Plateau getPlateau() { return this.plateauJeu;}
 	public Pioche  getPioche () { return this.pioche    ;}
-
 	
-
-
+	
+	
+	
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
 	
 	// le numero des sauvegardes commence a 0
-	public boolean sauvegardeExiste(int numSauvegarde)
-	{
-		String chemin = Metier.CHEMIN_SAUVEGARDES + 
-		                Metier.NOM_SAUVEGARDES    + String.format("%03d", numSauvegarde) + Metier.EXTENSION_SAUVEGARDES;
-		
-		try
-		{
-			Scanner sc = new Scanner ( new FileInputStream ( chemin ), "UTF8" );
-			sc.close();
-		}
-		catch (Exception e)
-		{
-			return false;
-		}
-		
-		return true;
-	}
-
-	// TODO: Finir méthode chargerPlateau et sauvegarderPlateau
-
 	
-	public boolean chargerPlateau(int numSauvegarde)
+	
+	// TODO: Finir methode chargerPlateau
+	public boolean sauvegardeCorrompue(String cheminSauvegarde)
 	{
-		if ( !sauvegardeExiste(numSauvegarde) ) return false;
-		
-		
-		String nomFichier = Metier.NOM_SAUVEGARDES    + String.format("%03d", numSauvegarde) + Metier.EXTENSION_SAUVEGARDES;
-		String chemin = Metier.CHEMIN_SAUVEGARDES + nomFichier;
-		
+		return false;
+	}
+	
+	
+	// retourne l'erreur
+	public int chargerPlateau(String cheminSauvegarde)
+	{
+		if ( this.sauvegardeCorrompue(cheminSauvegarde) ) return 1;
 		
 		int nbLignes   = 0;
 		int nbColonnes = 0;
@@ -75,14 +59,13 @@ public class Metier
 		
 		try
 		{
-			Scanner sc = new Scanner ( new FileInputStream ( chemin ), "UTF8" );
+			Scanner sc = new Scanner ( new FileInputStream ( cheminSauvegarde ), "UTF8" );
 			
 			
 			String premiereLigne       = sc.nextLine();
 			
 			String[] creationArguments = premiereLigne       .split(" ");
 			String[] creationTaille    = creationArguments[0].split("*");
-			
 			
 			nbLignes   = Integer.parseInt(creationTaille[0]);
 			nbColonnes = Integer.parseInt(creationTaille[1]);
@@ -118,10 +101,12 @@ public class Metier
 		}
 		catch (Exception e)
 		{
-			System.out.println("Erreur lors du chargement du plateau\""+ nomFichier +"\"");
-			return false;
+			System.out.println("Erreur lors du chargement du plateau \""+ cheminSauvegarde +"\"");
+			return 2;
 		}
 		
-		return true;
+		return 0;
 	}
+	
+	// TODO : faire la methode sauvegarderPlateau
 }

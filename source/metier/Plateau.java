@@ -10,16 +10,17 @@ public class Plateau
 	
 	public static final String[] TAB_FORMES  = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
 	public static final String[] TAB_ESPECES = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
-	                                               // Marron        BLeu      Rouge     Vert
+	                                          // Marron         BLeu        Rouge     Vert
 	
 	private Case[][] ensCases;
 	private String[] ensEspeces; // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
 	private String[] ensFormes;  // Nom des Planètes utilisées dans le Plateau, entre 2 et 4
 
 	private List<Voyage>  lstVoyages;
-	private List<Integer> lstNumSystemes;
+	//private List<Integer> lstNumSystemes;
 	
 	private int nbLignes, nbColonnes;
+	private int nbSysteme;
 	
 	// rajouter une liste de cases dans Plateau, car au début il n'y a pas de Systeme, mais il y a des cases
 	
@@ -39,10 +40,11 @@ public class Plateau
 	private Plateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.lstVoyages     = new ArrayList<Voyage >();
-		this.lstNumSystemes = new ArrayList<Integer>();
+		//this.lstNumSystemes = new ArrayList<Integer>();
 		
 		this.nbLignes   = nbLignes;
 		this.nbColonnes = nbColonnes;
+		this.nbSysteme  = 0;
 		
 		this.ensFormes  = new String[nbFormes ];
 		this.ensEspeces = new String[nbEspeces];
@@ -72,6 +74,7 @@ public class Plateau
 	
 	public int getNbLignes  () { return this.nbLignes         ;}
 	public int getNbColonnes() { return this.nbColonnes       ;}
+	public int getNbSysteme () { return this.nbSysteme        ;}
 
 	public int getNbEspeces () { return this.ensEspeces.length;}
 	public int getNbFormes  () { return this.ensFormes .length;}
@@ -85,41 +88,8 @@ public class Plateau
 	public Case     getCase    (int ligne, int colonne) {return this.ensCases[ligne][colonne];}
 	public Case[][] getEnsCases()                       {return this.ensCases                ;}
 
-	// Cette méthode retourne le nombre de système différents présents sur le plateau
-
-	public int getNbSysteme()
-	{
-		boolean numExiste = false;
 
 
-		// On parcours les lignes
-		for (int lig = 0; lig < this.ensCases.length; lig++) 
-		{
-			// On parcours les colonnes
-			for (int col = 0; col < this.ensCases[lig].length; col++) 
-			{
-				// On regarde si la case appartient à un système
-				if (!this.ensCases[lig][col].estNeutre() )
-				{
-					int numSysteme = this.ensCases[lig][col].getNumSysteme();
-
-					// Cette boucle vérifie si le numéro du système de la case testé est déjà dans la liste
-					for (Integer numTemp : this.lstNumSystemes) 
-						// Si le numéro existe déjà, on ne l'ajoute pas
-						if (numSysteme == numTemp) numExiste = true;
-
-					// S'il n'est pas présent dans la liste, on l'ajoute, et on remet le booléen à faux
-					if (!numExiste ) 
-					{
-						this.lstNumSystemes.add(numSysteme);
-						numExiste = false;
-					}
-				}	
-			}	
-		}
-
-		return this.lstNumSystemes.size();
-	}
 	
 	
 	/* ---------------------------------- */
@@ -133,61 +103,47 @@ public class Plateau
 	 
 	*/
 
-	// TODO: Finir méthode setNumSysteme(), ne fonctionne pas entièrement selon la case en paramètre
-
-	public boolean setNumSysteme(Case c, int numSysteme)
+	public boolean setNumSysteme(int numSysteme, int x, int y)
 	{
-		//System.out.println(c.getPosX() + " " + c.getPosY() );
-
-		// Si la liste ne contient pas le numéro
-		if (!this.lstNumSystemes.contains(numSysteme) )
-		{
-			if (c.estNeutre() )
-			{
-				c.setNumSysteme(numSysteme);
-				this.lstNumSystemes.add(numSysteme);
-				return true;
-			}
-		}
-		// Si la liste contient le numéro...
-		else
-		{
-			// ... On regarde les cases autour de la case en paramètre
-
-			// sur l'axe horizontal
-
-			System.out.println(c.getPosX() - 1 >= 0); // à gauche
-			System.out.println(c.getPosX() + 1 >= 0); // à droite
-
-			System.out.println(c.getPosY() - 1 <= 0); // en haut
-			System.out.println(c.getPosY() + 1 <= 0); // en bas
-
-
-			if (c.getPosY() -1 >= 0 &&    c.getPosY()                      < this.nbColonnes  && 
-			    this.getCase(c.getPosX(), c.getPosY() - 1).getNumSysteme() == numSysteme        ||
-			    this.getCase(c.getPosX(), c.getPosY() ).getNumSysteme() == numSysteme)
-			{
-				c.setNumSysteme(numSysteme);
-				return true;
-			}
-
-			// Puis sur l'axe vertical
-
-			/*if (c.getPosX() - 1 >= 0 && c.getPosX()  +1                    < this.nbLignes +1 &&
-		       this.getCase(c.getPosX() + 1, c.getPosY() ).getNumSysteme() == numSysteme || 
-			   this.getCase(c.getPosX() - 1, c.getPosY() ).getNumSysteme() == numSysteme)
-			{
-				c.setNumSysteme(numSysteme);
-				return true;
-			}*/
-
-
-		}
-				
+		if ( x < 0 || x >= this.nbColonnes ) return false;
+		if ( y < 0 || y >= this.nbLignes   ) return false;
+		if ( numSysteme >  this.nbSysteme  ) return false;
 		
+		if ( numSysteme == this.nbSysteme )
+		{
+			this.nbSysteme++;
+			this.ensCases[y][x].setNumSysteme(numSysteme);
+			return true;
+		}
+		
+		
+		boolean estAdjascent = false;
+		
+		/*
+		
+		-y
+		+y
+		+x
+		-x
+		
+		*/
+		
+		// en haut
+		if ( y-1 >= 0                ) estAdjascent |= this.ensCases[y-1][x  ].getNumSysteme() == numSysteme;
+		// en bas
+		if ( y+1 < this.nbLignes   ) estAdjascent |= this.ensCases[y+1][x  ].getNumSysteme() == numSysteme;
+		// à droite
+		if ( x+1 < this.nbColonnes ) estAdjascent |= this.ensCases[y  ][x+1].getNumSysteme() == numSysteme;
+		// à gauche
+		if ( x-1 >= 0                ) estAdjascent |= this.ensCases[y  ][x-1].getNumSysteme() == numSysteme;
 
-		return false;
 
+		
+		if (estAdjascent) this.ensCases[y][x].setNumSysteme(numSysteme);
+		else              return false;
+		
+		return true;
+		
 	}
 	
 	/* ---------------------------------- */
@@ -247,6 +203,21 @@ public class Plateau
 		return true;
 	}
 
+	private boolean coordonneesValide(int posX, int  posY)
+	{
+		return (posX >= 0 && posX < this.ensCases      .length ) && 
+		       (posY >= 0 && posY < this.ensCases[posX].length ); 
+	}
+
+	private boolean planeteValide(Planete j, int posX, int posY)
+	{
+		return j != null && j != this.ensCases [posX][posY].getPlanete()  &&
+		                         this.ensCases [posX][posY].getPlanete() == null ;
+	}
+	
+	
+	// Méthodes pour voir l'etat du plateau en CUI
+	
 	public String afficherPlanetes()
 	{
 		String sRet = "";
@@ -282,7 +253,13 @@ public class Plateau
 		for (int lig = 0; lig < this.ensCases.length; lig++) 
 		{
 			for (int col = 0; col < this.ensCases[lig].length; col++) 
-				sRet += String.format("%4d",this.ensCases[lig][col].getNumSysteme() );
+			{
+				if (this.ensCases[lig][col].getNumSysteme() != -1)
+					sRet += String.format("%3d",this.ensCases[lig][col].getNumSysteme() );
+				else sRet += String.format("%3s", ".");
+
+			}
+			
 
 			sRet += "\n";	
 		}
@@ -290,17 +267,10 @@ public class Plateau
 		return sRet;
 	}
 
-	private boolean coordonneesValide(int posX, int  posY)
+	
+	public String toString()
 	{
-		return (posX >= 0 && posX < this.ensCases      .length ) && 
-		       (posY >= 0 && posY < this.ensCases[posX].length ); 
+		return this.afficherPlanetes() + "\n" + this.afficherSystemes();
 	}
-
-	private boolean planeteValide(Planete j, int posX, int posY)
-	{
-		return j != null && j != this.ensCases [posX][posY].getPlanete()  &&
-		                         this.ensCases [posX][posY].getPlanete() == null ;
-	}
-
-
+	
 }
