@@ -104,6 +104,18 @@ public class Plateau
 
 	public boolean setNumSysteme(int numSysteme, int x, int y)
 	{
+		return this.setNumSysteme(numSysteme, x, y, false);
+	}
+	
+	protected boolean setNumSysteme(int numSysteme, int x, int y, boolean forcerPlacement)
+	{
+		if (forcerPlacement)
+		{
+			this.ensCases[y][x].setNumSysteme(numSysteme);
+			return true;
+		}
+		
+		
 		if ( x < 0 || x >= this.nbColonnes ) return false;
 		if ( y < 0 || y >= this.nbLignes   ) return false;
 		if ( numSysteme >  this.nbSysteme  ) return false;
