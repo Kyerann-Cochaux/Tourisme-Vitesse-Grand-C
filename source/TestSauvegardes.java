@@ -17,15 +17,20 @@ public class TestSauvegardes
 		
 		
 		
-		System.out.println("/* ---------------------------------- */");
-		System.out.println("/*          Test des sauvegardes      */");
-		System.out.println("/* ---------------------------------- */");
-		
+		System.out.println("Chargement d'un plateau sans les fix des zones");
 		System.out.println();
 		
 		System.out.println(plateau);
 		
-		TestSauvegardes.test("oui", "false");
+		
+		System.out.println("Sauvegarde et chargement de plateaux");
+		
+		TestSauvegardes.genererPLateau(metier);
+		plateau = metier.getPlateau();
+		
+		metier.sauvegarderPlateau("testSave");
+		
+		
 		
 	}
 	
@@ -35,4 +40,13 @@ public class TestSauvegardes
 		                    " Resultat : " + resultat + " = " + resultatAttendu + " => " +
 		                  ( resultat.equals(resultatAttendu) ? "OK" : "ERREUR" ) );
 	}
+	
+	// juste pour test
+	private static void genererPLateau(Metier metier)
+	{
+		metier.initialiserPlateau(7, 10, 2, 3);
+		
+	}
+	
+	
 }

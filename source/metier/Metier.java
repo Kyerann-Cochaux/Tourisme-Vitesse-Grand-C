@@ -1,12 +1,14 @@
 package source.metier;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Metier
 {
 	private static final String CHEMIN_SAUVEGARDES    = "../source/metier/sauvegardes/"; // attention a ne pas oublier le / a la fin
-	private static final String NOM_SAUVEGARDES       = "sauvegarde-";
 	private static final String EXTENSION_SAUVEGARDES = ".data";
 	
 	private Plateau plateauJeu;
@@ -36,11 +38,6 @@ public class Metier
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
-	
-	// le numero des sauvegardes commence a 0
-	
-	
-	// TODO: Finir methode chargerPlateau
 	
 	public boolean chargerPlateau(String cheminSauvegarde)
 	{
@@ -144,5 +141,25 @@ public class Metier
 		return true;
 	}
 	
-	// TODO : faire la methode sauvegarderPlateau
+	public boolean sauvegarderPlateau(String nomSauvegarde)
+	{
+		try
+		{
+			PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(Metier.CHEMIN_SAUVEGARDES + nomSauvegarde + Metier.EXTENSION_SAUVEGARDES), "UTF8" )); 
+			
+			pw.println ( "" + this.plateauJeu.getNbLignes() + "x" + this.plateauJeu.getNbColonnes() + " " +
+			                  this.plateauJeu.getNbFormes() + " " + this.plateauJeu.getNbEspeces ()         );
+			
+			// fermeture du writer
+			pw.close();
+		}
+		catch (Exception e)
+		{
+			System.out.println("Erreur lors de la sauvegarde du fichier.");
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
 }
