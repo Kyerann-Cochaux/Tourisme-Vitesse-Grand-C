@@ -35,6 +35,7 @@ public class PanelEdition extends JPanel
 		/*-------------------------------*/
 		/*    Création des Composants    */
 		/*-------------------------------*/
+		
 		this.panelCentre = new JPanel();
 
 		this.panelDroit = new JPanel();
