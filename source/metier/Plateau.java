@@ -254,8 +254,8 @@ public class Plateau
 			for (int col = 0; col < this.ensCases[lig].length; col++) 
 			{
 				if (this.ensCases[lig][col].getNumSysteme() != -1)
-					sRet += String.format("%3d",this.ensCases[lig][col].getNumSysteme() );
-				else sRet += String.format("%3s", ".");
+					sRet += String.format(" %-2d",this.ensCases[lig][col].getNumSysteme() );
+				else sRet += String.format(" %-2s", ".");
 
 			}
 			
