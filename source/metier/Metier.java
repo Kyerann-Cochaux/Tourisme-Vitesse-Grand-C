@@ -72,8 +72,7 @@ public class Metier
 			// initialisation du plateau
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			
-			int numLig = 0;
-			while (sc.hasNextLine())
+			for (int numLig = 0; numLig < nbLignes; numLig++)
 			{
 				String ligne = sc.nextLine();
 				
@@ -82,8 +81,6 @@ public class Metier
 					int numZone = Integer.parseInt( "" + ligne.charAt(numCol) );
 					this.plateauJeu.setNumSysteme(numZone, numCol, numLig);
 				}
-				
-				numLig++;
 			}
 			
 			
