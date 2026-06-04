@@ -22,7 +22,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	// Création de 2 tableaux pour faciliter la modification des composants
 	
 	private JLabel    [] tabLbl;
-	private JTextField[] tabTxt;
+	private JTextField[] tabZoneTxt;
 	
 	private int[] tabParametreEntrer;
 	
@@ -50,7 +50,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		panelSaisie = new JPanel(new GridLayout(5, 1  ) );
 		
 		this.tabLbl = new JLabel    [5];
-		this.tabTxt = new JTextField[4];
+		this.tabZoneTxt = new JTextField[4];
 		
 		this.tabLbl[0] = new JLabel("Initialisation du Plateau"       , SwingConstants.CENTER); // Titre
 		this.tabLbl[1] = new JLabel("Nombre de lignes :"              , SwingConstants.CENTER); // nbLignes
@@ -63,14 +63,14 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			La boucle permet d'éviter de répéter 4 fois la même instruction, sachant qu'il y a 2 fois 2 textes identiques
 		*/
 		
-		for (int cpt = 0; cpt < tabTxt.length ; cpt++) 
+		for (int cpt = 0; cpt < tabZoneTxt.length ; cpt++) 
 		{
-			if (cpt < 2) this.tabTxt[cpt] = new JTextField(PanelInit.TEXTE_TAILLE  , PanelInit.NB_CARA);
-			else         this.tabTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
+			if (cpt < 2) this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_TAILLE  , PanelInit.NB_CARA);
+			else         this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
 		}
 		
 		this.btnLancer  = new JButton("Lancer");
-		this.btnReset   = new JButton("Reset" );
+		this.btnReset   = new JButton("Réinitialiser" );
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -83,8 +83,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		for (JLabel label : tabLbl) 
 		{
-			label.setFont      (FrameCreation.POLICE_TEXTE);
-			label.setForeground(FrameCreation.COULEUR_FOND);
+			label.setFont      ( FrameCreation.POLICE_TEXTE  );
+			label.setForeground( FrameCreation.COULEUR_TITRE );
 		}
 		
 		// Modification individuelle de la police du Titre, car c'est le seul JLabel où la police est différente des autres
@@ -93,11 +93,11 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		/*--- CO3NFIGURATION ET CENTRAGE DES JTEXTFIELD ---*/
 		
-		for (JTextField txtF : this.tabTxt)
+		for (JTextField txtF : this.tabZoneTxt)
 		{
-			txtF.setFont               (FrameCreation.POLICE_TEXTE);
-			txtF.setForeground         (FrameCreation.COULEUR_ZONE);
-			txtF.setHorizontalAlignment(JTextField   .CENTER      );
+			txtF.setFont               ( FrameCreation.POLICE_TEXTE   );
+			txtF.setForeground         ( FrameCreation.COULEUR_ZONE   );
+			txtF.setHorizontalAlignment( JTextField   .CENTER         );
 		}
 		
 		/* ---------------------------------- */
@@ -111,7 +111,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		
 		for (int cpt = 1; cpt < tabLbl.length; cpt++) 
-			panelSaisie.add(this.creerPanelCentre(this.tabLbl[cpt], this.tabTxt[cpt -1]) );
+			panelSaisie.add(this.creerPanelCentre(this.tabLbl[cpt], this.tabZoneTxt[cpt -1]) );
 													// JTextfield         JLabel
 													// Dans l'ordre des tableaux définis au dessus.
 		
@@ -127,7 +127,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		// Activation des Zone d'entrée de texte
 
-		for (JTextField txtF : this.tabTxt)
+		for (JTextField txtF : this.tabZoneTxt)
 			txtF.addFocusListener(this);
 		
 		// Activation des Boutons d'Action
@@ -175,27 +175,28 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	}
 	
 	// Méthodes liée aux boutons d'Actions
-	/*public void actionPerformed(ActionEvent e)
+	/*
+	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == this.btnLancer)
 		{
-			this.tabParametreEntrer = new int[this.tabTxt.length] ;
+			this.tabParametreEntrer = new int[this.tabZoneTxt.length] ;
 			
 			
 			// Vérification des valeurs dans les Zones de Texte
 			boolean valeursValide = true ;
-			for ( int cpt = 0 ; cpt < this.tabTxt.length ; cpt++ )
+			for ( int cpt = 0 ; cpt < this.tabZoneTxt.length ; cpt++ )
 			{
 				try
 				{
-					int valActuelle = this.tabParametreEntrer[cpt] = Integer.parseInt(this.tabTxt[cpt].getText() );
+					int valActuelle = this.tabParametreEntrer[cpt] = Integer.parseInt(this.tabZoneTxt[cpt].getText() );
 					
 					if ( cpt == 0 || cpt == 1 )
 					{
 						if ( valActuelle < 1 || valActuelle > 30 )
 						{
 							this.tabParametreEntrer[cpt] = -1 ;
-							this.tabTxt[cpt].setText("Erreur : Valeur Invalide");
+							this.tabZoneTxt[cpt].setText("Erreur : Valeur Invalide");
 							valeursValide = false ;
 						}
 					}
@@ -205,14 +206,14 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 						if ( valActuelle < 2 || valActuelle > 4 )
 						{
 							this.tabParametreEntrer[cpt] = -1;
-							this.tabTxt[cpt].setText("Erreur : Valeur Invalide");
+							this.tabZoneTxt[cpt].setText("Erreur : Valeur Invalide");
 							valeursValide = false ;
 						}
 					}
 				}
 				catch(NumberFormatException ex)
 				{
-					this.tabTxt[cpt].setText("Erreur : Valeur Invalide");
+					this.tabZoneTxt[cpt].setText("Erreur : Valeur Invalide");
 					valeursValide = false ;
 				}
 			}
@@ -232,69 +233,73 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		{
 			this.reinitialiserTexte();
 		}
-	}*/
-
+	}
+	*/
+	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getSource() == this.btnReset) this.reinitialiserTexte();
-		if (e.getSource() == this.btnLancer && this.valeursValide() )
+		if (e.getSource() == this.btnLancer )
 		{
-			// Valider l'action, l'envoyer au controleur
-
+			for (int i=0 ; i < tabZoneTxt.length ; i++ )
+			{
+				if ( valeursValide() == 1 )
+				{
+					JOptionPane.showMessageDialog
+					(this, "Certaines valeurs ne sont pas comprises dans les limites indiquées",
+					       "Erreur de saisie"                                           , JOptionPane.ERROR_MESSAGE);
+				}
+			}
 		}
-			
+		
 	}
 	
 	private void reinitialiserTexte()
 	{
-		for (int cpt = 0; cpt < tabTxt.length ; cpt++) 
+		for (int cpt = 0; cpt < tabZoneTxt.length ; cpt++) 
 		{
-			if (cpt < 2) this.tabTxt[cpt] = new JTextField(PanelInit.TEXTE_TAILLE  , PanelInit.NB_CARA);
-			else         this.tabTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
+			if (cpt < 2) this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_TAILLE  , PanelInit.NB_CARA);
+			else         this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
 		}
 	}
-
+	
 	// Méthode privée vérifiant les valeurs saisie dans les JTextField
 	// Si des valeurs sont erronées, un pop-up indiquant l'erreur est affiché, et la méthode renvoie faux
 	// Dans le cas où aucune erreur n'a été trouvé, la méthode renvoie vrai
-
-	private boolean valeursValide()
+	
+	private int valeursValide()
 	{
 		int val = 0;
-
-		for (int cpt = 0; cpt < tabTxt.length; cpt++) 
+		
+		for ( int cpt = 0; cpt < tabZoneTxt.length; cpt++ )
 		{
-			try 
+			try
 			{
 				// Je regarde si le cast est possible...
-
-				val = Integer.parseInt(this.tabTxt[cpt].getText() );
-
+				
+				val = Integer.parseInt(this.tabZoneTxt[cpt].getText() );
+				
 				if ( (cpt <  2 && (val < 0 || val > 30) ) || (cpt >= 2 && (val < 0 || val > 4 ) ) ) 
 				{
 					// Si l'un des champs possède une valeur non comprise dans sa plage de valeurs, j'affiche un pop-up
-
-					JOptionPane.showMessageDialog
-					(this, "Certaines valeurs ne sont pas comprises dans les limites indiquées",
-									"Erreur de saisie"                                           , JOptionPane.ERROR_MESSAGE);
-					return false;
+					return 1;
 				}
-			} 
-
+			}
+			
 			catch (Exception ex) 
 			{
-
+				
 				// Si le cast en entier du contenu d'un JTexField n'est pas possible, j'affiche un pop-up
-
+				
 				JOptionPane.showMessageDialog
 				(this, "Certaines valeurs ne sont pas entières", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-				return false;
+				return 2;
 			}
 		}
-
-		return true;
-
+		
+		return 0;
+	
 	}
 	
 	// Méthodes liée aux Zone d'entrée de Texte
@@ -302,7 +307,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	{
 		JTextField focusTxtField = (JTextField) e.getSource();
 		focusTxtField.setText("");
-
+	
 	}
 	
 	public void focusLost( FocusEvent e )
@@ -311,20 +316,20 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		// On cherche quelle zone de texte n'est plus sélectionnée
 		int indTxtClc = -1 ;
-
-		for ( int cpt = 0 ; cpt < tabTxt.length ; cpt++ )
-			if ( tabTxt[cpt].equals(unfocusTxtField) )
+		
+		for ( int cpt = 0 ; cpt < tabZoneTxt.length ; cpt++ )
+			if ( tabZoneTxt[cpt].equals(unfocusTxtField) )
 			
 				indTxtClc = cpt ;
 		
 		String txtActuelle = unfocusTxtField.getText() ;
-
+		
 		if ( (indTxtClc == 0 || indTxtClc == 1) && ( txtActuelle.equals( PanelInit.TEXTE_TAILLE ) || txtActuelle.equals("") ) )
 			unfocusTxtField.setText( PanelInit.TEXTE_TAILLE );
 		
 		if ( (indTxtClc == 2 || indTxtClc == 3) && ( txtActuelle.equals( PanelInit.TEXTE_TAILLE ) || txtActuelle.equals("") )  )
 			unfocusTxtField.setText( PanelInit.TEXTE_QUANTITE );
-
+		
 		if (txtActuelle.equals( PanelInit.TEXTE_TAILLE ) || txtActuelle.equals("") )
 		{
 			if (indTxtClc == 0 || indTxtClc == 1) unfocusTxtField.setText( PanelInit.TEXTE_TAILLE  );
