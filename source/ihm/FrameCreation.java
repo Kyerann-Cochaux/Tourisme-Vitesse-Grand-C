@@ -12,34 +12,42 @@ public class FrameCreation extends JFrame
 	protected static final Color COULEUR_TITRE = Color.decode("#f1c232");
 	protected static final Color COULEUR_ZONE  = Color.decode("#f3f3f3");
 	protected static final Color COULEUR_FOND  = new Color (37, 37, 37);
-
+	
 	private Controleur ctrl;
-	private PanelCreation  panelCreation;
-
+	private JPanel     panelActuelle;
+	
 	public FrameCreation(Controleur ctrl) 
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+		
 		/* ---------------------------------- */
 		/*       Création des composants      */
 		/* ---------------------------------- */
-
+		
 		this.ctrl          = ctrl;
-		this.panelCreation = new PanelCreation(ctrl);
-
+		this.panelActuelle = new PanelCreation(this.ctrl, this);
+		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
-
-		this.add(this.panelCreation);
-
+		
+		this.add(this.panelActuelle);
+		
 		/* ---------------------------------- */
 		/*      Activation des composants     */
 		/* ---------------------------------- */
-
+		
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	
+	public void ouvrirPanelInit()
+	{
+		this.remove(this.panelActuelle);
+		this.panelActuelle = new PanelInit(this.ctrl);
+		this.add(this.panelActuelle);
+		this.revalidate();
 	}
 }

@@ -10,58 +10,64 @@ import source.Controleur ;
 
 public class PanelCreation extends JPanel implements ActionListener
 {
-	private Controleur ctrl;
+	private Controleur    ctrl;
+	private FrameCreation frame;
 	
 	private JPanel panelAccueil;
-
+	
 	private JLabel lblMenu  ;
-
+	
 	private JButton btnNouveau;
 	private JButton btnOuvrir ;
-
-
-
-	public PanelCreation(Controleur ctrl)
+	
+	
+	
+	public PanelCreation(Controleur ctrl, FrameCreation frame)
 	{
-
-		this.ctrl = ctrl;
-
+		this.ctrl  = ctrl;
+		this.frame = frame;
+		
 		/* ---------------------------------- */
 		/*       Création des composants      */
 		/* ---------------------------------- */
-
+		
 		this.panelAccueil = new JPanel();
 		this.panelAccueil.setLayout(new GridLayout(3, 1) );
-
+		
 		this.lblMenu = new JLabel ("MENU", SwingConstants.CENTER);
 		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE        );
 		this.lblMenu.setForeground(FrameCreation.COULEUR_ZONE        );
-
-		this.btnNouveau = new JButton("Jouer"  );
-		this.btnOuvrir  = new JButton("Edition");
-
+		
+		this.btnNouveau = new JButton("Nouveau");
+		this.btnOuvrir  = new JButton("Ouvrir" );
+		
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
-		this.panelAccueil.add(this.btnNouveau);
-		this.panelAccueil.add(this.btnOuvrir);
-
-		this.add(this.lblMenu);
+		this.panelAccueil.add( this.btnNouveau);
+		this.panelAccueil.add( this.btnOuvrir );
+		
+		this.add( this.lblMenu );
 		this.add( new JPanel() );
 		this.add(this.panelAccueil, new GridBagConstraints() );
-
+		
+		/* ------------------------------- */
+		/*    Activation des Composants    */
+		/* ------------------------------- */
+		
+		this.btnNouveau.addActionListener(this);
+		this.btnOuvrir.addActionListener(this);
 	}
-
+	
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == this.btnNouveau)
 		{
-			this.remove(this.panelAccueil);
-			this.add(new PanelInit(this.ctrl) );
+			this.frame.ouvrirPanelInit();
 		}
-
+		
 		if (e.getSource() == this.btnOuvrir)
 		{
 			
