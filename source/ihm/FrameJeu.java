@@ -17,7 +17,7 @@ public class FrameJeu extends JFrame
 	private AppliCreation ctrl;
 	private JPanel     panelActuelle;
 	
-	public FrameJeu(AppliCreation ctrl) 
+	public FrameJeu(AppliCreation ctrl)
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
 		this.setSize(500, 250);
@@ -29,7 +29,6 @@ public class FrameJeu extends JFrame
 		
 		this.ctrl          = ctrl;
 		this.panelActuelle = new PanelMenu(this.ctrl, this);
-
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
@@ -43,6 +42,5 @@ public class FrameJeu extends JFrame
 		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 	}
 }
