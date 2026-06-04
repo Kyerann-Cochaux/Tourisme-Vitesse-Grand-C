@@ -99,17 +99,7 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println("/*           Ajout des Zones          */");
 		System.out.println("/* ---------------------------------- */");
-
-		//p.setNumSysteme(p.getCase(1, 1), 0);
-		
-		
-		
-		//System.out.println(p.afficherPlanetes() );
-		
-		/* ---------------------------------- */
-		/*       4 zones dans les coins       */
-		/* ---------------------------------- */
-		
+	
 		// zone 0
 
 		System.out.println(p.setNumSysteme(0, 0, 1 )                              == true  ? "OK" : "ERREUR"  );

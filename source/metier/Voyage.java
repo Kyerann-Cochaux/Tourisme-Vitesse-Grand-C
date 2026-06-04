@@ -7,22 +7,22 @@ public class Voyage
 	
 	private String espece;
 	
-	/*Factory pour vérifier si les parametres ne sont pas null et si la planete de destination n'est pas egale a celle de départ */
+	/*Factory pour vérifier si les parametres ne sont pas null et si la planete de destination n'est pas égale a celle de départ */
 
-	public static Voyage creerVoyage(Case planeteSource, Case planeteDestination, String espece)
+	public static Voyage creerVoyage(Case planeteSource, Case planeteDestination)
 	{
-		if (planeteDestination == null         ) return null;
-		if (planeteSource      == null         ) return null; 
-		if (planeteDestination == planeteSource) return null;
+		if (planeteSource      == null              ) return null; 
+		if (planeteDestination == null              ) return null;
+		if (planeteSource      == planeteDestination) return null;
 
-		return new Voyage(planeteSource,  planeteDestination, espece);
+		return new Voyage(planeteSource,  planeteDestination);
 	}
 
-	private Voyage(Case planeteSource, Case planeteDestination, String espece)
+	private Voyage(Case planeteSource, Case planeteDestination)
 	{
 		this.planeteSource      = planeteSource;
 		this.planeteDestination = planeteDestination;
-		this.espece             = espece;
+		this.espece             = null;
 	}
 	
 	/* ---------------------------------- */
