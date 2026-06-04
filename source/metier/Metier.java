@@ -69,12 +69,27 @@ public class Metier
 			// initialisation du plateau
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			
+			int numLig = 0;
+			while (sc.hasNextLine())
+			{
+				String ligne = sc.nextLine();
+				
+				for (int numCol = 0; numCol < nbColonnes; numCol++)
+				{
+					int numZone = Integer.parseInt( "" + ligne.charAt(numCol) );
+					this.plateauJeu.setNumSysteme(numZone, numCol, numLig);
+				}
+				
+				numLig++;
+			}
+			
+			
 			// fermeture du scanner
 			sc.close();
 		}
 		catch (Exception e)
 		{
-			System.out.println("Erreur lors du chargement du plateau \""+ cheminSauvegarde +"\"");
+			System.out.println("Erreur lors du chargement du fichier de sauvegarde.");
 			e.printStackTrace();
 			return false;
 		}
