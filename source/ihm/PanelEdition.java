@@ -18,6 +18,9 @@ import source.Controleur ;
 public class PanelEdition extends JPanel
 {
 	private Controleur ctrl ;
+	private JPanel panelGauche;
+	private JPanel panelCentre;
+	private JPanel panelDroit;
 	
 	public PanelEdition(Controleur ctrl)
 	{
@@ -32,7 +35,14 @@ public class PanelEdition extends JPanel
 		/*-------------------------------*/
 		/*    Création des Composants    */
 		/*-------------------------------*/
-		
+		this.panelCentre = new JPanel();
+
+		this.panelDroit = new JPanel();
+		this.panelDroit.setLayout(new GridLayout());
+
+		this.panelGauche = new JPanel();
+		this.panelGauche.setLayout(new GridLayout());
+
 		
 		/*------------------------------------*/
 		/*    Configuration des Composants    */

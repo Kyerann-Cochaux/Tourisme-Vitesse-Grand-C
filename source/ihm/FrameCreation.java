@@ -53,4 +53,13 @@ public class FrameCreation extends JFrame
 		this.setLocation(550, 450);
 		this.revalidate();
 	}
+
+	public void ouvrirPanelEdition(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
+	{
+		this.remove(this.panelActuelle);
+		this.panelActuelle = new PanelEdition(this.ctrl);
+		this.add(this.panelActuelle);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.revalidate();
+	}
 }
