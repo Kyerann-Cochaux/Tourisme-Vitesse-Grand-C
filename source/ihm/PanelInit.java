@@ -9,7 +9,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import source.Controleur ;
+import source.Controleur;
+
+/**
+ * Panel Init
+ * 
+ * Panel de Prise de Paramètre pour créer un nouveau Plateau
+ * 
+ * @author Groupe 5
+ * 
+ */
 
 public class PanelInit extends JPanel implements ActionListener, FocusListener
 {
@@ -29,15 +38,17 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	private JButton btnLancer;
 	private JButton btnReset ;
 	
-	private Controleur ctrl ;
+	private Controleur    ctrl ;
+	private FrameCreation frame ;
 	
-	public PanelInit( Controleur ctrl )
+	public PanelInit( Controleur ctrl, FrameCreation frame )
 	{
 	
 		JPanel panelAction;
 		JPanel panelSaisie;
 		
-		this.ctrl = ctrl;
+		this.ctrl  = ctrl;
+		this.frame = frame;
 		
 		this.setLayout(new BorderLayout() );
 		this.setBackground(FrameCreation.COULEUR_FOND);
@@ -182,14 +193,16 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			this.reinitialiserTexte();
 		}
 		
-		if (e.getSource() == this.btnLancer )
+		if ( e.getSource() == this.btnLancer )
 		{
 			if ( this.valeursVerifier() )
 			{
-				// On ouvre le PanelEdition :
-				/*
-				this.frame.ouvrirPanelEdition()
-				*/
+				int nbLignes   = Integer.parseInt( this.tabZoneTxt[0].getText() );
+				int nbColonnes = Integer.parseInt( this.tabZoneTxt[1].getText() );
+				int nbFormes   = Integer.parseInt( this.tabZoneTxt[2].getText() );
+				int nbEspeces  = Integer.parseInt( this.tabZoneTxt[3].getText() );
+				
+				this.frame.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			}
 		}
 		
@@ -256,8 +269,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			int val = Integer.parseInt( zoneTxt.getText() );
 			
 			if (
-			     ( index <  2 && (val < 0 || val > 30) ) ||
-			     ( index >= 2 && (val < 0 || val > 4 ) )
+			     ( index <  2 && (val < 1 || val > 30) ) ||
+			     ( index >= 2 && (val < 2 || val > 4 ) )
 			   )
 			{
 				// Si l'un des champs possède une valeur non comprise dans sa plage de valeurs,
