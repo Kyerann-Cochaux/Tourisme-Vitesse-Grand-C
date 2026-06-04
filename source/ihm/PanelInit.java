@@ -222,7 +222,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	}
 	
 	// Méthodes privées vérifiant les valeurs saisie dans les JTextField
-	// Si des valeurs sont erronées, un pop-up indiquant l'erreur est affiché, et la méthode renvoie faux
+	// Si des valeurs sont erronées, un pop-uint nbLignes, int nbColonnes, int nbFormes, int nbEspecesp indiquant l'erreur est affiché, et la méthode renvoie faux
 	// Dans le cas où aucune erreur n'a été trouvé, la méthode renvoie vrai
 	private boolean valeursVerifier()
 	{
