@@ -117,16 +117,16 @@ public class PanelEdition extends JPanel
 		this.lotEspeceA = new JPanel();
 		this.lotEspeceA.setLayout( new GridLayout(1,2) );
 		
-		this.especeType1 = new JLabel("Gazeuze");
-		this.especeType2 = new JLabel("Océan");
+		this.especeType1 = new JLabel("Chlorophite");
+		this.especeType2 = new JLabel("Felinoïd");
 		
 		if ( this.nbEspece >= 3 )
 		{
 			this.lotEspeceB = new JPanel();
 			this.lotEspeceB.setLayout( new GridLayout(1,2) );
-			this.especeType3 = new JLabel("Tellurique");
+			this.especeType3 = new JLabel("Azimae");
 			
-			if ( this.nbEspece == 4 ) { this.especeType4 = new JLabel("Volcanique"); }
+			if ( this.nbEspece == 4 ) { this.especeType4 = new JLabel("Silikon"); }
 		}
 		
 		/*------------------------------------*/
@@ -150,12 +150,22 @@ public class PanelEdition extends JPanel
 			this.panelPlanete.add( this.lotPlaneteB );
 		}
 		
-		this.add( this.panelPlanete, BorderLayout.WEST   );
+		this.add( this.panelPlanete, BorderLayout.WEST );
 		
 		// Panel Plateau
 		this.add( this.panelPlateau, BorderLayout.CENTER );
 		
 		// Panel Espèces
+		this.lotEspeceA.add( this.especeType1 );
+		this.lotEspeceA.add( this.especeType2 );
+		this.panelEspece.add( this.lotEspeceA );
+		if ( this.nbPlanete >= 3 )
+		{
+			this.lotEspeceB.add( this.especeType3 );
+			if ( this.nbPlanete == 4 ) { this.lotEspeceB.add( this.especeType4 ); }
+			this.panelEspece.add( this.lotEspeceB );
+		}
+		
 		this.add( this.panelEspece,  BorderLayout.EAST   );
 		
 		/*---------------------------------*/
