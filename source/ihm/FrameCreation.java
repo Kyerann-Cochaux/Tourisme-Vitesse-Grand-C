@@ -2,6 +2,8 @@ package source.ihm;
 
 import source.Controleur;
 
+import java.io.File;
+
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -54,7 +56,7 @@ public class FrameCreation extends JFrame
 		this.revalidate();
 	}
 
-	public void ouvrirPanelEdition(Controleur ctrl, int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
+	public void ouvrirPanelEdition(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.remove(this.panelActuelle);
 		this.panelActuelle = new PanelEdition(this.ctrl, nbLignes, nbColonnes, nbFormes, nbEspeces);
@@ -63,7 +65,7 @@ public class FrameCreation extends JFrame
 		this.revalidate();
 	}
 
-	public void ouvrirPanelEdition(Controleur ctrl, File fichier )
+	public void ouvrirPanelEdition(File fichier )
 	{
 		this.remove(this.panelActuelle);
 		this.panelActuelle = new PanelEdition(this.ctrl, fichier);

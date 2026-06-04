@@ -2,6 +2,8 @@ package source.ihm;
 
 import javax.swing.*;
 
+import java.io.File;
+
 import java.awt.BorderLayout ;
 
 import source.Controleur ;
@@ -17,24 +19,29 @@ import source.Controleur ;
 
 public class PanelEdition extends JPanel
 {
-	private Controleur ctrl ;
+	private Controleur ctrl;
 
-	private int 
-	private int 
-	private int 
-	private int 
+	private int nbLigne;
+	private int nbColonne;
+	private int nbForme;
+	private int nbEspece;
+
+	private File fichier;
 
 	private JPanel panelGauche;
 	private JPanel panelCentre;
 	private JPanel panelDroit;
-	
-	public PanelEdition(Controleur ctrl, int, int, int, int)
+
+	public PanelEdition(Controleur ctrl, int nbLigne, int nbColonne, int nbForme, int nbEspece)
 	{
 		/*------------------------------*/
 		/*    Configuration du Panel    */
 		/*------------------------------*/
 		this.ctrl = ctrl ;
-		
+		this.nbLigne = nbLigne;
+		this.nbColonne = nbColonne;
+		this.nbForme = nbForme;
+		this.nbEspece = nbEspece;
 	}
 
 	public PanelEdition(Controleur ctrl, File fichier)
@@ -43,6 +50,7 @@ public class PanelEdition extends JPanel
 		/*    Configuration du Panel    */
 		/*------------------------------*/
 		this.ctrl = ctrl ;
+		this.fichier = fichier;
 		
 	}
 
