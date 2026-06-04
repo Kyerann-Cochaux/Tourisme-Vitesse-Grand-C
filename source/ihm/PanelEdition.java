@@ -6,7 +6,7 @@ import java.io.File;
 
 import java.awt.BorderLayout ;
 
-import source.Controleur ;
+import source.AppliCreation ;
 
 /**
  * Panel Edition
@@ -19,7 +19,7 @@ import source.Controleur ;
 
 public class PanelEdition extends JPanel
 {
-	private Controleur ctrl;
+	private AppliCreation ctrl;
 
 	private int nbLigne;
 	private int nbColonne;
@@ -32,7 +32,7 @@ public class PanelEdition extends JPanel
 	private JPanel panelCentre;
 	private JPanel panelDroit;
 
-	public PanelEdition(Controleur ctrl, int nbLigne, int nbColonne, int nbForme, int nbEspece)
+	public PanelEdition(AppliCreation ctrl, int nbLigne, int nbColonne, int nbForme, int nbEspece)
 	{
 		/*------------------------------*/
 		/*    Configuration du Panel    */
@@ -44,7 +44,7 @@ public class PanelEdition extends JPanel
 		this.nbEspece = nbEspece;
 	}
 
-	public PanelEdition(Controleur ctrl, File fichier)
+	public PanelEdition(AppliCreation ctrl, File fichier)
 	{
 		/*------------------------------*/
 		/*    Configuration du Panel    */

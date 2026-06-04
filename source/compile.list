@@ -13,7 +13,7 @@
 ./metier/Pioche.java
 ./metier/Plateau.java
 
-./Controleur.java
+./AppliCreation.java
 ./TestMetier.java
 ./TestIHM.java
 ./TestSauvegardes.java

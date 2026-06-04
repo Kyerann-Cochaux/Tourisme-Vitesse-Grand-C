@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import source.Controleur;
+import source.AppliCreation;
 
 /**
  * Panel Init
@@ -39,10 +39,10 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	private JButton btnReset ;
 	private JButton btnRetour;
 	
-	private Controleur    ctrl ;
+	private AppliCreation    ctrl ;
 	private FrameCreation frameCreation ;
 	
-	public PanelInit( Controleur ctrl, FrameCreation frameCreation )
+	public PanelInit( AppliCreation ctrl, FrameCreation frameCreation )
 	{
 		this.ctrl  = ctrl;
 		this.frameCreation = frameCreation;
@@ -207,7 +207,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		if ( e.getSource() == this.btnRetour )
 		{
-			this.frameCreation.ouvrirPanelMenu();
+			this.frameCreation.ouvrirPanelCreation();
 		}
 	}
 	

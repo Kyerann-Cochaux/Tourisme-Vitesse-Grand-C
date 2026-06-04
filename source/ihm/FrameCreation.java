@@ -1,6 +1,6 @@
 package source.ihm;
 
-import source.Controleur;
+import source.AppliCreation;
 
 import java.io.File;
 
@@ -15,10 +15,10 @@ public class FrameCreation extends JFrame
 	protected static final Color COULEUR_ZONE  = Color.decode("#f3f3f3");
 	protected static final Color COULEUR_FOND  = new Color (37, 37, 37);
 	
-	private Controleur ctrl;
+	private AppliCreation ctrl;
 	private JPanel     panelActuelle;
 	
-	public FrameCreation(Controleur ctrl) 
+	public FrameCreation(AppliCreation ctrl) 
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
 		this.setSize(300, 250);

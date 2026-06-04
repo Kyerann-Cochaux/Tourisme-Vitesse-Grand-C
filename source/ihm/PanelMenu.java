@@ -7,11 +7,11 @@ import java.io.File;
 
 import javax.swing.*;
 
-import source.Controleur ;
+import source.AppliCreation ;
 
 public class PanelMenu extends JPanel implements ActionListener
 {
-	private Controleur    ctrl;
+	private AppliCreation    ctrl;
 	
 	private FrameJeu frameJeu;
 	
@@ -23,7 +23,7 @@ public class PanelMenu extends JPanel implements ActionListener
 	
 	
 	
-	public PanelMenu(Controleur ctrl, FrameJeu frameJeu)
+	public PanelMenu(AppliCreation ctrl, FrameJeu frameJeu)
 	{
 		this.ctrl  = ctrl;
 		this.frameJeu = frameJeu;
@@ -75,7 +75,7 @@ public class PanelMenu extends JPanel implements ActionListener
 
 			explorateur.setCurrentDirectory(new File("."));
 
-			int resultat = explorateur.showOpenDialog(this.frame);
+			int resultat = explorateur.showOpenDialog(this.frameJeu);
 
 			if (resultat == JFileChooser.APPROVE_OPTION)
 			{
