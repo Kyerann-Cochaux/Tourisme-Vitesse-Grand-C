@@ -10,7 +10,7 @@ public class Controleur
 
 	public Controleur()
 	{
-		this.metier    = new Metier   ();
+		this.metier        = new Metier   ();
 		this.frameCreation = new FrameCreation(this);
 	}
 

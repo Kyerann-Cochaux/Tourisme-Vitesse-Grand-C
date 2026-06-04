@@ -269,7 +269,21 @@ public class Plateau
 	
 	public String toString()
 	{
-		return this.afficherPlanetes() + "\n" + this.afficherSystemes();
+		String sRet = "";
+
+		sRet +="/* ---------------------------------- */\n" + 
+			   "/*       Affichages des planètes      */\n" + 
+			   "/* ---------------------------------- */\n" ;
+
+		sRet += this.afficherPlanetes() + "\n";
+
+		sRet += "/* ---------------------------------- */\n" + 
+				"/*       Affichages des Systèmes      */\n" + 
+				"/* ---------------------------------- */\n" ;
+
+		sRet += this.afficherSystemes();
+
+		return sRet;
 	}
 	
 }

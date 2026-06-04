@@ -18,7 +18,7 @@ public class Voyage
 		return new Voyage(planeteSource,  planeteDestination, espece);
 	}
 
-	public Voyage(Case planeteSource, Case planeteDestination, String espece)
+	private Voyage(Case planeteSource, Case planeteDestination, String espece)
 	{
 		this.planeteSource      = planeteSource;
 		this.planeteDestination = planeteDestination;
