@@ -26,6 +26,8 @@ public class PanelCreation extends JPanel implements ActionListener
 	{
 		this.ctrl  = ctrl;
 		this.frame = frame;
+
+		this.setBackground(FrameCreation.COULEUR_FOND);
 		
 		/* ---------------------------------- */
 		/*       Création des composants      */
@@ -47,9 +49,13 @@ public class PanelCreation extends JPanel implements ActionListener
 		/* ---------------------------------- */
 		
 		this.panelAccueil.add( this.lblMenu );
-		this.panelAccueil.add( new JPanel() );
+		JPanel panelVide = new JPanel();
+		panelVide.setOpaque(false);
+		this.panelAccueil.add( panelVide );
 		this.panelAccueil.add( this.btnNouveau);
 		this.panelAccueil.add( this.btnOuvrir );
+
+		this.panelAccueil.setOpaque(false);
 		
 		
 		this.add(this.panelAccueil);
