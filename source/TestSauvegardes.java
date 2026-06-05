@@ -1,7 +1,5 @@
 package source;
 
-import javax.swing.text.PlainDocument;
-
 import source.metier.*;
 
 public class TestSauvegardes
@@ -16,31 +14,6 @@ public class TestSauvegardes
 		TestSauvegardes.genererPLateauTest(metier);
 		
 		System.out.println(metier.getPlateau());
-		
-		
-		System.out.println();
-		System.out.println();
-		System.out.println("--------");
-		System.out.println("---TEST sauvegardeExiste(String nomSauvegarde)");
-		System.out.println();
-		
-		metier.sauvegarderPlateau("oui");
-		
-		TestSauvegardes.test(metier.sauvegardeExiste("oui"), "true");
-		TestSauvegardes.test(metier.sauvegardeExiste("non"), "false");
-		
-		System.out.println();
-		System.out.println("Chargement d'un plateau...");
-		metier.chargerPlateau("../source/metier/sauvegardes/test.data");
-		
-		System.out.println("Sauvegarde de ce plateau...");
-		metier.sauvegarderPlateau("oui");
-		
-		TestSauvegardes.test(metier.sauvegardeExiste("oui"), "true");
-		TestSauvegardes.test(metier.sauvegardeExiste("non"), "false");
-		
-		
-		
 		
 		
 		System.out.println();
@@ -63,8 +36,8 @@ public class TestSauvegardes
 		System.out.println("---TEST chargerPlateau(String cheminSauvegarde)");
 		System.out.println();
 		
-		test(metier.chargerPlateau("../source/metier/sauvegardes/test.data"), "true");
-		test(metier.chargerPlateau("../source/metier/sauvegardes/test-0.data"), "true");
+		test(metier.chargerPlateau("../source/metier/sauvegardes/test.data"   ), "true");
+		test(metier.chargerPlateau("../source/metier/sauvegardes/test-0.data" ), "true");
 		test(metier.chargerPlateau("../source/metier/sauvegardes/asterix.data"), "false");
 		
 		
@@ -107,7 +80,7 @@ public class TestSauvegardes
 			{' ','S',' ',' ',' ',' ',' ','C',' ',' '},
 			{' ',' ',' ',' ',' ','C',' ',' ','F',' '},
 			{'A',' ',' ','S',' ',' ',' ',' ',' ',' '},
-			{' ',' ','C',' ',' ','S',' ','A',' ',' '},
+			{' ',' ','C',' ',' ','S',' ',' ',' ',' '},
 			{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
 			{' ','C',' ',' ','S',' ',' ',' ','A',' '},
 		};
