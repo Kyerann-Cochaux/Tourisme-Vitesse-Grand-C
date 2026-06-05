@@ -25,6 +25,7 @@ public class TestSauvegardes
 		// sauvegarde d'un plateau avec le même nom
 		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
 		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
 		
 		
 		
@@ -116,8 +117,9 @@ public class TestSauvegardes
 	private static void test(String resultat, String resultatAttendu)
 	{
 		String sEgalite = String.format("%15s = %-15s", resultat, resultatAttendu);
+		String sNumTest = String.format("Test %3d", ++TestSauvegardes.nbTests);
 		
-		System.out.println( "Test n°" + (TestSauvegardes.nbTests++)                      +
+		System.out.println( sNumTest                      +
 		                    " Resultat : " + sEgalite + " => " +
 		                  ( resultat.equals(resultatAttendu) ? "OK" : "ERREUR" ) );
 	}

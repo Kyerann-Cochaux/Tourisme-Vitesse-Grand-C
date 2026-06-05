@@ -158,9 +158,34 @@ public class Metier
 	
 	public boolean sauvegarderPlateau(String nomSauvegarde)
 	{
-		if ( this.getPlateau() == null  ) return false;
+		if ( this.getPlateau() == null ) return false;
 		
-		
+		while ( this.sauvegardeExiste(nomSauvegarde) )
+		{
+			String[] nomSaveDiv = nomSauvegarde.split("-");
+			
+			System.out.println("nomSaveDiv.length : " +  nomSaveDiv[nomSaveDiv.length-1]);
+			
+			if ( nomSaveDiv.length == 1 )
+				nomSauvegarde += "-1";
+			else
+			{
+				String sNumApparition = nomSaveDiv[nomSaveDiv.length-1];
+				int     numApparition = Integer.parseInt(sNumApparition)+1;
+				
+				nomSaveDiv[nomSaveDiv.length-1] = "" + numApparition;
+				
+				
+				
+				nomSauvegarde = nomSaveDiv[0];
+				
+				for (int numDiv = 1; numDiv < nomSaveDiv.length; numDiv++)
+				{
+					nomSauvegarde += "-" + nomSaveDiv[numDiv];
+				}
+			}
+			System.out.println(nomSauvegarde);
+		}
 		
 		
 		try
