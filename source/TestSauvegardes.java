@@ -26,6 +26,9 @@ public class TestSauvegardes
 		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
 		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
 		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
 		
 		
 		
