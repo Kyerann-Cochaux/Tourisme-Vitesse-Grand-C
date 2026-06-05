@@ -23,9 +23,9 @@ public class TestSauvegardes
 		System.out.println();
 		
 		// sauvegarde d'un plateau avec le même nom
-		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
-		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
-		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"  ), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"  ), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"  ), "true");
 		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
 		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
 		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
@@ -40,9 +40,9 @@ public class TestSauvegardes
 		System.out.println("---TEST chargerPlateau(String cheminSauvegarde)");
 		System.out.println();
 		
-		test(metier.chargerPlateau("../source/metier/sauvegardes/test.data"   ), "true");
-		test(metier.chargerPlateau("../source/metier/sauvegardes/test-1.data" ), "true");
-		test(metier.chargerPlateau("../source/metier/sauvegardes/asterix.data"), "false");
+		TestSauvegardes.test(metier.chargerPlateau("../source/metier/sauvegardes/test.data"   ), "true");
+		TestSauvegardes.test(metier.chargerPlateau("../source/metier/sauvegardes/test-1.data" ), "true");
+		TestSauvegardes.test(metier.chargerPlateau("../source/metier/sauvegardes/asterix.data"), "false");
 		
 		
 		
