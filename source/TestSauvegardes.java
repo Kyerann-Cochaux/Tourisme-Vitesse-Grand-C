@@ -38,7 +38,7 @@ public class TestSauvegardes
 		System.out.println();
 		
 		test(metier.chargerPlateau("../source/metier/sauvegardes/test.data"   ), "true");
-		test(metier.chargerPlateau("../source/metier/sauvegardes/test-0.data" ), "true");
+		test(metier.chargerPlateau("../source/metier/sauvegardes/test-1.data" ), "true");
 		test(metier.chargerPlateau("../source/metier/sauvegardes/asterix.data"), "false");
 		
 		
