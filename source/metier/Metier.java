@@ -39,6 +39,24 @@ public class Metier
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
 	
+	public boolean sauvegardeExiste(String nomSauvegarde)
+	{
+		String cheminSauvegarde = Metier.CHEMIN_SAUVEGARDES +
+		                          nomSauvegarde + Metier.EXTENSION_SAUVEGARDES;
+		
+		try
+		{
+			Scanner sc = new Scanner ( new FileInputStream ( cheminSauvegarde ), "UTF8" );
+			sc.close();
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	
 	public boolean chargerPlateau(String cheminSauvegarde)
 	{
 		int nbLignes   = 0;
@@ -129,7 +147,6 @@ public class Metier
 		catch (Exception e)
 		{
 			System.out.println("Erreur lors du chargement du fichier sauvegardé.");
-			e.printStackTrace();
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			return false;
 		}
@@ -139,9 +156,23 @@ public class Metier
 	
 	public boolean sauvegarderPlateau(String nomSauvegarde)
 	{
+		if ( this.getPlateau() == null  ) return false;
+		
+		
+		
+		
 		try
 		{
-			PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(Metier.CHEMIN_SAUVEGARDES + nomSauvegarde + Metier.EXTENSION_SAUVEGARDES), "UTF8" )); 
+			PrintWriter pw = new PrintWriter
+				(
+					new OutputStreamWriter
+					(
+						new FileOutputStream
+						(
+							Metier.CHEMIN_SAUVEGARDES + nomSauvegarde + Metier.EXTENSION_SAUVEGARDES
+						), "UTF8"
+					)
+				);
 			
 			pw.println ( "" + this.plateauJeu.getNbLignes() + "x" + this.plateauJeu.getNbColonnes() + " " +
 			                  this.plateauJeu.getNbFormes() + " " + this.plateauJeu.getNbEspeces ()         );
@@ -227,7 +258,6 @@ public class Metier
 		catch (Exception e)
 		{
 			System.out.println("Erreur lors de la sauvegarde du plateau.");
-			e.printStackTrace();
 			return false;
 		}
 		
