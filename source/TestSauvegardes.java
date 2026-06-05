@@ -17,22 +17,17 @@ public class TestSauvegardes
 		
 		
 		
-		System.out.println("Chargement d'un plateau sans les fix des zones");
+		System.out.println("----------------------------------------------------------");
+		System.out.println("------CHARGEMENT D'UN PLATEAU SANS LES FIX DES ZONES------");
 		System.out.println();
 		
 		System.out.println(plateau);
 		
 		
-		System.out.println("Sauvegarde et chargement de plateaux");
+		System.out.println("------------------------------------------------");
+		System.out.println("------SAUVEGARDE ET CHARGEMENT DE PLATEAUX------");
 		
-		metier.sauvegarderPlateau("testSave");
-		
-		metier.initialiserPlateau(7, 10, 2, 2);
-		plateau = metier.getPlateau();
-		
-		metier.chargerPlateau("../source/metier/sauvegardes/testSave.data");
-		
-		plateau = metier.getPlateau();
+		metier.sauvegarderPlateau("sauvegarde-000");
 		
 		System.out.println(plateau);
 		
