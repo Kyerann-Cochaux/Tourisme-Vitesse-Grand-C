@@ -174,8 +174,8 @@ public class Metier
 					)
 				);
 			
-			pw.println ( "" + this.plateauJeu.getNbLignes() + "x" + this.plateauJeu.getNbColonnes() + " " +
-			                  this.plateauJeu.getNbFormes() + " " + this.plateauJeu.getNbEspeces ()         );
+			pw.println ( "" + this.plateauJeu.getNbLignes  () + "x" + this.plateauJeu.getNbColonnes() + " " +
+			                  this.plateauJeu.getNbPlanetes() + " " + this.plateauJeu.getNbEspeces ()         );
 			
 			
 			// sauvegarde des systèmes

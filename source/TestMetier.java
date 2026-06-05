@@ -14,8 +14,19 @@ public class TestMetier
 		Metier m = new Metier();
 		Plateau p = null;
 		
-		m.initialiserPlateau(11,11,3,3);
+		m.initialiserPlateau(11,11,3,2);
+
+	
 		p = m.getPlateau();
+
+		for (int cpt = 0; cpt < p.getNbEspeces(); cpt++) 
+			System.out.println(p.getEspece(cpt) );
+		System.out.println();
+
+		for (int cpt = 0; cpt < p.getNbPlanetes(); cpt++)
+			System.out.println(p.getPlanete(cpt) );
+			
+		
 
 		System.out.println("/* ---------------------------------- */");
 		System.out.println("/*          Test des symboles         */");
@@ -275,7 +286,7 @@ public class TestMetier
 		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ( (p.getNbVoyages() == 8 ? "OK" : "Erreur") ) );
 
 		System.out.println();
-		System.out.println("/* -- Ajout sur l'axe horizontal + -- */");
+		System.out.println("/* -- Ajout sur les axes ++ -- */");
 		System.out.println("\n\n");
 
 		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(8, 5) ) == false ? "OK" : "Erreur"); 

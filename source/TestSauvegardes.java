@@ -117,7 +117,7 @@ public class TestSauvegardes
 				
 				Planete planete = Planete.creerPlanete(tabPla[y][x], null);
 				
-				metier.getPlateau().ajouterForme(x, y, planete);
+				metier.getPlateau().ajouterPlanete(x, y, planete);
 				
 				for (int numEspece = 0; numEspece < Plateau.TAB_ESPECES.length; numEspece++)
 				{
