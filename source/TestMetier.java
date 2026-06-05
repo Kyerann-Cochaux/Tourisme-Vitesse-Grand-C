@@ -308,13 +308,14 @@ public class TestMetier
 		System.out.println("/*       Test Génération Plateau      */");
 		System.out.println("/* ---------------------------------- */");
 
+		Metier m2 = new Metier();
+		TestMetier.genererPlateauTest(m2);
 
-		
-		
+		System.out.println(m2.getPlateau() );
 		
 	}
 
-	protected static void genererPLateauTest(Metier metier)
+	protected static void genererPlateauTest(Metier metier)
 	{
 		int[][] tabSys = new int[][]
 		{
@@ -350,7 +351,7 @@ public class TestMetier
 		};
 		
 		
-		metier.initialiserPlateau(tabSys.length, tabSys[0].length, 2, 3);
+		metier.initialiserPlateau(tabSys.length, tabSys[0].length, 4, 1);
 		
 		
 		for (int y = 0; y < tabSys.length; y++)

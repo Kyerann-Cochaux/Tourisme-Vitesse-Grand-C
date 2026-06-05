@@ -44,8 +44,8 @@ public class Plateau
 		this.nbColonnes = nbColonnes;
 		this.nbSysteme  = 0;
 		
-		this.ensPlanetes  = new String[nbPlanetes ];
-		this.ensEspeces = new String[nbEspeces];
+		this.ensPlanetes = new String[nbPlanetes];
+		this.ensEspeces  = new String[nbEspeces ];
 		
 		/* Ces tableaux permettent de savoir quelles valeurs sont utilisés lors d'une partie 
 			
@@ -161,7 +161,6 @@ public class Plateau
 		if (!coordonneesValide(   x, y        ) ) return false;
 		if (!planeteValide    (p, x, y        ) ) return false;
 		if (!planeteExiste    (p.getSymbole() ) ) return false;
-		if (!especeExiste     (p.getEspece () ) ) return false;
 
 		// Dans le cas où la planète fournie en paramètre est une base, il faut vérifier qu'elle n'est pas 
 		// déjà présente sur le plateau.
