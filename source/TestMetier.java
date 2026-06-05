@@ -315,7 +315,7 @@ public class TestMetier
 		
 	}
 
-	protected static void genererPlateauTest(Metier metier)
+	public static void genererPlateauTest(Metier metier)
 	{
 		int[][] tabSys = new int[][]
 		{
