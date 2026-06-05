@@ -361,26 +361,25 @@ public class TestMetier
 			// Parcours colonnes
 			for (int x = 0; x < tabSys[0].length; x++)
 			{
-				// set du systeme à l'aide 
+				// set du systeme à l'aide du tableau tabSys
 				metier.getPlateau().setNumSysteme(tabSys[y][x], x, y);
-				
+
+				//Création de la planete à ajouter
 				Planete planete = Planete.creerPlanete(tabPla[y][x], null);
 				
+				//Ajout de la planète
 				metier.getPlateau().ajouterPlanete(x, y, planete);
-				
-				for (int numEspece = 0; numEspece < Plateau.TAB_ESPECES.length; numEspece++)
-				{
+
+				if (tabPla[y][x] != ' ' && tabEsp[y][x] != ' ')
+					for (int numEspece = 0; numEspece < metier.getPlateau().getNbEspeces(); numEspece++)
+					{
 
 
-					/*Planete planeteTemp = metier.getPlateau()
-					                            .getCase(x, y)
-					                            .getPlanete();
-					
-					if ( planeteTemp != null && Plateau.TAB_ESPECES[numEspece].charAt(0) == tabEsp[y][x] )
-						planete.setEspece      (Plateau.TAB_ESPECES[numEspece]);*/
+						/*if ( planeteTemp != null && Plateau.TAB_ESPECES[numEspece].charAt(0) == tabEsp[y][x] )
+							planete.setEspece      (Plateau.TAB_ESPECES[numEspece]);*/
 
-					
-				}
+						
+					}
 			}
 		}
 		
