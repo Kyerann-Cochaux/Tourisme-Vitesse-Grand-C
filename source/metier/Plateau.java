@@ -8,9 +8,9 @@ public class Plateau
 	
 	private static final int TAILLE_MAX = 30;
 	
-	public static final String[] TAB_PLANETES = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
-	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
-	                                          // Marron         BLeu        Rouge     Vert
+	public static final String[] TAB_PLANETES = {"Gazeuse","Océan", "Tellurique", "Volcanique" };
+	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felinoïd", "Azimae", "Silikon"};
+	                                           // Marron         BLeu        Rouge     Vert
 	
 	private Case[][] ensCases;
 	private String[] ensEspeces;   // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4

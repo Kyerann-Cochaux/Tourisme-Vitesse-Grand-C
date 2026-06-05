@@ -76,17 +76,17 @@ public class PanelEdition extends JPanel implements ActionListener
 	private JToggleButton outilZone;
 	private JLabel selectionZone;
 	
-	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation, int nbLigne, int nbColonne, int nbPlanete, int nbEspece)
+	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation )
 	{
 		/*------------------------------*/
 		/*    Configuration du Panel    */
 		/*------------------------------*/
 		this.ctrl          = ctrl ;
 		this.frameCreation = frameCreation;
-		this.nbLigne       = nbLigne;
-		this.nbColonne     = nbColonne;
-		this.nbPlanete     = nbPlanete;
-		this.nbEspece      = nbEspece;
+		this.nbLigne       = this.ctrl.getPlateau().getNbLignes();
+		this.nbColonne     = this.ctrl.getPlateau().getNbColonnes();
+		this.nbPlanete     = this.ctrl.getPlateau().getNbPlanetes();
+		this.nbEspece      = this.ctrl.getPlateau().getNbEspeces();
 		
 		this.creationInterfaceEdition();
 	}

@@ -202,6 +202,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				int nbFormes   = Integer.parseInt( this.tabZoneTxt[2].getText() );
 				int nbEspeces  = Integer.parseInt( this.tabZoneTxt[3].getText() );
 				
+				System.out.println( "lig:"+nbLignes + " col:"+nbColonnes + " forme:" + nbFormes + " espece:" + nbEspeces );
+				
 				this.frameCreation.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			}
 		}
