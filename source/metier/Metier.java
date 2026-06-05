@@ -147,6 +147,8 @@ public class Metier
 		catch (Exception e)
 		{
 			System.out.println("Erreur lors du chargement du fichier sauvegardé.");
+			e.printStackTrace();
+			
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			return false;
 		}
@@ -258,6 +260,8 @@ public class Metier
 		catch (Exception e)
 		{
 			System.out.println("Erreur lors de la sauvegarde du plateau.");
+			e.printStackTrace();
+			
 			return false;
 		}
 		
