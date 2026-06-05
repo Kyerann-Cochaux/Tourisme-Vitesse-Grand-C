@@ -51,8 +51,8 @@ public class Voyage
 	
 	public String toString()
 	{
-		return "Planete source      : " + this.planeteSource      +
-		       "Planete destination : " + this.planeteDestination +
-		       "Espece :              " + this.espece;
+		return "Planete source      en [" + this.planeteSource     .getPosY() +":"+ this.planeteSource     .getPosX() + "]\n"+
+		       "Planete destination en [" + this.planeteDestination.getPosY() +":"+ this.planeteDestination.getPosX() + "]\n"+
+		       "Espece              : "   + this.espece                                                               + "\n";
 	}
 }

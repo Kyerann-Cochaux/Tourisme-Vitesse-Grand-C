@@ -152,18 +152,18 @@ public class Plateau
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
-	public boolean ajouterForme(int posX, int posY, Planete j) 
+	public boolean ajouterPlanete(int x, int y, Planete p) 
 	{
 		boolean baseExiste = false;
 
-		if (!coordonneesValide(   posX, posY) ) return false;
-		if (!planeteValide    (j, posX, posY) ) return false;
+		if (!coordonneesValide(   x, y) ) return false;
+		if (!planeteValide    (p, x, y) ) return false;
 
 		// Dans le cas où la planète fournie en paramètre est une base, il faut vérifier qu'elle n'est pas 
 		// déjà présente sur le plateau.
 		
 		// On regarde si le jeton en paramètres est une base.
-		if (j.estBase() )
+		if (p.estBase() )
 		{
 			// On parcours les lignes
 			for (int lig = 0; lig < this.ensCases.length; lig++) 
@@ -177,7 +177,7 @@ public class Plateau
 					{
 
 						if (cTemp.getPlanete().estBase()                            &&
-							j.getEspece().equals(cTemp.getPlanete().getEspece() ) )
+							p.getEspece().equals(cTemp.getPlanete().getEspece() ) )
 						
 							baseExiste = true;
 					}
@@ -191,62 +191,106 @@ public class Plateau
 
 		if (baseExiste) return false;
 
-		this.ensCases[posX][posY].setPlanete(j);
+		this.ensCases[y][x].setPlanete(p);
 
 		return true;
 	}
 
-	public boolean retirerForme(int posX, int posY)
+	public boolean retirerPlanete(int x, int y)
 	{
-		if (this.ensCases[posX][posY].getPlanete() == null) return false;
+		if (this.ensCases[y][x].getPlanete() == null) return false;
 
-		this.ensCases[posX][posY].setPlanete(null);
+		this.ensCases[y][x].setPlanete(null);
 
 		return true;
 	}
 
 	public boolean ajouterVoyage(Case source, Case destination)
 	{
-
-		if (source     .estVide() ) return false;
-		if (destination.estVide() ) return false;
+		if (source     .estVide()                  ) return false;
+		if (destination.estVide()                  ) return false;
+		if (this.voyageExiste(source, destination) ) return false;
 
 		int dX =  Math.abs(destination.getPosX() - source.getPosX() );
 		int dY =  Math.abs(destination.getPosY() - source.getPosY() );
 
-			//    Orthogonal      Diagonal
-		if ( dX == 0 ^ dY == 0 || dX == dY)
+		/*if (dX >=  3|| dY >= 3) 
+		{
+			//System.out.println(source);
+			//System.out.println(destination);
+			System.out.println(dY > 0 ); 
 
-			for (int cpt = 0; cpt < Math.max(dX, dY); cpt++) 
-			{
-				if (this.getCase(dX, dY).getPlanete() != null)
-					this.lstVoyages.add(Voyage.creerVoyage(source, destination));
-			}
+			System.out.println(source.getPosY() + ":" + dY );
+			System.out.println(this.getCase(dY   , 3) );
+			System.out.println(this.getCase(dY +1, 3) );
+			System.out.println(this.getCase(dY +2, 3) );
+
+		}*/
+
+		//         Orthogonal      Diagonal
+		//if ( dX == 0 ^ dY == 0  || dX == dY)
+
+		//System.out.println(dY ); // Axe Horizontal
+		//System.out.println(dX ); // Axe Vertical
+
+		for (int cpt = 1; cpt < Math.max(dX, dY); cpt++) 
+		{
+			// même colonne                 // Case vide
+			if (dX == 0  && !this.getCase(source.getPosY() + cpt , source.getPosX()   ).estVide() ) return false;
+			if (dY == 0  && !this.getCase(source.getPosY() + cpt , source.getPosX()   ).estVide() ) return false;
+			if (dX == dY && !this.getCase(source.getPosY() - cpt, source.getPosX() +  cpt).estVide() ) return false;
+			if (dX == dY && !this.getCase(source.getPosY() + cpt, source.getPosX() -  cpt).estVide() ) return false;
+
+		}
+		
+
 		
 	
-		System.out.println( );
-		System.out.println(source.getPosX() + " <==> " + destination.getPosX() );
+		
 
-		System.out.println(source);
-		System.out.println(destination);
-
-
-
+		this.lstVoyages.add(Voyage.creerVoyage(source, destination) );
 		return true;
+		
+		
+
 	}
 
-	private boolean coordonneesValide(int posX, int  posY)
+	public void viderPlateau()
 	{
-		return (posX >= 0 && posX < this.ensCases      .length ) && 
-		       (posY >= 0 && posY < this.ensCases[posX].length ); 
+		for (int lig = 0; lig < this.ensCases.length; lig++) 
+			for (int col = 0; col < this.ensCases[lig].length; col++) 
+			
+				this.ensCases[lig][col].setPlanete(null);
+
 	}
 
-	private boolean planeteValide(Planete j, int posX, int posY)
+	private boolean coordonneesValide(int x, int  y)
 	{
-		return j != null && j != this.ensCases [posX][posY].getPlanete()  &&
-		                         this.ensCases [posX][posY].getPlanete() == null ;
+		return (x >= 0 && x < this.nbColonnes && y >= 0 && y < this.nbLignes);
+	}
+
+	private boolean planeteValide(Planete j, int x, int y)
+	{
+		return j != null && j != this.ensCases [y][x].getPlanete()  &&
+		                         this.ensCases [y][x].getPlanete() == null ;
 	}
 	
+	public boolean voyageExiste(Case source, Case destination)
+	{
+
+		boolean bVexiste = false;
+		for (Voyage vTemp : this.lstVoyages) 
+		{
+			if (vTemp.getPlaneteSource() == source      && vTemp.getPlaneteDestination() == destination ||
+				vTemp.getPlaneteSource() == destination && vTemp.getPlaneteDestination() == source) 
+				
+				bVexiste = true;
+			
+		}
+
+		return bVexiste;
+
+	}
 	
 	// Méthodes pour voir l'etat du plateau en CUI
 	
@@ -296,6 +340,16 @@ public class Plateau
 			sRet += "\n";	
 		}
 
+		return sRet;
+	}
+
+	public String afficherVoyages()
+	{
+		String sRet = "";
+
+		for (Voyage voyage : this.lstVoyages)
+			sRet += voyage + "\n";
+		
 		return sRet;
 	}
 
