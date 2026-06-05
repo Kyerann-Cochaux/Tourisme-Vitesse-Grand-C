@@ -111,7 +111,7 @@ public class Metier
 					{
 						int indPlanete = Integer.parseInt("" + sIndPlanete);
 						
-						Planete tempPlanete = Planete.creerPlanete(Plateau.TAB_PLANETES[indPlanete].charAt(0), null);
+						Planete tempPlanete = Planete.creerPlanete(Plateau.TAB_PLANETES[indPlanete].charAt(0) );
 						
 						this.plateauJeu.getCase(numCol, numLig).setPlanete(tempPlanete);
 					}

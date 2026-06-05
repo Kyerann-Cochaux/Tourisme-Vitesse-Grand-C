@@ -20,11 +20,11 @@ public class TestMetier
 		p = m.getPlateau();
 
 		for (int cpt = 0; cpt < p.getNbEspeces(); cpt++) 
-			System.out.println(p.getEspece(cpt) );
+			System.out.println(p.getNomEspece(cpt) );
 		System.out.println();
 
 		for (int cpt = 0; cpt < p.getNbPlanetes(); cpt++)
-			System.out.println(p.getPlanete(cpt) );
+			System.out.println(p.getNomPlanete(cpt) );
 			
 		
 
@@ -33,19 +33,19 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println();
 		
-		j = Planete.creerPlanete('A',null);
+		j = Planete.creerPlanete('A');
 		System.out.println( (j == null) ? "OK" : "Erreur");
 		
-		j = Planete.creerPlanete('G',null);
+		j = Planete.creerPlanete('G');
 		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Planete.creerPlanete('o',null);
+		j = Planete.creerPlanete('o');
 		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Planete.creerPlanete('t',null);
+		j = Planete.creerPlanete('t');
 		System.out.println( (j != null) ? "OK" : "Erreur");
 		
-		j = Planete.creerPlanete('v',null);
+		j = Planete.creerPlanete('v');
 		System.out.println( (j != null) ? "OK" : "Erreur");
 
 		System.out.println();
@@ -54,16 +54,16 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println();
 
-		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[0] );
+		j = Planete.creerPlanete('G' );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
-		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[1] );
+		j = Planete.creerPlanete('G' );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
-		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[2] );
+		j = Planete.creerPlanete('G' );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
-		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[3] );
+		j = Planete.creerPlanete('G' );
 		System.out.println((j.getEspece() != null) ? "OK -> "+ j.getEspece() : "Erreur");
 
-		try { j = Planete.creerPlanete('G', null );}
+		try { j = Planete.creerPlanete('G');}
 		catch (Exception e) {System.out.println("OK");}
 
 		System.out.println("/* ------------------------------------------- */");
@@ -93,17 +93,17 @@ public class TestMetier
 		System.out.println("/*           Ajout de bases           */");
 		System.out.println("/* ---------------------------------- */");
 		
-		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[3] );
+		j = Planete.creerPlanete('G');
 		p.retirerPlanete(0, 0);
 		
 		p.ajouterPlanete(0, 0, j);
-		p.ajouterPlanete(0, 1, Planete.creerPlanete('G', Plateau.TAB_ESPECES[0] ) ); // Ajoute       : OK
-		p.ajouterPlanete(0, 2, Planete.creerPlanete('V', Plateau.TAB_ESPECES[1] ) ); // Ajoute       : OK
-		p.ajouterPlanete(0, 3, Planete.creerPlanete('O', Plateau.TAB_ESPECES[2] ) ); // Ajoute       : OK
-		p.ajouterPlanete(0, 4, Planete.creerPlanete('T', Plateau.TAB_ESPECES[3] ) ); // N'ajoute pas : OK
+		p.ajouterPlanete(0, 1, Planete.creerPlanete('G') ); // Ajoute       : OK
+		p.ajouterPlanete(0, 2, Planete.creerPlanete('V') ); // Ajoute       : OK
+		p.ajouterPlanete(0, 3, Planete.creerPlanete('O') ); // Ajoute       : OK
+		p.ajouterPlanete(0, 4, Planete.creerPlanete('T') ); // N'ajoute pas : OK
 		
-		p.ajouterPlanete(5, 5, Planete.creerPlanete('T',  null) ); 
-		p.ajouterPlanete(0, 0, Planete.creerPlanete('V',  null) ); 
+		p.ajouterPlanete(5, 5, Planete.creerPlanete('T') ); 
+		p.ajouterPlanete(0, 0, Planete.creerPlanete('V') ); 
 		
 		System.out.println(p.afficherPlanetes() );
 		
@@ -181,7 +181,7 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		p.viderPlateau();
 
-		System.out.println(p.ajouterPlanete(0, 0, Planete.creerPlanete('G', null) ) == true ? "OK" : "Erreur");
+		System.out.println(p.ajouterPlanete(0, 0, Planete.creerPlanete('G') ) == true ? "OK" : "Erreur");
 		System.out.println(p.afficherPlanetes() );
 		System.out.println(p.retirerPlanete(0, 0)                                                   == true ? "OK" : "Erreur" );
 		System.out.println(p.afficherPlanetes() );
@@ -202,49 +202,49 @@ public class TestMetier
 		/* ---------------------------------- */
 
 		// Planète centrale
-		p.ajouterPlanete(5, 5, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(5, 5, Planete.creerPlanete('G') );
 
 		
 		// Axe horizontal
-		p.ajouterPlanete(4, 5, Planete.creerPlanete('G', null) );
-		p.ajouterPlanete(6, 5, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(4, 5, Planete.creerPlanete('G') );
+		p.ajouterPlanete(6, 5, Planete.creerPlanete('G') );
 
 		// Axe vertical
-		p.ajouterPlanete(5, 4, Planete.creerPlanete('G', null) );
-		p.ajouterPlanete(5, 6, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(5, 4, Planete.creerPlanete('G') );
+		p.ajouterPlanete(5, 6, Planete.creerPlanete('G') );
 
 		// Axe diagonal SE / NO
-		p.ajouterPlanete(6,4, Planete.creerPlanete('G', null) );
-		p.ajouterPlanete(4, 6, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(6,4, Planete.creerPlanete('G') );
+		p.ajouterPlanete(4, 6, Planete.creerPlanete('G') );
 
 		// Axe diagonal SO / NE
 
-		p.ajouterPlanete(4,4 , Planete.creerPlanete('G', null) );
-		p.ajouterPlanete(6, 6, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(4,4 , Planete.creerPlanete('G') );
+		p.ajouterPlanete(6, 6, Planete.creerPlanete('G') );
 
 		 /* -------- Axe Horizontal où dX > 1 -------- */
 
 		// Axe horizontal
 
-		p.ajouterPlanete(2, 5, Planete.creerPlanete('G', null) );
-		p.ajouterPlanete(8, 5, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(2, 5, Planete.creerPlanete('G') );
+		p.ajouterPlanete(8, 5, Planete.creerPlanete('G') );
 
 		// Axe vertical
 
-		p.ajouterPlanete(5, 2, Planete.creerPlanete('G',null ) );
-		p.ajouterPlanete(5, 8, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(5, 2, Planete.creerPlanete('G' ) );
+		p.ajouterPlanete(5, 8, Planete.creerPlanete('G') );
 
 		// Axe diagonal NE / SO
 
 
-		p.ajouterPlanete(2, 2, Planete.creerPlanete('G', null) );
-		p.ajouterPlanete(8, 2, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(2, 2, Planete.creerPlanete('G') );
+		p.ajouterPlanete(8, 2, Planete.creerPlanete('G') );
 
 
 		// Axe diagonal NO / SE
 
-		p.ajouterPlanete(2, 8, Planete.creerPlanete('G', null) );
-		p.ajouterPlanete(8, 8, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(2, 8, Planete.creerPlanete('G') );
+		p.ajouterPlanete(8, 8, Planete.creerPlanete('G') );
 
 
 
@@ -343,17 +343,17 @@ public class TestMetier
 		
 		char[][] tabEsp = new char[][]
 		{
-			{'F',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+			{'C',' ',' ',' ',' ',' ',' ',' ',' ',' '},
 			{' ','S',' ',' ',' ',' ',' ','C',' ',' '},
-			{' ',' ',' ',' ',' ','C',' ',' ','F',' '},
-			{'A',' ',' ','S',' ',' ',' ',' ',' ',' '},
+			{' ',' ',' ',' ',' ','C',' ',' ','A',' '},
+			{'F',' ',' ','S',' ',' ',' ',' ',' ',' '},
 			{' ',' ','C',' ',' ','S',' ','A',' ',' '},
 			{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
 			{' ','C',' ',' ','S',' ',' ',' ','A',' '},
 		};
 		
 		
-		metier.initialiserPlateau(tabSys.length, tabSys[0].length, 4, 1);
+		metier.initialiserPlateau(tabSys.length, tabSys[0].length, 4, 4);
 		
 		// Parcours lignes
 		for (int y = 0; y < tabSys.length; y++)
@@ -361,29 +361,20 @@ public class TestMetier
 			// Parcours colonnes
 			for (int x = 0; x < tabSys[0].length; x++)
 			{
-				// set du systeme à l'aide du tableau tabSys
+				// Set du systeme à l'aide du tableau tabSys
 				metier.getPlateau().setNumSysteme(tabSys[y][x], x, y);
 
 				//Création de la planete à ajouter
-				Planete planete = Planete.creerPlanete(tabPla[y][x], null);
+				Planete planete = Planete.creerPlanete(tabPla[y][x]);
 				
 				//Ajout de la planète
 				metier.getPlateau().ajouterPlanete(x, y, planete);
-
-				if (tabPla[y][x] != ' ' && tabEsp[y][x] != ' ')
-					for (int numEspece = 0; numEspece < metier.getPlateau().getNbEspeces(); numEspece++)
-					{
-
-
-						/*if ( planeteTemp != null && Plateau.TAB_ESPECES[numEspece].charAt(0) == tabEsp[y][x] )
-							planete.setEspece      (Plateau.TAB_ESPECES[numEspece]);*/
-
-						
-					}
+				
+				
+				for (int numEspece = 0; numEspece < Plateau.TAB_ESPECES.length; numEspece++)
+					if ( Plateau.TAB_ESPECES[numEspece].charAt(0) == tabEsp[y][x] )
+						metier.getPlateau().setEspece(planete, Plateau.TAB_ESPECES[numEspece]);
 			}
-		}
-		
+		}	
 	}
-	
-	
 }

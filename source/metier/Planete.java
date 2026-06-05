@@ -7,37 +7,24 @@ public class Planete
 
 	/*Factory pour vérifier si le symbole de la planète fait partie des symboles autorisés */
 
-	public static Planete creerPlanete(char symbole, String espece)
+	public static Planete creerPlanete(char symbole)
 	{
 		symbole = Character.toUpperCase(symbole);
-
+		
 		// Test symbole invalide
 		if(!Planete.symboleValide(symbole) ) return null;
 
-		// Test espèce invalide
-		if (espece != null && !espece.equals("") && !Planete.especeValide(espece) ) return null;
-		
-		// L'espèce est null, donc la Planète ne possède uniquement un symbole
-		if (espece == null || espece.equals("") ) return new Planete(symbole); 
-		
-		// L'espèce est non null, la Planète est donc une base
-		return new Planete(symbole, espece);
-		
+		return new Planete(symbole);
 	}
-	 
+
 	/* ---------------------------------- */
 	/*            Constructeurs           */
 	/* ---------------------------------- */
 	
-	private Planete(char symbole, String espece)
-	{
-		this.symbole = symbole;
-		this.espece  = espece;
-	}
-
 	private Planete(char symbole)
 	{
-		this(symbole, null);
+		this.symbole = symbole;
+		this.espece  = null;
 	}
 
 	/* ---------------------------------- */
@@ -53,8 +40,13 @@ public class Planete
 
 	public boolean setEspece(String espece) 
 	{
-		if (!especeValide(espece) ) return false;
-		
+		if ( !especeValide(espece) )
+		{
+			System.out.println("Espece invalide : " + espece);
+			return false;
+		}
+		System.out.println("Espece valide : " + espece);
+
 		this.espece = espece;
 		return true;
 	}
@@ -63,21 +55,16 @@ public class Planete
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
-	// Vérifie si le String est bien dans le tableau
-
+	// Vérifie si le String est bien dans le tableau d'espèces disponible
 	private static boolean especeValide(String espece)
 	{
-		
-		boolean estEspeceValide = false;
-
 		for (int cpt = 0; cpt < Plateau.TAB_ESPECES.length; cpt++)
 		{
 			if ( Plateau.TAB_ESPECES[cpt].equals(espece) )
-				estEspeceValide = true;
+				return true;
 		}
-
-		return estEspeceValide;
-
+		
+		return false;
 	}
 	
 	private static boolean symboleValide(char symbole)
