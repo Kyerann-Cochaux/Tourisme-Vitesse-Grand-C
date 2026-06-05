@@ -9,7 +9,7 @@ public class Plateau
 	private static final int TAILLE_MAX = 30;
 	
 	public static final String[] TAB_PLANETES = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
-	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felihoïd", "Azimae", "Silikon"};
+	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felinoïd", "Azimae", "Silikon"};
 	                                          // Marron         BLeu        Rouge     Vert
 	
 	private Case[][] ensCases;
@@ -47,7 +47,7 @@ public class Plateau
 		this.ensPlanetes = new String[nbPlanetes];
 		this.ensEspeces  = new String[nbEspeces ];
 		
-		/* Ces tableaux permettent de savoir quelles valeurs sont utilisés lors d'une partie 
+		/* Ces tableaux permettent de savoir quelles valeurs sont utilisées lors d'une partie 
 			
 			Si il y a 3 Planetes, on prends les 3 premières dans le tableau de constantes.
 			S'il y a 4 couleurs, on prends les 4 couleurs dans le tableau de constantes.
@@ -70,8 +70,8 @@ public class Plateau
 	/*            Accesseurs              */
 	/* ---------------------------------- */
 
-	public String getEspece (int indice) { return this.ensEspeces[indice];}
-	public String getPlanete(int indice) { return this.ensPlanetes [indice];}
+	public String getNomEspece (int indice) { return this.ensEspeces [indice];}
+	public String getNomPlanete(int indice) { return this.ensPlanetes[indice];}
 	
 	public int getNbLignes  () { return this.nbLignes         ;}
 	public int getNbColonnes() { return this.nbColonnes       ;}
@@ -80,8 +80,8 @@ public class Plateau
 	public int getNbEspeces () { return this.ensEspeces.length;}
 	public int getNbPlanetes  () { return this.ensPlanetes .length;}
 	
-	public String[] getNomPlanetes () {return this.ensPlanetes  ;}
-	public String[] getNomEspeces() { return this.ensEspeces;}
+	public String[] getEnsPlanetes() {return this.ensPlanetes;}
+	public String[] getEnsEspeces () {return this.ensEspeces ;}
 	
 	public Voyage getVoyage   (int indice) { return this.lstVoyages .get(indice);}
 	public int    getNbVoyages()           { return this.lstVoyages.size()      ;}
@@ -150,37 +150,35 @@ public class Plateau
 		
 	}
 
-	public boolean setEspece(String espece)
+	public boolean setEspece(Planete planete, String espece)
 	{
 		if (!this.especeExiste(espece) ) return false;
-
-		Case cTemp = null;
+		
+		Planete planeteTemp = null;
+		
+		List<String> lstEspecePosee = new ArrayList<String>(4);
+		
 		// On parcours les lignes
 		for (int lig = 0; lig < this.ensCases.length; lig++) 
 		{
 			// On parcours les colonnes
 			for (int col = 0; col < this.ensCases[lig].length; col++) 
 			{
-				cTemp = this.ensCases[lig][col];
+				planeteTemp = this.ensCases[lig][col].getPlanete();
+				
+				if ( planeteTemp             != null &&
+				     planeteTemp.getEspece() != null &&
+				    !planeteTemp.getEspece().equals("") )
 
-				// On regarde si la case à une planète
-				if (!cTemp.estVide() )
-				{
-					// On regarde si la planète de cTemp est une base
-					if (cTemp.getPlanete().estBase() )
-					{
-						// On regarde si les 2 planètes ont la même esp
-						if (cTemp.getPlanete().getEspece().equals(espece) )
-							return false;
-					}
-					
-				}
+					lstEspecePosee.add(planeteTemp.getEspece() );
+				
 			}
 		}
-
-		if (cTemp == null) return false;
-
-		cTemp.getPlanete().setEspece(espece);
+		
+		if (planete == null) return false;
+		if ( lstEspecePosee.contains(espece) ) return false;
+		
+		planete.setEspece(espece);
 		return true;
 	}
 	
@@ -340,22 +338,19 @@ public class Plateau
 
 	private boolean especeExiste(String espece)
 	{
-		boolean bPresente = true;
+		boolean bExiste = false;
 
-		// Regarede 
+		// Regarde si l'espèce existe dans le tableau d'espèces utilisées si l'espèce existe dans le tableau d'espèces utilisées
 		for(String nomEspece : this.ensEspeces)
-			if (!nomEspece.equals(espece) ) 
-				
-				bPresente = false;
+		{
+			if ( nomEspece.equals(espece) ) bExiste |= true;
+			else                            bExiste |= false;
+		}
 
-		if (!bPresente) return false;
-		// ...
-
-
-		return false;
+		return bExiste;
 	}
 	
-	// Méthodes pour voir l'etat du plateau en CUI
+	// Méthodes pour voir l'état du plateau en CUI
 	
 	public String afficherPlanetes()
 	{
