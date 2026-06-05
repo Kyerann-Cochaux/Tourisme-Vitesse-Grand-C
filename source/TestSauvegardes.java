@@ -11,7 +11,7 @@ public class TestSauvegardes
 		
 		Metier metier = new Metier();
 		
-		TestSauvegardes.genererPLateauTest(metier);
+		TestMetier.genererPlateauTest(metier);
 		
 		System.out.println(metier.getPlateau());
 		
@@ -23,9 +23,12 @@ public class TestSauvegardes
 		System.out.println();
 		
 		// sauvegarde d'un plateau avec le même nom
-		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
-		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
-		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"  ), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"  ), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"  ), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test-0"), "true");
 		
 		
 		
@@ -37,9 +40,9 @@ public class TestSauvegardes
 		System.out.println("---TEST chargerPlateau(String cheminSauvegarde)");
 		System.out.println();
 		
-		test(metier.chargerPlateau("../source/metier/sauvegardes/test.data"   ), "true");
-		test(metier.chargerPlateau("../source/metier/sauvegardes/test-0.data" ), "true");
-		test(metier.chargerPlateau("../source/metier/sauvegardes/asterix.data"), "false");
+		TestSauvegardes.test(metier.chargerPlateau("../source/metier/sauvegardes/test.data"   ), "true");
+		TestSauvegardes.test(metier.chargerPlateau("../source/metier/sauvegardes/test-1.data" ), "true");
+		TestSauvegardes.test(metier.chargerPlateau("../source/metier/sauvegardes/asterix.data"), "false");
 		
 		
 		
@@ -47,70 +50,6 @@ public class TestSauvegardes
 		System.out.println(metier.getPlateau());
 		
 		
-		
-	}
-	
-	
-	private static void genererPLateauTest(Metier metier)
-	{
-		int[][] tabSys = new int[][]
-		{
-			{0,0,0,0,0,1,1,1,1,1},
-			{0,0,0,0,0,1,1,1,1,1},
-			{0,0,0,0,0,1,1,1,1,1},
-			{0,0,0,0,0,1,1,1,1,1},
-			{2,2,2,2,2,2,2,2,2,2},
-			{2,2,2,2,2,2,2,2,2,2},
-			{2,2,2,2,2,2,2,2,2,2},
-		};
-		
-		char[][] tabPla = new char[][]
-		{
-			{'G',' ',' ',' ',' ',' ',' ',' ',' ',' '},
-			{' ','G',' ',' ',' ',' ',' ','V',' ',' '},
-			{' ',' ',' ',' ',' ','O',' ',' ','V',' '},
-			{'T',' ',' ','G',' ',' ',' ',' ',' ',' '},
-			{' ',' ','O',' ',' ','O',' ','G',' ',' '},
-			{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
-			{' ','V',' ',' ','T',' ',' ',' ','G',' '},
-		};
-		
-		char[][] tabEsp = new char[][]
-		{
-			{'F',' ',' ',' ',' ',' ',' ',' ',' ',' '},
-			{' ','S',' ',' ',' ',' ',' ','C',' ',' '},
-			{' ',' ',' ',' ',' ','C',' ',' ','F',' '},
-			{'A',' ',' ','S',' ',' ',' ',' ',' ',' '},
-			{' ',' ','C',' ',' ','S',' ',' ',' ',' '},
-			{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
-			{' ','C',' ',' ','S',' ',' ',' ','A',' '},
-		};
-		
-		
-		metier.initialiserPlateau(tabSys.length, tabSys[0].length, 2, 3);
-		
-		
-		for (int y = 0; y < tabSys.length; y++)
-		{
-			for (int x = 0; x < tabSys[0].length; x++)
-			{
-				metier.getPlateau().setNumSysteme(tabSys[y][x], x, y);
-				
-				Planete planete = Planete.creerPlanete(tabPla[y][x], null);
-				
-				metier.getPlateau().ajouterPlanete(x, y, planete);
-				
-				for (int numEspece = 0; numEspece < Plateau.TAB_ESPECES.length; numEspece++)
-				{
-					Planete planeteTemp = metier.getPlateau()
-					                            .getCase(x, y)
-					                            .getPlanete();
-					
-					if ( planeteTemp != null && Plateau.TAB_ESPECES[numEspece].charAt(0) == tabEsp[y][x] )
-						planete.setEspece(Plateau.TAB_ESPECES[numEspece]);
-				}
-			}
-		}
 		
 	}
 	
