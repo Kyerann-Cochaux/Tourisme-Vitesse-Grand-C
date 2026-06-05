@@ -20,33 +20,42 @@ public class FrameCreation extends JFrame
 	
 	private AppliCreation ctrl;
 	private JPanel        panelActuelle;
+
+	// attributs utilisés pour placer la frame le plus au centre de l'écran en fonction de sa taille
+
+	private int posFrameX, posFrameY;
+
+	// Variable locales pour placer la frame avec le premier panel au centre de l'écran
+	// Pourrait fonctionner sans 4 variables locales, mais pour plus de lisibilité, mieux vaut décomposer l'appel de chaque méthode
+
+	private int largeurEcran, hauteurEcran;
+	private int largeurFrame, hauteurFrame;
 	
 	public FrameCreation(AppliCreation ctrl) 
 	{
-		// Variable locales pour placer la frame avec le premier panel au centre de l'écran
-		// Pourrait fonctionner sans 4 variables locales, mais pour plus de lisibilité, mieux vaut décomposer l'appel de chaque méthode
-		int largeurEcran, hauteurEcran;
-		int largeurFrame, hauteurFrame;
 
 		this.setTitle   ("Tourisme à Vitesse Grand C");
 		this.setSize    (300, 250            );
-		//this.setLocation(800    , 450                 );
-
 
 		/* À tester sous Linux pour voir si la frame se place au centre de l'écran*/
 
 		//                                 Permet de récupérer la largeur de l'écran
-		largeurEcran = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth ();
+		this.largeurEcran = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth ();
 
 		//                                 Permet de récupérer la hauteur de l'écran
-		hauteurEcran = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
+		this.hauteurEcran = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
 		// La taille étant définie au dessus (cf ligne 32) on peut réutiliser ces valeurs pour le positionnement
-		largeurFrame = this.getWidth ();
-		hauteurFrame = this.getHeight();
+		this.largeurFrame = this.getWidth ();
+		this.hauteurFrame = this.getHeight();
 
-		//                centre écran largeur   taille frame largeur   centre écran hauteur    taille frame hauteur
-		this.setLocation( (largeurEcran / 2)    - (largeurFrame / 2),    (hauteurEcran /2)   -   ( hauteurFrame / 2) );
+ 		//             centre écran largeur   taille frame largeur
+		this.posFrameX = (this.largeurEcran / 2)    - (this.largeurFrame / 2);
+
+		//             centre écran hauteur   taille frame hauteur
+		this.posFrameY = (this.hauteurEcran / 2)    - (this.hauteurFrame / 2);
+
+		this.setLocation( this.posFrameX, this.posFrameY );
 		
 		/* ---------------------------------- */
 		/*       Création des composants      */
@@ -85,8 +94,12 @@ public class FrameCreation extends JFrame
 		this.remove(this.panelActuelle);
 		this.panelActuelle = new PanelInit(this.ctrl, this);
 		this.add(this.panelActuelle);
-		this.setSize(800, 1080);
-		this.setLocation(550, 450);
+
+		this.setSize(800, this.hauteurEcran - 50);
+
+		this.largeurFrame = this.getWidth ();
+		this.posFrameX = (this.largeurEcran / 2)    - (this.largeurFrame / 2);
+		this.setLocation(posFrameX, 0);
 		this.revalidate();
 	}
 	
@@ -107,5 +120,56 @@ public class FrameCreation extends JFrame
 		this.add(this.panelActuelle);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.revalidate();
+	}
+
+
+	// Place sur la frame le panel correspondant à l'entier
+	// Permet de rendre le code plus modulaire, car plusieurs actions se répétaient dans les 4 méthodes ci dessus
+	
+	public void ouvrirPanel(int numPanel)
+	{
+		this.removeAll();
+
+		switch (numPanel) 
+		{
+			// Ajout du panelInit
+			case 1 -> 
+			{
+				this.add    (new PanelInit(this.ctrl, this)    );
+				this.setSize(800, this.hauteurEcran - 50);
+
+			}
+
+			// Ajout du panelEdition
+			case 2 ->
+			{
+
+			}
+
+			// retour sur panelCreation
+			case 3 ->
+			{
+				this.add     (new PanelCreation(this.ctrl, this) );
+				this.setSize (300, 250             );
+			}
+
+			
+		}
+
+		this.majPositionFrame();
+		this.setLocation(this.posFrameX, this.posFrameY);
+
+
+	}
+
+	private void majPositionFrame()
+	{
+		this.largeurFrame = this.getWidth ();
+		this.hauteurFrame = this.getHeight();
+
+		this.posFrameX = (this.largeurEcran / 2) - (this.largeurFrame / 2);
+		this.posFrameY = (this.hauteurEcran / 2) - (this.hauteurFrame / 2);
+
+
 	}
 }
