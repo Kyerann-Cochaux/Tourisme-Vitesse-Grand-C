@@ -135,7 +135,7 @@ public class Metier
 						int indEspece = Integer.parseInt("" + sIndEspece);
 						String typeEspece = Plateau.TAB_ESPECES[indEspece];
 						
-						this.plateauJeu.getCase(numLig, numCol).getPlanete().setEspece(typeEspece);
+						this.plateauJeu.getCase(numCol, numLig).getPlanete().setEspece(typeEspece);
 					}
 					
 				}
