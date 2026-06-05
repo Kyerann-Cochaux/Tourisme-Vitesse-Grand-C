@@ -5,9 +5,29 @@ Liste de chose a faire:
 [Appli Création]
 
  Metier :
-- Programmation des Liaisons entre Planètes
-- Chargement des Plateaux à Partir d'un fichier
-- Sauvegarde à Partir d'un Fichier
+ 
+| Plateau | (Kyerann)
+
+méthode remplirZone(numZone,caseDep)
+
+méthode remplirZone(caseDep)
+
+méthode zoneScindee(numZone)
 
  IHM :
-- Création du Panel Edition
+ 
+| PanelEdition |
+
+initialiser le plateau à partir d'un fichier
+
+MenuBar dans le Frame quand PanelEdition est afficher (Clément)
+
+Ajout des Planètes sur le Plateau
+
+Render des Liens sur le Plateau
+
+Ajout des Zones sur le Plateau
+
+Ajout des Bases sur les Planètes
+
+Ajout d'un bouton sauvegarder le plateau
