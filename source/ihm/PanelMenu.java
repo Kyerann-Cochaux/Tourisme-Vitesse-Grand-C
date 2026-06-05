@@ -23,7 +23,7 @@ public class PanelMenu extends JPanel implements ActionListener
 	
 	public PanelMenu(AppliCreation ctrl, FrameJeu frameJeu)
 	{
-		this.ctrl  = ctrl;
+		this.ctrl     = ctrl;
 		this.frameJeu = frameJeu;
 
 		this.setBackground(FrameJeu.COULEUR_FOND_FONCE);

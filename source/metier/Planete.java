@@ -63,6 +63,8 @@ public class Planete
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
+	// Vérifie si le String est bien dans le tableau
+
 	private static boolean especeValide(String espece)
 	{
 		

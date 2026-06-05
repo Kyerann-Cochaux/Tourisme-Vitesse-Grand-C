@@ -14,8 +14,19 @@ public class TestMetier
 		Metier m = new Metier();
 		Plateau p = null;
 		
-		m.initialiserPlateau(7,10,3,3);
+		m.initialiserPlateau(11,11,3,2);
+
+	
 		p = m.getPlateau();
+
+		for (int cpt = 0; cpt < p.getNbEspeces(); cpt++) 
+			System.out.println(p.getEspece(cpt) );
+		System.out.println();
+
+		for (int cpt = 0; cpt < p.getNbPlanetes(); cpt++)
+			System.out.println(p.getPlanete(cpt) );
+			
+		
 
 		System.out.println("/* ---------------------------------- */");
 		System.out.println("/*          Test des symboles         */");
@@ -64,17 +75,17 @@ public class TestMetier
 
 		boolean b = false;
 
-		b = p.ajouterForme(-1, 0, j);
+		b = p.ajouterPlanete(-1, 0, j);
 		System.out.println("x négatif --> " + (!b ? " OK " : " Erreur ") );
 
-		b = p.ajouterForme(0, -1, j);
+		b = p.ajouterPlanete(0, -1, j);
 		System.out.println( "y négatif --> " + (!b ? " OK " : " Erreur ") );
-		b = p.ajouterForme(0, 0, null);
-		System.out.println( "Forme null --> " + (!b ? " OK " : " Erreur ") );
+		b = p.ajouterPlanete(0, 0, null);
+		System.out.println( "Planete null --> " + (!b ? " OK " : " Erreur ") );
 		
-		p.ajouterForme(0, 0, j);
-		b = p.ajouterForme(0, 0, j);
-		System.out.println("Forme déjà présent --> " + (!b ? " OK " : " Erreur ") );
+		p.ajouterPlanete(0, 0, j);
+		b = p.ajouterPlanete(0, 0, j);
+		System.out.println("Planete déjà présent --> " + (!b ? " OK " : " Erreur ") );
 		
 		System.out.println(p.afficherPlanetes() );
 		
@@ -83,16 +94,16 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		
 		j = Planete.creerPlanete('G', Plateau.TAB_ESPECES[3] );
-		p.retirerForme(0, 0);
+		p.retirerPlanete(0, 0);
 		
-		p.ajouterForme(0, 0, j);
-		p.ajouterForme(0, 1, Planete.creerPlanete('G', Plateau.TAB_ESPECES[0] ) ); // Ajoute       : OK
-		p.ajouterForme(0, 2, Planete.creerPlanete('V', Plateau.TAB_ESPECES[1] ) ); // Ajoute       : OK
-		p.ajouterForme(0, 3, Planete.creerPlanete('O', Plateau.TAB_ESPECES[2] ) ); // Ajoute       : OK
-		p.ajouterForme(0, 4, Planete.creerPlanete('T', Plateau.TAB_ESPECES[3] ) ); // N'ajoute pas : OK
+		p.ajouterPlanete(0, 0, j);
+		p.ajouterPlanete(0, 1, Planete.creerPlanete('G', Plateau.TAB_ESPECES[0] ) ); // Ajoute       : OK
+		p.ajouterPlanete(0, 2, Planete.creerPlanete('V', Plateau.TAB_ESPECES[1] ) ); // Ajoute       : OK
+		p.ajouterPlanete(0, 3, Planete.creerPlanete('O', Plateau.TAB_ESPECES[2] ) ); // Ajoute       : OK
+		p.ajouterPlanete(0, 4, Planete.creerPlanete('T', Plateau.TAB_ESPECES[3] ) ); // N'ajoute pas : OK
 		
-		p.ajouterForme(5, 5, Planete.creerPlanete('T',  null) ); 
-		p.ajouterForme(0, 0, Planete.creerPlanete('V',  null) ); 
+		p.ajouterPlanete(5, 5, Planete.creerPlanete('T',  null) ); 
+		p.ajouterPlanete(0, 0, Planete.creerPlanete('V',  null) ); 
 		
 		System.out.println(p.afficherPlanetes() );
 		
@@ -164,21 +175,205 @@ public class TestMetier
 		System.out.println();
 		System.out.println(p.afficherSystemes() );
 
+	
+		System.out.println("/* ---------------------------------- */");
+		System.out.println("/*       Suppression de Planetes      */");
+		System.out.println("/* ---------------------------------- */");
+		p.viderPlateau();
+
+		System.out.println(p.ajouterPlanete(0, 0, Planete.creerPlanete('G', null) ) == true ? "OK" : "Erreur");
+		System.out.println(p.afficherPlanetes() );
+		System.out.println(p.retirerPlanete(0, 0)                                                   == true ? "OK" : "Erreur" );
+		System.out.println(p.afficherPlanetes() );
+		System.out.println(p.retirerPlanete(0, 0)                                                   == false ? "OK" : "Erreur" );
+
+
 		System.out.println();
 		System.out.println("/* ---------------------------------- */");
 		System.out.println("/*          Test des liaisons         */");
 		System.out.println("/* ---------------------------------- */");
 		System.out.println();
+		p.viderPlateau();
+		//System.out.println("source inexistante : " + (p.ajouterVoyage(p.getCase(0, 0), p.getCase(5, 0) ) == false ? "OK" : "ERREUR") );
+		//System.out.println("dest   inexistante : " + (p.ajouterVoyage(p.getCase(5, 0), p.getCase(0, 0) ) == false ? "OK" : "ERREUR") );
 
-		System.out.println("source inexistante : " + (p.ajouterVoyage(p.getCase(0, 0), p.getCase(5, 0) ) == false ? "OK" : "ERREUR") );
-		System.out.println("dest   inexistante : " + (p.ajouterVoyage(p.getCase(5, 0), p.getCase(0, 0) ) == false ? "OK" : "ERREUR") );
+		/* ---------------------------------- */
+		/*         Ajout des planètes         */
+		/* ---------------------------------- */
 
-		System.out.println( (p.ajouterVoyage(p.getCase(0, 0), p.getCase(1, 0) ) == true ? "OK" : "ERREUR") );
-
-
-		System.out.println(p.afficherPlanetes() );
+		// Planète centrale
+		p.ajouterPlanete(5, 5, Planete.creerPlanete('G', null) );
 
 		
+		// Axe horizontal
+		p.ajouterPlanete(4, 5, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(6, 5, Planete.creerPlanete('G', null) );
+
+		// Axe vertical
+		p.ajouterPlanete(5, 4, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(5, 6, Planete.creerPlanete('G', null) );
+
+		// Axe diagonal SE / NO
+		p.ajouterPlanete(6,4, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(4, 6, Planete.creerPlanete('G', null) );
+
+		// Axe diagonal SO / NE
+
+		p.ajouterPlanete(4,4 , Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(6, 6, Planete.creerPlanete('G', null) );
+
+		 /* -------- Axe Horizontal où dX > 1 -------- */
+
+		// Axe horizontal
+
+		p.ajouterPlanete(2, 5, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(8, 5, Planete.creerPlanete('G', null) );
+
+		// Axe vertical
+
+		p.ajouterPlanete(5, 2, Planete.creerPlanete('G',null ) );
+		p.ajouterPlanete(5, 8, Planete.creerPlanete('G', null) );
+
+		// Axe diagonal NE / SO
+
+
+		p.ajouterPlanete(2, 2, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(8, 2, Planete.creerPlanete('G', null) );
+
+
+		// Axe diagonal NO / SE
+
+		p.ajouterPlanete(2, 8, Planete.creerPlanete('G', null) );
+		p.ajouterPlanete(8, 8, Planete.creerPlanete('G', null) );
+
+
+
+
+
+		/* ---------------------------------- */
+		/*         Ajout des Liaisons         */
+		/* ---------------------------------- */
+
+		
+
+		// Ajout d'un voyage sur l'axe horizontal
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 5) )                                        == true  ? "OK" : "Erreur"); 
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 5) )                                        == true  ? "OK" : "Erreur"); 
+		System.out.println("Voyage horizontal déjà présent (1): " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 5) ) == false ? "OK" : "Erreur") ); 
+		System.out.println("Voyage horizontal déjà présent (2): " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 5) ) == false ? "OK" : "Erreur") ); 
+		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ((p.getNbVoyages() == 2 ? "OK" : "Erreur") ) );
+
+		// Ajout d'un voyage sur l'axe vertical
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 4) ) == true ? "OK" : "Erreur"); 
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 6) ) == true ? "OK" : "Erreur"); 
+		System.out.println("Voyage vertical déjà présent (1) : " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 4) ) == false ? "OK" : "Erreur") ); 
+		System.out.println("Voyage vertical déjà présent (2) : " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 6) ) == false ? "OK" : "Erreur") ); 
+		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ((p.getNbVoyages() == 4 ? "OK" : "Erreur") ) );
+
+		// Ajout d'un voyage sur l'axe diagonal SE / NO
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 4) ) == true ? "OK" : "Erreur"); 
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 6) ) == true ? "OK" : "Erreur"); 
+		System.out.println("Voyage diagonal SE / NO déjà présent (1): " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 4) ) == false ? "OK" : "Erreur") ); 
+		System.out.println("Voyage diagonal SE / NO déjà présent (2): " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 6) ) == false ? "OK" : "Erreur") ); 
+		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ( (p.getNbVoyages() == 6 ? "OK" : "Erreur") ) );
+
+		//Ajout d'un voyage sur l'axe SO / NE
+
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 6) ) == true ? "OK" : "Erreur"); 
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 4) ) == true ? "OK" : "Erreur"); 
+		System.out.println("Voyage diagonal SO / NE déjà présent : " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 6) ) == false ? "OK" : "Erreur") ); 
+		System.out.println("Voyage diagonal SO / NE déjà présent : " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 4) ) == false ? "OK" : "Erreur") ); 
+		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ( (p.getNbVoyages() == 8 ? "OK" : "Erreur") ) );
+
+		System.out.println();
+		System.out.println("/* -- Ajout sur les axes ++ -- */");
+		System.out.println("\n\n");
+
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(8, 5) ) == false ? "OK" : "Erreur"); 
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(2, 5) ) == false ? "OK" : "Erreur"); 
+
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 2) ) == false ? "OK" : "Erreur"); 
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 8) ) == false ? "OK" : "Erreur"); 
+
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(8, 2) ) == false ? "OK" : "Erreur"); 
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(8, 8) ) == false ? "OK" : "Erreur"); 
+
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(2, 2) ) == false ? "OK" : "Erreur"); 
+		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(2, 8) ) == false ? "OK" : "Erreur"); 
+
+		System.out.println(p.afficherPlanetes() );
+		System.out.println(p.afficherVoyages() );
+
+		System.out.println("/* ---------------------------------- */");
+		System.out.println("/*       Test Génération Plateau      */");
+		System.out.println("/* ---------------------------------- */");
+
+
+		
+		
+		
+	}
+
+	protected static void genererPLateauTest(Metier metier)
+	{
+		int[][] tabSys = new int[][]
+		{
+			{0,0,0,0,0,1,1,1,1,1},
+			{0,0,0,0,0,1,1,1,1,1},
+			{0,0,0,0,0,1,1,1,1,1},
+			{0,0,0,0,0,1,1,1,1,1},
+			{2,2,2,2,2,2,2,2,2,2},
+			{2,2,2,2,2,2,2,2,2,2},
+			{2,2,2,2,2,2,2,2,2,2},
+		};
+		
+		char[][] tabPla = new char[][]
+		{
+			{'G',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+			{' ','G',' ',' ',' ',' ',' ','V',' ',' '},
+			{' ',' ',' ',' ',' ','O',' ',' ','V',' '},
+			{'T',' ',' ','G',' ',' ',' ',' ',' ',' '},
+			{' ',' ','O',' ',' ','O',' ','G',' ',' '},
+			{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+			{' ','V',' ',' ','T',' ',' ',' ','G',' '},
+		};
+		
+		char[][] tabEsp = new char[][]
+		{
+			{'F',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+			{' ','S',' ',' ',' ',' ',' ','C',' ',' '},
+			{' ',' ',' ',' ',' ','C',' ',' ','F',' '},
+			{'A',' ',' ','S',' ',' ',' ',' ',' ',' '},
+			{' ',' ','C',' ',' ','S',' ','A',' ',' '},
+			{' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+			{' ','C',' ',' ','S',' ',' ',' ','A',' '},
+		};
+		
+		
+		metier.initialiserPlateau(tabSys.length, tabSys[0].length, 2, 3);
+		
+		
+		for (int y = 0; y < tabSys.length; y++)
+		{
+			for (int x = 0; x < tabSys[0].length; x++)
+			{
+				metier.getPlateau().setNumSysteme(tabSys[y][x], x, y);
+				
+				Planete planete = Planete.creerPlanete(tabPla[y][x], null);
+				
+				metier.getPlateau().ajouterPlanete(x, y, planete);
+				
+				for (int numEspece = 0; numEspece < Plateau.TAB_ESPECES.length; numEspece++)
+				{
+					Planete planeteTemp = metier.getPlateau()
+					                            .getCase(x, y)
+					                            .getPlanete();
+					
+					if ( planeteTemp != null && Plateau.TAB_ESPECES[numEspece].charAt(0) == tabEsp[y][x] )
+						planete.setEspece(Plateau.TAB_ESPECES[numEspece]);
+				}
+			}
+		}
 		
 	}
 	
