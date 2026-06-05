@@ -6,6 +6,7 @@ import java.io.File;
 
 import java.awt.BorderLayout ;
 import java.awt.GridLayout ;
+import java.awt.Dimension ;
 
 import source.AppliCreation ;
 
@@ -37,6 +38,14 @@ public class PanelEdition extends JPanel
 	private JLabel planeteType1;
 	private JLabel planeteType2;
 	
+	private JPanel lotBaseA;
+	private JLabel baseType1;
+	private JLabel baseType2;
+	
+	private JPanel lotBaseB;
+	private JLabel baseType3;
+	private JLabel baseType4;
+	
 	private JPanel lotPlaneteB;
 	private JLabel planeteType3;
 	private JLabel planeteType4;
@@ -44,16 +53,12 @@ public class PanelEdition extends JPanel
 	// Partie Plateau
 	private JPanel panelPlateau;
 	
-	// Partie Espèces
-	private JPanel panelEspece;
+	// Partie Système
+	private JPanel panelSysteme;
 	
-	private JPanel lotEspeceA;
-	private JLabel especeType1;
-	private JLabel especeType2;
-	
-	private JPanel lotEspeceB;
-	private JLabel especeType3;
-	private JLabel especeType4;
+	private JPanel sectionZone;
+	private JLabel outilZone;
+	private JLabel selectionZone;
 	
 	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation, int nbLigne, int nbColonne, int nbPlanete, int nbEspece)
 	{
@@ -87,7 +92,8 @@ public class PanelEdition extends JPanel
 		/*    Création des Composants    */
 		/*-------------------------------*/
 		
-		// Panel des Planètes
+			/* Panel des Planètes */
+		// Partie Planete
 		this.panelPlanete = new JPanel();
 		
 		this.lotPlaneteA = new JPanel();
@@ -102,26 +108,30 @@ public class PanelEdition extends JPanel
 			
 			if ( this.nbPlanete == 4 ) { this.planeteType4 = new JLabel("Volcanique"); }
 		}
+		// Partie Base
+		this.lotBaseA  = new JPanel();
+		this.baseType1 = new JLabel("Chlorophite");
+		this.baseType2 = new JLabel("Felinoïd");
+		
+		if ( this.nbEspece >= 3 )
+		{
+			this.lotBaseB = new JPanel();
+			this.lotBaseB.setLayout( new GridLayout(1,2) );
+			this.baseType3 = new JLabel("Azimae");
+			
+			if ( this.nbEspece == 4 ) { this.baseType4 = new JLabel("Silikon"); }
+		}
 		
 		// Panel d'affichage du Plateau
 		this.panelPlateau = new JPanel();
 		
 		
-		// Panel des Espèces
-		this.panelEspece = new JPanel();
+		// Panel des Systèmes
+		this.panelSysteme = new JPanel();
 		
-		this.lotEspeceA  = new JPanel();
-		this.especeType1 = new JLabel("Chlorophite");
-		this.especeType2 = new JLabel("Felinoïd");
-		
-		if ( this.nbEspece >= 3 )
-		{
-			this.lotEspeceB = new JPanel();
-			this.lotEspeceB.setLayout( new GridLayout(1,2) );
-			this.especeType3 = new JLabel("Azimae");
-			
-			if ( this.nbEspece == 4 ) { this.especeType4 = new JLabel("Silikon"); }
-		}
+		this.sectionZone   = new JPanel();
+		this.outilZone     = new JLabel("Zone");
+		this.selectionZone = new JLabel("0");
 		
 		/*------------------------------------*/
 		/*    Configuration des Composants    */
@@ -130,23 +140,27 @@ public class PanelEdition extends JPanel
 		// Panel des Planètes
 		this.panelPlanete.setLayout(new GridLayout(10,2));
 		this.panelPlanete.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
+		this.panelPlanete.setPreferredSize( new Dimension( 200 , 1080 ) );
 		
 		this.lotPlaneteA.setLayout( new GridLayout(1,2) );
+		this.lotBaseA.setLayout( new GridLayout(1,2) );
 		
 		// Panel d'affichage du Plateau
 		this.panelPlateau.setBackground( FrameJeu.COULEUR_FOND_FONCE );
 		
-		// Panel des Espèces
-		this.panelEspece.setLayout(new GridLayout(10,1));
-		this.panelEspece.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
+		// Panel des Système
+		this.panelSysteme.setLayout( new GridLayout(10,1) );
+		this.panelSysteme.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
+		this.panelSysteme.setPreferredSize( new Dimension( 200 , 1080 ) );
 		
-		this.lotEspeceA.setLayout( new GridLayout(1,2) );
+		this.sectionZone.setLayout( new GridLayout(1,2) );
 		
 		/*-------------------------------------*/
 		/*    Positionnement des Composants    */
 		/*-------------------------------------*/
 		
-		// Panel Planètes
+			/* Panel Planètes */
+		// Partie Planete
 		this.lotPlaneteA.add( this.planeteType1 );
 		this.lotPlaneteA.add( this.planeteType2 );
 		this.panelPlanete.add( this.lotPlaneteA );
@@ -156,24 +170,29 @@ public class PanelEdition extends JPanel
 			if ( this.nbPlanete == 4 ) { this.lotPlaneteB.add( this.planeteType4 ); }
 			this.panelPlanete.add( this.lotPlaneteB );
 		}
+		this.panelPlanete.add( new JLabel("") ); // Séparateur
+		// Partie Base
+		this.lotBaseA.add( this.baseType1 );
+		this.lotBaseA.add( this.baseType2 );
+		this.panelPlanete.add( this.lotBaseA );
+		if ( this.nbEspece >= 3 )
+		{
+			this.lotBaseB.add( this.baseType3 );
+			if ( this.nbEspece == 4 ) { this.lotBaseB.add( this.baseType4 ); }
+			this.panelPlanete.add( this.lotBaseB );
+		}
 		
 		this.add( this.panelPlanete, BorderLayout.WEST );
 		
 		// Panel Plateau
 		this.add( this.panelPlateau, BorderLayout.CENTER );
 		
-		// Panel Espèces
-		this.lotEspeceA.add( this.especeType1 );
-		this.lotEspeceA.add( this.especeType2 );
-		this.panelEspece.add( this.lotEspeceA );
-		if ( this.nbPlanete >= 3 )
-		{
-			this.lotEspeceB.add( this.especeType3 );
-			if ( this.nbPlanete == 4 ) { this.lotEspeceB.add( this.especeType4 ); }
-			this.panelEspece.add( this.lotEspeceB );
-		}
+		// Panel Système
+		this.sectionZone.add( this.outilZone );
+		this.sectionZone.add( this.selectionZone );
+		this.panelSysteme.add( this.sectionZone );
 		
-		this.add( this.panelEspece,  BorderLayout.EAST   );
+		this.add( this.panelSysteme, BorderLayout.EAST );
 		
 		/*---------------------------------*/
 		/*    Activation des Composants    */

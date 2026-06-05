@@ -39,6 +39,24 @@ public class Metier
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
 	
+	public boolean sauvegardeExiste(String nomSauvegarde)
+	{
+		String cheminSauvegarde = Metier.CHEMIN_SAUVEGARDES +
+		                          nomSauvegarde + Metier.EXTENSION_SAUVEGARDES;
+		
+		try
+		{
+			Scanner sc = new Scanner ( new FileInputStream ( cheminSauvegarde ), "UTF8" );
+			sc.close();
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	
 	public boolean chargerPlateau(String cheminSauvegarde)
 	{
 		int nbLignes   = 0;
@@ -51,12 +69,9 @@ public class Metier
 			Scanner sc = new Scanner ( new FileInputStream ( cheminSauvegarde ), "UTF8" );
 			
 			
-			String premiereLigne       = sc.nextLine();
+			String premiereLigne = sc.nextLine();
 			
 			String[] creationArguments = premiereLigne       .split(" ");
-			
-			System.out.println(creationArguments[0]);
-			
 			String[] creationTaille    = creationArguments[0].split("x");
 			
 			nbLignes   = Integer.parseInt(creationTaille[0]);
@@ -90,7 +105,6 @@ public class Metier
 				
 				for (int numCol = 0; numCol < nbColonnes; numCol++)
 				{
-					
 					char sIndPlanete = ligne.charAt(numCol);
 					
 					if( sIndPlanete != '.' )
@@ -99,7 +113,7 @@ public class Metier
 						
 						Planete tempPlanete = Planete.creerPlanete(Plateau.TAB_PLANETES[indPlanete].charAt(0), null);
 						
-						this.plateauJeu.getCase(numLig, numCol).setPlanete(tempPlanete);
+						this.plateauJeu.getCase(numCol, numLig).setPlanete(tempPlanete);
 					}
 					
 				}
@@ -132,8 +146,7 @@ public class Metier
 		}
 		catch (Exception e)
 		{
-			System.out.println("Erreur lors du chargement du fichier de sauvegarde.");
-			e.printStackTrace();
+			System.out.println("Erreur lors du chargement du fichier sauvegardé.");
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			return false;
 		}
@@ -143,20 +156,108 @@ public class Metier
 	
 	public boolean sauvegarderPlateau(String nomSauvegarde)
 	{
+		if ( this.getPlateau() == null  ) return false;
+		
+		
+		
+		
 		try
 		{
-			PrintWriter pw = new PrintWriter(new OutputStreamWriter(new FileOutputStream(Metier.CHEMIN_SAUVEGARDES + nomSauvegarde + Metier.EXTENSION_SAUVEGARDES), "UTF8" )); 
+			PrintWriter pw = new PrintWriter
+				(
+					new OutputStreamWriter
+					(
+						new FileOutputStream
+						(
+							Metier.CHEMIN_SAUVEGARDES + nomSauvegarde + Metier.EXTENSION_SAUVEGARDES
+						), "UTF8"
+					)
+				);
 			
 			pw.println ( "" + this.plateauJeu.getNbLignes() + "x" + this.plateauJeu.getNbColonnes() + " " +
 			                  this.plateauJeu.getNbFormes() + " " + this.plateauJeu.getNbEspeces ()         );
+			
+			
+			// sauvegarde des systèmes
+			for (int numLig = 0; numLig < this.getPlateau().getNbLignes(); numLig++)
+			{
+				String ligne = "";
+				
+				for (int numCol = 0; numCol < this.getPlateau().getNbColonnes(); numCol++)
+					ligne += this.getPlateau().getCase(numCol, numLig).getNumSysteme();
+				
+				pw.println ( ligne );
+			}
+			
+			
+			
+			// sauvegarde des planetes
+			for (int numLig = 0; numLig < this.getPlateau().getNbLignes(); numLig++)
+			{
+				String ligne = "";
+				
+				for (int numCol = 0; numCol < this.getPlateau().getNbColonnes(); numCol++)
+				{
+					Planete planete = this.getPlateau().getCase(numCol, numLig).getPlanete();
+					char symolePlanete = 'X';
+					
+					if ( planete == null )
+						symolePlanete = '.';
+					else
+					{
+						for (int numPlanete = 0; numPlanete < Plateau.TAB_PLANETES.length; numPlanete++)
+						{
+							char symoleATest = Plateau.TAB_PLANETES[numPlanete].charAt(0);
+							
+							if ( symoleATest == planete.getSymbole() )
+								symolePlanete = (char)('0' + numPlanete);
+						}
+					}
+					
+					ligne += symolePlanete;
+				}
+				
+				pw.println ( ligne );
+			}
+			
+			
+			
+			// sauvegarde des bases des espèces
+			for (int numLig = 0; numLig < this.getPlateau().getNbLignes(); numLig++)
+			{
+				String ligne = "";
+				
+				for (int numCol = 0; numCol < this.getPlateau().getNbColonnes(); numCol++)
+				{
+					Planete planete = this.getPlateau().getCase(numCol, numLig).getPlanete();
+					char symoleEspece = 'X';
+					
+					if ( planete == null || planete.getEspece() == null )
+						symoleEspece = '-';
+					else
+					{
+						for (int numEspece = 0; numEspece < Plateau.TAB_ESPECES.length; numEspece++)
+						{
+							char symoleATest = Plateau.TAB_ESPECES[numEspece].charAt(0);
+							
+							if ( symoleATest == planete.getEspece().charAt(0) )
+								symoleEspece = (char)('0' + numEspece);
+						}
+					}
+					
+					ligne += symoleEspece;
+				}
+				
+				pw.println ( ligne );
+			}
+			
 			
 			// fermeture du writer
 			pw.close();
 		}
 		catch (Exception e)
 		{
-			System.out.println("Erreur lors de la sauvegarde du fichier.");
-			e.printStackTrace();
+			System.out.println("Erreur lors de la sauvegarde du plateau.");
 			return false;
 		}
 		
