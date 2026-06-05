@@ -132,7 +132,9 @@ public class TestZone
 		// y trop grand
 		TestZone.test(plateau.setNumSysteme(7, 3, 700 ), "false");
 		System.out.println();
-		System.out.println(plateau);
+		
+		
+		
 		
 		
 		
@@ -141,9 +143,10 @@ public class TestZone
 		System.out.println("+++++");
 		System.out.println("+++ Test pour savior si une zone est coupée");
 		
+		plateau.setNumSysteme(8, 7, 0);
 		
 		
-		
+		System.out.println(plateau);
 		
 	}
 	
