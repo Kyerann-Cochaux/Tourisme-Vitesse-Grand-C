@@ -116,7 +116,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		panelSaisie.add(this.tabLbl[0]); // Titre
 		
 		// On part de 1 car on ajoute pas le titre, déjà ajouté au dessus, et qu'il n'a pas besoin d'être sur un sous panel
-		// Car il ne possède pas de JTextField associé.
 		
 		
 		for (int cpt = 1; cpt < tabLbl.length; cpt++) 
@@ -208,7 +207,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		if ( e.getSource() == this.btnRetour )
 		{
-			this.frameCreation.ouvrirPanelCreation();
+			
+			// this.frameCreation.ouvrirPanelCreation();
+			this.frameCreation.ouvrirPanel(FrameCreation.PANEL_CREATION);
 		}
 	}
 	
@@ -222,7 +223,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	}
 	
 	// Méthodes privées vérifiant les valeurs saisie dans les JTextField
-	// Si des valeurs sont erronées, un pop-uint nbLignes, int nbColonnes, int nbFormes, int nbEspecesp indiquant l'erreur est affiché, et la méthode renvoie faux
+	// Si des valeurs sont erronées, un pop-up indique où sont les erreurs, et la méthode renvoie faux
 	// Dans le cas où aucune erreur n'a été trouvé, la méthode renvoie vrai
 	private boolean valeursVerifier()
 	{
@@ -272,10 +273,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			// Je regarde si le cast est possible...
 			int val = Integer.parseInt( zoneTxt.getText() );
 			
-			if (
-			     ( index <  2 && (val < 5 || val > 30) ) ||
-			     ( index >= 2 && (val < 2 || val > 4 ) )
-			   )
+			if ( ( index <  2 && (val < 5 || val > 30) ) ||
+			     ( index >= 2 && (val < 2 || val > 4 ) ) )
 			{
 				// Si l'un des champs possède une valeur non comprise dans sa plage de valeurs,
 				// Je retourne 2

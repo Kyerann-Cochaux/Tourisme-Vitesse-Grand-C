@@ -11,12 +11,17 @@ import java.awt.Toolkit;
 
 public class FrameCreation extends JFrame
 {
+
 	protected static final Font  POLICE_TEXTE        = new Font ("Goldman", Font.BOLD, 25);
 
 	protected static final Color COULEUR_TITRE       = Color.decode("#f1c232");
 	protected static final Color COULEUR_ZONE        = Color.decode("#f3f3f3");
 	protected static final Color COULEUR_FOND        = new Color (37, 37, 37);
 	protected static final Color COULEUR_FOND_CLAIR  = new Color (70, 70, 70);
+
+	protected static final int PANEL_INIT     = 1;
+	protected static final int PANEL_EDITION  = 2;
+	protected static final int PANEL_CREATION = 3;
 	
 	private AppliCreation ctrl;
 	private JPanel        panelActuelle;
@@ -35,7 +40,7 @@ public class FrameCreation extends JFrame
 	{
 
 		this.setTitle   ("Tourisme à Vitesse Grand C");
-		this.setSize    (300, 250            );
+		this.setSize    (350, 250            );
 
 		/* À tester sous Linux pour voir si la frame se place au centre de l'écran*/
 
@@ -125,51 +130,58 @@ public class FrameCreation extends JFrame
 
 	// Place sur la frame le panel correspondant à l'entier
 	// Permet de rendre le code plus modulaire, car plusieurs actions se répétaient dans les 4 méthodes ci dessus
-	
-	public void ouvrirPanel(int numPanel)
+
+	public void ouvrirPanel(int numeroPanel)
 	{
-		this.removeAll();
+		this.remove(this.panelActuelle);
 
-		switch (numPanel) 
+		switch (numeroPanel) 
 		{
-			// Ajout du panelInit
-			case 1 -> 
+			case FrameCreation.PANEL_INIT -> 
 			{
-				this.add    (new PanelInit(this.ctrl, this)    );
-				this.setSize(800, this.hauteurEcran - 50);
+				this.panelActuelle = new PanelInit(this.ctrl, this);
+				this.setSize(800, this.hauteurEcran -50 );
+				this.setExtendedState(JFrame.NORMAL);
 
 			}
 
-			// Ajout du panelEdition
-			case 2 ->
+			case FrameCreation.PANEL_EDITION ->
 			{
+				this.panelActuelle = new PanelEdition(this.ctrl, this);
+				this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+
 
 			}
 
-			// retour sur panelCreation
-			case 3 ->
+			case FrameCreation.PANEL_CREATION ->
 			{
-				this.add     (new PanelCreation(this.ctrl, this) );
-				this.setSize (300, 250             );
+				this.panelActuelle = new PanelCreation(this.ctrl, this);
+				this.setSize(350, 250);
+				this.setExtendedState(JFrame.NORMAL);
 			}
 
 			
 		}
 
-		this.majPositionFrame();
-		this.setLocation(this.posFrameX, this.posFrameY);
+		this.add             ( this.panelActuelle           );
+		this.majPositionFrame(numeroPanel                   );
+		this.setLocation     (this.posFrameX, this.posFrameY);
+		this.revalidate      (                              );
+
 
 
 	}
 
-	private void majPositionFrame()
+	private void majPositionFrame(int numeroPanel)
 	{
 		this.largeurFrame = this.getWidth ();
 		this.hauteurFrame = this.getHeight();
 
 		this.posFrameX = (this.largeurEcran / 2) - (this.largeurFrame / 2);
-		this.posFrameY = (this.hauteurEcran / 2) - (this.hauteurFrame / 2);
 
+		if (numeroPanel == FrameCreation.PANEL_INIT) this.posFrameY = 0;
+		else                                         this.posFrameY = (this.hauteurEcran / 2) - (this.hauteurFrame / 2);
 
 	}
 }

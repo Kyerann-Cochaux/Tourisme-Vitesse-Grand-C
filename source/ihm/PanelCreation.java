@@ -64,14 +64,15 @@ public class PanelCreation extends JPanel implements ActionListener
 		/* ------------------------------- */
 		
 		this.btnNouveau.addActionListener(this);
-		this.btnOuvrir.addActionListener(this);
+		this.btnOuvrir .addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == this.btnNouveau)
 		{
-			this.frameCreation.ouvrirPanelInit();
+			//this.frameCreation.ouvrirPanelInit();
+			this.frameCreation.ouvrirPanel(FrameCreation.PANEL_INIT);
 		}
 		
 		if (e.getSource() == this.btnOuvrir)
