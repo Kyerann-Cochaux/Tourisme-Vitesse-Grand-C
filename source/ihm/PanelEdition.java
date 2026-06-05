@@ -98,6 +98,11 @@ public class PanelEdition extends JPanel implements ActionListener
 		/*------------------------------*/
 		this.ctrl    = ctrl ;
 		this.fichier = fichier;
+		this.frameCreation = frameCreation;
+		this.nbLigne       = this.ctrl.getPlateau().getNbLignes();
+		this.nbColonne     = this.ctrl.getPlateau().getNbColonnes();
+		this.nbPlanete     = this.ctrl.getPlateau().getNbPlanetes();
+		this.nbEspece      = this.ctrl.getPlateau().getNbEspeces();
 	}
 	
 	public void creationInterfaceEdition()
@@ -142,7 +147,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		}
 		
 		// Panel d'affichage du Plateau
-		this.panelPlateau   = new PanelPlateau(this.nbLigne, this.nbColonne, this.nbPlanete, this.nbEspece);
+		this.panelPlateau   = new PanelPlateau(this.ctrl);
 		JPanel panelCentrer = new JPanel( new GridBagLayout() );
 		panelCentrer.setSize( this.panelPlateau.getWidth()+2, this.panelPlateau.getHeight()+2 );
 		panelCentrer.setBackground( FrameCreation.COULEUR_FOND );
