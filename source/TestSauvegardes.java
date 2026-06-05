@@ -26,7 +26,7 @@ public class TestSauvegardes
 		
 		metier.sauvegarderPlateau("oui");
 		
-		TestSauvegardes.test(metier.sauvegardeExiste("oui"), "false");
+		TestSauvegardes.test(metier.sauvegardeExiste("oui"), "true");
 		TestSauvegardes.test(metier.sauvegardeExiste("non"), "false");
 		
 		System.out.println();
@@ -38,6 +38,21 @@ public class TestSauvegardes
 		
 		TestSauvegardes.test(metier.sauvegardeExiste("oui"), "true");
 		TestSauvegardes.test(metier.sauvegardeExiste("non"), "false");
+		
+		
+		
+		
+		
+		System.out.println();
+		System.out.println();
+		System.out.println("--------");
+		System.out.println("---TEST sauvegarderPlateau(String nomSauvegarde)");
+		System.out.println();
+		
+		// sauvegarde d'un plateau avec le même nom
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
+		TestSauvegardes.test(metier.sauvegarderPlateau("test"), "true");
+		
 		
 		
 		
@@ -54,14 +69,6 @@ public class TestSauvegardes
 		
 		
 		
-		System.out.println();
-		System.out.println();
-		System.out.println("--------");
-		System.out.println("---TEST");
-		System.out.println();
-		
-		// sauvegarde d'un plateau avec le même nom
-		metier.sauvegarderPlateau("sauvegarde-000");
 		
 		System.out.println(metier.getPlateau());
 		
