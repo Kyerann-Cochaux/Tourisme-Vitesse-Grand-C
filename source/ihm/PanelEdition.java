@@ -15,6 +15,8 @@ import java.awt.Dimension ;
 import java.awt.Graphics ;
 import java.awt.Graphics2D ;
 
+import java.awt.event.* ;
+
 import source.AppliCreation ;
 
 /**
@@ -26,7 +28,7 @@ import source.AppliCreation ;
  * 
  */
 
-public class PanelEdition extends JPanel
+public class PanelEdition extends JPanel implements ActionListener
 {
 	private final String imagePath = "../source/ihm/images/Tuiles/" ;
 	
@@ -40,26 +42,28 @@ public class PanelEdition extends JPanel
 	
 	private File fichier;
 	
-	private ArrayList<JLabel> ensBouton;
+	private ArrayList<JToggleButton> ensBouton ;
+	
+	private ButtonGroup grpBouton;
 	
 	// Partie Planete
 	private JPanel panelPlanete;
 	
 	private JPanel lotPlaneteA;
-	private JLabel planeteType1;
-	private JLabel planeteType2;
+	private JToggleButton planeteType1;
+	private JToggleButton planeteType2;
 	
 	private JPanel lotBaseA;
-	private JLabel baseType1;
-	private JLabel baseType2;
+	private JToggleButton baseType1;
+	private JToggleButton baseType2;
 	
 	private JPanel lotBaseB;
-	private JLabel baseType3;
-	private JLabel baseType4;
+	private JToggleButton baseType3;
+	private JToggleButton baseType4;
 	
 	private JPanel lotPlaneteB;
-	private JLabel planeteType3;
-	private JLabel planeteType4;
+	private JToggleButton planeteType3;
+	private JToggleButton planeteType4;
 	
 	// Partie Plateau
 	private JScrollPane  scrollPlateau;
@@ -69,7 +73,7 @@ public class PanelEdition extends JPanel
 	private JPanel panelSysteme;
 	
 	private JPanel sectionZone;
-	private JLabel outilZone;
+	private JToggleButton outilZone;
 	private JLabel selectionZone;
 	
 	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation, int nbLigne, int nbColonne, int nbPlanete, int nbEspece)
@@ -104,36 +108,37 @@ public class PanelEdition extends JPanel
 		/*    Création des Composants    */
 		/*-------------------------------*/
 		
-		this.ensBouton = new ArrayList<JLabel>(4);
+		this.grpBouton = new ButtonGroup();
+		this.ensBouton = new ArrayList<JToggleButton>(4);
 		
 			/* Panel des Planètes */
 		// Partie Planete
 		this.panelPlanete = new JPanel();
 		
 		this.lotPlaneteA = new JPanel();
-		this.planeteType1 = new JLabel( new ImageIcon(this.imagePath + "Planete-G.png"), JLabel.CENTER );
-		this.planeteType2 = new JLabel( new ImageIcon(this.imagePath + "Planete-O.png"), JLabel.CENTER );
+		this.planeteType1 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-G.png") );
+		this.planeteType2 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-O.png") );
 		
 		if ( this.nbPlanete >= 3 )
 		{
 			this.lotPlaneteB = new JPanel();
 			this.lotPlaneteB.setLayout( new GridLayout(1,2) );
-			this.planeteType3 = new JLabel( new ImageIcon(this.imagePath + "Planete-T.png"), JLabel.CENTER );
+			this.planeteType3 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-T.png") );
 			
-			if ( this.nbPlanete == 4 ) { this.planeteType4 = new JLabel( new ImageIcon(this.imagePath + "Planete-V.png"), JLabel.CENTER ); }
+			if ( this.nbPlanete == 4 ) { this.planeteType4 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-V.png") ); }
 		}
 		// Partie Base
 		this.lotBaseA  = new JPanel();
-		this.baseType1 = new JLabel( new ImageIcon(this.imagePath + "Espece-Chlorophite.png"), JLabel.CENTER );
-		this.baseType2 = new JLabel( new ImageIcon(this.imagePath + "Espece-Felinoid.png"),    JLabel.CENTER );
+		this.baseType1 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Chlorophite.png") );
+		this.baseType2 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Felinoid.png") );
 		
 		if ( this.nbEspece >= 3 )
 		{
 			this.lotBaseB = new JPanel();
 			this.lotBaseB.setLayout( new GridLayout(1,2) );
-			this.baseType3 = new JLabel( new ImageIcon(this.imagePath + "Espece-Azimae.png"), JLabel.CENTER );
+			this.baseType3 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Azimae.png") );
 			
-			if ( this.nbEspece == 4 ) { this.baseType4 = new JLabel( new ImageIcon(this.imagePath + "Espece-Silikon.png"), JLabel.CENTER ); }
+			if ( this.nbEspece == 4 ) { this.baseType4 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Silikon.png") ); }
 		}
 		
 		// Panel d'affichage du Plateau
@@ -149,8 +154,8 @@ public class PanelEdition extends JPanel
 		this.panelSysteme = new JPanel();
 		
 		this.sectionZone   = new JPanel();
-		this.outilZone     = new JLabel( "Outil Zone", JLabel.CENTER );
-		this.selectionZone = new JLabel(    "0", JLabel.CENTER );
+		this.outilZone     = new JToggleButton( "Zone" );
+		this.selectionZone = new JLabel( "0", JLabel.CENTER );
 		
 		/*------------------------------------*/
 		/*    Configuration des Composants    */
@@ -231,8 +236,25 @@ public class PanelEdition extends JPanel
 		
 		this.add( this.panelSysteme, BorderLayout.EAST );
 		
+		// Ajouts des Boutons dans le ButtonGroup
+		for ( JToggleButton btn : this.ensBouton )
+		{
+			this.grpBouton.add(btn);
+		}
+		
 		/*---------------------------------*/
 		/*    Activation des Composants    */
 		/*---------------------------------*/
+		
+		// Activations des Boutons
+		for ( JToggleButton btn : this.ensBouton )
+		{
+			btn.addActionListener(this);
+		}
+	}
+	
+	public void actionPerformed( ActionEvent e )
+	{
+		
 	}
 }
