@@ -18,3 +18,4 @@
 ./TestMetier.java
 ./TestIHM.java
 ./TestSauvegardes.java
+./TestZone.java
