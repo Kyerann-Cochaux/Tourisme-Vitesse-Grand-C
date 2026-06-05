@@ -24,6 +24,21 @@ public class AppliCreation
 		return this.metier.getPlateau();
 	}
 	
+	public Planete getPlanete( int indLig, int indCol )
+	{
+		return this.metier.getPlateau().getCase(indLig,indCol).getPlanete();
+	}
+	
+	public char getSymbolePlanete( int indLig, int indCol )
+	{
+		return this.metier.getPlateau().getCase(indLig,indCol).getPlanete().getSymbole();
+	}
+	
+	public void ajouterPlanete( int indLig, int indCol, Planete p )
+	{
+		this.metier.getPlateau().ajouterPlanete( indLig, indCol,p );
+	}
+	
 	public static void main(String[] args) 
 	{
 		new AppliCreation();
