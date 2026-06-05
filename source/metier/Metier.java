@@ -135,7 +135,7 @@ public class Metier
 						int indEspece = Integer.parseInt("" + sIndEspece);
 						String typeEspece = Plateau.TAB_ESPECES[indEspece];
 						
-						this.plateauJeu.getCase(numLig, numCol).getPlanete().setEspece(typeEspece);
+						this.plateauJeu.getCase(numCol, numLig).getPlanete().setEspece(typeEspece);
 					}
 					
 				}
@@ -147,6 +147,8 @@ public class Metier
 		catch (Exception e)
 		{
 			System.out.println("Erreur lors du chargement du fichier sauvegardé.");
+			e.printStackTrace();
+			
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			return false;
 		}
@@ -156,9 +158,34 @@ public class Metier
 	
 	public boolean sauvegarderPlateau(String nomSauvegarde)
 	{
-		if ( this.getPlateau() == null  ) return false;
+		if ( this.getPlateau() == null ) return false;
 		
-		
+		while ( this.sauvegardeExiste(nomSauvegarde) )
+		{
+			String[] nomSaveDiv = nomSauvegarde.split("-");
+			
+			System.out.println("nomSaveDiv.length : " +  nomSaveDiv[nomSaveDiv.length-1]);
+			
+			if ( nomSaveDiv.length == 1 )
+				nomSauvegarde += "-1";
+			else
+			{
+				String sNumApparition = nomSaveDiv[nomSaveDiv.length-1];
+				int     numApparition = Integer.parseInt(sNumApparition)+1;
+				
+				nomSaveDiv[nomSaveDiv.length-1] = "" + numApparition;
+				
+				
+				
+				nomSauvegarde = nomSaveDiv[0];
+				
+				for (int numDiv = 1; numDiv < nomSaveDiv.length; numDiv++)
+				{
+					nomSauvegarde += "-" + nomSaveDiv[numDiv];
+				}
+			}
+			System.out.println(nomSauvegarde);
+		}
 		
 		
 		try
@@ -258,6 +285,8 @@ public class Metier
 		catch (Exception e)
 		{
 			System.out.println("Erreur lors de la sauvegarde du plateau.");
+			e.printStackTrace();
+			
 			return false;
 		}
 		
