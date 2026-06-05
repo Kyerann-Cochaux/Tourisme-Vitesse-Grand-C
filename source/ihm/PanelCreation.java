@@ -11,7 +11,7 @@ import source.AppliCreation ;
 
 public class PanelCreation extends JPanel implements ActionListener
 {
-	private AppliCreation    ctrl;
+	private AppliCreation ctrl;
 	private FrameCreation frameCreation;
 	
 	private JPanel panelAccueil;
@@ -20,12 +20,10 @@ public class PanelCreation extends JPanel implements ActionListener
 	
 	private JButton btnNouveau;
 	private JButton btnOuvrir ;
-	
-	
-	
+
 	public PanelCreation(AppliCreation ctrl, FrameCreation frameCreation)
 	{
-		this.ctrl  = ctrl;
+		this.ctrl          = ctrl;
 		this.frameCreation = frameCreation;
 
 		this.setBackground(FrameCreation.COULEUR_FOND);
@@ -38,8 +36,8 @@ public class PanelCreation extends JPanel implements ActionListener
 		this.panelAccueil.setLayout(new GridLayout(4, 1, 0, 20) );
 		
 		this.lblMenu = new JLabel ("Edition de Plateau", SwingConstants.CENTER);
-		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE        );
-		this.lblMenu.setForeground(FrameCreation.COULEUR_TITRE        );
+		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE                       );
+		this.lblMenu.setForeground(FrameCreation.COULEUR_TITRE                      );
 		
 		this.btnNouveau = new JButton("Nouveau");
 		this.btnOuvrir  = new JButton("Ouvrir" );

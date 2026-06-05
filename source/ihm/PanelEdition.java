@@ -116,7 +116,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.grpBouton = new ButtonGroup();
 		this.ensBouton = new ArrayList<JToggleButton>(4);
 		
-			/* Panel des Planètes */
+		/* Panel des Planètes */
 		// Partie Planete
 		this.panelPlanete = new JPanel();
 		
@@ -168,7 +168,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		// Panel des Planètes
 		this.panelPlanete.setLayout(new GridLayout(10,2));
-		this.panelPlanete.setBackground( FrameCreation.COULEUR_FOND_CLAIRE );
+		this.panelPlanete.setBackground( FrameCreation.COULEUR_FOND_CLAIR );
 		this.panelPlanete.setPreferredSize( new Dimension( 200 , 900 ) );
 		
 		this.lotPlaneteA.setLayout( new GridLayout(1,2) );
@@ -181,7 +181,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		// Panel des Système
 		this.panelSysteme.setLayout( new GridLayout(10,1) );
-		this.panelSysteme.setBackground( FrameCreation.COULEUR_FOND_CLAIRE );
+		this.panelSysteme.setBackground( FrameCreation.COULEUR_FOND_CLAIR );
 		this.panelSysteme.setPreferredSize( new Dimension( 200 , 900 ) );
 		
 		this.sectionZone.setLayout( new GridLayout(1,2) );
@@ -192,11 +192,12 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 			/* Panel Planètes */
 		// Partie Planete
-		this.lotPlaneteA.add( this.planeteType1 );
-		this.ensBouton.add(this.planeteType1);
-		this.lotPlaneteA.add( this.planeteType2 );
-		this.ensBouton.add(this.planeteType2);
-		this.panelPlanete.add( this.lotPlaneteA );
+		this.lotPlaneteA .add( this.planeteType1 );
+		this.ensBouton   .add(this.planeteType1  );
+		this.lotPlaneteA .add( this.planeteType2 );
+		this.ensBouton   .add(this.planeteType2  );
+		this.panelPlanete.add( this.lotPlaneteA  );
+		
 		if ( this.nbPlanete >= 3 )
 		{
 			this.lotPlaneteB.add( this.planeteType3 );
