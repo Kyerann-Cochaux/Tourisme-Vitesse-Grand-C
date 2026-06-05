@@ -99,7 +99,7 @@ public class PanelPlateau extends JPanel
 		{
 			for( int cptCol=0 ; cptCol < this.nbColonne ; cptCol++ )
 			{
-				if ( this.ctrl.getPlanete(cptLig, cptCol) != null )
+				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
 				{
 					char symbPlanete = this.ctrl.getSymbolePlanete(cptLig, cptCol) ;
 					
