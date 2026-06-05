@@ -95,10 +95,6 @@ public class PanelPlateau extends JPanel
 	{
 		g2 = (Graphics2D) g;
 		
-		Planete p = this.
-		
-		this.ctrl.ajouterPlanete( 3, 3 )
-		
 		for( int cptLig=0 ; cptLig < this.nbLigne ; cptLig++ )
 		{
 			for( int cptCol=0 ; cptCol < this.nbColonne ; cptCol++ )
