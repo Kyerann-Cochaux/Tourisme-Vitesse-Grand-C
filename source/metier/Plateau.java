@@ -27,10 +27,10 @@ public class Plateau
 	
 	public static Plateau creerPlateau(int nbLignes, int nbColonnes, int nbPlanetes, int nbEspeces)
 	{
-		if (nbLignes   < 5 || nbLignes   > TAILLE_MAX  ) return null;
-		if (nbColonnes < 5 || nbColonnes > TAILLE_MAX  ) return null;
-		if (nbPlanetes < 2 || nbPlanetes > 4           ) return null;
-		if (nbEspeces  < 2 || nbEspeces  > 4           ) return null;
+		if (nbLignes   < 5 || nbLignes   > TAILLE_MAX  ) nbLignes   = 5;
+		if (nbColonnes < 5 || nbColonnes > TAILLE_MAX  ) nbColonnes = 5;
+		if (nbPlanetes < 2 || nbPlanetes > 4           ) nbPlanetes = 2;
+		if (nbEspeces  < 2 || nbEspeces  > 4           ) nbEspeces  = 2;
 		
 		return new Plateau(nbLignes, nbColonnes, nbPlanetes, nbEspeces);
 		
@@ -149,6 +149,36 @@ public class Plateau
 		return true;
 		
 	}
+
+	public boolean setEspece(String espese)
+	{
+		Case cTemp = null;
+		// On parcours les lignes
+		for (int lig = 0; lig < this.ensCases.length; lig++) 
+		{
+			// On parcours les colonnes
+			for (int col = 0; col < this.ensCases[lig].length; col++) 
+			{
+				cTemp = this.ensCases[lig][col];
+
+				// On regarde si la case à une planète
+				if (!cTemp.estVide() )
+				{
+					// On regarde si la planète de cTemp est une base
+					if (cTemp.getPlanete().estBase() )
+					{
+						// On regarde si les 2 planètes ont la même esp
+						if (cTemp.getPlanete().getEspece().equals(espese) )
+							return false;
+					}
+					
+				}
+			}
+		}
+
+		if (cTemp != null) cTemp.getPlanete().setEspece(espese);
+		return true;
+	}
 	
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
@@ -176,19 +206,24 @@ public class Plateau
 				{
 					Case cTemp = this.ensCases[lig][col];
 
+					// On regarde si la case à une planète
 					if (!cTemp.estVide() )
 					{
+						// On regarde si la planète de cTemp est une base
+						if (cTemp.getPlanete().estBase() )
+						{
+							// On regarde si les 2 planètes ont la même esp
+							if (cTemp.getPlanete().getEspece().equals(p.getEspece() ) )
 
-						if (cTemp.getPlanete().estBase()                            &&
-							p.getEspece().equals(cTemp.getPlanete().getEspece() ) )
+								return false;
+						}
 						
-							baseExiste = true;
 					}
 				}
 			}
 		}
 
-		if (baseExiste) return false;
+		//if (baseExiste) {System.out.println("base Existe");return false;}
 
 		this.ensCases[y][x].setPlanete(p);
 
@@ -303,13 +338,23 @@ public class Plateau
 		return false;
 	}
 	
-	// Vérifie si l'espèce est dans le tableau de jeu
+	// Vérifie si l'espèce est dans le tableau de jeu et
+	// que la 
+
 	private boolean especeExiste(String espece)
 	{
+		boolean bPresente = true;
+
+		// Regarede 
 		for(String nomEspece : this.ensEspeces)
-		{
-			if(nomEspece == espece)return true;
-		}
+			if (!nomEspece.equals(espece) ) 
+				
+				bPresente = false;
+
+		if (!bPresente) return false;
+		// ...
+
+
 		return false;
 	}
 	

@@ -312,6 +312,8 @@ public class TestMetier
 		TestMetier.genererPlateauTest(m2);
 
 		System.out.println(m2.getPlateau() );
+
+
 		
 	}
 
@@ -353,11 +355,13 @@ public class TestMetier
 		
 		metier.initialiserPlateau(tabSys.length, tabSys[0].length, 4, 1);
 		
-		
+		// Parcours lignes
 		for (int y = 0; y < tabSys.length; y++)
 		{
+			// Parcours colonnes
 			for (int x = 0; x < tabSys[0].length; x++)
 			{
+				// set du systeme à l'aide 
 				metier.getPlateau().setNumSysteme(tabSys[y][x], x, y);
 				
 				Planete planete = Planete.creerPlanete(tabPla[y][x], null);
@@ -366,12 +370,16 @@ public class TestMetier
 				
 				for (int numEspece = 0; numEspece < Plateau.TAB_ESPECES.length; numEspece++)
 				{
-					Planete planeteTemp = metier.getPlateau()
+
+
+					/*Planete planeteTemp = metier.getPlateau()
 					                            .getCase(x, y)
 					                            .getPlanete();
 					
 					if ( planeteTemp != null && Plateau.TAB_ESPECES[numEspece].charAt(0) == tabEsp[y][x] )
-						planete.setEspece(Plateau.TAB_ESPECES[numEspece]);
+						planete.setEspece      (Plateau.TAB_ESPECES[numEspece]);*/
+
+					
 				}
 			}
 		}
