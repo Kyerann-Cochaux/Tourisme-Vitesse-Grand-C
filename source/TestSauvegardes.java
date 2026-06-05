@@ -11,7 +11,7 @@ public class TestSauvegardes
 		
 		Metier metier = new Metier();
 		
-		TestSauvegardes.genererPLateauTest(metier);
+		TestMetier.genererPLateauTest(metier);
 		
 		System.out.println(metier.getPlateau());
 		
