@@ -6,7 +6,12 @@ import java.io.File;
 
 import java.awt.BorderLayout ;
 import java.awt.GridLayout ;
+import java.awt.GridBagLayout ;
+import java.awt.GridBagConstraints ;
+import java.awt.FlowLayout ;
 import java.awt.Dimension ;
+import java.awt.Graphics ;
+import java.awt.Graphics2D ;
 
 import source.AppliCreation ;
 
@@ -51,7 +56,8 @@ public class PanelEdition extends JPanel
 	private JLabel planeteType4;
 	
 	// Partie Plateau
-	private JPanel panelPlateau;
+	private JScrollPane  scrollPlateau;
+	private PanelPlateau panelPlateau;
 	
 	// Partie Système
 	private JPanel panelSysteme;
@@ -123,8 +129,13 @@ public class PanelEdition extends JPanel
 		}
 		
 		// Panel d'affichage du Plateau
-		this.panelPlateau = new JPanel();
+		this.panelPlateau   = new PanelPlateau(this.nbLigne, this.nbColonne, this.nbPlanete, this.nbEspece);
+		JPanel panelCentrer = new JPanel( new GridBagLayout() );
+		panelCentrer.setSize( this.panelPlateau.getWidth()+2, this.panelPlateau.getHeight()+2 );
+		panelCentrer.setBackground( FrameCreation.COULEUR_FOND );
+		panelCentrer.add( this.panelPlateau, new GridBagConstraints() );
 		
+		this.scrollPlateau = new JScrollPane( panelCentrer );
 		
 		// Panel des Systèmes
 		this.panelSysteme = new JPanel();
@@ -139,18 +150,20 @@ public class PanelEdition extends JPanel
 		
 		// Panel des Planètes
 		this.panelPlanete.setLayout(new GridLayout(10,2));
-		this.panelPlanete.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
+		this.panelPlanete.setBackground( FrameCreation.COULEUR_FOND_CLAIRE );
 		this.panelPlanete.setPreferredSize( new Dimension( 200 , 1080 ) );
 		
 		this.lotPlaneteA.setLayout( new GridLayout(1,2) );
 		this.lotBaseA.setLayout( new GridLayout(1,2) );
 		
 		// Panel d'affichage du Plateau
-		this.panelPlateau.setBackground( FrameJeu.COULEUR_FOND_FONCE );
+		this.scrollPlateau.setBackground( FrameCreation.COULEUR_FOND );
+		this.scrollPlateau.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		this.scrollPlateau.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		// Panel des Système
 		this.panelSysteme.setLayout( new GridLayout(10,1) );
-		this.panelSysteme.setBackground( FrameJeu.COULEUR_FOND_CLAIRE );
+		this.panelSysteme.setBackground( FrameCreation.COULEUR_FOND_CLAIRE );
 		this.panelSysteme.setPreferredSize( new Dimension( 200 , 1080 ) );
 		
 		this.sectionZone.setLayout( new GridLayout(1,2) );
@@ -185,7 +198,8 @@ public class PanelEdition extends JPanel
 		this.add( this.panelPlanete, BorderLayout.WEST );
 		
 		// Panel Plateau
-		this.add( this.panelPlateau, BorderLayout.CENTER );
+		this.add( this.scrollPlateau, BorderLayout.CENTER );
+		this.panelPlateau.repaint();
 		
 		// Panel Système
 		this.sectionZone.add( this.outilZone );
@@ -197,7 +211,5 @@ public class PanelEdition extends JPanel
 		/*---------------------------------*/
 		/*    Activation des Composants    */
 		/*---------------------------------*/
-		
-		
 	}
 }
