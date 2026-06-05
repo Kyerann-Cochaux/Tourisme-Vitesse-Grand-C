@@ -70,11 +70,11 @@ public class FrameCreation extends JFrame
 	public void ouvrirPanelEdition(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.remove(this.panelActuelle);
+		this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 		this.panelActuelle = new PanelEdition( this.ctrl, this );
 		this.add(this.panelActuelle);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.revalidate();
-		this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
 	
 	public void ouvrirPanelEdition( File fichier )
