@@ -150,8 +150,10 @@ public class Plateau
 		
 	}
 
-	public boolean setEspece(String espese)
+	public boolean setEspece(String espece)
 	{
+		if (!this.especeExiste(espece) ) return false;
+
 		Case cTemp = null;
 		// On parcours les lignes
 		for (int lig = 0; lig < this.ensCases.length; lig++) 
@@ -168,7 +170,7 @@ public class Plateau
 					if (cTemp.getPlanete().estBase() )
 					{
 						// On regarde si les 2 planètes ont la même esp
-						if (cTemp.getPlanete().getEspece().equals(espese) )
+						if (cTemp.getPlanete().getEspece().equals(espece) )
 							return false;
 					}
 					
@@ -176,7 +178,9 @@ public class Plateau
 			}
 		}
 
-		if (cTemp != null) cTemp.getPlanete().setEspece(espese);
+		if (cTemp == null) return false;
+
+		cTemp.getPlanete().setEspece(espece);
 		return true;
 	}
 	
@@ -222,8 +226,6 @@ public class Plateau
 				}
 			}
 		}
-
-		//if (baseExiste) {System.out.println("base Existe");return false;}
 
 		this.ensCases[y][x].setPlanete(p);
 
@@ -276,12 +278,7 @@ public class Plateau
 			if (dX == dY && !this.getCase(source.getPosY() + cpt, source.getPosX() -  cpt).estVide() ) return false;
 
 		}
-		
-
-		
 	
-		
-
 		this.lstVoyages.add(Voyage.creerVoyage(source, destination) );
 		return true;
 		
