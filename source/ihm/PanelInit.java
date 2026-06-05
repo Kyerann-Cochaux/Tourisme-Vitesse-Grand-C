@@ -23,7 +23,7 @@ import source.AppliCreation;
 public class PanelInit extends JPanel implements ActionListener, FocusListener
 {
 	
-	private static final String TEXTE_TAILLE   = "Valeur entre 1 et 30";
+	private static final String TEXTE_TAILLE   = "Valeur entre 5 et 30";
 	private static final String TEXTE_QUANTITE = "Valeur entre 2 et 4" ;
 	
 	private static final int NB_CARA = 50;
@@ -273,7 +273,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			int val = Integer.parseInt( zoneTxt.getText() );
 			
 			if (
-			     ( index <  2 && (val < 1 || val > 30) ) ||
+			     ( index <  2 && (val < 5 || val > 30) ) ||
 			     ( index >= 2 && (val < 2 || val > 4 ) )
 			   )
 			{
