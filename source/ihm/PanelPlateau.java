@@ -34,7 +34,7 @@ public class PanelPlateau extends JPanel
 	private int nbPlanete;
 	private int nbEspece;
 	
-	boolean casesAfficher;
+	private boolean casesAfficher;
 	
 	private Dimension dimPlateau ;
 	

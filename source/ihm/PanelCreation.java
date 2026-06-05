@@ -1,39 +1,44 @@
 package source.ihm;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
+import source.AppliCreation;
 
 import javax.swing.*;
+import java.awt.event.*;
+import java.awt.GridLayout;
 
-import source.AppliCreation ;
+
+import java.io.File;
+
+
 
 public class PanelCreation extends JPanel implements ActionListener
 {
+	// Multiplicités IHM
+
 	private AppliCreation ctrl;
 	private FrameCreation frameCreation;
-	
-	private JPanel panelAccueil;
-	
-	private JLabel lblMenu  ;
+
+	private JLabel lblMenu;
 	
 	private JButton btnNouveau;
 	private JButton btnOuvrir ;
 
 	public PanelCreation(AppliCreation ctrl, FrameCreation frameCreation)
 	{
+
+		JPanel panelAccueil;
+		
 		this.ctrl          = ctrl;
 		this.frameCreation = frameCreation;
 
 		this.setBackground(FrameCreation.COULEUR_FOND);
 		
 		/* ---------------------------------- */
-		/* Création des composants      */
+		/*       Création des composants      */
 		/* ---------------------------------- */
 		
-		this.panelAccueil = new JPanel();
-		this.panelAccueil.setLayout(new GridLayout(4, 1, 0, 20) );
+		panelAccueil = new JPanel();
+		panelAccueil.setLayout(new GridLayout(4, 1, 0, 20) );
 		
 		this.lblMenu = new JLabel ("Edition de Plateau", SwingConstants.CENTER);
 		this.lblMenu.setFont      (FrameCreation.POLICE_TEXTE                       );
@@ -42,26 +47,26 @@ public class PanelCreation extends JPanel implements ActionListener
 		this.btnNouveau = new JButton("Nouveau");
 		this.btnOuvrir  = new JButton("Ouvrir" );
 		
-		
 		/* ---------------------------------- */
-		/* Positionnement des composants   */
+		/*    Positionnement des composants   */
 		/* ---------------------------------- */
-		
-		this.panelAccueil.add( this.lblMenu );
-		JPanel panelVide = new JPanel();
-		panelVide.setOpaque(false);
-		this.panelAccueil.add( panelVide );
-		this.panelAccueil.add( this.btnNouveau);
-		this.panelAccueil.add( this.btnOuvrir );
 
-		this.panelAccueil.setOpaque(false);
+
+		/* --- Positionnement panelAccueil -- */
 		
+		panelAccueil.add( this.lblMenu );
+		panelAccueil.add( new JLabel() );
+		panelAccueil.add( this.btnNouveau);
+		panelAccueil.add( this.btnOuvrir );
+		panelAccueil.setOpaque(false);
+
+		/* --- Positionment PanelCreation --- */
 		
-		this.add(this.panelAccueil);
+		this.add(panelAccueil);
 		
-		/* ------------------------------- */
-		/* Activation des Composants    */
-		/* ------------------------------- */
+		/* ---------------------------------- */
+		/*      Activation des composants     */
+		/* ---------------------------------- */
 		
 		this.btnNouveau.addActionListener(this);
 		this.btnOuvrir .addActionListener(this);

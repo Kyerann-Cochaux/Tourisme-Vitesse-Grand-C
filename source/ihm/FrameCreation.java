@@ -139,9 +139,9 @@ public class FrameCreation extends JFrame
 		{
 			case FrameCreation.PANEL_INIT -> 
 			{
-				this.panelActuelle = new PanelInit(this.ctrl, this);
-				this.setSize(800, this.hauteurEcran -50 );
-				this.setExtendedState(JFrame.NORMAL);
+				this.panelActuelle = new PanelInit(this.ctrl, this                   );
+				this.setSize                      (800, this.hauteurEcran -50 );
+				this.setExtendedState             (JFrame.NORMAL                     );
 
 			}
 
@@ -149,9 +149,6 @@ public class FrameCreation extends JFrame
 			{
 				this.panelActuelle = new PanelEdition(this.ctrl, this);
 				this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-
-
 			}
 
 			case FrameCreation.PANEL_CREATION ->

@@ -1,10 +1,9 @@
 package source.ihm;
 
+import source.AppliCreation ;
+
 import javax.swing.*;
-
-import java.util.ArrayList ;
-
-import java.io.File;
+import java.awt.event.* ;
 
 import java.awt.BorderLayout ;
 import java.awt.GridLayout ;
@@ -15,9 +14,8 @@ import java.awt.Dimension ;
 import java.awt.Graphics ;
 import java.awt.Graphics2D ;
 
-import java.awt.event.* ;
-
-import source.AppliCreation ;
+import java.util.ArrayList ;
+import java.io.File;
 
 /**
  * Panel Edition
@@ -175,8 +173,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.lotBaseA.setLayout( new GridLayout(1,2) );
 		
 		// Panel d'affichage du Plateau
-		this.scrollPlateau.setBackground( FrameCreation.COULEUR_FOND );
-		this.scrollPlateau.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		this.scrollPlateau.setBackground               ( FrameCreation.COULEUR_FOND               );
+		this.scrollPlateau.setVerticalScrollBarPolicy  (JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED  );
 		this.scrollPlateau.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		// Panel des Système
