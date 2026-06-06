@@ -64,7 +64,7 @@ public class PanelPlateau extends JPanel
 		super.paintComponent(g);
 		
 		// Render des Cases
-			this.renderCases(g);
+		this.renderCases(g);
 		
 		// Render des Planètes
 		this.renderPlanete(g);
