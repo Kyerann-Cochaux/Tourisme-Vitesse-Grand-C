@@ -147,8 +147,10 @@ public class FrameCreation extends JFrame
 
 			case FrameCreation.PANEL_EDITION ->
 			{
-				this.panelActuelle = new PanelEdition(this.ctrl, this);
+				this.panelActuelle = new PanelEdition(this.ctrl, this); // plateau est null
 				this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				
+				
 				
 			}
 

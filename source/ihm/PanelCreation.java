@@ -81,18 +81,26 @@ public class PanelCreation extends JPanel implements ActionListener
 		
 		if (e.getSource() == this.btnOuvrir)
 		{
-			JFileChooser explorateur = new JFileChooser();
+			//this.frameCreation.ouvrirPanelEdition(fichierSelectionne);
 
-			explorateur.setDialogTitle     ("Ouvrir plateau..." );
-			explorateur.setCurrentDirectory(new File ("./metier/sauvegardes") );
-
-			if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-			{
-				File fichierSelectionne = explorateur.getSelectedFile();
-
-				this.frameCreation.ouvrirPanel(FrameCreation.PANEL_EDITION);
-				//this.frameCreation.ouvrirPanelEdition(fichierSelectionne);
-			}
+			this.ctrl.chargerPlateau(this.chargerFichier() );            // charge le plateau dans Métier
+			this.frameCreation.ouvrirPanel(FrameCreation.PANEL_EDITION); // Affiche le plateau dans IHM
+			
 		}
+	}
+
+	public String chargerFichier()
+	{
+		String fichiercharge = "";
+		JFileChooser explorateur = new JFileChooser();
+
+		explorateur.setDialogTitle     ("Ouvrir plateau..."            );
+		explorateur.setCurrentDirectory(new File ("./metier/sauvegardes") );
+
+		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+			fichiercharge = explorateur.getSelectedFile().getPath();
+
+		return fichiercharge;
+
 	}
 }

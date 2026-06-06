@@ -95,13 +95,13 @@ public class PanelPlateau extends JPanel
 	{
 		g2 = (Graphics2D) g;
 		
-		for( int cptLig=0 ; cptLig < this.nbLigne ; cptLig++ )
+		for( int cptLig= 0 ; cptLig < this.nbLigne ; cptLig++ )
 		{
-			for( int cptCol=0 ; cptCol < this.nbColonne ; cptCol++ )
+			for( int cptCol= 0 ; cptCol < this.nbColonne ; cptCol++ )
 			{
 				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
 				{
-					char symbPlanete = this.ctrl.getPlanete(cptLig, cptCol).getSymbole() ;
+					char symbPlanete = this.ctrl.getPlanete(cptCol, cptLig).getSymbole() ;
 					
 					BufferedImage image = null ;
 					try

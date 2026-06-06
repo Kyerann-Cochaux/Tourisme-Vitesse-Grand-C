@@ -256,6 +256,8 @@ public class PanelEdition extends JPanel implements ActionListener
 			btn.addActionListener(this);
 		}
 	}
+
+
 	
 	public void actionPerformed( ActionEvent e )
 	{

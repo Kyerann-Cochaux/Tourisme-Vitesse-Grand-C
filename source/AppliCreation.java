@@ -35,6 +35,7 @@ public class AppliCreation
 	/* ---------------------------------- */
 	
 	public void ajouterPlanete( int indLig, int indCol, Planete p ) { this.metier.getPlateau().ajouterPlanete( indLig, indCol,p );}
+	public void chargerPlateau(String fichier)                      { this.metier.chargerPlateau(fichier)                        ;}
 	
 	public static void main(String[] args) 
 	{
