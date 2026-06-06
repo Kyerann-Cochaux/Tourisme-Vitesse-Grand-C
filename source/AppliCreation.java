@@ -14,17 +14,24 @@ public class AppliCreation
 		this.frameCreation = new FrameCreation(this);
 	}
 	
-	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
-	{
-		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
-	}
+	
 
 	/* ---------------------------------- */
 	/*             Accesseurs             */
 	/* ---------------------------------- */
 
-	public Plateau getPlateau()                         {return this.metier.getPlateau()                                    ;}
+
+	public int getNbLignes  () {return this.metier.getPlateau().getNbLignes  ();}
+	public int getNbColonnes() {return this.metier.getPlateau().getNbColonnes();}
+	public int getNbPlanetes() {return this.metier.getPlateau().getNbPlanetes();}
+	public int getNbEspeces () {return this.metier.getPlateau().getNbEspeces ();}
+	public int getNbVoyages () {return this.metier.getPlateau().getNbVoyages ();}
+
+	public Case   getCase  (int x, int y ) {return this.metier.getPlateau().getCase  (x,y   );}
+	public Voyage getVoyage(int indice   ) {return this.metier.getPlateau().getVoyage(indice);}
+
 	public Planete getPlanete( int indLig, int indCol ) {return this.metier.getPlateau().getCase(indLig,indCol).getPlanete();}
+
 
 	/* ---------------------------------- */
 	/*            Modificateurs           */
@@ -33,6 +40,11 @@ public class AppliCreation
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
+
+	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
+	{
+		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
+	}
 	
 	public void ajouterPlanete( int indLig, int indCol, Planete p ) { this.metier.getPlateau().ajouterPlanete( indLig, indCol,p );}
 	public void chargerPlateau(String fichier)                      { this.metier.chargerPlateau(fichier)                        ;}
