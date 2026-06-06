@@ -63,7 +63,7 @@ public class Plateau
 		
 		for (int lig = 0; lig < this.nbLignes; lig++)
 			for (int col = 0; col < this.nbColonnes; col++)
-				ensCases[lig][col] = new Case(lig, col);
+				ensCases[lig][col] = new Case(col, lig);
 	}
 	
 	/* ---------------------------------- */
@@ -103,7 +103,36 @@ public class Plateau
 	 on ne peut pas attribuer ce numéro du système à la case en paramètre.
 	 
 	*/
-
+	
+	private void corrigerDecoupeZone(int x, int y)
+	{
+		// création de nouvelles zones si besoin
+		int[][] dPos = 
+		{//   dx  dy
+			{ 0, -1},
+			{+1,  0},
+			{ 0, +1},
+			{-1,  0}
+		};
+		
+		for (int indDPos = 0; indDPos < dPos.length; indDPos++)
+		{
+			int nX = dPos[indDPos][0] + x;
+			int nY = dPos[indDPos][1] + y;
+			
+			if ( nX >= 0 && nX < this.nbColonnes &&
+				nY >= 0 && nY < this.nbLignes      )
+			{
+				Case caseTemp = this.getCase(nX, nY);
+				
+				if ( caseTemp.getNumSysteme() != -1 && this.estZoneScindee(caseTemp.getNumSysteme()) )
+				{
+					this.remplirZone(this.nbSysteme, caseTemp);
+				}
+			}
+		}
+	}
+	
 	public boolean setNumSysteme(int numSysteme, int x, int y)
 	{
 		return this.setNumSysteme(numSysteme, x, y, false);
@@ -126,6 +155,9 @@ public class Plateau
 		{
 			this.nbSysteme++;
 			this.ensCases[y][x].setNumSysteme(numSysteme);
+			
+			this.corrigerDecoupeZone(x, y);
+			
 			return true;
 		}
 		
@@ -133,18 +165,19 @@ public class Plateau
 		boolean estAdjascent = false;
 
 		// en haut
-		if ( y-1 >= 0                ) estAdjascent |= this.ensCases[y-1][x  ].getNumSysteme() == numSysteme;
+		if ( y-1 >= 0              ) estAdjascent |= this.ensCases[y-1][x  ].getNumSysteme() == numSysteme;
 		// en bas
 		if ( y+1 < this.nbLignes   ) estAdjascent |= this.ensCases[y+1][x  ].getNumSysteme() == numSysteme;
 		// à droite
 		if ( x+1 < this.nbColonnes ) estAdjascent |= this.ensCases[y  ][x+1].getNumSysteme() == numSysteme;
 		// à gauche
-		if ( x-1 >= 0                ) estAdjascent |= this.ensCases[y  ][x-1].getNumSysteme() == numSysteme;
-
-
+		if ( x-1 >= 0              ) estAdjascent |= this.ensCases[y  ][x-1].getNumSysteme() == numSysteme;
 		
-		if (estAdjascent) this.ensCases[y][x].setNumSysteme(numSysteme);
-		else              return false;
+		if (!estAdjascent) return false;
+		
+		this.ensCases[y][x].setNumSysteme(numSysteme);
+		
+		this.corrigerDecoupeZone(x, y);
 		
 		return true;
 		
@@ -185,6 +218,122 @@ public class Plateau
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
+	
+	public ArrayList<Case> parcoursZone(Case caseDep)
+	{
+		if ( caseDep == null          ) return null;
+		int numZone = caseDep.getNumSysteme();
+		if ( numZone > this.nbSysteme ) return null;
+		if ( numZone < -1             ) return null;
+		
+		int nbCasesMarquee = 0;
+		ArrayList<Case>    lstCaseZonee    = new ArrayList<Case>();
+		
+		Case caseActuelle = caseDep;
+		lstCaseZonee   .add(caseActuelle);
+		
+		do
+		{
+			int[][] dPos = 
+			{//   dx  dy
+				{ 0, -1},
+				{+1,  0},
+				{ 0, +1},
+				{-1,  0}
+			};
+			
+			int x = caseActuelle.getPosX();
+			int y = caseActuelle.getPosY();
+			
+			for (int indDPos = 0; indDPos < dPos.length; indDPos++)
+			{
+				int nX = dPos[indDPos][0] + x;
+				int nY = dPos[indDPos][1] + y;
+				
+				
+				if ( nX >= 0 && nX < this.nbColonnes &&
+				     nY >= 0 && nY < this.nbLignes      )
+				{
+					Case caseVerif = this.ensCases[nY][nX];
+					
+					if ( caseVerif.getNumSysteme() == numZone && !lstCaseZonee.contains(caseVerif) )
+					{
+						lstCaseZonee.add(caseVerif);
+					}
+				}
+				
+			}
+			
+			nbCasesMarquee++;
+			
+			// passer a la case suivante apres l'avoir explorée
+			if ( nbCasesMarquee < lstCaseZonee.size() )
+				caseActuelle = lstCaseZonee.get(nbCasesMarquee);
+		}
+		while ( nbCasesMarquee < lstCaseZonee.size() );
+		
+		return lstCaseZonee;
+	}
+	
+	public boolean estZoneScindee(int numZone)
+	{
+		Case caseActuelle = null;
+		
+		// récuperation de la dernière case de la zone
+		for (int lig = 0; lig < this.ensCases.length; lig++)
+			for (int col = 0; col < this.ensCases[lig].length; col++)
+				if ( this.ensCases[lig][col].getNumSysteme() == numZone )
+					caseActuelle = this.ensCases[lig][col];
+		
+		if ( caseActuelle == null ) return false;
+		
+		return this.tailleZone(numZone) != this.parcoursZone(caseActuelle).size();
+	}
+	
+	
+	// nombre de cases appartenant a la zone numZone
+	public int tailleZone(int numZone)
+	{
+		int nbCases = 0;
+		
+		for (int numLig = 0; numLig < this.ensCases.length; numLig++)
+			for (int numCol = 0; numCol < this.ensCases[numLig].length; numCol++)
+				if ( this.ensCases[numLig][numCol].getNumSysteme() == numZone )
+					nbCases++;
+		
+		return nbCases;
+	}
+	
+	// parcours logique pour remplir une zone
+	// retourne si la zone as été remplie ou non
+	public boolean remplirZone(int numZone, Case caseDep)
+	{
+		int numZoneInitiale = caseDep.getNumSysteme();
+		if ( numZone == numZoneInitiale ) return false; // pas besoin de modifications
+		
+		if ( numZone >  this.nbSysteme  ) return false;
+		if ( this.nbSysteme == numZone )
+			this.nbSysteme++;
+		
+		ArrayList<Case> lstCaseZonee = this.parcoursZone(caseDep);
+		
+		if ( lstCaseZonee == null ) return false;
+		
+		for (Case caseAnulation : lstCaseZonee)
+			caseAnulation.setNumSysteme(numZone);
+		
+		if ( this.estZoneScindee(numZone) )
+		{
+			for (Case caseAnulation : lstCaseZonee)
+			{
+				caseAnulation.setNumSysteme(numZoneInitiale);
+			}
+			return false;
+		}
+		
+		return true;
+	}
+	
 
 	public boolean ajouterPlanete(int x, int y, Planete p) 
 	{

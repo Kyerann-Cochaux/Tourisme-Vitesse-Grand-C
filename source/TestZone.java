@@ -98,6 +98,8 @@ public class TestZone
 		// zone 5
 		TestZone.test(plateau.setNumSysteme(5, 9, 3 )   , "true" );
 		TestZone.test(plateau.setNumSysteme(5, 8, 3 )   , "true" );
+		for (int x = 8; x >= 5; x--)
+			TestZone.test(plateau.setNumSysteme(5, x, 4 )   , "true" );
 		
 		//x trop grand
 		TestZone.test(plateau.setNumSysteme(5, 500, 3 ), "false" );
@@ -122,31 +124,93 @@ public class TestZone
 		TestZone.test(plateau.setNumSysteme(6,  6, 0 )   , "true" );
 		TestZone.test(plateau.setNumSysteme(6,  5, 0 )   , "true" );
 		TestZone.test(plateau.setNumSysteme(6,  7, 1 )   , "true" );
-		
+		TestZone.test(plateau.setNumSysteme(6,  4, 0 )   , "true" );
 		
 		
 		
 		
 		// zone 7
 		TestZone.test(plateau.setNumSysteme(7, 3, 6 ), "true" );
+		for (int x = 3; x <= 8; x++)
+			TestZone.test(plateau.setNumSysteme(7, x, 5 ), "true" );
+		
 		// y trop grand
 		TestZone.test(plateau.setNumSysteme(7, 3, 700 ), "false");
+		
+		
+		
+		
+		
 		System.out.println();
+		System.out.println("---");
+		System.out.println("tests découpe des zones");
 		
+		// coupage de la zone 1
+		plateau.setNumSysteme(6,  4, 1 );
+		// zone 8 qui coupe la zone 6
+		plateau.setNumSysteme(9, 7, 0);
+		// zone 5 qui coupe la zone 7
+		plateau.setNumSysteme(5, 6, 5);
 		
+		System.out.println(plateau.afficherSystemes());
 		
-		
+		TestZone.test(plateau.estZoneScindee(1), "false");
+		TestZone.test(plateau.estZoneScindee(6), "false");
+		TestZone.test(plateau.estZoneScindee(7), "false");
 		
 		
 		
 		System.out.println();
 		System.out.println("+++++");
-		System.out.println("+++ Test pour savior si une zone est coupée");
+		System.out.println("+++ Test tailleZone(numZone)");
+		System.out.println(plateau.afficherSystemes());
 		
-		plateau.setNumSysteme(8, 7, 0);
+		TestZone.test(plateau.tailleZone(1), "2");
+		TestZone.test(plateau.tailleZone(6), "4");
 		
 		
-		System.out.println(plateau);
+		System.out.println();
+		System.out.println("+++++");
+		System.out.println("+++ Test parcoursZone(caseDep)");
+		
+		System.out.println(plateau.afficherSystemes());
+		
+		
+		TestZone.test(plateau.parcoursZone(plateau.getCase(0, 0)).size(),  "3");
+		TestZone.test(plateau.parcoursZone(plateau.getCase(3, 0)).size(),  "2");
+		TestZone.test(plateau.parcoursZone(plateau.getCase(8, 3)).size(),  "7");
+		TestZone.test(plateau.parcoursZone(plateau.getCase(5, 0)).size(),  "4");
+		TestZone.test(plateau.parcoursZone(plateau.getCase(1, 1)).size(), "29");// 29 car 2 zones sont isolées
+		
+		
+		
+		System.out.println();
+		System.out.println("+++++");
+		System.out.println("+++ Test remplirZone(numZone, caseDep)");
+		
+		System.out.println(plateau.afficherSystemes());
+		
+		TestZone.test(plateau.remplirZone( 1, plateau.getCase(0, 0)), "false");
+		TestZone.test(plateau.remplirZone( 2, plateau.getCase(3, 0)), "false");
+		TestZone.test(plateau.remplirZone(12, plateau.getCase(3, 0)), "false");
+		TestZone.test(plateau.remplirZone(13, plateau.getCase(1, 1)), "true" );
+		TestZone.test(plateau.remplirZone( 3, plateau.getCase(0, 3)), "true" );
+		TestZone.test(plateau.remplirZone(50, plateau.getCase(1, 1)), "false");
+		
+		System.out.println(plateau.afficherSystemes());
+		
+		System.out.println();
+		System.out.println("+++++");
+		System.out.println("+++ Test estZoneScindee(numZone)");
+		
+		System.out.println(plateau.afficherSystemes());
+		
+		test(plateau.estZoneScindee(-1), "true");
+		test(plateau.estZoneScindee(1), "false");
+		test(plateau.estZoneScindee(6), "false");
+		test(plateau.estZoneScindee(5), "false");
+		test(plateau.estZoneScindee(9), "false");
+		
 		
 	}
 	
@@ -163,6 +227,10 @@ public class TestZone
 	
 	
 	private static void test(boolean resultat, String resultatAttendu)
+	{
+		TestZone.test("" + resultat, resultatAttendu);
+	}
+	private static void test(int resultat, String resultatAttendu)
 	{
 		TestZone.test("" + resultat, resultatAttendu);
 	}
