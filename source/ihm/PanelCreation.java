@@ -88,7 +88,7 @@ public class PanelCreation extends JPanel implements ActionListener
 			if (fichier != null && !fichier.equals("") )
 			{
 
-				this.ctrl.chargerPlateau(this.chargerFichier() );            // charge le plateau dans Métier
+				this.ctrl.chargerPlateau(fichier );            // charge le plateau dans Métier
 				this.frameCreation.ouvrirPanel(FrameCreation.PANEL_EDITION); // Affiche le plateau dans IHM
 			}
 
