@@ -29,30 +29,16 @@ public class PanelPlateau extends JPanel
 	
 	private AppliCreation ctrl ;
 	
-	private int nbLigne;
-	private int nbColonne;
-	private int nbPlanete;
-	private int nbEspece;
-	
-	private boolean casesAfficher;
-	
 	private Dimension dimPlateau ;
-	
-	private Graphics2D g2;
 	
 	public PanelPlateau( AppliCreation ctrl )
 	{
 		// Configuration du Panel
 		this.ctrl = ctrl ;
 		
-		this.nbLigne   = this.ctrl.getPlateau().getNbLignes();
-		this.nbColonne = this.ctrl.getPlateau().getNbColonnes();
-		this.nbPlanete = this.ctrl.getPlateau().getNbPlanetes();
-		this.nbEspece  = this.ctrl.getPlateau().getNbEspeces();
-		this.dimPlateau = new Dimension( this.nbColonne * PanelPlateau.TAILLE_CASE + 1, this.nbLigne * PanelPlateau.TAILLE_CASE + 1 );
-		
-		// Configuration des états de Render
-		casesAfficher = false ;
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		this.dimPlateau = new Dimension( nbColonne * PanelPlateau.TAILLE_CASE + 1, nbLigne * PanelPlateau.TAILLE_CASE + 1 );
 		
 		this.setSize( this.dimPlateau );
 		this.setPreferredSize( this.dimPlateau );
@@ -63,23 +49,28 @@ public class PanelPlateau extends JPanel
 	{
 		super.paintComponent(g);
 		
+		Graphics2D g2 = (Graphics2D) g;
+		
 		// Render des Cases
-		this.renderCases(g);
+		this.renderCases(g2);
+		
+		// Render des Liens
+		this.renderLiens(g2);
 		
 		// Render des Planètes
-		this.renderPlanete(g);
+		this.renderPlanete(g2);
 	}
 	
-	private void renderCases( Graphics g )
+	private void renderCases( Graphics2D g2 )
 	{
-		g2 = (Graphics2D) g;
-		
 		g2.setColor( new Color(194, 231, 242) );
 		
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
 		
-		for( int cptLig=0 ; cptLig < this.nbLigne ; cptLig++ )
+		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
-			for( int cptCol=0 ; cptCol < this.nbColonne ; cptCol++ )
+			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				g2.drawRect(
 				             TAILLE_CASE * cptCol, /*  Position X  */
@@ -91,13 +82,33 @@ public class PanelPlateau extends JPanel
 		}
 	}
 	
-	private void renderPlanete( Graphics g )
+	private void renderLiens( Graphics2D g2 )
 	{
-		g2 = (Graphics2D) g;
+		g2.setColor( Color.WHITE );
 		
-		for( int cptLig= 0 ; cptLig < this.nbLigne ; cptLig++ )
+		int nbVoyage = this.ctrl.getPlateau().getNbVoyages();
+		
+		int milieuCase = TAILLE_CASE / 2 ;
+		
+		for( int ind=0 ; ind < nbVoyage ; ind++ )
 		{
-			for( int cptCol= 0 ; cptCol < this.nbColonne ; cptCol++ )
+			int departPosX  = this.ctrl.getPlateau().getVoyage(ind).getPlaneteSource().getPosX()      * milieuCase ;
+			int departPosY  = this.ctrl.getPlateau().getVoyage(ind).getPlaneteSource().getPosY()      * milieuCase ;
+			int arriverPosX = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosX() * milieuCase ;
+			int arriverPosY = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosY() * milieuCase ;
+			
+			g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
+		}
+	}
+	
+	private void renderPlanete( Graphics2D g2 )
+	{
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		
+		for( int cptLig= 0 ; cptLig < nbLigne ; cptLig++ )
+		{
+			for( int cptCol= 0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
 				{
@@ -114,10 +125,10 @@ public class PanelPlateau extends JPanel
 					if ( image != null )
 					{
 						g2.drawImage(
-								      image,
-								      null,
-								      TAILLE_CASE * cptCol,
-								      TAILLE_CASE * cptLig
+								      image,                /* L'image à afficher */
+								      null,                 /* Traitement d'Image (Innutile ici) */
+								      TAILLE_CASE * cptCol, /* Position X */
+								      TAILLE_CASE * cptLig  /* Position Y */
 								    );
 					}
 				}
