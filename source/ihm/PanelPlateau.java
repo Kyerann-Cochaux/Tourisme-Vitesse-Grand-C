@@ -88,6 +88,8 @@ public class PanelPlateau extends JPanel
 		
 		int nbVoyage = this.ctrl.getPlateau().getNbVoyages();
 		
+		System.out.println("Nombre de Voyage à render : " + nbVoyage);
+		
 		int milieuCase = TAILLE_CASE / 2 ;
 		
 		for( int ind=0 ; ind < nbVoyage ; ind++ )
@@ -96,6 +98,8 @@ public class PanelPlateau extends JPanel
 			int departPosY  = this.ctrl.getPlateau().getVoyage(ind).getPlaneteSource().getPosY()      * milieuCase ;
 			int arriverPosX = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosX() * milieuCase ;
 			int arriverPosY = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosY() * milieuCase ;
+			
+			System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 			
 			g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 		}
