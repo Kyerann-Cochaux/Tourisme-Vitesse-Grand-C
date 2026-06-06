@@ -29,30 +29,15 @@ public class PanelPlateau extends JPanel
 	
 	private AppliCreation ctrl ;
 	
-	private int nbLigne;
-	private int nbColonne;
-	private int nbPlanete;
-	private int nbEspece;
-	
-	private boolean casesAfficher;
-	
 	private Dimension dimPlateau ;
-	
-	private Graphics2D g2;
 	
 	public PanelPlateau( AppliCreation ctrl )
 	{
 		// Configuration du Panel
 		this.ctrl = ctrl ;
 		
-		this.nbLigne   = this.ctrl.getPlateau().getNbLignes();
-		this.nbColonne = this.ctrl.getPlateau().getNbColonnes();
-		this.nbPlanete = this.ctrl.getPlateau().getNbPlanetes();
-		this.nbEspece  = this.ctrl.getPlateau().getNbEspeces();
-		this.dimPlateau = new Dimension( this.nbColonne * PanelPlateau.TAILLE_CASE + 1, this.nbLigne * PanelPlateau.TAILLE_CASE + 1 );
-		
-		// Configuration des états de Render
-		casesAfficher = false ;
+		this.dimPlateau = new Dimension( this.ctrl.getPlateau().getNbColonnes() * PanelPlateau.TAILLE_CASE + 1,
+		                                 this.ctrl.getPlateau().getNbLignes()   * PanelPlateau.TAILLE_CASE + 1 );
 		
 		this.setSize( this.dimPlateau );
 		this.setPreferredSize( this.dimPlateau );
@@ -63,23 +48,71 @@ public class PanelPlateau extends JPanel
 	{
 		super.paintComponent(g);
 		
-		// Render des Cases
-		this.renderCases(g);
+		Graphics2D g2 = (Graphics2D) g;
 		
-		// Render des Planètes
-		this.renderPlanete(g);
+		// Affichage du Fond
+		this.affichageFond(g2);
+		
+		// Affichage des Cases
+		this.affichageCases(g2);
+		
+		// Affichage des Zones (Non Fonctionnel)
+		this.affichageZones(g2);
+		
+		// Affichage des Liens
+		this.affichageLiens(g2);
+		
+		// Affichage des Planètes
+		this.affichagePlanetes(g2);
+		
+		// Affichage des Départs des Espèces
+		this.affichageDepartEspece(g2);
 	}
 	
-	private void renderCases( Graphics g )
+	/*----------------------*/
+	/* Méthodes d'Affichage */
+	/*----------------------*/
+	
+	private void affichageFond( Graphics2D g2 )
 	{
-		g2 = (Graphics2D) g;
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
 		
+		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
+		{
+			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
+			{
+				BufferedImage image = null ;
+				try
+				{
+					File inputFile = new File("../source/ihm/images/Tuiles/Fond.png");
+					image = ImageIO.read(inputFile);
+				}
+				catch (IOException e){}
+				
+				if ( image != null )
+				{
+					g2.drawImage(
+					              image,                /* L'image à afficher */
+					              null,                 /* Traitement d'Image (Innutile ici) */
+					              TAILLE_CASE * cptCol, /* Position X */
+					              TAILLE_CASE * cptLig  /* Position Y */
+					            );
+					}
+			}
+		}
+	}
+	
+	private void affichageCases( Graphics2D g2 )
+	{
 		g2.setColor( new Color(194, 231, 242) );
 		
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
 		
-		for( int cptLig=0 ; cptLig < this.nbLigne ; cptLig++ )
+		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
-			for( int cptCol=0 ; cptCol < this.nbColonne ; cptCol++ )
+			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				g2.drawRect(
 				             TAILLE_CASE * cptCol, /*  Position X  */
@@ -91,13 +124,91 @@ public class PanelPlateau extends JPanel
 		}
 	}
 	
-	private void renderPlanete( Graphics g )
+	private void affichageZones( Graphics2D g2 )
 	{
-		g2 = (Graphics2D) g;
+		g2.setColor( Color.RED );
 		
-		for( int cptLig= 0 ; cptLig < this.nbLigne ; cptLig++ )
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		
+		// System.out.println( "Taille du Plateau : " + nbLigne + " Lignes et " + nbColonne + " Colonnes" );
+		
+		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
-			for( int cptCol= 0 ; cptCol < this.nbColonne ; cptCol++ )
+			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
+			{
+				// System.out.println( "Vérification de la case à " + cptLig + " Lig " + cptCol + " Col" );
+				
+				int zoneCaseAct     = this.ctrl.getPlateau().getCase( cptCol, cptLig ).getNumSysteme();
+				int zoneCaseADroite = -1;
+				int zoneCaseEnBas   = -1;
+				
+				if ( cptCol+1 < nbColonne-1 )
+				{
+					zoneCaseADroite = this.ctrl.getPlateau().getCase( cptCol+1, cptLig ).getNumSysteme();
+				}
+				
+				if ( cptLig+1 < nbLigne-1 )
+				{
+					zoneCaseEnBas   = this.ctrl.getPlateau().getCase( cptCol, cptLig+1 ).getNumSysteme();
+				}
+				
+				if ( (zoneCaseAct != zoneCaseADroite) && (zoneCaseADroite != -1) )
+				{
+					// Dessiner La ligne sur le côté droit de la case actuelle
+					// g2.drawLine(
+					             /* Départ X */
+					             /* Départ Y */
+					             /* Arrivé X */
+					             /* Arrivé Y */
+					//           );
+				}
+				
+				if ( (zoneCaseAct != zoneCaseEnBas) && (zoneCaseEnBas != -1) )
+				{
+					// Dessiner La ligne sur le côté bas de la case actuelle
+					// g2.drawLine(
+					             /* Départ X */
+					             /* Départ Y */
+					             /* Arrivé X */
+					             /* Arrivé Y */
+					//            );
+				}
+			}
+		}
+	}
+	
+	private void affichageLiens( Graphics2D g2 )
+	{
+		g2.setColor( Color.WHITE );
+		
+		int nbVoyage = this.ctrl.getPlateau().getNbVoyages();
+		
+		// System.out.println("Nombre de Voyage à render : " + nbVoyage);
+		
+		int milieuCase = TAILLE_CASE / 2 ;
+		
+		for( int ind=0 ; ind < nbVoyage ; ind++ )
+		{
+			int departPosX  = this.ctrl.getPlateau().getVoyage(ind).getPlaneteSource().getPosX()      * milieuCase ;
+			int departPosY  = this.ctrl.getPlateau().getVoyage(ind).getPlaneteSource().getPosY()      * milieuCase ;
+			int arriverPosX = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosX() * milieuCase ;
+			int arriverPosY = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosY() * milieuCase ;
+			
+			// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
+			
+			g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
+		}
+	}
+	
+	private void affichagePlanetes( Graphics2D g2 )
+	{
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		
+		for( int cptLig= 0 ; cptLig < nbLigne ; cptLig++ )
+		{
+			for( int cptCol= 0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
 				{
@@ -114,11 +225,49 @@ public class PanelPlateau extends JPanel
 					if ( image != null )
 					{
 						g2.drawImage(
-								      image,
-								      null,
-								      TAILLE_CASE * cptCol,
-								      TAILLE_CASE * cptLig
-								    );
+						              image,                /* L'image à afficher */
+						              null,                 /* Traitement d'Image (Innutile ici) */
+						              TAILLE_CASE * cptCol, /* Position X */
+						              TAILLE_CASE * cptLig  /* Position Y */
+						            );
+					}
+				}
+			}
+		}
+	}
+	
+	private void affichageDepartEspece( Graphics2D g2 )
+	{
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		
+		for( int cptLig= 0 ; cptLig < nbLigne ; cptLig++ )
+		{
+			for( int cptCol= 0 ; cptCol < nbColonne ; cptCol++ )
+			{
+				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
+				{
+					if ( this.ctrl.getPlanete(cptCol, cptLig).getEspece() != null  )
+					{
+						String nomEspece = this.ctrl.getPlanete(cptCol, cptLig).getEspece();
+						
+						BufferedImage image = null ;
+						try
+						{
+							File inputFile = new File("../source/ihm/images/Tuiles/Espece-" + nomEspece + ".png");
+							image = ImageIO.read(inputFile);
+						}
+						catch (IOException e){}
+						
+						if ( image != null )
+						{
+							g2.drawImage(
+										  image,                /* L'image à afficher */
+										  null,                 /* Traitement d'Image (Innutile ici) */
+										  TAILLE_CASE * cptCol, /* Position X */
+										  TAILLE_CASE * cptLig  /* Position Y */
+										);
+						}
 					}
 				}
 			}

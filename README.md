@@ -26,8 +26,6 @@ Render des Liens sur le Plateau
 
 Ajout des Zones sur le Plateau
 
-Ajout des Bases sur les Planètes
-
 Ajout d'un bouton sauvegarder le plateau <-- MenuBar
 
 
