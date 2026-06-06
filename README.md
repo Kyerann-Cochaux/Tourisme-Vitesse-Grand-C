@@ -18,8 +18,6 @@ méthode zoneScindee(numZone)
  
 | PanelEdition |
 
-initialiser le plateau à partir d'un fichier
-
 MenuBar dans le Frame quand PanelEdition est afficher (Clément)
 
 Ajout des Planètes sur le Plateau
@@ -41,6 +39,8 @@ Liste des changements fonctionnels effectués le 05/06/2026 par Clément :
 
 • Nettoyage de code dans les classes FrameCreation et PanelCreation 
 
+• Passerelle entre IHM et Métier pour le chargement d'un fichier et l'initialisation d'un plateau
+	Le chargement ne fonctionne pas tout le temps (voir précédent commit) (problème coté Métier)
 
 
 "En cours" : Optimisation dans PanelPlateau, panelMenu et panelInit.
