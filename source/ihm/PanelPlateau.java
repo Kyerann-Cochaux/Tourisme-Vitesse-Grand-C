@@ -126,7 +126,56 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageZones( Graphics2D g2 )
 	{
+		g2.setColor( Color.RED );
 		
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		
+		// System.out.println( "Taille du Plateau : " + nbLigne + " Lignes et " + nbColonne + " Colonnes" );
+		
+		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
+		{
+			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
+			{
+				// System.out.println( "Vérification de la case à " + cptLig + " Lig " + cptCol + " Col" );
+				
+				int zoneCaseAct     = this.ctrl.getPlateau().getCase( cptCol, cptLig ).getNumSysteme();
+				int zoneCaseADroite = -1;
+				int zoneCaseEnBas   = -1;
+				
+				if ( cptCol+1 < nbColonne-1 )
+				{
+					zoneCaseADroite = this.ctrl.getPlateau().getCase( cptCol+1, cptLig ).getNumSysteme();
+				}
+				
+				if ( cptLig+1 < nbLigne-1 )
+				{
+					zoneCaseEnBas   = this.ctrl.getPlateau().getCase( cptCol, cptLig+1 ).getNumSysteme();
+				}
+				
+				if ( (zoneCaseAct != zoneCaseADroite) && (zoneCaseADroite != -1) )
+				{
+					// Dessiner La ligne sur le côté droit de la case actuelle
+					// g2.drawLine(
+					             /* Départ X */
+					             /* Départ Y */
+					             /* Arrivé X */
+					             /* Arrivé Y */
+					//           );
+				}
+				
+				if ( (zoneCaseAct != zoneCaseEnBas) && (zoneCaseEnBas != -1) )
+				{
+					// Dessiner La ligne sur le côté bas de la case actuelle
+					// g2.drawLine(
+					             /* Départ X */
+					             /* Départ Y */
+					             /* Arrivé X */
+					             /* Arrivé Y */
+					//            );
+				}
+			}
+		}
 	}
 	
 	private void affichageLiens( Graphics2D g2 )
