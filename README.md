@@ -7,19 +7,19 @@ Liste de chose a faire:
  Metier :
  
 | Plateau | (Kyerann)
-[AJOUTÉ] privée corrigerDecoupeZone(x, y)
-[MODIFIÉ] boolean setNumSysteme(int numSysteme, int x, int y, boolean forcerPlacement)
-[AJOUTÉ] ArrayList<Case> parcoursZone(Case caseDep)
+[AJOUTÉ] privée corrigerDecoupeZone(x, y)  
+[MODIFIÉ] boolean setNumSysteme(int numSysteme, int x, int y, boolean forcerPlacement)  
+[AJOUTÉ] ArrayList<Case> parcoursZone(Case caseDep)  
 
-[AJOUTE] int tailleZone(int numZone)
+[AJOUTE] int tailleZone(int numZone)  
 
-[ FAIT ] boolean remplirZone(int numZone, Case caseDep)
+[ FAIT ] boolean remplirZone(int numZone, Case caseDep)  
 
-[ANULLE] remplirZone(caseDep)
+[ANULLE] remplirZone(caseDep)  
 
-[ FAIT ] boolean estZoneScindee(int numZone)
+[ FAIT ] boolean estZoneScindee(int numZone)  
 
-[------] une méthode pour remplir les zones a -1
+[------] une méthode pour remplir les zones a -1  
 
  IHM :
  
