@@ -50,6 +50,9 @@ public class PanelPlateau extends JPanel
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
+		// Affichage du Fond
+		this.affichageFond(g2);
+		
 		// Affichage des Cases
 		this.affichageCases(g2);
 		
@@ -69,6 +72,36 @@ public class PanelPlateau extends JPanel
 	/*----------------------*/
 	/* Méthodes d'Affichage */
 	/*----------------------*/
+	
+	private void affichageFond( Graphics2D g2 )
+	{
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		
+		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
+		{
+			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
+			{
+				BufferedImage image = null ;
+				try
+				{
+					File inputFile = new File("../source/ihm/images/Tuiles/Fond.png");
+					image = ImageIO.read(inputFile);
+				}
+				catch (IOException e){}
+				
+				if ( image != null )
+				{
+					g2.drawImage(
+					              image,                /* L'image à afficher */
+					              null,                 /* Traitement d'Image (Innutile ici) */
+					              TAILLE_CASE * cptCol, /* Position X */
+					              TAILLE_CASE * cptLig  /* Position Y */
+					            );
+					}
+			}
+		}
+	}
 	
 	private void affichageCases( Graphics2D g2 )
 	{
@@ -143,11 +176,11 @@ public class PanelPlateau extends JPanel
 					if ( image != null )
 					{
 						g2.drawImage(
-								      image,                /* L'image à afficher */
-								      null,                 /* Traitement d'Image (Innutile ici) */
-								      TAILLE_CASE * cptCol, /* Position X */
-								      TAILLE_CASE * cptLig  /* Position Y */
-								    );
+						              image,                /* L'image à afficher */
+						              null,                 /* Traitement d'Image (Innutile ici) */
+						              TAILLE_CASE * cptCol, /* Position X */
+						              TAILLE_CASE * cptLig  /* Position Y */
+						            );
 					}
 				}
 			}
