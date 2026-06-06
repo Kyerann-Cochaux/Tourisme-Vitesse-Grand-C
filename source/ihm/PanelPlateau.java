@@ -39,7 +39,7 @@ public class PanelPlateau extends JPanel
 		this.dimPlateau = new Dimension( this.ctrl.getNbColonnes() * PanelPlateau.TAILLE_CASE + 1,
 		                                 this.ctrl.getNbLignes  () * PanelPlateau.TAILLE_CASE + 1 );
 		
-		this.setSize( this.dimPlateau );
+		//this.setSize( this.dimPlateau );
 		this.setPreferredSize( this.dimPlateau );
 		this.setBackground( FrameJeu.COULEUR_FOND_FONCE );
 	}
@@ -75,30 +75,37 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageFond( Graphics2D g2 )
 	{
-		int nbLigne   = this.ctrl.getNbLignes();
+		BufferedImage image = null ;
+
+		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
-		
+
 		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
 			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
-				BufferedImage image = null ;
+				
 				try
 				{
 					File inputFile = new File("../source/ihm/images/Tuiles/Fond.png");
 					image = ImageIO.read(inputFile);
-				}
-				catch (IOException e){}
-				
-				if ( image != null )
-				{
-					g2.drawImage(
-					              image,                /* L'image à afficher */
-					              null,                 /* Traitement d'Image (Innutile ici) */
-					              TAILLE_CASE * cptCol, /* Position X */
-					              TAILLE_CASE * cptLig  /* Position Y */
-					            );
+
+					if ( image != null )
+					{
+						g2.drawImage(image               , /* L'image à afficher */
+									null             , /* Traitement d'Image (Innutile ici) */
+									TAILLE_CASE * cptCol, /* Position X */
+									TAILLE_CASE * cptLig  /* Position Y */
+									);
 					}
+				}
+
+				catch (IOException e)
+				{
+					System.out.println(e);
+				}
+				
+				
 			}
 		}
 	}
@@ -107,7 +114,7 @@ public class PanelPlateau extends JPanel
 	{
 		g2.setColor( new Color(194, 231, 242) );
 		
-		int nbLigne   = this.ctrl.getNbLignes();
+		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
 		
 		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
@@ -186,14 +193,12 @@ public class PanelPlateau extends JPanel
 		
 		// System.out.println("Nombre de Voyage à render : " + nbVoyage);
 		
-		int milieuCase = TAILLE_CASE / 2 ;
-		
 		for( int ind=0 ; ind < nbVoyage ; ind++ )
 		{
-			int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * milieuCase ;
-			int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * milieuCase ;
-			int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * milieuCase ;
-			int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * milieuCase ;
+			int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE / 2 ;
+			int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE / 2 ;
+			int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE / 2 ;
+			int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE / 2 ;
 			
 			// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 			
@@ -226,7 +231,7 @@ public class PanelPlateau extends JPanel
 					{
 						g2.drawImage(
 						              image,                /* L'image à afficher */
-						              null,                 /* Traitement d'Image (Innutile ici) */
+						              null,             /* Traitement d'Image (Innutile ici) */
 						              TAILLE_CASE * cptCol, /* Position X */
 						              TAILLE_CASE * cptLig  /* Position Y */
 						            );
@@ -238,7 +243,7 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageDepartEspece( Graphics2D g2 )
 	{
-		int nbLigne   = this.ctrl.getNbLignes();
+		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
 		
 		for( int cptLig= 0 ; cptLig < nbLigne ; cptLig++ )

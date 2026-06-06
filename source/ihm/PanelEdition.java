@@ -33,10 +33,10 @@ public class PanelEdition extends JPanel implements ActionListener
 	private AppliCreation ctrl;
 	private FrameCreation frameCreation;
 	
-	private int nbLigne;
-	private int nbColonne;
-	private int nbPlanete;
-	private int nbEspece;
+	//private int nbLigne;
+	//private int nbColonne;
+	//private int nbPlanete;
+	//private int nbEspece;
 	
 	private File fichier;
 	
@@ -83,8 +83,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.frameCreation = frameCreation;
 		//this.nbLigne       = this.ctrl.getPlateau().getNbLignes();
 		//this.nbColonne     = this.ctrl.getPlateau().getNbColonnes();
-		this.nbPlanete     = this.ctrl.getNbPlanetes();
-		this.nbEspece      = this.ctrl.getNbEspeces();
+		//this.nbPlanete     = this.ctrl.getNbPlanetes();
+		//this.nbEspece      = this.ctrl.getNbEspeces();
 		
 		this.creationInterfaceEdition();
 	}
@@ -105,30 +105,31 @@ public class PanelEdition extends JPanel implements ActionListener
 		// Partie Planete
 		this.panelPlanete = new JPanel();
 		this.lotPlaneteA  = new JPanel();
-		
+
 		this.planeteType1 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-G.png") );
 		this.planeteType2 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-O.png") );
 		
-		if ( this.nbPlanete >= 3 )
+		if ( this.ctrl.getNbPlanetes() >= 3 )
 		{
 			this.lotPlaneteB = new JPanel();
 			this.lotPlaneteB.setLayout( new GridLayout(1,2) );
 			this.planeteType3 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-T.png") );
 			
-			if ( this.nbPlanete == 4 ) { this.planeteType4 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-V.png") ); }
+			if (this.ctrl.getNbPlanetes() == 4 ) { this.planeteType4 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-V.png") ); }
 		}
 		// Partie Base
 		this.lotBaseA  = new JPanel();
 		this.baseType1 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Chlorophite.png") );
 		this.baseType2 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Felinoid.png") );
 		
-		if ( this.nbEspece >= 3 )
+		if (this.ctrl.getNbEspeces() >= 3 )
 		{
 			this.lotBaseB = new JPanel();
 			this.lotBaseB.setLayout( new GridLayout(1,2) );
 			this.baseType3 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Azimae.png") );
 			
-			if ( this.nbEspece == 4 ) { this.baseType4 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Silikon.png") ); }
+			if ( this.ctrl.getNbEspeces() == 4 ) 
+				 this.baseType4 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Silikon.png") ); 
 		}
 		
 		// Panel d'affichage du Plateau
@@ -183,11 +184,11 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.ensBouton   .add(this.planeteType2  );
 		this.panelPlanete.add( this.lotPlaneteA  );
 		
-		if ( this.nbPlanete >= 3 )
+		if ( this.ctrl.getNbPlanetes() >= 3 )
 		{
 			this.lotPlaneteB.add( this.planeteType3 );
 			this.ensBouton.add(this.planeteType3);
-			if ( this.nbPlanete == 4 )
+			if ( this.ctrl.getNbPlanetes() == 4 )
 			{
 				this.lotPlaneteB.add( this.planeteType4 );
 				this.ensBouton.add(this.planeteType4);
@@ -196,16 +197,17 @@ public class PanelEdition extends JPanel implements ActionListener
 		}
 		this.panelPlanete.add( new JLabel("") ); // Séparateur
 		// Partie Base
-		this.lotBaseA.add( this.baseType1 );
-		this.ensBouton.add(this.baseType1);
-		this.lotBaseA.add( this.baseType2 );
-		this.ensBouton.add(this.baseType2);
+		this.lotBaseA    .add( this.baseType1 );
+		this.ensBouton   .add(this.baseType1);
+		this.lotBaseA    .add( this.baseType2 );
+		this.ensBouton   .add(this.baseType2);
 		this.panelPlanete.add( this.lotBaseA );
-		if ( this.nbEspece >= 3 )
+
+		if ( this.ctrl.getNbEspeces() >= 3 )
 		{
 			this.lotBaseB.add( this.baseType3 );
 			this.ensBouton.add(this.baseType3);
-			if ( this.nbEspece == 4 )
+			if ( this.ctrl.getNbEspeces() == 4 )
 			{
 				this.lotBaseB.add( this.baseType4 );
 				this.ensBouton.add(this.baseType4);
