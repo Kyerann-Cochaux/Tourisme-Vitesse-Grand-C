@@ -51,17 +51,24 @@ public class PanelPlateau extends JPanel
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
-		// Render des Cases
-		this.renderCases(g2);
+		// Affichage des Cases
+		this.affichageCases(g2);
 		
-		// Render des Liens
-		this.renderLiens(g2);
+		// Affichage des Zones
+		this.affichageZones(g2);
 		
-		// Render des Planètes
-		this.renderPlanete(g2);
+		// Affichage des Liens
+		this.affichageLiens(g2);
+		
+		// Affichage des Planètes
+		this.affichagePlanetes(g2);
 	}
 	
-	private void renderCases( Graphics2D g2 )
+	/*----------------------*/
+	/* Méthodes d'Affichage */
+	/*----------------------*/
+	
+	private void affichageCases( Graphics2D g2 )
 	{
 		g2.setColor( new Color(194, 231, 242) );
 		
@@ -82,13 +89,18 @@ public class PanelPlateau extends JPanel
 		}
 	}
 	
-	private void renderLiens( Graphics2D g2 )
+	private void affichageZones( Graphics2D g2 )
+	{
+		
+	}
+	
+	private void affichageLiens( Graphics2D g2 )
 	{
 		g2.setColor( Color.WHITE );
 		
 		int nbVoyage = this.ctrl.getPlateau().getNbVoyages();
 		
-		System.out.println("Nombre de Voyage à render : " + nbVoyage);
+		// System.out.println("Nombre de Voyage à render : " + nbVoyage);
 		
 		int milieuCase = TAILLE_CASE / 2 ;
 		
@@ -99,13 +111,13 @@ public class PanelPlateau extends JPanel
 			int arriverPosX = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosX() * milieuCase ;
 			int arriverPosY = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosY() * milieuCase ;
 			
-			System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
+			// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 			
 			g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 		}
 	}
 	
-	private void renderPlanete( Graphics2D g2 )
+	private void affichagePlanetes( Graphics2D g2 )
 	{
 		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
 		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
