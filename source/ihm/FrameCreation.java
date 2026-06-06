@@ -149,6 +149,7 @@ public class FrameCreation extends JFrame
 			{
 				this.panelActuelle = new PanelEdition(this.ctrl, this);
 				this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+				
 			}
 
 			case FrameCreation.PANEL_CREATION ->

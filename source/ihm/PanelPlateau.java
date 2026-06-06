@@ -101,7 +101,7 @@ public class PanelPlateau extends JPanel
 			{
 				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
 				{
-					char symbPlanete = this.ctrl.getSymbolePlanete(cptLig, cptCol) ;
+					char symbPlanete = this.ctrl.getPlanete(cptLig, cptCol).getSymbole() ;
 					
 					BufferedImage image = null ;
 					try

@@ -70,9 +70,9 @@ public class PanelEdition extends JPanel implements ActionListener
 	// Partie Système
 	private JPanel panelSysteme;
 	
-	private JPanel sectionZone;
+	private JPanel        sectionZone;
 	private JToggleButton outilZone;
-	private JLabel selectionZone;
+	private JLabel        selectionZone;
 	
 	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation )
 	{

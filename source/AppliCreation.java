@@ -10,7 +10,7 @@ public class AppliCreation
 
 	public AppliCreation()
 	{
-		this.metier        = new Metier();
+		this.metier        = new Metier           ();
 		this.frameCreation = new FrameCreation(this);
 	}
 	
@@ -18,26 +18,23 @@ public class AppliCreation
 	{
 		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
+
+	/* ---------------------------------- */
+	/*             Accesseurs             */
+	/* ---------------------------------- */
+
+	public Plateau getPlateau()                         {return this.metier.getPlateau()                                    ;}
+	public Planete getPlanete( int indLig, int indCol ) {return this.metier.getPlateau().getCase(indLig,indCol).getPlanete();}
+
+	/* ---------------------------------- */
+	/*            Modificateurs           */
+	/* ---------------------------------- */
+
+	/* ---------------------------------- */
+	/*           Autres méthodes          */
+	/* ---------------------------------- */
 	
-	public Plateau getPlateau()
-	{
-		return this.metier.getPlateau();
-	}
-	
-	public Planete getPlanete( int indLig, int indCol )
-	{
-		return this.metier.getPlateau().getCase(indLig,indCol).getPlanete();
-	}
-	
-	public char getSymbolePlanete( int indLig, int indCol )
-	{
-		return this.metier.getPlateau().getCase(indLig,indCol).getPlanete().getSymbole();
-	}
-	
-	public void ajouterPlanete( int indLig, int indCol, Planete p )
-	{
-		this.metier.getPlateau().ajouterPlanete( indLig, indCol,p );
-	}
+	public void ajouterPlanete( int indLig, int indCol, Planete p ) { this.metier.getPlateau().ajouterPlanete( indLig, indCol,p );}
 	
 	public static void main(String[] args) 
 	{

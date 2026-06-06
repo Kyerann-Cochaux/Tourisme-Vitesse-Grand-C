@@ -51,14 +51,13 @@ public class PanelCreation extends JPanel implements ActionListener
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 
-
 		/* --- Positionnement panelAccueil -- */
 		
-		panelAccueil.add( this.lblMenu );
-		panelAccueil.add( new JLabel() );
-		panelAccueil.add( this.btnNouveau);
-		panelAccueil.add( this.btnOuvrir );
-		panelAccueil.setOpaque(false);
+		panelAccueil.add      ( this.lblMenu   );
+		panelAccueil.add      ( new JLabel ()  );
+		panelAccueil.add      ( this.btnNouveau);
+		panelAccueil.add      ( this.btnOuvrir );
+		panelAccueil.setOpaque(false  );
 
 		/* --- Positionment PanelCreation --- */
 		
@@ -83,17 +82,16 @@ public class PanelCreation extends JPanel implements ActionListener
 		if (e.getSource() == this.btnOuvrir)
 		{
 			JFileChooser explorateur = new JFileChooser();
-			explorateur.setDialogTitle("Ouvrir un plateau existant");
 
-			explorateur.setCurrentDirectory(new File("."));
+			explorateur.setDialogTitle     ("Ouvrir plateau..." );
+			explorateur.setCurrentDirectory(new File ("./metier/sauvegardes") );
 
-			int resultat = explorateur.showOpenDialog(this.frameCreation);
-
-			if (resultat == JFileChooser.APPROVE_OPTION)
+			if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
 			{
 				File fichierSelectionne = explorateur.getSelectedFile();
 
-				this.frameCreation.ouvrirPanelEdition(fichierSelectionne);
+				this.frameCreation.ouvrirPanel(FrameCreation.PANEL_EDITION);
+				//this.frameCreation.ouvrirPanelEdition(fichierSelectionne);
 			}
 		}
 	}
