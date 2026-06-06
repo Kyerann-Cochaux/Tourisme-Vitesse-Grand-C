@@ -103,7 +103,36 @@ public class Plateau
 	 on ne peut pas attribuer ce numéro du système à la case en paramètre.
 	 
 	*/
-
+	
+	private void corrigerDecoupeZone(int x, int y)
+	{
+		// création de nouvelles zones si besoin
+		int[][] dPos = 
+		{//   dx  dy
+			{ 0, -1},
+			{+1,  0},
+			{ 0, +1},
+			{-1,  0}
+		};
+		
+		for (int indDPos = 0; indDPos < dPos.length; indDPos++)
+		{
+			int nX = dPos[indDPos][0] + x;
+			int nY = dPos[indDPos][1] + y;
+			
+			if ( nX >= 0 && nX < this.nbColonnes &&
+				nY >= 0 && nY < this.nbLignes      )
+			{
+				Case caseTemp = this.getCase(nX, nY);
+				
+				if ( caseTemp.getNumSysteme() != -1 && this.estZoneScindee(caseTemp.getNumSysteme()) )
+				{
+					this.remplirZone(this.nbSysteme, caseTemp);
+				}
+			}
+		}
+	}
+	
 	public boolean setNumSysteme(int numSysteme, int x, int y)
 	{
 		return this.setNumSysteme(numSysteme, x, y, false);
@@ -126,6 +155,9 @@ public class Plateau
 		{
 			this.nbSysteme++;
 			this.ensCases[y][x].setNumSysteme(numSysteme);
+			
+			this.corrigerDecoupeZone(x, y);
+			
 			return true;
 		}
 		
@@ -133,18 +165,19 @@ public class Plateau
 		boolean estAdjascent = false;
 
 		// en haut
-		if ( y-1 >= 0                ) estAdjascent |= this.ensCases[y-1][x  ].getNumSysteme() == numSysteme;
+		if ( y-1 >= 0              ) estAdjascent |= this.ensCases[y-1][x  ].getNumSysteme() == numSysteme;
 		// en bas
 		if ( y+1 < this.nbLignes   ) estAdjascent |= this.ensCases[y+1][x  ].getNumSysteme() == numSysteme;
 		// à droite
 		if ( x+1 < this.nbColonnes ) estAdjascent |= this.ensCases[y  ][x+1].getNumSysteme() == numSysteme;
 		// à gauche
-		if ( x-1 >= 0                ) estAdjascent |= this.ensCases[y  ][x-1].getNumSysteme() == numSysteme;
-
-
+		if ( x-1 >= 0              ) estAdjascent |= this.ensCases[y  ][x-1].getNumSysteme() == numSysteme;
 		
-		if (estAdjascent) this.ensCases[y][x].setNumSysteme(numSysteme);
-		else              return false;
+		if (!estAdjascent) return false;
+		
+		this.ensCases[y][x].setNumSysteme(numSysteme);
+		
+		this.corrigerDecoupeZone(x, y);
 		
 		return true;
 		
@@ -204,9 +237,9 @@ public class Plateau
 			int[][] dPos = 
 			{//   dx  dy
 				{ 0, -1},
+				{+1,  0},
 				{ 0, +1},
-				{-1,  0},
-				{+1,  0}
+				{-1,  0}
 			};
 			
 			int x = caseActuelle.getPosX();
