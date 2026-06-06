@@ -36,8 +36,8 @@ public class PanelPlateau extends JPanel
 		// Configuration du Panel
 		this.ctrl = ctrl ;
 		
-		this.dimPlateau = new Dimension( this.ctrl.getPlateau().getNbColonnes() * PanelPlateau.TAILLE_CASE + 1,
-		                                 this.ctrl.getPlateau().getNbLignes()   * PanelPlateau.TAILLE_CASE + 1 );
+		this.dimPlateau = new Dimension( this.ctrl.getNbColonnes() * PanelPlateau.TAILLE_CASE + 1,
+		                                 this.ctrl.getNbLignes  () * PanelPlateau.TAILLE_CASE + 1 );
 		
 		this.setSize( this.dimPlateau );
 		this.setPreferredSize( this.dimPlateau );
@@ -75,8 +75,8 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageFond( Graphics2D g2 )
 	{
-		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
-		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		int nbLigne   = this.ctrl.getNbLignes();
+		int nbColonne = this.ctrl.getNbColonnes();
 		
 		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
@@ -107,8 +107,8 @@ public class PanelPlateau extends JPanel
 	{
 		g2.setColor( new Color(194, 231, 242) );
 		
-		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
-		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		int nbLigne   = this.ctrl.getNbLignes();
+		int nbColonne = this.ctrl.getNbColonnes();
 		
 		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
@@ -128,8 +128,8 @@ public class PanelPlateau extends JPanel
 	{
 		g2.setColor( Color.RED );
 		
-		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
-		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		int nbLigne   = this.ctrl.getNbLignes();
+		int nbColonne = this.ctrl.getNbColonnes();
 		
 		// System.out.println( "Taille du Plateau : " + nbLigne + " Lignes et " + nbColonne + " Colonnes" );
 		
@@ -139,18 +139,18 @@ public class PanelPlateau extends JPanel
 			{
 				// System.out.println( "Vérification de la case à " + cptLig + " Lig " + cptCol + " Col" );
 				
-				int zoneCaseAct     = this.ctrl.getPlateau().getCase( cptCol, cptLig ).getNumSysteme();
+				int zoneCaseAct     = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
 				int zoneCaseADroite = -1;
 				int zoneCaseEnBas   = -1;
 				
 				if ( cptCol+1 < nbColonne-1 )
 				{
-					zoneCaseADroite = this.ctrl.getPlateau().getCase( cptCol+1, cptLig ).getNumSysteme();
+					zoneCaseADroite = this.ctrl.getCase( cptCol+1, cptLig ).getNumSysteme();
 				}
 				
 				if ( cptLig+1 < nbLigne-1 )
 				{
-					zoneCaseEnBas   = this.ctrl.getPlateau().getCase( cptCol, cptLig+1 ).getNumSysteme();
+					zoneCaseEnBas   = this.ctrl.getCase( cptCol, cptLig+1 ).getNumSysteme();
 				}
 				
 				if ( (zoneCaseAct != zoneCaseADroite) && (zoneCaseADroite != -1) )
@@ -182,7 +182,7 @@ public class PanelPlateau extends JPanel
 	{
 		g2.setColor( Color.WHITE );
 		
-		int nbVoyage = this.ctrl.getPlateau().getNbVoyages();
+		int nbVoyage = this.ctrl.getNbVoyages();
 		
 		// System.out.println("Nombre de Voyage à render : " + nbVoyage);
 		
@@ -190,10 +190,10 @@ public class PanelPlateau extends JPanel
 		
 		for( int ind=0 ; ind < nbVoyage ; ind++ )
 		{
-			int departPosX  = this.ctrl.getPlateau().getVoyage(ind).getPlaneteSource().getPosX()      * milieuCase ;
-			int departPosY  = this.ctrl.getPlateau().getVoyage(ind).getPlaneteSource().getPosY()      * milieuCase ;
-			int arriverPosX = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosX() * milieuCase ;
-			int arriverPosY = this.ctrl.getPlateau().getVoyage(ind).getPlaneteDestination().getPosY() * milieuCase ;
+			int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * milieuCase ;
+			int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * milieuCase ;
+			int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * milieuCase ;
+			int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * milieuCase ;
 			
 			// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 			
@@ -203,8 +203,8 @@ public class PanelPlateau extends JPanel
 	
 	private void affichagePlanetes( Graphics2D g2 )
 	{
-		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
-		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		int nbLigne   = this.ctrl.getNbLignes();
+		int nbColonne = this.ctrl.getNbColonnes();
 		
 		for( int cptLig= 0 ; cptLig < nbLigne ; cptLig++ )
 		{
@@ -238,8 +238,8 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageDepartEspece( Graphics2D g2 )
 	{
-		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
-		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		int nbLigne   = this.ctrl.getNbLignes();
+		int nbColonne = this.ctrl.getNbColonnes();
 		
 		for( int cptLig= 0 ; cptLig < nbLigne ; cptLig++ )
 		{

@@ -77,9 +77,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			else         this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
 		}
 		
-		this.btnLancer = new JButton("Lancer"        );
-		this.btnReset  = new JButton("Réinitialiser" );
-		this.btnRetour = new JButton("Retour"        );
+		this.btnLancer = new JButton("Lancer"       );
+		this.btnReset  = new JButton("Réinitialiser");
+		this.btnRetour = new JButton("Retour"       );
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -92,8 +92,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		for (JLabel label : tabLbl) 
 		{
-			label.setFont      ( FrameCreation.POLICE_TEXTE  );
-			label.setForeground( FrameCreation.COULEUR_TITRE );
+			label.setFont      (FrameCreation.POLICE_TEXTE );
+			label.setForeground(FrameCreation.COULEUR_TITRE);
 		}
 		
 		// Modification individuelle de la police du Titre, car c'est le seul JLabel où la police est différente des autres
@@ -104,9 +104,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		for (JTextField txtF : this.tabZoneTxt)
 		{
-			txtF.setFont               ( FrameCreation.POLICE_TEXTE );
-			txtF.setForeground         ( FrameCreation.COULEUR_ZONE );
-			txtF.setHorizontalAlignment( JTextField   .CENTER       );
+			txtF.setFont               (FrameCreation.POLICE_TEXTE);
+			txtF.setForeground         (FrameCreation.COULEUR_ZONE);
+			txtF.setHorizontalAlignment(JTextField   .CENTER      );
 		}
 		
 		/* ---------------------------------- */
@@ -149,7 +149,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	/*
 		Méthode utilitaire permettant d'encapsuler dans un panel les 2 composants fournis en paramètres
 		Le JPanel renvoyé contient 2 sous panel contenant chacun un des composants fournis
-		
 	*/
 	
 	private JPanel creerPanelCentre(JLabel lbl,JTextField txtField)
@@ -161,6 +160,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		JPanel sPanelLbl = new JPanel();
 		JPanel sPanelTxt = new JPanel();
+
 		sPanelLbl.setOpaque(false);
 		sPanelTxt.setOpaque(false);
 		
@@ -201,7 +201,11 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				int nbFormes   = Integer.parseInt( this.tabZoneTxt[2].getText() );
 				int nbEspeces  = Integer.parseInt( this.tabZoneTxt[3].getText() );
 				
-				this.frameCreation.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
+				//this.frameCreation.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
+
+				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
+				this.frameCreation.ouvrirPanel(FrameCreation.PANEL_EDITION);
+
 			}
 		}
 		
@@ -225,6 +229,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	// Méthodes privées vérifiant les valeurs saisie dans les JTextField
 	// Si des valeurs sont erronées, un pop-up indique où sont les erreurs, et la méthode renvoie faux
 	// Dans le cas où aucune erreur n'a été trouvé, la méthode renvoie vrai
+
 	private boolean valeursVerifier()
 	{
 		boolean erreurLimPasTrouver = true ;

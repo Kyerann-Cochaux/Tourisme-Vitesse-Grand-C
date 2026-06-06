@@ -81,27 +81,14 @@ public class PanelEdition extends JPanel implements ActionListener
 		/*------------------------------*/
 		this.ctrl          = ctrl ;
 		this.frameCreation = frameCreation;
-		this.nbLigne       = this.ctrl.getPlateau().getNbLignes();
-		this.nbColonne     = this.ctrl.getPlateau().getNbColonnes();
-		this.nbPlanete     = this.ctrl.getPlateau().getNbPlanetes();
-		this.nbEspece      = this.ctrl.getPlateau().getNbEspeces();
+		//this.nbLigne       = this.ctrl.getPlateau().getNbLignes();
+		//this.nbColonne     = this.ctrl.getPlateau().getNbColonnes();
+		this.nbPlanete     = this.ctrl.getNbPlanetes();
+		this.nbEspece      = this.ctrl.getNbEspeces();
 		
 		this.creationInterfaceEdition();
 	}
 	
-	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation, File fichier)
-	{
-		/*------------------------------*/
-		/*    Configuration du Panel    */
-		/*------------------------------*/
-		this.ctrl    = ctrl ;
-		this.fichier = fichier;
-		this.frameCreation = frameCreation;
-		this.nbLigne       = this.ctrl.getPlateau().getNbLignes();
-		this.nbColonne     = this.ctrl.getPlateau().getNbColonnes();
-		this.nbPlanete     = this.ctrl.getPlateau().getNbPlanetes();
-		this.nbEspece      = this.ctrl.getPlateau().getNbEspeces();
-	}
 	
 	public void creationInterfaceEdition()
 	{
@@ -117,8 +104,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		/* Panel des Planètes */
 		// Partie Planete
 		this.panelPlanete = new JPanel();
+		this.lotPlaneteA  = new JPanel();
 		
-		this.lotPlaneteA = new JPanel();
 		this.planeteType1 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-G.png") );
 		this.planeteType2 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-O.png") );
 		

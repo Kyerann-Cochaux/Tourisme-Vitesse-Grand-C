@@ -50,15 +50,15 @@ public class FrameCreation extends JFrame
 		//                                 Permet de récupérer la hauteur de l'écran
 		this.hauteurEcran = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
-		// La taille étant définie au dessus (cf ligne 32) on peut réutiliser ces valeurs pour le positionnement
+		// La taille étant définie au dessus, on peut réutiliser ces valeurs pour le positionnement
 		this.largeurFrame = this.getWidth ();
 		this.hauteurFrame = this.getHeight();
 
- 		//             centre écran largeur   taille frame largeur
-		this.posFrameX = (this.largeurEcran / 2)    - (this.largeurFrame / 2);
+ 		//                 centre écran largeur      taille frame largeur
+		this.posFrameX = (this.largeurEcran / 2) - (this.largeurFrame / 2);
 
-		//             centre écran hauteur   taille frame hauteur
-		this.posFrameY = (this.hauteurEcran / 2)    - (this.hauteurFrame / 2);
+		//                 centre écran hauteur      taille frame hauteur
+		this.posFrameY = (this.hauteurEcran / 2) - (this.hauteurFrame / 2);
 
 		this.setLocation( this.posFrameX, this.posFrameY );
 		
@@ -84,31 +84,8 @@ public class FrameCreation extends JFrame
 		
 	}
 	
-	public void ouvrirPanelCreation()
-	{
-		this.remove(this.panelActuelle);
-		this.panelActuelle = new PanelCreation(this.ctrl, this);
-		this.add(this.panelActuelle);
-		this.setSize(300, 250);
-		this.setLocation(800, 450);
-		this.revalidate();
-	}
 	
-	public void ouvrirPanelInit()
-	{
-		this.remove(this.panelActuelle);
-		this.panelActuelle = new PanelInit(this.ctrl, this);
-		this.add(this.panelActuelle);
-
-		this.setSize(800, this.hauteurEcran - 50);
-
-		this.largeurFrame = this.getWidth ();
-		this.posFrameX = (this.largeurEcran / 2)    - (this.largeurFrame / 2);
-		this.setLocation(posFrameX, 0);
-		this.revalidate();
-	}
-	
-	public void ouvrirPanelEdition(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
+	/*public void ouvrirPanelEdition(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.remove(this.panelActuelle);
 		this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
@@ -116,19 +93,9 @@ public class FrameCreation extends JFrame
 		this.add(this.panelActuelle);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.revalidate();
-	}
-	
-	public void ouvrirPanelEdition( File fichier )
-	{
-		this.remove(this.panelActuelle);
-		this.panelActuelle = new PanelEdition(this.ctrl, this, fichier);
-		this.add(this.panelActuelle);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.revalidate();
-	}
+	}*/
 
-
-	// Place sur la frame le panel correspondant à l'entier
+	// Place sur la frame le panel correspondant à l'entier en paramètre
 	// Permet de rendre le code plus modulaire, car plusieurs actions se répétaient dans les 4 méthodes ci dessus
 
 	public void ouvrirPanel(int numeroPanel)
@@ -139,37 +106,29 @@ public class FrameCreation extends JFrame
 		{
 			case FrameCreation.PANEL_INIT -> 
 			{
-				this.panelActuelle = new PanelInit(this.ctrl, this                   );
+				this.panelActuelle = new PanelInit(this.ctrl, this                  );
 				this.setSize                      (800, this.hauteurEcran -50 );
-				this.setExtendedState             (JFrame.NORMAL                     );
-
+				this.setExtendedState             (JFrame.NORMAL                    );
 			}
 
 			case FrameCreation.PANEL_EDITION ->
 			{
-				this.panelActuelle = new PanelEdition(this.ctrl, this); // plateau est null
-				this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-				
-				
-				
+				this.panelActuelle = new PanelEdition(this.ctrl, this      );
+				this.setExtendedState                (JFrame.MAXIMIZED_BOTH);
 			}
 
 			case FrameCreation.PANEL_CREATION ->
 			{
-				this.panelActuelle = new PanelCreation(this.ctrl, this);
-				this.setSize(350, 250);
-				this.setExtendedState(JFrame.NORMAL);
-			}
-
-			
+				this.panelActuelle = new PanelCreation(this.ctrl, this       );
+				this.setSize                          (350, 250);
+				this.setExtendedState                 (JFrame.NORMAL         );
+			}	
 		}
 
 		this.add             ( this.panelActuelle           );
 		this.majPositionFrame(numeroPanel                   );
 		this.setLocation     (this.posFrameX, this.posFrameY);
 		this.revalidate      (                              );
-
-
 
 	}
 
