@@ -36,9 +36,8 @@ public class PanelPlateau extends JPanel
 		// Configuration du Panel
 		this.ctrl = ctrl ;
 		
-		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
-		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
-		this.dimPlateau = new Dimension( nbColonne * PanelPlateau.TAILLE_CASE + 1, nbLigne * PanelPlateau.TAILLE_CASE + 1 );
+		this.dimPlateau = new Dimension( this.ctrl.getPlateau().getNbColonnes() * PanelPlateau.TAILLE_CASE + 1,
+		                                 this.ctrl.getPlateau().getNbLignes()   * PanelPlateau.TAILLE_CASE + 1 );
 		
 		this.setSize( this.dimPlateau );
 		this.setPreferredSize( this.dimPlateau );
@@ -54,7 +53,7 @@ public class PanelPlateau extends JPanel
 		// Affichage des Cases
 		this.affichageCases(g2);
 		
-		// Affichage des Zones
+		// Affichage des Zones (Non Fonctionnel)
 		this.affichageZones(g2);
 		
 		// Affichage des Liens
@@ -62,6 +61,9 @@ public class PanelPlateau extends JPanel
 		
 		// Affichage des Planètes
 		this.affichagePlanetes(g2);
+		
+		// Affichage des Départs des Espèces
+		this.affichageDepartEspece(g2);
 	}
 	
 	/*----------------------*/
@@ -146,6 +148,44 @@ public class PanelPlateau extends JPanel
 								      TAILLE_CASE * cptCol, /* Position X */
 								      TAILLE_CASE * cptLig  /* Position Y */
 								    );
+					}
+				}
+			}
+		}
+	}
+	
+	private void affichageDepartEspece( Graphics2D g2 )
+	{
+		int nbLigne   = this.ctrl.getPlateau().getNbLignes();
+		int nbColonne = this.ctrl.getPlateau().getNbColonnes();
+		
+		for( int cptLig= 0 ; cptLig < nbLigne ; cptLig++ )
+		{
+			for( int cptCol= 0 ; cptCol < nbColonne ; cptCol++ )
+			{
+				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
+				{
+					if ( this.ctrl.getPlanete(cptCol, cptLig).getEspece() != null  )
+					{
+						String nomEspece = this.ctrl.getPlanete(cptCol, cptLig).getEspece();
+						
+						BufferedImage image = null ;
+						try
+						{
+							File inputFile = new File("../source/ihm/images/Tuiles/Espece-" + nomEspece + ".png");
+							image = ImageIO.read(inputFile);
+						}
+						catch (IOException e){}
+						
+						if ( image != null )
+						{
+							g2.drawImage(
+										  image,                /* L'image à afficher */
+										  null,                 /* Traitement d'Image (Innutile ici) */
+										  TAILLE_CASE * cptCol, /* Position X */
+										  TAILLE_CASE * cptLig  /* Position Y */
+										);
+						}
 					}
 				}
 			}
