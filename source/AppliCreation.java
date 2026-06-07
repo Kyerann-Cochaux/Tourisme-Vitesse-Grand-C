@@ -48,8 +48,9 @@ public class AppliCreation
 		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
 	
-	public void ajouterPlanete( int indLig, int indCol, Planete p ) { this.metier.getPlateau().ajouterPlanete( indLig, indCol,p );}
-	public void chargerPlateau(String fichier)                      { this.metier.chargerPlateau(fichier)                        ;}
+	public void ajouterPlanete    ( int indLig, int indCol, Planete p ) { this.metier.getPlateau().ajouterPlanete( indLig, indCol,p );}
+	public void chargerPlateau    (String fichier)                      { this.metier.chargerPlateau    (fichier)                    ;}
+	public void sauvegarderPlateau(String fichier)                      { this.metier.sauvegarderPlateau(fichier)                    ;}
 	
 	public static void main(String[] args) 
 	{

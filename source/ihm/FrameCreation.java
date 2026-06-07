@@ -7,6 +7,7 @@ import java.io.File;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Menu;
 import java.awt.Toolkit;
 
 public class FrameCreation extends JFrame
@@ -23,8 +24,12 @@ public class FrameCreation extends JFrame
 	protected static final int PANEL_EDITION  = 2;
 	protected static final int PANEL_CREATION = 3;
 	
-	private AppliCreation ctrl;
-	private JPanel        panelActuelle;
+	private AppliCreation    ctrl;
+	private JPanel           panelActuelle;
+	private MenuBarreEdition menuBarreEdition;
+
+	// À BOUGER DANS LE MÉTIER DÈS QUE POSSIBLE, IDEM POUR LA MÉTHODE GET
+	private String fichierCharge;
 
 	// attributs utilisés pour placer la frame le plus au centre de l'écran en fonction de sa taille
 
@@ -66,8 +71,9 @@ public class FrameCreation extends JFrame
 		/*       Création des composants      */
 		/* ---------------------------------- */
 		
-		this.ctrl          = ctrl;
-		this.panelActuelle = new PanelCreation(this.ctrl, this);
+		this.ctrl             = ctrl;
+		this.panelActuelle    = new PanelCreation   (this.ctrl, this);
+		this.menuBarreEdition = new MenuBarreEdition(this.ctrl, this);
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
@@ -99,12 +105,14 @@ public class FrameCreation extends JFrame
 				this.panelActuelle = new PanelInit(this.ctrl, this                  );
 				this.setSize                      (800, this.hauteurEcran -50 );
 				this.setExtendedState             (JFrame.NORMAL                    );
+				this.setJMenuBar                  (null);
 			}
 
 			case FrameCreation.PANEL_EDITION ->
 			{
 				this.panelActuelle = new PanelEdition(this.ctrl, this      );
 				this.setExtendedState                (JFrame.MAXIMIZED_BOTH);
+				this.setJMenuBar                     (this.menuBarreEdition );
 			}
 
 			case FrameCreation.PANEL_CREATION ->
@@ -112,6 +120,8 @@ public class FrameCreation extends JFrame
 				this.panelActuelle = new PanelCreation(this.ctrl, this       );
 				this.setSize                          (350, 250);
 				this.setExtendedState                 (JFrame.NORMAL         );
+				this.setJMenuBar                      (null);
+
 			}	
 		}
 
@@ -133,4 +143,22 @@ public class FrameCreation extends JFrame
 		else                                         this.posFrameY = (this.hauteurEcran / 2) - (this.hauteurFrame / 2);
 
 	}
+
+	public String getFichier() {return this.fichierCharge;}
+
+	public String chargerFichier()
+	{
+		this.fichierCharge = "";
+		JFileChooser explorateur = new JFileChooser();
+
+		explorateur.setDialogTitle     ("Ouvrir plateau..."            );
+		explorateur.setCurrentDirectory(new File ("./metier/sauvegardes") );
+
+		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+			this.fichierCharge = explorateur.getSelectedFile().getAbsolutePath();
+
+		return this.fichierCharge;
+
+	}
+	
 }
