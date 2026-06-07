@@ -39,9 +39,8 @@ public class PanelPlateau extends JPanel
 		this.dimPlateau = new Dimension( this.ctrl.getNbColonnes() * PanelPlateau.TAILLE_CASE + 1,
 		                                 this.ctrl.getNbLignes  () * PanelPlateau.TAILLE_CASE + 1 );
 		
-		//this.setSize( this.dimPlateau );
-		this.setPreferredSize( this.dimPlateau );
-		this.setBackground( FrameJeu.COULEUR_FOND_FONCE );
+		this.setPreferredSize( this.dimPlateau                  );
+		this.setBackground   ( FrameCreation.COULEUR_FOND_FONCE );
 	}
 	
 	public void paintComponent(Graphics g)
@@ -268,7 +267,7 @@ public class PanelPlateau extends JPanel
 						{
 							g2.drawImage(
 										  image,                /* L'image à afficher */
-										  null,                 /* Traitement d'Image (Innutile ici) */
+										  null,             /* Traitement d'Image (Innutile ici) */
 										  TAILLE_CASE * cptCol, /* Position X */
 										  TAILLE_CASE * cptLig  /* Position Y */
 										);

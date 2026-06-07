@@ -31,7 +31,7 @@ public class PanelCreation extends JPanel implements ActionListener
 		this.ctrl          = ctrl;
 		this.frameCreation = frameCreation;
 
-		this.setBackground(FrameCreation.COULEUR_FOND);
+		this.setBackground(FrameCreation.COULEUR_FOND_FONCE);
 		
 		/* ---------------------------------- */
 		/*       Création des composants      */

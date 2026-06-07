@@ -48,7 +48,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		this.frameCreation = frameCreation;
 		
 		this.setLayout(new BorderLayout() );
-		this.setBackground(FrameCreation.COULEUR_FOND);
+		this.setBackground(FrameCreation.COULEUR_FOND_FONCE);
 		
 		/* ---------------------------------- */
 		/*       création des composants      */

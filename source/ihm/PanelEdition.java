@@ -7,6 +7,7 @@ import java.awt.event.* ;
 
 import java.awt.BorderLayout ;
 import java.awt.GridLayout ;
+import java.awt.Panel;
 import java.awt.GridBagLayout ;
 import java.awt.GridBagConstraints ;
 import java.awt.FlowLayout ;
@@ -15,7 +16,6 @@ import java.awt.Graphics ;
 import java.awt.Graphics2D ;
 
 import java.util.ArrayList ;
-import java.io.File;
 
 /**
  * Panel Edition
@@ -28,41 +28,21 @@ import java.io.File;
 
 public class PanelEdition extends JPanel implements ActionListener
 {
-	private final String imagePath = "../source/ihm/images/Tuiles/" ;
+	private static final String REP_IMAGES = "../source/ihm/images/Tuiles/" ;
 	
 	private AppliCreation ctrl;
 	private FrameCreation frameCreation;
 	
-	//private int nbLigne;
-	//private int nbColonne;
-	//private int nbPlanete;
-	//private int nbEspece;
+	private ArrayList<JToggleButton> ensBoutonActifs ;
 	
-	private File fichier;
-	
-	private ArrayList<JToggleButton> ensBouton ;
-	
-	private ButtonGroup grpBouton;
+	private ButtonGroup bgBtnActifs;
 	
 	// Partie Planete
-	private JPanel panelPlanete;
-	
-	private JPanel lotPlaneteA;
-	private JToggleButton planeteType1;
-	private JToggleButton planeteType2;
-	
-	private JPanel lotBaseA;
-	private JToggleButton baseType1;
-	private JToggleButton baseType2;
-	
-	private JPanel lotBaseB;
-	private JToggleButton baseType3;
-	private JToggleButton baseType4;
-	
-	private JPanel lotPlaneteB;
-	private JToggleButton planeteType3;
-	private JToggleButton planeteType4;
-	
+	private JToggleButton[] tabTypePlanete;
+
+	// Partie Planete
+	private JToggleButton[] tabTypeEspece ;
+
 	// Partie Plateau
 	private JScrollPane  scrollPlateau;
 	private PanelPlateau panelPlateau;
@@ -76,92 +56,84 @@ public class PanelEdition extends JPanel implements ActionListener
 	
 	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation )
 	{
+		JPanel panelPlanete;
+		JPanel lotBaseA;
+		JPanel lotPlaneteA;	
+		JPanel lotBaseB;	
+		JPanel lotPlaneteB;
+
 		/*------------------------------*/
 		/*    Configuration du Panel    */
 		/*------------------------------*/
 		this.ctrl          = ctrl ;
 		this.frameCreation = frameCreation;
-		//this.nbLigne       = this.ctrl.getPlateau().getNbLignes();
-		//this.nbColonne     = this.ctrl.getPlateau().getNbColonnes();
-		//this.nbPlanete     = this.ctrl.getNbPlanetes();
-		//this.nbEspece      = this.ctrl.getNbEspeces();
-		
-		this.creationInterfaceEdition();
-	}
-	
-	
-	public void creationInterfaceEdition()
-	{
+
 		this.setLayout( new BorderLayout() );
 		
 		/*-------------------------------*/
 		/*    Création des Composants    */
 		/*-------------------------------*/
 		
-		this.grpBouton = new ButtonGroup();
-		this.ensBouton = new ArrayList<JToggleButton>(4);
-		
+		this.bgBtnActifs     = new ButtonGroup();
+		this.ensBoutonActifs = new ArrayList<JToggleButton>(4);
+
+		this.tabTypeEspece   = new JToggleButton[this.ctrl.getNbEspeces ()];
+		this.tabTypePlanete  = new JToggleButton[this.ctrl.getNbPlanetes()];
+
+
+		// Création des JToggleButton pour les planètes
+		for (int cpt = 0; cpt < this.tabTypeEspece.length; cpt++) 
+			this.tabTypeEspece[cpt] = 
+		    new JToggleButton(new ImageIcon(PanelEdition.REP_IMAGES + "Espece-" + this.ctrl.getNomEspece(cpt) + ".png") );
+			
+		for (int cpt = 0; cpt < this.tabTypePlanete.length; cpt++) 
+		{
+			this.tabTypePlanete[cpt] = new JToggleButton 
+			( 
+				new ImageIcon(PanelEdition.REP_IMAGES + "Planete-" + this.ctrl.getNomPlanete(cpt).charAt(0) + ".png") 
+			);
+		}
+
 		/* Panel des Planètes */
 		// Partie Planete
-		this.panelPlanete = new JPanel();
-		this.lotPlaneteA  = new JPanel();
 
-		this.planeteType1 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-G.png") );
-		this.planeteType2 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-O.png") );
-		
-		if ( this.ctrl.getNbPlanetes() >= 3 )
-		{
-			this.lotPlaneteB = new JPanel();
-			this.lotPlaneteB.setLayout( new GridLayout(1,2) );
-			this.planeteType3 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-T.png") );
-			
-			if (this.ctrl.getNbPlanetes() == 4 ) { this.planeteType4 = new JToggleButton( new ImageIcon(this.imagePath + "Planete-V.png") ); }
-		}
-		// Partie Base
-		this.lotBaseA  = new JPanel();
-		this.baseType1 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Chlorophite.png") );
-		this.baseType2 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Felinoid.png") );
-		
-		if (this.ctrl.getNbEspeces() >= 3 )
-		{
-			this.lotBaseB = new JPanel();
-			this.lotBaseB.setLayout( new GridLayout(1,2) );
-			this.baseType3 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Azimae.png") );
-			
-			if ( this.ctrl.getNbEspeces() == 4 ) 
-				 this.baseType4 = new JToggleButton( new ImageIcon(this.imagePath + "Espece-Silikon.png") ); 
-		}
-		
+		panelPlanete = new JPanel    (new GridLayout  (10,2) );
+
+		lotPlaneteA  = new JPanel(new GridLayout(1,2) );
+		lotBaseA     = new JPanel(new GridLayout(1,2) );
+		lotBaseB     = lotPlaneteB = null;
+
+		if ( this.ctrl.getNbPlanetes() >= 3 ) lotPlaneteB = new JPanel( new GridLayout(1,this.ctrl.getNbPlanetes() /2) );
+		if (this.ctrl.getNbEspeces  () >= 3 ) lotBaseB    = new JPanel( new GridLayout(1,this.ctrl.getNbPlanetes() /2) );
+
 		// Panel d'affichage du Plateau
-		this.panelPlateau   = new PanelPlateau(this.ctrl);
+		this.panelPlateau   = new PanelPlateau      (this.ctrl);
 		JPanel panelCentrer = new JPanel( new GridBagLayout() );
-		panelCentrer.setSize( this.panelPlateau.getWidth()+2, this.panelPlateau.getHeight()+2 );
-		panelCentrer.setBackground( FrameCreation.COULEUR_FOND );
-		panelCentrer.add( this.panelPlateau, new GridBagConstraints() );
-		
+
+		panelCentrer.setSize      ( this.panelPlateau.getWidth() + 2, this.panelPlateau.getHeight() +2 );
+		panelCentrer.setBackground( FrameCreation.COULEUR_FOND_FONCE                                   );
+		panelCentrer.add          (this.panelPlateau, new GridBagConstraints()                         );
+
 		this.scrollPlateau = new JScrollPane( panelCentrer );
 		
 		// Panel des Systèmes
 		this.panelSysteme = new JPanel();
 		
-		this.sectionZone   = new JPanel();
-		this.outilZone     = new JToggleButton( "Zone" );
-		this.selectionZone = new JLabel( "0", JLabel.CENTER );
+		this.sectionZone   = new JPanel       ( new GridLayout(1,2 ) );
+		this.outilZone     = new JToggleButton( "Zone"                     );
+		this.selectionZone = new JLabel       ( "0", JLabel.CENTER         );
 		
 		/*------------------------------------*/
 		/*    Configuration des Composants    */
 		/*------------------------------------*/
 		
 		// Panel des Planètes
-		this.panelPlanete.setLayout(new GridLayout(10,2));
-		this.panelPlanete.setBackground( FrameCreation.COULEUR_FOND_CLAIR );
-		this.panelPlanete.setPreferredSize( new Dimension( 200 , 900 ) );
-		
-		this.lotPlaneteA.setLayout( new GridLayout(1,2) );
-		this.lotBaseA.setLayout( new GridLayout(1,2) );
-		
+
+		panelPlanete.setBackground   ( FrameCreation.COULEUR_FOND_CLAIR          );
+		panelPlanete.setPreferredSize( new Dimension ( 200 , 900 ) );
+
 		// Panel d'affichage du Plateau
-		this.scrollPlateau.setBackground               ( FrameCreation.COULEUR_FOND               );
+		this.scrollPlateau.setBackground               ( FrameCreation.COULEUR_FOND_FONCE         );
 		this.scrollPlateau.setVerticalScrollBarPolicy  (JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED  );
 		this.scrollPlateau.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
@@ -170,82 +142,86 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.panelSysteme.setBackground( FrameCreation.COULEUR_FOND_CLAIR );
 		this.panelSysteme.setPreferredSize( new Dimension( 200 , 900 ) );
 		
-		this.sectionZone.setLayout( new GridLayout(1,2) );
-		
 		/*-------------------------------------*/
 		/*    Positionnement des Composants    */
 		/*-------------------------------------*/
 		
-			/* Panel Planètes */
+		/* Panel Planètes */
 		// Partie Planete
-		this.lotPlaneteA .add( this.planeteType1 );
-		this.ensBouton   .add(this.planeteType1  );
-		this.lotPlaneteA .add( this.planeteType2 );
-		this.ensBouton   .add(this.planeteType2  );
-		this.panelPlanete.add( this.lotPlaneteA  );
+
+		lotPlaneteA          .add(this.tabTypePlanete[0]);
+		this.ensBoutonActifs .add(this.tabTypePlanete[0]);
+		lotPlaneteA          .add(this.tabTypePlanete[1]);
+		this.ensBoutonActifs .add(this.tabTypePlanete[1]);
+		panelPlanete         .add( lotPlaneteA  );
 		
 		if ( this.ctrl.getNbPlanetes() >= 3 )
 		{
-			this.lotPlaneteB.add( this.planeteType3 );
-			this.ensBouton.add(this.planeteType3);
+			lotPlaneteB         .add(this.tabTypePlanete[2] );
+			this.ensBoutonActifs.add(this.tabTypePlanete[2] );
+
 			if ( this.ctrl.getNbPlanetes() == 4 )
 			{
-				this.lotPlaneteB.add( this.planeteType4 );
-				this.ensBouton.add(this.planeteType4);
+				lotPlaneteB         .add(tabTypePlanete[3] );
+				this.ensBoutonActifs.add(tabTypePlanete[3] );
 			}
-			this.panelPlanete.add( this.lotPlaneteB );
+
+			panelPlanete.add( lotPlaneteB );
 		}
-		this.panelPlanete.add( new JLabel("") ); // Séparateur
+		panelPlanete.add( new JLabel("") ); // Séparateur
+
 		// Partie Base
-		this.lotBaseA    .add( this.baseType1 );
-		this.ensBouton   .add(this.baseType1);
-		this.lotBaseA    .add( this.baseType2 );
-		this.ensBouton   .add(this.baseType2);
-		this.panelPlanete.add( this.lotBaseA );
+
+		lotBaseA            .add(this.tabTypeEspece[0] );
+		this.ensBoutonActifs.add(this.tabTypeEspece[0] );
+		lotBaseA            .add(this.tabTypeEspece[1] );
+		this.ensBoutonActifs.add(this.tabTypeEspece[1] );
+		panelPlanete        .add( lotBaseA             );
 
 		if ( this.ctrl.getNbEspeces() >= 3 )
 		{
-			this.lotBaseB.add( this.baseType3 );
-			this.ensBouton.add(this.baseType3);
+			lotBaseB            .add( this.tabTypeEspece[2] );
+			this.ensBoutonActifs.add(this.tabTypeEspece [2] );
+			
 			if ( this.ctrl.getNbEspeces() == 4 )
 			{
-				this.lotBaseB.add( this.baseType4 );
-				this.ensBouton.add(this.baseType4);
+				lotBaseB            .add( this.tabTypeEspece[3]);
+				this.ensBoutonActifs.add(this.tabTypeEspece [3]);
 			}
-			this.panelPlanete.add( this.lotBaseB );
+			panelPlanete.add( lotBaseB );
 		}
 		
-		this.add( this.panelPlanete, BorderLayout.WEST );
+		this.add( panelPlanete, BorderLayout.WEST );
 		
 		// Panel Plateau
 		this.add( this.scrollPlateau, BorderLayout.CENTER );
 		this.panelPlateau.repaint();
 		
 		// Panel Système
-		this.sectionZone.add( this.outilZone );
-		this.ensBouton.add(this.outilZone);
-		this.sectionZone.add( this.selectionZone );
-		this.panelSysteme.add( this.sectionZone );
+		this.sectionZone    .add(this.outilZone     );
+		this.ensBoutonActifs.add(this.outilZone      );
+		this.sectionZone    .add(this.selectionZone );
+		this.panelSysteme   .add(this.sectionZone   );
 		
 		this.add( this.panelSysteme, BorderLayout.EAST );
 		
 		// Ajouts des Boutons dans le ButtonGroup
-		for ( JToggleButton btn : this.ensBouton )
-		{
-			this.grpBouton.add(btn);
-		}
+
+		for ( JToggleButton btn : this.ensBoutonActifs )
+			this.bgBtnActifs.add(btn);
+	
 		
 		/*---------------------------------*/
 		/*    Activation des Composants    */
 		/*---------------------------------*/
 		
 		// Activations des Boutons
-		for ( JToggleButton btn : this.ensBouton )
-		{
+		for ( JToggleButton btn : this.ensBoutonActifs )
 			btn.addActionListener(this);
-		}
+		
 	}
-
+	
+	
 
 	
 	public void actionPerformed( ActionEvent e )

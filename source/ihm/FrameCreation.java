@@ -16,7 +16,7 @@ public class FrameCreation extends JFrame
 
 	protected static final Color COULEUR_TITRE       = Color.decode("#f1c232");
 	protected static final Color COULEUR_ZONE        = Color.decode("#f3f3f3");
-	protected static final Color COULEUR_FOND        = new Color (37, 37, 37);
+	protected static final Color COULEUR_FOND_FONCE  = new Color (37, 37, 37);
 	protected static final Color COULEUR_FOND_CLAIR  = new Color (70, 70, 70);
 
 	protected static final int PANEL_INIT     = 1;
@@ -84,16 +84,6 @@ public class FrameCreation extends JFrame
 		
 	}
 	
-	
-	/*public void ouvrirPanelEdition(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
-	{
-		this.remove(this.panelActuelle);
-		this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
-		this.panelActuelle = new PanelEdition( this.ctrl, this );
-		this.add(this.panelActuelle);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.revalidate();
-	}*/
 
 	// Place sur la frame le panel correspondant à l'entier en paramètre
 	// Permet de rendre le code plus modulaire, car plusieurs actions se répétaient dans les 4 méthodes ci dessus

@@ -27,8 +27,10 @@ public class AppliCreation
 	public int getNbEspeces () {return this.metier.getPlateau().getNbEspeces ();}
 	public int getNbVoyages () {return this.metier.getPlateau().getNbVoyages ();}
 
-	public Case   getCase  (int x, int y ) {return this.metier.getPlateau().getCase  (x,y   );}
-	public Voyage getVoyage(int indice   ) {return this.metier.getPlateau().getVoyage(indice);}
+	public String getNomEspece (int indice   ) {return this.metier.getPlateau().getNomEspece (indice);}
+	public String getNomPlanete(int indice   ) {return this.metier.getPlateau().getNomPlanete(indice);}
+	public Case   getCase      (int x, int y ) {return this.metier.getPlateau().getCase  (x,y   )    ;}
+	public Voyage getVoyage    (int indice   ) {return this.metier.getPlateau().getVoyage(indice)    ;}
 
 	public Planete getPlanete( int indLig, int indCol ) {return this.metier.getPlateau().getCase(indLig,indCol).getPlanete();}
 
