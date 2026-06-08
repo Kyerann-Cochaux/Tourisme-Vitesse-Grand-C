@@ -231,6 +231,10 @@ public class PanelEdition extends JPanel implements ActionListener
 		for ( JToggleButton btn : this.ensBoutonActifs )
 			btn.addActionListener(this);
 		
+		// Activation des Boutons du Widget de Selection de Zone
+		this.moinsZone.addActionListener(this);
+		this.plusZone .addActionListener(this);
+		
 		// Activation du Panel Plateau
 		this.panelPlateau.addMouseListener( this.gererSouris() );
 	}
@@ -254,6 +258,31 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		// On regarde si l'Outil Zone est selectionner
 		if ( e.getSource() == this.tbgOutilZone ) { this.typeBtnSlct = "Zone" ; }
+		
+		// Code de la gestion de la selection de zone
+		if ( e.getSource() == this.moinsZone )
+		{
+			int nbZoneAct = Integer.parseInt( this.lblSelectionZone.getText() );
+			
+			System.out.println( "Nombre de Système Actuelle : " + this.ctrl.getNbSysteme() );
+			
+			if ( nbZoneAct > 0 )
+			{
+				this.lblSelectionZone.setText( "" + nbZoneAct-- );
+			}
+		}
+		
+		if ( e.getSource() == this.plusZone )
+		{
+			int nbZoneAct = Integer.parseInt( this.lblSelectionZone.getText() );
+			
+			System.out.println( "Nombre de Système Actuelle : " + this.ctrl.getNbSysteme() );
+			
+			if ( nbZoneAct <= this.ctrl.getNbSysteme() )
+			{
+				this.lblSelectionZone.setText( "" + nbZoneAct++ );
+			}
+		}
 		
 		// System.out.println( "Bouton Selectionné : " + this.typeBtnSlct );
 	}
@@ -282,7 +311,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		// Ajout d'une Planète
 		for( int ind=0 ; ind < this.ctrl.getNbTypePlanetes() ; ind++ )
 		{
-			if ( this.ctrl.getNomPlanete(ind) == this.typeBtnSlct )
+			if ( this.ctrl.getNomPlanete(ind).equals(this.typeBtnSlct) )
 			{
 				this.ctrl.ajouterPlanete( posColClk, posLigClk, this.typeBtnSlct );
 			}
@@ -291,10 +320,20 @@ public class PanelEdition extends JPanel implements ActionListener
 		// Ajout d'un Départ d'Espèce
 		for( int ind=0 ; ind < this.ctrl.getNbTypeEspeces() ; ind++ )
 		{
-			if ( this.ctrl.getNomEspece(ind) == this.typeBtnSlct )
+			if ( this.ctrl.getNomEspece(ind).equals(this.typeBtnSlct) )
 			{
 				this.ctrl.ajouterEspece( posColClk, posLigClk, this.typeBtnSlct );
 			}
+		}
+		
+		// Ajout d'une Zone
+		if ( this.typeBtnSlct.equals("Zone") )
+		{
+			this.ctrl.ajouterSysteme( 
+			                          Integer.parseInt( this.lblSelectionZone.getText() ),
+			                          posColClk,
+			                          posLigClk
+			                        );
 		}
 		
 		this.panelPlateau.repaint();

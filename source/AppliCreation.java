@@ -25,6 +25,7 @@ public class AppliCreation
 	public int getNbTypePlanetes() {return this.metier.getPlateau().getNbPlanetes();}
 	public int getNbTypeEspeces () {return this.metier.getPlateau().getNbEspeces ();}
 	public int getNbVoyages     () {return this.metier.getPlateau().getNbVoyages ();}
+	public int getNbSysteme     () {return this.metier.getPlateau().getNbSysteme ();}
 	
 	public String getNomEspece (int indice   ) {return this.metier.getPlateau().getNomEspece (indice);}
 	public String getNomPlanete(int indice   ) {return this.metier.getPlateau().getNomPlanete(indice);}
@@ -62,7 +63,12 @@ public class AppliCreation
 		                                  );
 	}
 	
-	public void chargerPlateau         (String fichier)       { this.metier.chargerPlateau    (fichier)                        ;}
+	public void ajouterSysteme( int numSysteme, int indCol, int indLig )
+	{
+		this.metier.getPlateau().setNumSysteme( numSysteme, indCol, indLig );
+	}
+	
+	public void chargerPlateau         (String fichier)       { this.metier.chargerPlateau    (fichier)              ;}
 	public void sauvegarderPlateau     (String nomSauvegarde) { this.metier.sauvegarderPlateau(nomSauvegarde, true)  ;}
 	public void sauvegarderCopiePlateau(String nomSauvegarde) { this.metier.sauvegarderPlateau(nomSauvegarde,false)  ;}
 	
