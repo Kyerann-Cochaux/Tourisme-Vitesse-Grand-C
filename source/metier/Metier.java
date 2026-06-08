@@ -42,12 +42,12 @@ public class Metier
 	
 	public boolean sauvegardeExiste(String nomSauvegarde)
 	{
-		//String cheminSauvegarde = Metier.CHEMIN_SAUVEGARDES +
-		//                          nomSauvegarde + Metier.EXTENSION_SAUVEGARDES;
+		String cheminSauvegarde = Metier.CHEMIN_SAUVEGARDES +
+		                          nomSauvegarde + Metier.EXTENSION_SAUVEGARDES;
 		
 		try
 		{
-			Scanner sc = new Scanner ( new FileInputStream ( nomSauvegarde ), "UTF8" );
+			Scanner sc = new Scanner ( new FileInputStream ( cheminSauvegarde ), "UTF8" );
 			sc.close();
 		}
 		catch (Exception e)
@@ -64,6 +64,7 @@ public class Metier
 		int nbColonnes = 0;
 		int nbFormes   = 0;
 		int nbEspeces  = 0;
+		
 		
 		try
 		{
@@ -168,34 +169,39 @@ public class Metier
 
 	public boolean sauvegarderPlateau(String nomSauvegarde, boolean reecrire)
 	{
-
+		
+		this.plateauJeu.remplirZoneVide();
+		
 		if ( this.getPlateau() == null ) return false;
 		
-		while ( this.sauvegardeExiste(nomSauvegarde) && !reecrire )
+		if ( !reecrire )
 		{
-			String[] nomSaveDiv = nomSauvegarde.split("-");
-			
-			System.out.println("nomSaveDiv.length : " +  nomSaveDiv[nomSaveDiv.length-1]);
-			
-			if ( nomSaveDiv.length == 1 )
-				nomSauvegarde += "-1";
-			else
+			while ( this.sauvegardeExiste(nomSauvegarde) )
 			{
-				String sNumApparition = nomSaveDiv[nomSaveDiv.length-1];
-				int     numApparition = Integer.parseInt(sNumApparition)+1;
+				String[] nomSaveDiv = nomSauvegarde.split("-");
 				
-				nomSaveDiv[nomSaveDiv.length-1] = "" + numApparition;
+				System.out.println("nomSaveDiv.length : " +  nomSaveDiv[nomSaveDiv.length-1]);
 				
-				
-				
-				nomSauvegarde = nomSaveDiv[0];
-				
-				for (int numDiv = 1; numDiv < nomSaveDiv.length; numDiv++)
+				if ( nomSaveDiv.length == 1 )
+					nomSauvegarde += "-1";
+				else
 				{
-					nomSauvegarde += "-" + nomSaveDiv[numDiv];
+					String sNumApparition = nomSaveDiv[nomSaveDiv.length-1];
+					int     numApparition = Integer.parseInt(sNumApparition)+1;
+					
+					nomSaveDiv[nomSaveDiv.length-1] = "" + numApparition;
+					
+					
+					
+					nomSauvegarde = nomSaveDiv[0];
+					
+					for (int numDiv = 1; numDiv < nomSaveDiv.length; numDiv++)
+					{
+						nomSauvegarde += "-" + nomSaveDiv[numDiv];
+					}
 				}
+				System.out.println(nomSauvegarde);
 			}
-			System.out.println(nomSauvegarde);
 		}
 		
 		
@@ -207,7 +213,7 @@ public class Metier
 					(
 						new FileOutputStream
 						(
-							/*Metier.CHEMIN_SAUVEGARDES +*/ nomSauvegarde /*+ Metier.EXTENSION_SAUVEGARDES*/
+							Metier.CHEMIN_SAUVEGARDES + nomSauvegarde + Metier.EXTENSION_SAUVEGARDES
 						), "UTF8"
 					)
 				);

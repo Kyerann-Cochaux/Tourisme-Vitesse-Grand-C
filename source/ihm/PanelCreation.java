@@ -84,10 +84,10 @@ public class PanelCreation extends JPanel implements ActionListener
 			//this.frameCreation.ouvrirPanelEdition(fichierSelectionne);
 
 			String fichier = this.frameCreation.chargerFichier();
-			
+			System.out.println(fichier);
+
 			if (fichier != null && !fichier.equals("") )
 			{
-
 				this.ctrl         .chargerPlateau(          fichier          ); // charge le plateau dans Métier
 				this.frameCreation.ouvrirPanel   (FrameCreation.PANEL_EDITION); // Affiche le plateau dans IHM
 			}
