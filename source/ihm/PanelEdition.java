@@ -48,7 +48,7 @@ public class PanelEdition extends JPanel implements ActionListener
 	private JToggleButton tbgOutilZone;
 	private JLabel        lblSelectionZone;
 	
-	public PanelEdition(AppliCreation ctrl, FrameCreation frameCreation )
+	public PanelEdition( AppliCreation ctrl, FrameCreation frameCreation )
 	{
 		JPanel panelPlanete;
 		JPanel panelSysteme;
@@ -218,10 +218,41 @@ public class PanelEdition extends JPanel implements ActionListener
 		for ( JToggleButton btn : this.ensBoutonActifs )
 			btn.addActionListener(this);
 		
+		// Activation du Panel Plateau
+		this.panelPlateau.addMouseListener( this.gererSouris() );
 	}
 	
+	/*----------------------------------*/
+	/* Gestion de selection des boutons */
+	/*----------------------------------*/
 	public void actionPerformed( ActionEvent e )
 	{
+		// On parcours les boutons Planete pour voir si il est pressé
+		for ( int cpt=0 ; cpt < this.tabTypePlanete.length ; cpt++ )
+		{
+			if ( e.getSource() == this.tabTypePlanete[cpt] ) { this.typeBtnSlct = "" + this.ctrl.getNomPlanete(cpt).charAt(0) ; }
+		}
 		
+		// On parcours les boutons Espece pour voir si il est pressé
+		for ( int cpt=0 ; cpt < this.tabTypeEspece.length ; cpt++ )
+		{
+			if ( e.getSource() == this.tabTypeEspece[cpt] ) { this.typeBtnSlct = this.ctrl.getNomEspece(cpt) ; }
+		}
+		
+		// On regarde si l'Outil Zone est selectionner
+		if ( e.getSource() == this.tbgOutilZone ) { this.typeBtnSlct = "Zone" ; }
+		
+		// System.out.println( "Bouton Selectionné : " + this.typeBtnSlct );
+	}
+	
+	private MouseAdapter gererSouris()
+	{
+		return new MouseAdapter()
+		{
+			public void mouseClicked(MouseEvent e)
+			{
+				// System.out.println( e.paramString() );
+			}
+		} ;
 	}
 }
