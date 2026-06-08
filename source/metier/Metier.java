@@ -115,8 +115,8 @@ public class Metier
 						Planete tempPlanete = Planete.creerPlanete(Plateau.TAB_PLANETES[indPlanete].charAt(0) );
 						
 						this.plateauJeu.getCase(numCol, numLig).setPlanete(tempPlanete);
-						System.out.println(tempPlanete.getSymbole() + " : numCol -> " + numCol + "\n" + "    numLig -> " + numLig );
-						System.out.println();
+						// System.out.println(tempPlanete.getSymbole() + " : numCol -> " + numCol + "\n" + "    numLig -> " + numLig );
+						// System.out.println();
 						//this.plateauJeu.ajouterPlanete(numCol, numLig, tempPlanete);
 					}
 					
@@ -150,7 +150,7 @@ public class Metier
 		}
 		catch (Exception e)
 		{
-			System.out.println("Erreur lors du chargement du fichier sauvegardé.");
+			// System.out.println("Erreur lors du chargement du fichier sauvegardé.");
 			e.printStackTrace();
 			
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
@@ -181,7 +181,7 @@ public class Metier
 			{
 				String[] nomSaveDiv = nomSauvegarde.split("-");
 				
-				System.out.println("nomSaveDiv.length : " +  nomSaveDiv[nomSaveDiv.length-1]);
+				// System.out.println("nomSaveDiv.length : " +  nomSaveDiv[nomSaveDiv.length-1]);
 				
 				if ( nomSaveDiv.length == 1 )
 					nomSauvegarde += "-1";
@@ -201,7 +201,7 @@ public class Metier
 						nomSauvegarde += "-" + nomSaveDiv[numDiv];
 					}
 				}
-				System.out.println(nomSauvegarde);
+				// System.out.println(nomSauvegarde);
 			}
 		}
 		
@@ -302,7 +302,7 @@ public class Metier
 		}
 		catch (Exception e)
 		{
-			System.out.println("Erreur lors de la sauvegarde du plateau.");
+			// System.out.println("Erreur lors de la sauvegarde du plateau.");
 			e.printStackTrace();
 			
 			return false;

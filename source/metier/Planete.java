@@ -51,7 +51,7 @@ public class Planete
 			System.out.println("Espece invalide : " + espece);
 			return false;
 		}
-		 System.out.println("Espece valide : " + espece);
+		// System.out.println("Espece valide : " + espece);
 
 		this.espece = espece;
 		return true;

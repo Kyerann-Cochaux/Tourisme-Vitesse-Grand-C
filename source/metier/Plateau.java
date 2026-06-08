@@ -369,7 +369,7 @@ public class Plateau
 		if (!planeteValide    (p, x, y        ) ) return false;
 		if (!planeteExiste    (p.getSymbole() ) ) return false;
 
-		System.out.println("AJOUT PLANETE : " + x + "/" + y );
+		// System.out.println("AJOUT PLANETE : " + x + "/" + y );
 		
 		
 		// Dans le cas où la planète fournie en paramètre est une base, il faut vérifier qu'elle n'est pas 
