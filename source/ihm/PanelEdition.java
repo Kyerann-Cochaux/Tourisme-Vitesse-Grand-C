@@ -303,6 +303,7 @@ public class PanelEdition extends JPanel implements ActionListener
 			public void mouseClicked(MouseEvent e)
 			{
 				if( e.getButton() == MouseEvent.BUTTON1 ) { ajouterElement(e); }
+				if( e.getButton() == MouseEvent.BUTTON3 ) { supprimerElement(e); }
 			}
 		} ;
 	}
@@ -349,9 +350,21 @@ public class PanelEdition extends JPanel implements ActionListener
 		int posLigClk = (int) ( e.getY() / this.panelPlateau.getTailleCase() ) ;
 		int posColClk = (int) ( e.getX() / this.panelPlateau.getTailleCase() ) ;
 		
+		boolean especeDejaSupprimer = false ;
+		
+		// Suppression d'une Espèce
 		if ( this.ctrl.getPlanete( posColClk, posLigClk ).getEspece() != null )
 		{
 			this.ctrl.supprimerEspece( posColClk, posLigClk );
+			especeDejaSupprimer = true ;
 		}
+		
+		// Suppression d'une Planète
+		if ( this.ctrl.getPlanete( posColClk, posLigClk ) != null && especeDejaSupprimer == false )
+		{
+			this.ctrl.supprimerPlanete( posColClk, posLigClk );
+		}
+		
+		this.panelPlateau.repaint();
 	}
 }
