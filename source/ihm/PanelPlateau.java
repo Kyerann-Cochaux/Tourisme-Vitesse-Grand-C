@@ -65,7 +65,7 @@ public class PanelPlateau extends JPanel
 		this.affichageZones(g2);
 		
 		// Affichage des Liens
-		this.affichageLiens(g2);
+		// this.affichageLiens(g2);
 		
 		// Affichage des Planètes
 		this.affichagePlanetes(g2);
