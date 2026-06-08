@@ -65,7 +65,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		/* ---------------------------------- */
 
 		panelAction     = new JPanel();
-		panelSaisie     = new JPanel(new GridLayout(6,1) );
+		panelSaisie     = new JPanel( new GridLayout(6,1) );
 		panelNomFichier = new JPanel();
 		
 		
@@ -75,11 +75,11 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		this.lblNomFichier = new JLabel("Nom du plateau : ");
 		this.txtNomFichier = new JTextField(10);
 		
-		this.tabLbl[0] = new JLabel("Nouveau Plateau"     , SwingConstants.CENTER); // Titre
+		this.tabLbl[0] = new JLabel("Nouveau Plateau"                 , SwingConstants.CENTER); // Titre
 		this.tabLbl[1] = new JLabel("Nombre de lignes :"              , SwingConstants.CENTER); // nbLignes
 		this.tabLbl[2] = new JLabel("Nombre de colonnes :"            , SwingConstants.CENTER); // nbColonnes
-		this.tabLbl[3] = new JLabel("Nombre d'espèces différentes :"  , SwingConstants.CENTER); // nbEspece
-		this.tabLbl[4] = new JLabel("Nombre de planètes différentes :", SwingConstants.CENTER); // nbPlanete
+		this.tabLbl[3] = new JLabel("Nombre de planètes différentes :", SwingConstants.CENTER); // nbPlanete
+		this.tabLbl[4] = new JLabel("Nombre d'espèces différentes :"  , SwingConstants.CENTER); // nbEspece
 		
 		/*
 			Si le compteur vaut 0 ou 1, le texte est "valeur entre 1 et 30", sinon c'est "valeur entre 2 et 4"
