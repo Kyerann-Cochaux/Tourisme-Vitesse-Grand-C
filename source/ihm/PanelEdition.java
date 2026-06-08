@@ -346,7 +346,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		if ( this.ctrl.getPlanete( posColClk, posLigClk ).getEspece() != null )
 		{
-			
+			this.ctrl.supprimerEspece( posColClk, posLigClk );
 		}
 	}
 }
