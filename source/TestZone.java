@@ -193,7 +193,7 @@ public class TestZone
 		TestZone.test(plateau.remplirZone( 1, plateau.getCase(0, 0)), "false");
 		TestZone.test(plateau.remplirZone( 2, plateau.getCase(3, 0)), "false");
 		TestZone.test(plateau.remplirZone(12, plateau.getCase(3, 0)), "false");
-		TestZone.test(plateau.remplirZone(13, plateau.getCase(1, 1)), "true" );
+		TestZone.test(plateau.remplirZone(13, plateau.getCase(4, 6)), "true" );
 		TestZone.test(plateau.remplirZone( 3, plateau.getCase(0, 3)), "true" );
 		TestZone.test(plateau.remplirZone(50, plateau.getCase(1, 1)), "false");
 		
@@ -213,9 +213,14 @@ public class TestZone
 		
 		System.out.println();
 		System.out.println("+++++");
-		System.out.println("+++ Test estZoneScindee(numZone)");
-		
-		
+		System.out.println("+++ Test remplirZoneVide(numZone)");
+
+		plateau.remplirZoneVide();
+
+		System.out.println(plateau.afficherSystemes());
+		test(plateau.estZoneScindee(-1), "false");
+
+
 	}
 	
 	
