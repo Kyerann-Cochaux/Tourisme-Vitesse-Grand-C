@@ -223,7 +223,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 						return;
 
 					}
-					if ((this.frameCreation.getNomSauvegarde() + ".data").equals(fExistant.getName() ) )
+
+					if ( (this.tabZoneTxt[0].getText() + ".data").equals(fExistant.getName() ) )
 					{
 						JOptionPane.showMessageDialog
 						(this, "Le nom du fichier existe déjà",

@@ -89,6 +89,26 @@ public class Plateau
 	public Case     getCase    (int x, int y) {return this.ensCases[y][x];}
 	public Case[][] getEnsCases()             {return this.ensCases      ;}
 
+	public int getNbEspecesPosees()
+	{
+		int nbEspecePosees = 0;
+
+
+		for (int lig = 0; lig < this.ensCases.length; lig++) 
+		{
+			// On parcours les colonnes
+			for (int col = 0; col < this.ensCases[lig].length; col++) 
+			{
+				if (this.ensCases[lig][col].getPlanete().getEspece() != null)
+					nbEspecePosees++;
+					
+				
+			}
+		}
+
+		return nbEspecePosees;
+	}
+
 
 
 	
@@ -190,7 +210,7 @@ public class Plateau
 		
 		Planete planeteTemp = null;
 		
-		List<String> lstEspecePosee = new ArrayList<String>(4);
+		//List<String> lstEspecePosee = new ArrayList<String>(4);
 		
 		// On parcours les lignes
 		for (int lig = 0; lig < this.ensCases.length; lig++) 
@@ -199,19 +219,15 @@ public class Plateau
 			for (int col = 0; col < this.ensCases[lig].length; col++) 
 			{
 				planeteTemp = this.ensCases[lig][col].getPlanete();
-				
-				if ( planeteTemp             != null &&
-				     planeteTemp.getEspece() != null &&
-				    !planeteTemp.getEspece().equals("") )
 
-					lstEspecePosee.add(planeteTemp.getEspece() );
+				if ( planeteTemp != null && planeteTemp.getEspece() != null && planeteTemp.getEspece().equals(espece) )
+					planeteTemp.setEspece(null);
 				
 			}
 		}
 		
 		if (planete == null) return false;
-		if ( lstEspecePosee.contains(espece) ) return false;
-		
+
 		planete.setEspece(espece);
 		return true;
 	}
