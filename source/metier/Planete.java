@@ -51,6 +51,14 @@ public class Planete
 		return true;
 	}
 
+	public boolean setSymbole(char symbole)
+	{
+		if (!symboleValide(symbole) ) return false;
+		
+		this.symbole = symbole;
+		return true;
+	}
+
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
