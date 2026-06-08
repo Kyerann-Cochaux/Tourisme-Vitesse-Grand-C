@@ -260,7 +260,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 					return;
 
 				}
-				else if (this.frameCreation.getFichier().equals(fExistant.getName() ) )
+				else if (this.frameCreation.getNomSauvegarde().equals(fExistant.getName() ) )
 				{
 					JOptionPane.showMessageDialog
 					(this, "Le nom du fichier existe déjà",
@@ -268,7 +268,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 					return;
 
 				}
-				else this.frameCreation.setFichier(this.txtNomFichier.getText() );
+				else this.frameCreation.setNomSauvegarde( this.txtNomFichier.getText() );
 				
 			}
 		}

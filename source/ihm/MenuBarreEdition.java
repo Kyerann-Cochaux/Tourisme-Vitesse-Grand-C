@@ -101,18 +101,17 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 
 			if (menui.getText().equals("Nouveau" ) ) 
 			{
-				// Ne fonctionne pas pour le moment
-				//this.ctrl.sauvegarderPlateau(this.frameMere.getFichier() );
+				this.ctrl.sauvegarderPlateau( this.frameMere.getNomSauvegarde() );
 				
-
 				this.frameMere.ouvrirPanel(FrameCreation.PANEL_INIT);
 			}
+			
 			if (menui.getText().equals("Fermer" ) )  this.frameMere.ouvrirPanel(FrameCreation.PANEL_CREATION);
 			if (menui.getText().equals("Quitter" ) ) System.exit(JFrame.EXIT_ON_CLOSE);
 			if (menui.getText().equals("Ouvrir"  ) ) this.frameMere.chargerFichier  ();
 			
-			if (menui.getText().equals("Enregistrer"      ) ) this.ctrl.sauvegarderPlateau     (this.frameMere.getFichier() );
-			if (menui.getText().equals("Enregistrer Copie") ) this.ctrl.sauvegarderCopiePlateau(this.frameMere.getFichier() );
+			if (menui.getText().equals("Enregistrer"      ) ) this.ctrl.sauvegarderPlateau     (this.frameMere.getNomSauvegarde() );
+			if (menui.getText().equals("Enregistrer Copie") ) this.ctrl.sauvegarderCopiePlateau(this.frameMere.getNomSauvegarde() );
 
 		}
 	}

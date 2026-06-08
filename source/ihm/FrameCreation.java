@@ -29,7 +29,7 @@ public class FrameCreation extends JFrame
 	private MenuBarreEdition menuBarreEdition;
 
 	// À BOUGER DANS LE MÉTIER DÈS QUE POSSIBLE, IDEM POUR LA MÉTHODE GET
-	private String fichierCharge;
+	private String nomSauvegardeChargee;
 
 	// attributs utilisés pour placer la frame le plus au centre de l'écran en fonction de sa taille
 
@@ -106,7 +106,7 @@ public class FrameCreation extends JFrame
 				this.setSize                      (800, this.hauteurEcran -50 );
 				this.setExtendedState             (JFrame.NORMAL                    );
 				this.setJMenuBar                  (null);
-				this.fichierCharge = "./metier/sauvegardes/sauvegarde.data";
+				this.nomSauvegardeChargee = "sauvegarde";
 			}
 
 			case FrameCreation.PANEL_EDITION ->
@@ -145,25 +145,35 @@ public class FrameCreation extends JFrame
 
 	}
 
-	public String getFichier() 
+	public String getNomSauvegarde() 
 	{
-		return this.fichierCharge;
+		return this.nomSauvegardeChargee;
 	}
 
-	public void setFichier(String nomFichier) { this.fichierCharge = nomFichier;}
+	public void setNomSauvegarde(String nomFichier) { this.nomSauvegardeChargee = nomFichier;}
 
 	public String chargerFichier()
 	{
 		JFileChooser explorateur = new JFileChooser();
-		this.fichierCharge = "";
-
+		String retFichier = "";
+		this.nomSauvegardeChargee = "";
+		
 		explorateur.setDialogTitle     ("Ouvrir plateau..."            );
-		explorateur.setCurrentDirectory(new File ("./metier/sauvegardes/") );
-
+		explorateur.setCurrentDirectory(new File ("../source/metier/sauvegardes/") );
+		
 		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-			this.fichierCharge = explorateur.getSelectedFile().getPath();
-
-		return this.fichierCharge;
+		{
+			this.nomSauvegardeChargee = explorateur
+				.getSelectedFile()
+				.getName()
+				.replaceAll(".data", "");
+				
+			retFichier = explorateur
+				.getSelectedFile()
+				.getAbsolutePath();
+		}
+		
+		return retFichier;
 
 	}
 	
