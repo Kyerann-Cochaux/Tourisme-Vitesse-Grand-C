@@ -131,7 +131,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.tbgOutilZone     = new JToggleButton( "Zone"                     );
 		
 		widgetSelectionZone = new JPanel ( new GridLayout( 2,1 ) );
-		this.lblSelectionZone    = new JLabel ( "0", JLabel.CENTER );
+		this.lblSelectionZone    = new JLabel ( ""+this.ctrl.getNbSysteme(), JLabel.CENTER );
 		panelPlusMoins           = new JPanel( new GridLayout(1,2) );
 		this.btnPlusZone            = new JButton( "+" );
 		this.btnMoinsZone           = new JButton( "-" );
@@ -269,11 +269,12 @@ public class PanelEdition extends JPanel implements ActionListener
 		{
 			int nbZoneAct = Integer.parseInt( this.lblSelectionZone.getText() );
 			
-			System.out.println( "Nombre de Système Actuelle : " + this.ctrl.getNbSysteme() );
+			//System.out.println( "Nombre de Système Actuelle : " + this.ctrl.getNbSysteme() );
 			
 			if ( nbZoneAct > 0 )
 			{
-				this.lblSelectionZone.setText( "" + nbZoneAct-- );
+				nbZoneAct--;
+				this.lblSelectionZone.setText( "" + nbZoneAct );
 			}
 		}
 		
@@ -281,11 +282,13 @@ public class PanelEdition extends JPanel implements ActionListener
 		{
 			int nbZoneAct = Integer.parseInt( this.lblSelectionZone.getText() );
 			
-			System.out.println( "Nombre de Système Actuelle : " + this.ctrl.getNbSysteme() );
+			//System.out.println( "Nombre de Système Actuelle : " + this.ctrl.getNbSysteme() );
 			
 			if ( nbZoneAct <= this.ctrl.getNbSysteme() )
 			{
-				this.lblSelectionZone.setText( "" + nbZoneAct++ );
+				nbZoneAct++;
+				//System.out.println( "On passe à la zone suivante : " + nbZoneAct );
+				this.lblSelectionZone.setText( "" + nbZoneAct );
 			}
 		}
 		
@@ -302,8 +305,12 @@ public class PanelEdition extends JPanel implements ActionListener
 		{
 			public void mouseClicked(MouseEvent e)
 			{
-				if( e.getButton() == MouseEvent.BUTTON1 ) { ajouterElement(e); }
-				if( e.getButton() == MouseEvent.BUTTON3 ) { supprimerElement(e); }
+				if( e.getButton() == MouseEvent.BUTTON1 && typeBtnSlct != null ) 
+				{
+					ajouterElement(e);
+				}
+				
+				if( e.getButton() == MouseEvent.BUTTON3 ) { supprimerElement(e) ; }
 			}
 		} ;
 	}

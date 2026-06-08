@@ -163,7 +163,7 @@ public class Plateau
 		if (forcerPlacement)
 		{
 			this.ensCases[y][x].setNumSysteme(numSysteme);
-			if ( numSysteme > this.nbSysteme ) this.nbSysteme = numSysteme+1;
+			if ( numSysteme >= this.nbSysteme ) this.nbSysteme = numSysteme + 1 ;
 			return true;
 		}
 		
@@ -418,7 +418,8 @@ public class Plateau
 		if (this.ensCases[y][x].getPlanete() == null) return false;
 
 		this.ensCases[y][x].setPlanete(null);
-
+		
+		this.actualiserVoyages();
 		return true;
 	}
 
