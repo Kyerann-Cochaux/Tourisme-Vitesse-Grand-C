@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.File;
 
 import source.AppliCreation;
 
@@ -29,9 +30,13 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	private static final int NB_CARA = 50;
 	
 	// Création de 2 tableaux pour faciliter la modification des composants
-	
 	private JLabel    [] tabLbl;
 	private JTextField[] tabZoneTxt;
+
+	private JLabel     lblNomFichier;
+	private JTextField txtNomFichier;
+	private JButton    btnValider;
+
 	
 	private int[] tabParametreEntrer;
 	
@@ -44,21 +49,31 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	
 	public PanelInit( AppliCreation ctrl, FrameCreation frameCreation )
 	{
+
+		JPanel panelAction    ;
+		JPanel panelSaisie    ;
+		JPanel panelNomFichier;
+
 		this.ctrl          = ctrl;
 		this.frameCreation = frameCreation;
 		
-		this.setLayout(new BorderLayout() );
+		this.setLayout    (new BorderLayout() );
 		this.setBackground(FrameCreation.COULEUR_FOND_FONCE);
 		
 		/* ---------------------------------- */
 		/*       création des composants      */
 		/* ---------------------------------- */
+
+		panelAction     = new JPanel();
+		panelSaisie     = new JPanel(new GridLayout(6,1) );
+		panelNomFichier = new JPanel();
 		
-		JPanel panelAction = new JPanel();
-		JPanel panelSaisie = new JPanel(new GridLayout(5, 1  ) );
 		
 		this.tabLbl     = new JLabel    [5];
 		this.tabZoneTxt = new JTextField[4];
+
+		this.lblNomFichier = new JLabel("Nom du plateau : ");
+		this.txtNomFichier = new JTextField(10);
 		
 		this.tabLbl[0] = new JLabel("Nouveau Plateau"     , SwingConstants.CENTER); // Titre
 		this.tabLbl[1] = new JLabel("Nombre de lignes :"              , SwingConstants.CENTER); // nbLignes
@@ -77,16 +92,25 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			else         this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
 		}
 		
-		this.btnLancer = new JButton("Lancer"       );
-		this.btnReset  = new JButton("Réinitialiser");
-		this.btnRetour = new JButton("Retour"       );
+		this.btnLancer  = new JButton("Lancer"       );
+		this.btnReset   = new JButton("Réinitialiser");
+		this.btnRetour  = new JButton("Retour"       );
+		this.btnValider = new JButton("Valider"      );
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
 		/* ---------------------------------- */
 		
-		panelAction.setOpaque(false);
-		panelSaisie.setOpaque(false);
+		panelAction       .setOpaque(false);
+		panelSaisie       .setOpaque(false);
+		panelNomFichier   .setOpaque(false);
+		this.txtNomFichier.setOpaque(false);
+
+		this.txtNomFichier.setFont      (FrameCreation.POLICE_TEXTE);
+		this.lblNomFichier.setFont      (FrameCreation.POLICE_TEXTE);
+		this.txtNomFichier.setForeground(FrameCreation.COULEUR_ZONE);
+		this.lblNomFichier.setForeground(FrameCreation.COULEUR_TITRE);
+
 		
 		/*--- COULEURS ET POLICES ---*/
 		
@@ -113,8 +137,13 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
-		panelSaisie.add(this.tabLbl[0]); // Titre
 		
+		panelNomFichier.add(this.lblNomFichier);
+		panelNomFichier.add(this.txtNomFichier);
+		panelNomFichier.add(this.btnValider   );
+		
+		panelSaisie.add(this.tabLbl[0]); // Titre
+		panelSaisie.add(panelNomFichier);
 		// On part de 1 car on ajoute pas le titre, déjà ajouté au dessus, et qu'il n'a pas besoin d'être sur un sous panel
 		
 		
@@ -140,9 +169,10 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		// Activation des Boutons d'Action
 
-		this.btnLancer.addActionListener(this);
-		this.btnReset .addActionListener(this);
-		this.btnRetour.addActionListener(this);
+		this.btnLancer .addActionListener(this);
+		this.btnReset  .addActionListener(this);
+		this.btnRetour .addActionListener(this);
+		this.btnValider.addActionListener(this);
 	}
 	
 	
@@ -214,6 +244,33 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			
 			// this.frameCreation.ouvrirPanelCreation();
 			this.frameCreation.ouvrirPanel(FrameCreation.PANEL_CREATION);
+		}
+
+		if (e.getSource() == this.btnValider )
+		{
+			JFileChooser jfc = new JFileChooser("./metier/sauvegardes/");
+
+			for (File fExistant : jfc.getCurrentDirectory().listFiles() ) 
+			{
+				if (this.txtNomFichier.getText() == null || this.txtNomFichier.getText().equals("") )
+				{
+					JOptionPane.showMessageDialog
+					(this, "Le nom du fichier n'est pas renseigné",
+					 "Nom du fichier inexistant", JOptionPane.ERROR_MESSAGE);
+					return;
+
+				}
+				else if (this.frameCreation.getFichier().equals(fExistant.getName() ) )
+				{
+					JOptionPane.showMessageDialog
+					(this, "Le nom du fichier existe déjà",
+					 "Fichier déjà existant", JOptionPane.ERROR_MESSAGE);
+					return;
+
+				}
+				else this.frameCreation.setFichier(this.txtNomFichier.getText() );
+				
+			}
 		}
 	}
 	

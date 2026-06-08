@@ -102,7 +102,7 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 			if (menui.getText().equals("Nouveau" ) ) 
 			{
 				// Ne fonctionne pas pour le moment
-				this.ctrl.sauvegarderPlateau(this.frameMere.getFichier() );
+				//this.ctrl.sauvegarderPlateau(this.frameMere.getFichier() );
 				
 
 				this.frameMere.ouvrirPanel(FrameCreation.PANEL_INIT);

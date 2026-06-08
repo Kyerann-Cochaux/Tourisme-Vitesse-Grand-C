@@ -353,6 +353,9 @@ public class Plateau
 		if (!planeteValide    (p, x, y        ) ) return false;
 		if (!planeteExiste    (p.getSymbole() ) ) return false;
 
+		System.out.println("AJOUT PLANETE");
+
+
 		// Dans le cas où la planète fournie en paramètre est une base, il faut vérifier qu'elle n'est pas 
 		// déjà présente sur le plateau.
 		
@@ -384,7 +387,20 @@ public class Plateau
 			}
 		}
 
+		//System.out.println("AJOUT PLANETE");
+
 		this.ensCases[y][x].setPlanete(p);
+
+		for (int lig = 0; lig < this.ensCases.length; lig++) 
+		{
+			for (int col = 0; col < this.ensCases[lig].length; col++)
+			{
+				this.ajouterVoyage(this.getCase(y, x), this.getCase(col, lig) );
+				
+			}
+			
+		}
+
 
 		return true;
 	}
@@ -402,7 +418,7 @@ public class Plateau
 	{
 		if (source     .estVide()                  ) return false;
 		if (destination.estVide()                  ) return false;
-		if (this.voyageExiste(source, destination) ) return false;
+		//if (this.voyageExiste(source, destination) ) return false;
 
 		int dX =  Math.abs(destination.getPosX() - source.getPosX() );
 		int dY =  Math.abs(destination.getPosY() - source.getPosY() );
@@ -422,9 +438,6 @@ public class Plateau
 	
 		this.lstVoyages.add(Voyage.creerVoyage(source, destination) );
 		return true;
-		
-		
-
 	}
 
 	public void viderPlateau()

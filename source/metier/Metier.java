@@ -115,6 +115,9 @@ public class Metier
 						Planete tempPlanete = Planete.creerPlanete(Plateau.TAB_PLANETES[indPlanete].charAt(0) );
 						
 						this.plateauJeu.getCase(numCol, numLig).setPlanete(tempPlanete);
+						System.out.println(tempPlanete.getSymbole() + " : numCol -> " + numCol + "\n" + "    numLig -> " + numLig );
+						System.out.println();
+						//this.plateauJeu.ajouterPlanete(numCol, numLig, tempPlanete);
 					}
 					
 				}

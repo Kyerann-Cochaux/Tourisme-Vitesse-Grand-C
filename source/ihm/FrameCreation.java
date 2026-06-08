@@ -150,6 +150,8 @@ public class FrameCreation extends JFrame
 		return this.fichierCharge;
 	}
 
+	public void setFichier(String nomFichier) { this.fichierCharge = nomFichier;}
+
 	public String chargerFichier()
 	{
 		JFileChooser explorateur = new JFileChooser();

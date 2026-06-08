@@ -141,7 +141,7 @@ public class PanelPlateau extends JPanel
 		g2.setColor( Color.RED );
 		g2.setStroke(new BasicStroke(3) );
 		
-		int nbLigne   = this.ctrl.getNbLignes();
+		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
 		
 		// System.out.println( "Taille du Plateau : " + nbLigne + " Lignes et " + nbColonne + " Colonnes" );
@@ -208,19 +208,23 @@ public class PanelPlateau extends JPanel
 		g2.setColor( Color.WHITE );
 		
 		int nbVoyage = this.ctrl.getNbVoyages();
+		System.out.println("NbVoyages -> " + nbVoyage);
 		
 		// System.out.println("Nombre de Voyage à render : " + nbVoyage);
-		
-		for( int ind=0 ; ind < nbVoyage ; ind++ )
+		if (nbVoyage >= 1)
 		{
-			int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE / 2 ;
-			int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE / 2 ;
-			int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE / 2 ;
-			int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE / 2 ;
-			
-			// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
-			
-			g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
+
+			for( int ind=0 ; ind < nbVoyage ; ind++ )
+			{
+				int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE / 2 ;
+				int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE / 2 ;
+				int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE / 2 ;
+				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE / 2 ;
+				
+				// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
+				
+				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
+			}
 		}
 	}
 	
