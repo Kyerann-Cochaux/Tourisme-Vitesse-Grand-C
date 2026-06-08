@@ -168,7 +168,7 @@ public class PanelPlateau extends JPanel
 				
 				if (zoneCaseAct != zoneCaseADroite && cptCol+1 < nbColonne)
 				{
-					System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite à sa droite." );
+					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite à sa droite." );
 					
 					//Dessiner La ligne sur le côté droit de la case actuelle
 					g2.drawLine(
@@ -185,7 +185,7 @@ public class PanelPlateau extends JPanel
 				
 				if (zoneCaseAct != zoneCaseEnBas && cptLig+1 < nbLigne)
 				{
-					//System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite en bas." );
+					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite en bas." );
 					
 					// Dessiner La ligne sur le côté bas de la case actuelle
 					g2.drawLine(

@@ -275,6 +275,15 @@ public class PanelEdition extends JPanel implements ActionListener
 			}
 		}
 		
+		// Ajout d'un Départ d'Espèce
+		for( int ind=0 ; ind < this.ctrl.getNbTypeEspeces() ; ind++ )
+		{
+			if ( this.ctrl.getNomEspece(ind) == this.typeBtnSlct )
+			{
+				this.ctrl.ajouterEspece( posColClk, posLigClk, this.typeBtnSlct );
+			}
+		}
+		
 		this.panelPlateau.repaint();
 	}
 }
