@@ -392,6 +392,7 @@ public class Plateau
 	{
 		if (source     .estVide()                  ) return false;
 		if (destination.estVide()                  ) return false;
+		if (source == destination                  ) return false;
 		if (this.voyageExiste(source, destination) ) return false;
 
 		int dX =  Math.abs(destination.getPosX() - source.getPosX() );

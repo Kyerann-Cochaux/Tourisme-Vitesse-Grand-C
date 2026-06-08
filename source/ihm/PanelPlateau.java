@@ -8,6 +8,7 @@ import java.io.IOException ;
 import java.awt.Dimension ;
 import java.awt.Graphics ;
 import java.awt.Graphics2D ;
+import java.awt.BasicStroke;
 import java.awt.Color ;
 import java.awt.Image ;
 import java.awt.image.BufferedImage ;
@@ -133,6 +134,7 @@ public class PanelPlateau extends JPanel
 	private void affichageZones( Graphics2D g2 )
 	{
 		g2.setColor( Color.RED );
+		g2.setStroke(new BasicStroke(3) );
 		
 		int nbLigne   = this.ctrl.getNbLignes();
 		int nbColonne = this.ctrl.getNbColonnes();
@@ -149,40 +151,48 @@ public class PanelPlateau extends JPanel
 				int zoneCaseADroite = -1;
 				int zoneCaseEnBas   = -1;
 				
-				if ( cptCol+1 < nbColonne-1 )
+				if ( cptCol+1 < nbColonne )
 				{
 					zoneCaseADroite = this.ctrl.getCase( cptCol+1, cptLig ).getNumSysteme();
 				}
 				
-				if ( cptLig+1 < nbLigne-1 )
+				if ( cptLig+1 < nbLigne )
 				{
 					zoneCaseEnBas   = this.ctrl.getCase( cptCol, cptLig+1 ).getNumSysteme();
 				}
 				
-				if ( (zoneCaseAct != zoneCaseADroite) && (zoneCaseADroite != -1) )
+				if (zoneCaseAct != zoneCaseADroite && cptCol+1 < nbColonne)
 				{
-					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite à sa droite." );
+					System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite à sa droite." );
 					
-					// Dessiner La ligne sur le côté droit de la case actuelle
-					// g2.drawLine(
-					                /* Départ X */
-					                /* Départ Y */
-					                /* Arrivé X */
-					                /* Arrivé Y */
-					//           );
+					//Dessiner La ligne sur le côté droit de la case actuelle
+					g2.drawLine(
+						/* Départ X */
+						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE,
+						/* Départ Y */
+						cptLig * PanelPlateau.TAILLE_CASE,
+						/* Arrivé X */
+						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE,
+						/* Arrivé Y */
+						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE
+					);
 				}
 				
-				if ( (zoneCaseAct != zoneCaseEnBas) && (zoneCaseEnBas != -1) )
+				if (zoneCaseAct != zoneCaseEnBas && cptLig+1 < nbLigne)
 				{
-					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite en bas." );
+					//System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite en bas." );
 					
 					// Dessiner La ligne sur le côté bas de la case actuelle
-					//g2.drawLine(
-					               /* Départ X */
-					               /* Départ Y */
-					               /* Arrivé X */
-					               /* Arrivé Y */
-					//           );
+					g2.drawLine(
+						/* Départ X */
+						cptCol * PanelPlateau.TAILLE_CASE,
+						/* Départ Y */
+						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE,
+						/* Arrivé X */
+						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE,
+						/* Arrivé Y */
+						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE
+					);
 				}
 			}
 		}

@@ -17,7 +17,7 @@ public class FrameCreation extends JFrame
 
 	protected static final Color COULEUR_TITRE       = Color.decode("#f1c232");
 	protected static final Color COULEUR_ZONE        = Color.decode("#f3f3f3");
-	protected static final Color COULEUR_FOND_FONCE  = new Color (37, 37, 37);
+	protected static final Color COULEUR_FOND_FONCE  = new Color (85, 64, 98);
 	protected static final Color COULEUR_FOND_CLAIR  = new Color (70, 70, 70);
 
 	protected static final int PANEL_INIT     = 1;
@@ -144,7 +144,10 @@ public class FrameCreation extends JFrame
 
 	}
 
-	public String getFichier() {return this.fichierCharge;}
+	public String getFichier() 
+	{
+		return this.fichierCharge;
+	}
 
 	public String chargerFichier()
 	{
@@ -155,8 +158,8 @@ public class FrameCreation extends JFrame
 		explorateur.setCurrentDirectory(new File ("./metier/sauvegardes/") );
 
 		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-			this.fichierCharge = explorateur.getSelectedFile().getAbsolutePath();
-
+			this.fichierCharge = explorateur
+				.getSelectedFile().getPath();
 		return this.fichierCharge;
 
 	}

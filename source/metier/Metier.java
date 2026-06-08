@@ -41,12 +41,12 @@ public class Metier
 	
 	public boolean sauvegardeExiste(String nomSauvegarde)
 	{
-		String cheminSauvegarde = Metier.CHEMIN_SAUVEGARDES +
-		                          nomSauvegarde + Metier.EXTENSION_SAUVEGARDES;
+		//String cheminSauvegarde = Metier.CHEMIN_SAUVEGARDES +
+		//                          nomSauvegarde + Metier.EXTENSION_SAUVEGARDES;
 		
 		try
 		{
-			Scanner sc = new Scanner ( new FileInputStream ( cheminSauvegarde ), "UTF8" );
+			Scanner sc = new Scanner ( new FileInputStream ( nomSauvegarde ), "UTF8" );
 			sc.close();
 		}
 		catch (Exception e)
@@ -155,12 +155,18 @@ public class Metier
 		
 		return true;
 	}
-	
+
 	public boolean sauvegarderPlateau(String nomSauvegarde)
 	{
+		return this.sauvegarderPlateau(nomSauvegarde, true);
+	}
+	
+	public boolean sauvegarderPlateau(String nomSauvegarde, boolean reecrire)
+	{
+		System.out.println(nomSauvegarde);
 		if ( this.getPlateau() == null ) return false;
 		
-		while ( this.sauvegardeExiste(nomSauvegarde) )
+		while ( this.sauvegardeExiste(nomSauvegarde) && !reecrire )
 		{
 			String[] nomSaveDiv = nomSauvegarde.split("-");
 			
@@ -196,7 +202,7 @@ public class Metier
 					(
 						new FileOutputStream
 						(
-							Metier.CHEMIN_SAUVEGARDES + nomSauvegarde + Metier.EXTENSION_SAUVEGARDES
+							/*Metier.CHEMIN_SAUVEGARDES +*/ nomSauvegarde /*+ Metier.EXTENSION_SAUVEGARDES*/
 						), "UTF8"
 					)
 				);
