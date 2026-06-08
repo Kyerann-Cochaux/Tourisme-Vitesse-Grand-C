@@ -106,13 +106,14 @@ public class FrameCreation extends JFrame
 				this.setSize                      (800, this.hauteurEcran -50 );
 				this.setExtendedState             (JFrame.NORMAL                    );
 				this.setJMenuBar                  (null);
+				this.fichierCharge = "./metier/sauvegardes/sauvegarde.data";
 			}
 
 			case FrameCreation.PANEL_EDITION ->
 			{
 				this.panelActuelle = new PanelEdition(this.ctrl, this      );
 				this.setExtendedState                (JFrame.MAXIMIZED_BOTH);
-				this.setJMenuBar                     (this.menuBarreEdition );
+				this.setJMenuBar                     (this.menuBarreEdition);
 			}
 
 			case FrameCreation.PANEL_CREATION ->
@@ -151,15 +152,15 @@ public class FrameCreation extends JFrame
 
 	public String chargerFichier()
 	{
-		this.fichierCharge = "";
 		JFileChooser explorateur = new JFileChooser();
+		this.fichierCharge = "";
 
 		explorateur.setDialogTitle     ("Ouvrir plateau..."            );
 		explorateur.setCurrentDirectory(new File ("./metier/sauvegardes/") );
 
 		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-			this.fichierCharge = explorateur
-				.getSelectedFile().getPath();
+			this.fichierCharge = explorateur.getSelectedFile().getPath();
+
 		return this.fichierCharge;
 
 	}

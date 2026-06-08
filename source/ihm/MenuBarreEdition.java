@@ -98,12 +98,12 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 		if (e.getSource() instanceof JMenuItem)
 		{
 			JMenuItem menui = ( (JMenuItem) e.getSource() );
-			System.out.println(  menui       .getText  () );
 
 			if (menui.getText().equals("Nouveau" ) ) 
 			{
 				// Ne fonctionne pas pour le moment
 				this.ctrl.sauvegarderPlateau(this.frameMere.getFichier() );
+				
 
 				this.frameMere.ouvrirPanel(FrameCreation.PANEL_INIT);
 			}

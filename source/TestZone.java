@@ -211,6 +211,10 @@ public class TestZone
 		test(plateau.estZoneScindee(5), "false");
 		test(plateau.estZoneScindee(9), "false");
 		
+		System.out.println();
+		System.out.println("+++++");
+		System.out.println("+++ Test estZoneScindee(numZone)");
+		
 		
 	}
 	

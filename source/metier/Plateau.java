@@ -235,7 +235,7 @@ public class Plateau
 		do
 		{
 			int[][] dPos = 
-			{//   dx  dy
+			{//	 dx  dy
 				{ 0, -1},
 				{+1,  0},
 				{ 0, +1},
@@ -257,9 +257,7 @@ public class Plateau
 					Case caseVerif = this.ensCases[nY][nX];
 					
 					if ( caseVerif.getNumSysteme() == numZone && !lstCaseZonee.contains(caseVerif) )
-					{
 						lstCaseZonee.add(caseVerif);
-					}
 				}
 				
 			}
