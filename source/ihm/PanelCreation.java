@@ -83,7 +83,7 @@ public class PanelCreation extends JPanel implements ActionListener
 		{
 			//this.frameCreation.ouvrirPanelEdition(fichierSelectionne);
 
-			String fichier = this.chargerFichier();
+			String fichier = this.frameCreation.chargerFichier();
 			
 			if (fichier != null && !fichier.equals("") )
 			{
@@ -92,20 +92,5 @@ public class PanelCreation extends JPanel implements ActionListener
 				this.frameCreation.ouvrirPanel   (FrameCreation.PANEL_EDITION); // Affiche le plateau dans IHM
 			}
 		}
-	}
-
-	public String chargerFichier()
-	{
-		String fichiercharge = "";
-		JFileChooser explorateur = new JFileChooser();
-
-		explorateur.setDialogTitle     ("Ouvrir plateau..."            );
-		explorateur.setCurrentDirectory(new File ("./metier/sauvegardes") );
-
-		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-			fichiercharge = explorateur.getSelectedFile().getPath();
-
-		return fichiercharge;
-
 	}
 }

@@ -5,6 +5,7 @@
 ./ihm/PanelInit.java
 ./ihm/PanelMenu.java
 ./ihm/PanelPlateau.java
+./ihm/MenuBarreEdition.java
 
 ./metier/Carte.java
 ./metier/Case.java
