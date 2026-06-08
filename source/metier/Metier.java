@@ -14,6 +14,7 @@ public class Metier
 	private Plateau plateauJeu;
 	private Pioche  pioche    ;
 	
+	
 	public Metier()
 	{
 		this.plateauJeu = null;
@@ -161,9 +162,10 @@ public class Metier
 		return this.sauvegarderPlateau(nomSauvegarde, true);
 	}
 	
+
 	public boolean sauvegarderPlateau(String nomSauvegarde, boolean reecrire)
 	{
-		System.out.println(nomSauvegarde);
+
 		if ( this.getPlateau() == null ) return false;
 		
 		while ( this.sauvegardeExiste(nomSauvegarde) && !reecrire )

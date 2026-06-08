@@ -235,7 +235,7 @@ public class Plateau
 		do
 		{
 			int[][] dPos = 
-			{//   dx  dy
+			{//	 dx  dy
 				{ 0, -1},
 				{+1,  0},
 				{ 0, +1},
@@ -257,9 +257,7 @@ public class Plateau
 					Case caseVerif = this.ensCases[nY][nX];
 					
 					if ( caseVerif.getNumSysteme() == numZone && !lstCaseZonee.contains(caseVerif) )
-					{
 						lstCaseZonee.add(caseVerif);
-					}
 				}
 				
 			}
@@ -334,6 +332,18 @@ public class Plateau
 		return true;
 	}
 	
+	public void remplirZoneVide()
+	{
+		for (int numLig = 0; numLig < this.ensCases.length; numLig++)
+			for (int numCol = 0; numCol < this.ensCases[numLig].length; numCol++)
+			{
+				if(this.ensCases[numLig][numCol].getNumSysteme() == -1)
+				{
+					this.remplirZone(this.nbSysteme, this.ensCases[numLig][numCol]);
+				}
+			}
+	}
+	
 
 	public boolean ajouterPlanete(int x, int y, Planete p) 
 	{
@@ -392,7 +402,6 @@ public class Plateau
 	{
 		if (source     .estVide()                  ) return false;
 		if (destination.estVide()                  ) return false;
-		if (source == destination                  ) return false;
 		if (this.voyageExiste(source, destination) ) return false;
 
 		int dX =  Math.abs(destination.getPosX() - source.getPosX() );
