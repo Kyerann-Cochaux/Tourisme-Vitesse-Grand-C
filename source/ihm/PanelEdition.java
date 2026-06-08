@@ -20,7 +20,7 @@ import java.util.ArrayList ;
 /**
  * Panel Edition
  * 
- * Panel utiliser pour editer des plateau manuellement
+ * Panel utiliser pour editer des plateaux manuellement
  * 
  * @author Groupe 5
  * 
@@ -35,8 +35,9 @@ public class PanelEdition extends JPanel implements ActionListener
 	
 	private ArrayList<JToggleButton> ensBoutonActifs ;
 	
+	private String          typeBtnSlct ;
 	private ButtonGroup     btgBtnActifs;
-	private JToggleButton[] tabTypePlanete; // Partie Planete	
+	private JToggleButton[] tabTypePlanete; // Partie Planete
 	private JToggleButton[] tabTypeEspece ; // Partie Espece
 
 	// Partie Plateau
@@ -54,9 +55,9 @@ public class PanelEdition extends JPanel implements ActionListener
 		JPanel panelZone;
 
 		JPanel panelLotBaseA;
-		JPanel panelLotPlaneteA;	
+		JPanel panelLotPlaneteA;
 
-		JPanel panelLotBaseB;	
+		JPanel panelLotBaseB;
 		JPanel panelLotPlaneteB;
 
 		/*------------------------------*/
@@ -64,14 +65,16 @@ public class PanelEdition extends JPanel implements ActionListener
 		/*------------------------------*/
 		this.ctrl          = ctrl ;
 		this.frameCreation = frameCreation;
-
+		
+		this.typeBtnSlct   = null ;
+		
 		this.setLayout( new BorderLayout() );
 		
 		/*-------------------------------*/
 		/*    Création des Composants    */
 		/*-------------------------------*/
 		
-		this.btgBtnActifs     = new ButtonGroup();
+		this.btgBtnActifs    = new ButtonGroup();
 		this.ensBoutonActifs = new ArrayList<JToggleButton>(4);
 
 		this.tabTypeEspece   = new JToggleButton[this.ctrl.getNbEspeces ()];
@@ -81,7 +84,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		// Création des JToggleButton pour les espèces
 		for (int cpt = 0; cpt < this.tabTypeEspece.length; cpt++) 
 			this.tabTypeEspece[cpt] = 
-		    new JToggleButton(new ImageIcon(PanelEdition.REP_IMAGES + "Espece-" + this.ctrl.getNomEspece(cpt) + ".png") );
+			new JToggleButton(new ImageIcon(PanelEdition.REP_IMAGES + "Espece-" + this.ctrl.getNomEspece(cpt) + ".png") );
 
 		// Création des JToggleButton pour les planètes
 		for (int cpt = 0; cpt < this.tabTypePlanete.length; cpt++) 
@@ -109,13 +112,13 @@ public class PanelEdition extends JPanel implements ActionListener
 
 		panelCentrer.setSize      ( this.panelPlateau.getWidth() + 2, this.panelPlateau.getHeight() +2 );
 		panelCentrer.setBackground( FrameCreation.COULEUR_FOND_FONCE                                   );
-		panelCentrer.add          (this.panelPlateau, new GridBagConstraints()                         );
+		panelCentrer.add          ( this.panelPlateau, new GridBagConstraints()                        );
 
 		this.scrollPlateau = new JScrollPane( panelCentrer );
 		
 		// Panel des Systèmes
-		panelSysteme          = new JPanel(new GridLayout(10,1) );
-		panelZone             = new JPanel(new GridLayout(1,2 ) );
+		panelSysteme          = new JPanel( new GridLayout(10,1) );
+		panelZone             = new JPanel( new GridLayout(1,2 ) );
 
 		this.tbgOutilZone     = new JToggleButton( "Zone"                     );
 		this.lblSelectionZone = new JLabel       ( "0", JLabel.CENTER         );

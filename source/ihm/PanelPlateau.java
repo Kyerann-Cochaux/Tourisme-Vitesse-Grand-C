@@ -91,11 +91,11 @@ public class PanelPlateau extends JPanel
 
 					if ( image != null )
 					{
-						g2.drawImage(image               , /* L'image à afficher */
-									null             , /* Traitement d'Image (Innutile ici) */
-									TAILLE_CASE * cptCol, /* Position X */
-									TAILLE_CASE * cptLig  /* Position Y */
-									);
+						g2.drawImage( image               , /* L'image à afficher */
+						              null                , /* Traitement d'Image (Innutile ici) */
+						              TAILLE_CASE * cptCol, /* Position X */
+						              TAILLE_CASE * cptLig  /* Position Y */
+						            );
 					}
 				}
 
@@ -161,24 +161,28 @@ public class PanelPlateau extends JPanel
 				
 				if ( (zoneCaseAct != zoneCaseADroite) && (zoneCaseADroite != -1) )
 				{
+					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite à sa droite." );
+					
 					// Dessiner La ligne sur le côté droit de la case actuelle
 					// g2.drawLine(
-					             /* Départ X */
-					             /* Départ Y */
-					             /* Arrivé X */
-					             /* Arrivé Y */
+					                /* Départ X */
+					                /* Départ Y */
+					                /* Arrivé X */
+					                /* Arrivé Y */
 					//           );
 				}
 				
 				if ( (zoneCaseAct != zoneCaseEnBas) && (zoneCaseEnBas != -1) )
 				{
+					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite en bas." );
+					
 					// Dessiner La ligne sur le côté bas de la case actuelle
-					// g2.drawLine(
-					             /* Départ X */
-					             /* Départ Y */
-					             /* Arrivé X */
-					             /* Arrivé Y */
-					//            );
+					//g2.drawLine(
+					               /* Départ X */
+					               /* Départ Y */
+					               /* Arrivé X */
+					               /* Arrivé Y */
+					//           );
 				}
 			}
 		}
@@ -230,7 +234,7 @@ public class PanelPlateau extends JPanel
 					{
 						g2.drawImage(
 						              image,                /* L'image à afficher */
-						              null,             /* Traitement d'Image (Innutile ici) */
+						              null,                 /* Traitement d'Image (Innutile ici) */
 						              TAILLE_CASE * cptCol, /* Position X */
 						              TAILLE_CASE * cptLig  /* Position Y */
 						            );
@@ -266,11 +270,11 @@ public class PanelPlateau extends JPanel
 						if ( image != null )
 						{
 							g2.drawImage(
-										  image,                /* L'image à afficher */
-										  null,             /* Traitement d'Image (Innutile ici) */
-										  TAILLE_CASE * cptCol, /* Position X */
-										  TAILLE_CASE * cptLig  /* Position Y */
-										);
+							              image,                /* L'image à afficher */
+							              null,                 /* Traitement d'Image (Innutile ici) */
+							              TAILLE_CASE * cptCol, /* Position X */
+							              TAILLE_CASE * cptLig  /* Position Y */
+							            );
 						}
 					}
 				}
