@@ -138,7 +138,6 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageZones( Graphics2D g2 )
 	{
-		g2.setColor( Color.RED );
 		g2.setStroke(new BasicStroke(3) );
 		
 		int nbLigne   = this.ctrl.getNbLignes  ();
@@ -151,6 +150,7 @@ public class PanelPlateau extends JPanel
 			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				// System.out.println( "Vérification de la case à " + cptLig + " Lig " + cptCol + " Col" );
+				g2.setColor( Color.RED );
 				
 				int zoneCaseAct     = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
 				int zoneCaseADroite = -1;
@@ -166,11 +166,11 @@ public class PanelPlateau extends JPanel
 					zoneCaseEnBas   = this.ctrl.getCase( cptCol, cptLig+1 ).getNumSysteme();
 				}
 				
-				if (zoneCaseAct != zoneCaseADroite && cptCol+1 < nbColonne)
+				//Dessiner La ligne sur le côté droit de la case actuelle
+				if ( zoneCaseAct != zoneCaseADroite && cptCol+1 < nbColonne )
 				{
 					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite à sa droite." );
 					
-					//Dessiner La ligne sur le côté droit de la case actuelle
 					g2.drawLine(
 						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ X */
 						cptLig * PanelPlateau.TAILLE_CASE,                            /* Départ Y */
@@ -179,11 +179,11 @@ public class PanelPlateau extends JPanel
 					);
 				}
 				
-				if (zoneCaseAct != zoneCaseEnBas && cptLig+1 < nbLigne)
+				// Dessiner La ligne sur le côté bas de la case actuelle
+				if ( zoneCaseAct != zoneCaseEnBas && cptLig+1 < nbLigne )
 				{
 					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite en bas." );
 					
-					// Dessiner La ligne sur le côté bas de la case actuelle
 					g2.drawLine(
 						cptCol * PanelPlateau.TAILLE_CASE,                            /* Départ X */
 						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ Y */
@@ -191,6 +191,13 @@ public class PanelPlateau extends JPanel
 						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE  /* Arrivé Y */
 					);
 				}
+				
+				// Dessin du Numéro de la Zone dans la case
+				g2.setColor( Color.YELLOW );
+				g2.drawString( ""+zoneCaseAct, 
+				               cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE - 10,
+				               cptLig * PanelPlateau.TAILLE_CASE + 15
+				             );
 			}
 		}
 	}
