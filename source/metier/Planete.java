@@ -49,7 +49,7 @@ public class Planete
 
 		this.espece = espece;
 		return true;
-	}
+	} 
 
 	public boolean setSymbole(char symbole)
 	{

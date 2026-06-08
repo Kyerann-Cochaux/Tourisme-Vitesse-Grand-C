@@ -36,7 +36,7 @@ public class PanelEdition extends JPanel implements ActionListener
 	private ArrayList<JToggleButton> ensBoutonActifs ;
 	
 	private String          typeBtnSlct ;
-	private ButtonGroup     btgBtnActifs;
+
 	private JToggleButton[] tabTypePlanete; // Partie Planete
 	private JToggleButton[] tabTypeEspece ; // Partie Espece
 
@@ -46,7 +46,7 @@ public class PanelEdition extends JPanel implements ActionListener
 
 	// Partie Système
 	private JToggleButton tbgOutilZone;
-	private JPanel        widgetSelectionZone;
+
 	private JLabel        lblSelectionZone;
 	private JButton       plusZone;
 	private JButton       moinsZone;
@@ -63,6 +63,10 @@ public class PanelEdition extends JPanel implements ActionListener
 		JPanel panelLotBaseB;
 		JPanel panelLotPlaneteB;
 
+		JPanel widgetSelectionZone;
+
+		ButtonGroup btgBtnActifs;
+
 		/*------------------------------*/
 		/*    Configuration du Panel    */
 		/*------------------------------*/
@@ -77,7 +81,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		/*    Création des Composants    */
 		/*-------------------------------*/
 		
-		this.btgBtnActifs    = new ButtonGroup();
+		btgBtnActifs    = new ButtonGroup();
 		this.ensBoutonActifs = new ArrayList<JToggleButton>(4);
 
 		this.tabTypeEspece   = new JToggleButton[this.ctrl.getNbTypeEspeces ()];
@@ -125,7 +129,7 @@ public class PanelEdition extends JPanel implements ActionListener
 
 		this.tbgOutilZone     = new JToggleButton( "Zone"                     );
 		
-		this.widgetSelectionZone = new JPanel ( new GridLayout( 2,1 ) );
+		widgetSelectionZone = new JPanel ( new GridLayout( 2,1 ) );
 		this.lblSelectionZone    = new JLabel ( "0", JLabel.CENTER );
 		this.plusZone            = new JButton( "+" );
 		this.moinsZone           = new JButton( "-" );
@@ -206,22 +210,22 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.panelPlateau.repaint();
 		
 		// Panel Système
-		this.widgetSelectionZone.add(this.lblSelectionZone);
+		widgetSelectionZone.add(this.lblSelectionZone);
 		JPanel panelPlusMoins = new JPanel( new GridLayout(1,2) );
 		panelPlusMoins.add( this.moinsZone );
 		panelPlusMoins.add( this.plusZone );
-		this.widgetSelectionZone.add(panelPlusMoins);
+		widgetSelectionZone.add(panelPlusMoins);
 		
 		panelZone           .add(this.tbgOutilZone);
 		this.ensBoutonActifs.add(this.tbgOutilZone);
-		panelZone           .add(this.widgetSelectionZone);
+		panelZone           .add(widgetSelectionZone);
 		
 		panelSysteme.add(panelZone);
 		this.add( panelSysteme, BorderLayout.EAST );
 		
 		// Ajout des Boutons dans le ButtonGroup
 		for ( JToggleButton btn : this.ensBoutonActifs )
-			this.btgBtnActifs.add(btn);
+			btgBtnActifs.add(btn);
 	
 		/*---------------------------------*/
 		/*    Activation des Composants    */

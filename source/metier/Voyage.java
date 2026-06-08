@@ -22,7 +22,7 @@ public class Voyage
 	{
 		this.planeteSource      = planeteSource;
 		this.planeteDestination = planeteDestination;
-		this.espece             = null;
+		this.espece             = null;	
 	}
 	
 	/* ---------------------------------- */
