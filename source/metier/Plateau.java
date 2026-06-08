@@ -206,11 +206,10 @@ public class Plateau
 
 	public boolean setEspece(Planete planete, String espece)
 	{
-		if (!this.especeExiste(espece) ) return false;
+		if ( !this.especeExiste(espece) ) return false;
+		if ( planete == null            ) return false;
 		
 		Planete planeteTemp = null;
-		
-		//List<String> lstEspecePosee = new ArrayList<String>(4);
 		
 		// On parcours les lignes
 		for (int lig = 0; lig < this.ensCases.length; lig++) 
