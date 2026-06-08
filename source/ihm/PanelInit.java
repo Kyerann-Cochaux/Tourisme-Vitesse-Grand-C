@@ -60,7 +60,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		this.tabLbl     = new JLabel    [5];
 		this.tabZoneTxt = new JTextField[4];
 		
-		this.tabLbl[0] = new JLabel("Initialisation du Plateau"       , SwingConstants.CENTER); // Titre
+		this.tabLbl[0] = new JLabel("Nouveau Plateau"     , SwingConstants.CENTER); // Titre
 		this.tabLbl[1] = new JLabel("Nombre de lignes :"              , SwingConstants.CENTER); // nbLignes
 		this.tabLbl[2] = new JLabel("Nombre de colonnes :"            , SwingConstants.CENTER); // nbColonnes
 		this.tabLbl[3] = new JLabel("Nombre d'espèces différentes :"  , SwingConstants.CENTER); // nbEspece

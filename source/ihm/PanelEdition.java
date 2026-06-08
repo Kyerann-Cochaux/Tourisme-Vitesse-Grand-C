@@ -46,7 +46,10 @@ public class PanelEdition extends JPanel implements ActionListener
 
 	// Partie Système
 	private JToggleButton tbgOutilZone;
+	private JPanel        widgetSelectionZone;
 	private JLabel        lblSelectionZone;
+	private JButton       plusZone;
+	private JButton       moinsZone;
 	
 	public PanelEdition( AppliCreation ctrl, FrameCreation frameCreation )
 	{
@@ -90,7 +93,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		for (int cpt = 0; cpt < this.tabTypePlanete.length; cpt++) 
 		{
 			this.tabTypePlanete[cpt] = new JToggleButton 
-			( 
+			(
 				new ImageIcon(PanelEdition.REP_IMAGES + "Planete-" + this.ctrl.getNomPlanete(cpt).charAt(0) + ".png") 
 			);
 		}
@@ -121,7 +124,11 @@ public class PanelEdition extends JPanel implements ActionListener
 		panelZone             = new JPanel( new GridLayout(1,2 ) );
 
 		this.tbgOutilZone     = new JToggleButton( "Zone"                     );
-		this.lblSelectionZone = new JLabel       ( "0", JLabel.CENTER         );
+		
+		this.widgetSelectionZone = new JPanel ( new GridLayout( 2,1 ) );
+		this.lblSelectionZone    = new JLabel ( "0", JLabel.CENTER );
+		this.plusZone            = new JButton( "+" );
+		this.moinsZone           = new JButton( "-" );
 		
 		/*------------------------------------*/
 		/*    Configuration des Composants    */
@@ -199,11 +206,17 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.panelPlateau.repaint();
 		
 		// Panel Système
-		panelZone           .add(this.tbgOutilZone     );
-		this.ensBoutonActifs.add(this.tbgOutilZone     );
-		panelZone           .add(this.lblSelectionZone );
-		panelSysteme        .add(panelZone             );
+		this.widgetSelectionZone.add(this.lblSelectionZone);
+		JPanel panelPlusMoins = new JPanel( new GridLayout(1,2) );
+		panelPlusMoins.add( this.moinsZone );
+		panelPlusMoins.add( this.plusZone );
+		this.widgetSelectionZone.add(panelPlusMoins);
 		
+		panelZone           .add(this.tbgOutilZone);
+		this.ensBoutonActifs.add(this.tbgOutilZone);
+		panelZone           .add(this.widgetSelectionZone);
+		
+		panelSysteme.add(panelZone);
 		this.add( panelSysteme, BorderLayout.EAST );
 		
 		// Ajout des Boutons dans le ButtonGroup
