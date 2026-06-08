@@ -402,7 +402,8 @@ public class Plateau
 		if (this.ensCases[y][x].getPlanete() == null) return false;
 
 		this.ensCases[y][x].setPlanete(null);
-
+		
+		this.actualiserVoyages();
 		return true;
 	}
 
