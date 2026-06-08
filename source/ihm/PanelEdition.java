@@ -360,7 +360,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		boolean especeDejaSupprimer = false ;
 		
 		// Suppression d'une Espèce
-		if ( this.ctrl.getPlanete( posColClk, posLigClk ).getEspece() != null )
+		if ( this.ctrl.getPlanete( posColClk, posLigClk ) != null && this.ctrl.getPlanete( posColClk, posLigClk ).getEspece() != null )
 		{
 			this.ctrl.supprimerEspece( posColClk, posLigClk );
 			especeDejaSupprimer = true ;
