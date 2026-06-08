@@ -24,14 +24,7 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 		                         { "I"  , "Enregistrer",      "E", "CTRL+S"       },
 		                         { "I"  , "Enregistrer Copie", "C", "CTRL+SHIFT+S"},
 		                         { "S"                                            },
-		                         { "I"  , "Quitter",          "Q", "ALT+F4"       },
-		                         { "M"  , "Edition",          "E"                 },
-		                         { "I"  , "Annuler",          "A", "CTRL+Z"       },
-		                         { "I"  , "Refaire",          "R", "CTRL+Y"       }//,
-		                         /*{ "S"                                            },
-		                         /*{ "I"  , "Copier",           "C", "CTRL+C"       },*/
-		                         /*{ "I"  , "Coller",           "L", "CTRL+V"       },*/
-		                         /*{ "I"  , "Couper",           "U", "CTRL+X"       } */};
+		                         { "I"  , "Quitter",          "Q", "ALT+F4"       } };
 
 		this.ctrl      = ctrl;
 		this.frameMere = frameMere;
@@ -68,7 +61,7 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 					{
 						int    iSep = 0;
 						char sAccelerator;
-						String sInput       = "";
+						String sInput = "";
 						String sLigne = modeleBarre[cptLig][modeleBarre[cptLig].length -1];
 
 						for (int cpt = 0; cpt < sLigne.length(); cpt++) 

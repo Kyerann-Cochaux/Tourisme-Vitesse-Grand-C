@@ -9,7 +9,7 @@ public class Plateau
 	private static final int TAILLE_MAX = 30;
 	
 	public static final String[] TAB_PLANETES = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
-	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felinoïd", "Azimae", "Silikon"};
+	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felinoid", "Azimae", "Silikon"};
 	                                          // Marron         BLeu        Rouge     Vert
 	
 	private Case[][] ensCases;
@@ -397,24 +397,8 @@ public class Plateau
 		int dX =  Math.abs(destination.getPosX() - source.getPosX() );
 		int dY =  Math.abs(destination.getPosY() - source.getPosY() );
 
-		/*if (dX >=  3|| dY >= 3) 
-		{
-			//System.out.println(source);
-			//System.out.println(destination);
-			System.out.println(dY > 0 ); 
-
-			System.out.println(source.getPosY() + ":" + dY );
-			System.out.println(this.getCase(dY   , 3) );
-			System.out.println(this.getCase(dY +1, 3) );
-			System.out.println(this.getCase(dY +2, 3) );
-
-		}*/
-
 		//         Orthogonal      Diagonal
 		//if ( dX == 0 ^ dY == 0  || dX == dY)
-
-		//System.out.println(dY ); // Axe Horizontal
-		//System.out.println(dX ); // Axe Vertical
 
 		for (int cpt = 1; cpt < Math.max(dX, dY); cpt++) 
 		{

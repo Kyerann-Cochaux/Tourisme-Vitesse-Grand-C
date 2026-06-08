@@ -152,7 +152,7 @@ public class FrameCreation extends JFrame
 		JFileChooser explorateur = new JFileChooser();
 
 		explorateur.setDialogTitle     ("Ouvrir plateau..."            );
-		explorateur.setCurrentDirectory(new File ("./metier/sauvegardes") );
+		explorateur.setCurrentDirectory(new File ("./metier/sauvegardes/") );
 
 		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
 			this.fichierCharge = explorateur.getSelectedFile().getAbsolutePath();
