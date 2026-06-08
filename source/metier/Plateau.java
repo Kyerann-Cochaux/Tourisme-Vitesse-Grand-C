@@ -435,21 +435,26 @@ public class Plateau
 						int nX = col + dDir[indDeltaDir][0];
 						int nY = lig + dDir[indDeltaDir][1];
 						
-						Case caseDest = this.ensCases[nY][nX];
-						
-						while ( nX >= 0 && nX < this.nbColonnes &&
-						        nY >= 0 && nY < this.nbLignes   &&
-						        caseDest.estVide()                 )
+						if ( nX >= 0 && nX < this.nbColonnes &&
+						     nY >= 0 && nY < this.nbLignes      )
 						{
-							nX += dDir[indDeltaDir][0];
-							nY += dDir[indDeltaDir][1];
 							
-							caseDest = this.ensCases[nY][nX];
-						}
-						
-						if ( !caseDep.estVide() )
-						{
-							this.lstVoyages.add(Voyage.creerVoyage(caseDep, caseDest));
+							Case caseDest = this.ensCases[nY][nX];
+							
+							while ( nX >= 0 && nX < this.nbColonnes &&
+							        nY >= 0 && nY < this.nbLignes   &&
+							        caseDest.estVide()                 )
+							{
+								caseDest = this.ensCases[nY][nX];
+								
+								nX += dDir[indDeltaDir][0];
+								nY += dDir[indDeltaDir][1];
+							}
+							
+							if ( caseDest != null && !caseDest.estVide() )
+							{
+								this.lstVoyages.add(Voyage.creerVoyage(caseDep, caseDest));
+							}
 						}
 						
 					}
