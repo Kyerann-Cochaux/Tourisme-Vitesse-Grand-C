@@ -63,9 +63,9 @@ public class AppliCreation
 		                                  );
 	}
 	
-	public void chargerPlateau         (String fichier)                      { this.metier.chargerPlateau    (fichier)                  ;}
-	public void sauvegarderPlateau     (String fichier)                      { this.metier.sauvegarderPlateau(fichier)                  ;}
-	public void sauvegarderCopiePlateau(String fichier)                      { this.metier.sauvegarderPlateau(fichier,false)  ;}
+	public void chargerPlateau         (String fichier)       { this.metier.chargerPlateau    (fichier)                        ;}
+	public void sauvegarderPlateau     (String nomSauvegarde) { this.metier.sauvegarderPlateau(nomSauvegarde, true)  ;}
+	public void sauvegarderCopiePlateau(String nomSauvegarde) { this.metier.sauvegarderPlateau(nomSauvegarde,false)  ;}
 	
 	public static void main(String[] args) 
 	{
