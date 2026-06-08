@@ -437,6 +437,7 @@ public class Plateau
 		}
 	
 		this.lstVoyages.add(Voyage.creerVoyage(source, destination) );
+		System.out.println("NbVoyage Metier -> " + this.getNbVoyages() );
 		return true;
 	}
 

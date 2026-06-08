@@ -35,9 +35,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 	private JLabel     lblNomFichier;
 	private JTextField txtNomFichier;
-	private JButton    btnValider;
 
-	
 	private int[] tabParametreEntrer;
 	
 	private JButton btnLancer;
@@ -95,7 +93,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		this.btnLancer  = new JButton("Lancer"       );
 		this.btnReset   = new JButton("Réinitialiser");
 		this.btnRetour  = new JButton("Retour"       );
-		this.btnValider = new JButton("Valider"      );
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -106,9 +103,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		panelNomFichier   .setOpaque(false);
 		this.txtNomFichier.setOpaque(false);
 
-		this.txtNomFichier.setFont      (FrameCreation.POLICE_TEXTE);
-		this.lblNomFichier.setFont      (FrameCreation.POLICE_TEXTE);
-		this.txtNomFichier.setForeground(FrameCreation.COULEUR_ZONE);
+		this.txtNomFichier.setFont      (FrameCreation.POLICE_TEXTE );
+		this.lblNomFichier.setFont      (FrameCreation.POLICE_TEXTE );
+		this.txtNomFichier.setForeground(FrameCreation.COULEUR_ZONE );
 		this.lblNomFichier.setForeground(FrameCreation.COULEUR_TITRE);
 
 		
@@ -140,7 +137,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		panelNomFichier.add(this.lblNomFichier);
 		panelNomFichier.add(this.txtNomFichier);
-		panelNomFichier.add(this.btnValider   );
 		
 		panelSaisie.add(this.tabLbl[0]); // Titre
 		panelSaisie.add(panelNomFichier);
@@ -172,7 +168,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		this.btnLancer .addActionListener(this);
 		this.btnReset  .addActionListener(this);
 		this.btnRetour .addActionListener(this);
-		this.btnValider.addActionListener(this);
 	}
 	
 	
@@ -233,8 +228,34 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				
 				//this.frameCreation.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
 
+				JFileChooser jfc = new JFileChooser("./metier/sauvegardes/");
+
+				for (File fExistant : jfc.getCurrentDirectory().listFiles() ) 
+				{
+					if (this.txtNomFichier.getText() == null || this.txtNomFichier.getText().equals("") )
+					{
+						JOptionPane.showMessageDialog
+						(this, "Le nom du fichier n'est pas renseigné",
+						"Nom du fichier inexistant", JOptionPane.ERROR_MESSAGE);
+						return;
+
+					}
+					else if ( (this.txtNomFichier.getText() + ".data").equals(fExistant.getName() ) )
+					{
+						JOptionPane.showMessageDialog
+						(this, "Le nom du fichier existe déjà",
+						"Fichier déjà existant", JOptionPane.ERROR_MESSAGE);
+						return;
+
+					}
+					else this.frameCreation.setNomSauvegarde(this.txtNomFichier.getText() );
+					
+				}
+
 				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 				this.frameCreation.ouvrirPanel(FrameCreation.PANEL_EDITION);
+
+
 
 			}
 		}
@@ -246,32 +267,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			this.frameCreation.ouvrirPanel(FrameCreation.PANEL_CREATION);
 		}
 
-		if (e.getSource() == this.btnValider )
-		{
-			JFileChooser jfc = new JFileChooser("./metier/sauvegardes/");
 
-			for (File fExistant : jfc.getCurrentDirectory().listFiles() ) 
-			{
-				if (this.txtNomFichier.getText() == null || this.txtNomFichier.getText().equals("") )
-				{
-					JOptionPane.showMessageDialog
-					(this, "Le nom du fichier n'est pas renseigné",
-					 "Nom du fichier inexistant", JOptionPane.ERROR_MESSAGE);
-					return;
-
-				}
-				else if (this.frameCreation.getNomSauvegarde().equals(fExistant.getName() ) )
-				{
-					JOptionPane.showMessageDialog
-					(this, "Le nom du fichier existe déjà",
-					 "Fichier déjà existant", JOptionPane.ERROR_MESSAGE);
-					return;
-
-				}
-				else this.frameCreation.setNomSauvegarde( this.txtNomFichier.getText() );
-				
-			}
-		}
+			
+		
 	}
 	
 	private void reinitialiserTexte()

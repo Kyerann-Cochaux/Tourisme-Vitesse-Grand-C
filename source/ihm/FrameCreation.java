@@ -145,12 +145,8 @@ public class FrameCreation extends JFrame
 
 	}
 
-	public String getNomSauvegarde() 
-	{
-		return this.nomSauvegardeChargee;
-	}
-
-	public void setNomSauvegarde(String nomFichier) { this.nomSauvegardeChargee = nomFichier;}
+	public String getNomSauvegarde()                  {return this.nomSauvegardeChargee;}
+	public void setNomSauvegarde  (String nomFichier) { this.nomSauvegardeChargee = nomFichier;}
 
 	public String chargerFichier()
 	{
