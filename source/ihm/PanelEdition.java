@@ -64,7 +64,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		JPanel panelLotPlaneteB;
 
 		JPanel widgetSelectionZone;
-
+		JPanel panelPlusMoins;
+		
 		ButtonGroup btgBtnActifs;
 
 		/*------------------------------*/
@@ -131,6 +132,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		widgetSelectionZone = new JPanel ( new GridLayout( 2,1 ) );
 		this.lblSelectionZone    = new JLabel ( "0", JLabel.CENTER );
+		panelPlusMoins           = new JPanel( new GridLayout(1,2) );
 		this.plusZone            = new JButton( "+" );
 		this.moinsZone           = new JButton( "-" );
 		
@@ -211,7 +213,6 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		// Panel Système
 		widgetSelectionZone.add(this.lblSelectionZone);
-		JPanel panelPlusMoins = new JPanel( new GridLayout(1,2) );
 		panelPlusMoins.add( this.moinsZone );
 		panelPlusMoins.add( this.plusZone );
 		widgetSelectionZone.add(panelPlusMoins);

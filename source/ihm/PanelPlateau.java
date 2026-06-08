@@ -263,29 +263,26 @@ public class PanelPlateau extends JPanel
 		{
 			for( int cptCol= 0 ; cptCol < nbColonne ; cptCol++ )
 			{
-				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
+				if ( this.ctrl.getPlanete(cptCol, cptLig) != null && this.ctrl.getPlanete(cptCol, cptLig).getEspece() != null  )
 				{
-					if ( this.ctrl.getPlanete(cptCol, cptLig).getEspece() != null  )
+					String nomEspece = this.ctrl.getPlanete(cptCol, cptLig).getEspece();
+					
+					BufferedImage image = null ;
+					try
 					{
-						String nomEspece = this.ctrl.getPlanete(cptCol, cptLig).getEspece();
-						
-						BufferedImage image = null ;
-						try
-						{
-							File inputFile = new File("../source/ihm/images/Tuiles/Espece-" + nomEspece + ".png");
-							image = ImageIO.read(inputFile);
-						}
-						catch (IOException e){}
-						
-						if ( image != null )
-						{
-							g2.drawImage(
-							              image,                /* L'image à afficher */
-							              null,                 /* Traitement d'Image (Innutile ici) */
-							              TAILLE_CASE * cptCol, /* Position X */
-							              TAILLE_CASE * cptLig  /* Position Y */
-							            );
-						}
+						File inputFile = new File("../source/ihm/images/Tuiles/Espece-" + nomEspece + ".png");
+						image = ImageIO.read(inputFile);
+					}
+					catch (IOException e){}
+					
+					if ( image != null )
+					{
+						g2.drawImage(
+						              image,                /* L'image à afficher */
+						              null,                 /* Traitement d'Image (Innutile ici) */
+						              TAILLE_CASE * cptCol, /* Position X */
+						              TAILLE_CASE * cptLig  /* Position Y */
+						            );
 					}
 				}
 			}
