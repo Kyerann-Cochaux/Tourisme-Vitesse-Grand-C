@@ -65,7 +65,7 @@ public class PanelPlateau extends JPanel
 		this.affichageZones(g2);
 		
 		// Affichage des Liens
-		// this.affichageLiens(g2);
+		this.affichageLiens(g2);
 		
 		// Affichage des Planètes
 		this.affichagePlanetes(g2);
@@ -172,14 +172,10 @@ public class PanelPlateau extends JPanel
 					
 					//Dessiner La ligne sur le côté droit de la case actuelle
 					g2.drawLine(
-						/* Départ X */
-						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE,
-						/* Départ Y */
-						cptLig * PanelPlateau.TAILLE_CASE,
-						/* Arrivé X */
-						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE,
-						/* Arrivé Y */
-						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE
+						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ X */
+						cptLig * PanelPlateau.TAILLE_CASE,                            /* Départ Y */
+						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Arrivé X */
+						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE  /* Arrivé Y */
 					);
 				}
 				
@@ -189,14 +185,10 @@ public class PanelPlateau extends JPanel
 					
 					// Dessiner La ligne sur le côté bas de la case actuelle
 					g2.drawLine(
-						/* Départ X */
-						cptCol * PanelPlateau.TAILLE_CASE,
-						/* Départ Y */
-						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE,
-						/* Arrivé X */
-						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE,
-						/* Arrivé Y */
-						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE
+						cptCol * PanelPlateau.TAILLE_CASE,                            /* Départ X */
+						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ Y */
+						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Arrivé X */
+						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE  /* Arrivé Y */
 					);
 				}
 			}
@@ -213,17 +205,16 @@ public class PanelPlateau extends JPanel
 		// System.out.println("Nombre de Voyage à render : " + nbVoyage);
 		if (nbVoyage >= 1)
 		{
-
 			for( int ind = 0 ; ind < nbVoyage ; ind++ )
 			{
-				//int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE / 2 ;
-				//int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE / 2 ;
-				//int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE / 2 ;
-				//int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE / 2 ;
+				int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE + TAILLE_CASE / 2 ;
+				int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE + TAILLE_CASE / 2 ;
+				int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE + TAILLE_CASE / 2 ;
+				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE + TAILLE_CASE / 2 ;
 				
 				// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				
-				//g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
+				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 			}
 		}
 	}

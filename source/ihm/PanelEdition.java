@@ -338,4 +338,15 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		this.panelPlateau.repaint();
 	}
+	
+	private void supprimerElement(MouseEvent e)
+	{
+		int posLigClk = (int) ( e.getY() / this.panelPlateau.getTailleCase() ) ;
+		int posColClk = (int) ( e.getX() / this.panelPlateau.getTailleCase() ) ;
+		
+		if ( this.ctrl.getPlanete( posColClk, posLigClk ).getEspece() != null )
+		{
+			
+		}
+	}
 }

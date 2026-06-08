@@ -55,12 +55,22 @@ public class AppliCreation
 		this.metier.getPlateau().ajouterPlanete(indCol, indLig, pTmp);
 	}
 	
+	public void supprimerPlanete( int indCol, int indLig )
+	{
+		this.metier.getPlateau().retirerPlanete( indCol, indLig );
+	}
+	
 	public void ajouterEspece( int indLig, int indCol, String nomEspece )
 	{
 		this.metier.getPlateau().setEspece( 
 		                                    this.getPlanete( indLig, indCol ),
 		                                    nomEspece
 		                                  );
+	}
+	
+	public void supprimerEspece( int indCol, int indLig )
+	{
+		this.getPlanete( indCol, indLig ).setEspece(null);
 	}
 	
 	public void ajouterSysteme( int numSysteme, int indCol, int indLig )
