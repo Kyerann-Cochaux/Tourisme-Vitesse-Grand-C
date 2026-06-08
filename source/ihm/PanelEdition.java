@@ -211,7 +211,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		// Panel Système
 		widgetSelectionZone.add(this.lblSelectionZone);
-		JPanel panelPlusMoins = new JPanel( new GridLayout(1,2) );
+		JPanel panelPlusMoins = new JPanel( new GridLayout(1,2) );	
 		panelPlusMoins.add( this.btnMoinsZone );
 		panelPlusMoins.add( this.btnPlusZone );
 		widgetSelectionZone.add(panelPlusMoins);
