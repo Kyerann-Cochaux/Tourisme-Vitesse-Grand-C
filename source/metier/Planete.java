@@ -40,12 +40,18 @@ public class Planete
 
 	public boolean setEspece(String espece) 
 	{
+		if (espece == null) 
+		{
+			this.espece = null;
+			return true;
+		}
+
 		if ( !especeValide(espece) )
 		{
-			// System.out.println("Espece invalide : " + espece);
+			System.out.println("Espece invalide : " + espece);
 			return false;
 		}
-		// System.out.println("Espece valide : " + espece);
+		 System.out.println("Espece valide : " + espece);
 
 		this.espece = espece;
 		return true;
