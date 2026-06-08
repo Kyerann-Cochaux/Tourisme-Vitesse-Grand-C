@@ -143,6 +143,7 @@ public class Plateau
 		if (forcerPlacement)
 		{
 			this.ensCases[y][x].setNumSysteme(numSysteme);
+			if ( numSysteme > this.nbSysteme ) this.nbSysteme = numSysteme+1;
 			return true;
 		}
 		
