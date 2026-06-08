@@ -46,7 +46,7 @@ public class PanelPlateau extends JPanel
 	
 	public int getTailleCase()
 	{
-		return this.TAILLE_CASE ;
+		return PanelPlateau.TAILLE_CASE ;
 	}
 	
 	public void paintComponent(Graphics g)
