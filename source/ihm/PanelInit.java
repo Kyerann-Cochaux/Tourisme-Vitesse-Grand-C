@@ -32,11 +32,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	// Création de 2 tableaux pour faciliter la modification des composants
 	private JLabel    [] tabLbl;
 	private JTextField[] tabZoneTxt;
-
-	private JLabel     lblNomFichier;
-	private JTextField txtNomFichier;
-	private JButton    btnValider;
-
 	
 	private int[] tabParametreEntrer;
 	
@@ -52,7 +47,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 		JPanel panelAction    ;
 		JPanel panelSaisie    ;
-		JPanel panelNomFichier;
 
 		this.ctrl          = ctrl;
 		this.frameCreation = frameCreation;
@@ -66,36 +60,33 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 		panelAction     = new JPanel();
 		panelSaisie     = new JPanel( new GridLayout(6,1) );
-		panelNomFichier = new JPanel();
 		
-		
-		this.tabLbl     = new JLabel    [5];
-		this.tabZoneTxt = new JTextField[4];
+		this.tabLbl     = new JLabel    [6];
+		this.tabZoneTxt = new JTextField[5];
 
-		this.lblNomFichier = new JLabel("Nom du plateau : ");
-		this.txtNomFichier = new JTextField(10);
+		this.tabLbl[0]        = new JLabel("Nouveau Plateau"                 , SwingConstants.CENTER); // Titre
+		this.tabLbl[1]        = new JLabel("Nom du plateau : "               , SwingConstants.CENTER);
+		this.tabLbl[2]        = new JLabel("Nombre de lignes :"              , SwingConstants.CENTER); // nbLignes
+		this.tabLbl[3]        = new JLabel("Nombre de colonnes :"            , SwingConstants.CENTER); // nbColonnes
+		this.tabLbl[4]        = new JLabel("Nombre de planètes différentes :", SwingConstants.CENTER); // nbPlanete
+		this.tabLbl[5]        = new JLabel("Nombre d'espèces différentes :"  , SwingConstants.CENTER); // nbEspece
 		
-		this.tabLbl[0] = new JLabel("Nouveau Plateau"                 , SwingConstants.CENTER); // Titre
-		this.tabLbl[1] = new JLabel("Nombre de lignes :"              , SwingConstants.CENTER); // nbLignes
-		this.tabLbl[2] = new JLabel("Nombre de colonnes :"            , SwingConstants.CENTER); // nbColonnes
-		this.tabLbl[3] = new JLabel("Nombre de planètes différentes :", SwingConstants.CENTER); // nbPlanete
-		this.tabLbl[4] = new JLabel("Nombre d'espèces différentes :"  , SwingConstants.CENTER); // nbEspece
-		
+
 		/*
 			Si le compteur vaut 0 ou 1, le texte est "valeur entre 1 et 30", sinon c'est "valeur entre 2 et 4"
 			La boucle permet d'éviter de répéter 4 fois la même instruction, sachant qu'il y a 2 fois 2 textes identiques
 		*/
 		
-		for (int cpt = 0; cpt < tabZoneTxt.length ; cpt++) 
+		for (int cpt = 0; cpt < tabZoneTxt.length; cpt++) 
 		{
-			if (cpt < 2) this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_TAILLE  , PanelInit.NB_CARA);
-			else         this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
+			if (cpt == 0)             this.tabZoneTxt[cpt] = new JTextField("Entrez le nom du plateau", PanelInit.NB_CARA);
+			if (cpt == 1 || cpt == 2) this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_TAILLE  , PanelInit.NB_CARA);
+			if (cpt > 2             ) this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
 		}
 		
 		this.btnLancer  = new JButton("Lancer"       );
 		this.btnReset   = new JButton("Réinitialiser");
 		this.btnRetour  = new JButton("Retour"       );
-		this.btnValider = new JButton("Valider"      );
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -103,14 +94,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		panelAction       .setOpaque(false);
 		panelSaisie       .setOpaque(false);
-		panelNomFichier   .setOpaque(false);
-		this.txtNomFichier.setOpaque(false);
-
-		this.txtNomFichier.setFont      (FrameCreation.POLICE_TEXTE);
-		this.lblNomFichier.setFont      (FrameCreation.POLICE_TEXTE);
-		this.txtNomFichier.setForeground(FrameCreation.COULEUR_ZONE);
-		this.lblNomFichier.setForeground(FrameCreation.COULEUR_TITRE);
-
 		
 		/*--- COULEURS ET POLICES ---*/
 		
@@ -137,13 +120,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
-		
-		panelNomFichier.add(this.lblNomFichier);
-		panelNomFichier.add(this.txtNomFichier);
-		panelNomFichier.add(this.btnValider   );
-		
 		panelSaisie.add(this.tabLbl[0]); // Titre
-		panelSaisie.add(panelNomFichier);
 		// On part de 1 car on ajoute pas le titre, déjà ajouté au dessus, et qu'il n'a pas besoin d'être sur un sous panel
 		
 		
@@ -172,7 +149,6 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		this.btnLancer .addActionListener(this);
 		this.btnReset  .addActionListener(this);
 		this.btnRetour .addActionListener(this);
-		this.btnValider.addActionListener(this);
 	}
 	
 	
@@ -226,11 +202,35 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		{
 			if ( this.valeursVerifier() )
 			{
-				int nbLignes   = Integer.parseInt( this.tabZoneTxt[0].getText() );
-				int nbColonnes = Integer.parseInt( this.tabZoneTxt[1].getText() );
-				int nbFormes   = Integer.parseInt( this.tabZoneTxt[2].getText() );
-				int nbEspeces  = Integer.parseInt( this.tabZoneTxt[3].getText() );
+				int nbLignes   = Integer.parseInt( this.tabZoneTxt[1].getText() );
+				int nbColonnes = Integer.parseInt( this.tabZoneTxt[2].getText() );
+				int nbFormes   = Integer.parseInt( this.tabZoneTxt[3].getText() );
+				int nbEspeces  = Integer.parseInt( this.tabZoneTxt[4].getText() );
 				
+				JFileChooser jfc = new JFileChooser("./metier/sauvegardes/");
+
+				for (File fExistant : jfc.getCurrentDirectory().listFiles() ) 
+				{
+					if (this.tabZoneTxt[0].getText() == null || this.tabZoneTxt[0].getText().equals("") )
+					{
+						JOptionPane.showMessageDialog
+						(this, "Le nom du fichier n'est pas renseigné",
+						"Nom du fichier inexistant", JOptionPane.ERROR_MESSAGE);
+						return;
+
+					}
+					else if (this.frameCreation.getNomSauvegarde().equals(fExistant.getName() ) )
+					{
+						JOptionPane.showMessageDialog
+						(this, "Le nom du fichier existe déjà",
+						"Fichier déjà existant", JOptionPane.ERROR_MESSAGE);
+						return;
+
+					}
+					else this.frameCreation.setNomSauvegarde( tabZoneTxt[0].getText() );
+					
+				}
+
 				//this.frameCreation.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
 
 				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
@@ -245,41 +245,15 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			// this.frameCreation.ouvrirPanelCreation();
 			this.frameCreation.ouvrirPanel(FrameCreation.PANEL_CREATION);
 		}
-
-		if (e.getSource() == this.btnValider )
-		{
-			JFileChooser jfc = new JFileChooser("./metier/sauvegardes/");
-
-			for (File fExistant : jfc.getCurrentDirectory().listFiles() ) 
-			{
-				if (this.txtNomFichier.getText() == null || this.txtNomFichier.getText().equals("") )
-				{
-					JOptionPane.showMessageDialog
-					(this, "Le nom du fichier n'est pas renseigné",
-					 "Nom du fichier inexistant", JOptionPane.ERROR_MESSAGE);
-					return;
-
-				}
-				else if (this.frameCreation.getNomSauvegarde().equals(fExistant.getName() ) )
-				{
-					JOptionPane.showMessageDialog
-					(this, "Le nom du fichier existe déjà",
-					 "Fichier déjà existant", JOptionPane.ERROR_MESSAGE);
-					return;
-
-				}
-				else this.frameCreation.setNomSauvegarde( this.txtNomFichier.getText() );
-				
-			}
-		}
 	}
 	
 	private void reinitialiserTexte()
 	{
 		for (int cpt = 0; cpt < tabZoneTxt.length ; cpt++) 
 		{
-			if   (cpt < 2)  this.tabZoneTxt[cpt].setText( PanelInit.TEXTE_TAILLE  );
-			else            this.tabZoneTxt[cpt].setText( PanelInit.TEXTE_QUANTITE);
+			if (cpt == 0)             this.tabZoneTxt[cpt].setText("Entrez le nom du plateau");
+			if (cpt == 1 || cpt == 2) this.tabZoneTxt[cpt].setText(PanelInit.TEXTE_TAILLE  );
+			if (cpt > 2             ) this.tabZoneTxt[cpt].setText(PanelInit.TEXTE_QUANTITE);
 		}
 	}
 	
@@ -292,7 +266,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		boolean erreurLimPasTrouver = true ;
 		boolean erreurNumPasTrouver = true ;
 		
-		for (int cpt = 0 ; cpt < this.tabZoneTxt.length ; cpt++ )
+		for (int cpt = 1 ; cpt < this.tabZoneTxt.length ; cpt++ )
 		{
 			// Si le texte entrée n'est pas numérique valeurValide retourne 2
 			if ( valeurValide( this.tabZoneTxt[cpt], cpt ) == 1 )
@@ -335,8 +309,8 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 			// Je regarde si le cast est possible...
 			int val = Integer.parseInt( zoneTxt.getText() );
 			
-			if ( ( index <  2 && (val < 5 || val > 30) ) ||
-			     ( index >= 2 && (val < 2 || val > 4 ) ) )
+			if ( ( index > 0 && index < 3 && (val < 5 || val > 30) ) ||
+			     ( index >= 3 && (val < 2 || val > 4 ) ) )
 			{
 				// Si l'un des champs possède une valeur non comprise dans sa plage de valeurs,
 				// Je retourne 2
@@ -377,8 +351,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		if (txtActuelle.equals( PanelInit.TEXTE_TAILLE ) || txtActuelle.equals("") )
 		{
-			if (indTxtClc == 0 || indTxtClc == 1) unfocusTxtField.setText( PanelInit.TEXTE_TAILLE  );
-			if (indTxtClc == 2 || indTxtClc == 3) unfocusTxtField.setText( PanelInit.TEXTE_QUANTITE);
+			if (indTxtClc == 0                  ) unfocusTxtField.setText( "Entrez un nom pour le plateau");
+			if (indTxtClc == 1 || indTxtClc == 2) unfocusTxtField.setText( PanelInit.TEXTE_TAILLE         );
+			if (indTxtClc == 3 || indTxtClc == 4) unfocusTxtField.setText( PanelInit.TEXTE_QUANTITE       );
 		}
 		
 	}
