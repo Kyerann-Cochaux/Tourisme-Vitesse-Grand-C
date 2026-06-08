@@ -44,6 +44,11 @@ public class PanelPlateau extends JPanel
 		this.setBackground   ( FrameCreation.COULEUR_FOND_FONCE );
 	}
 	
+	public int getTailleCase()
+	{
+		return this.TAILLE_CASE ;
+	}
+	
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);

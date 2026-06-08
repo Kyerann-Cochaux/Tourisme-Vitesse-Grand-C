@@ -77,8 +77,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.btgBtnActifs    = new ButtonGroup();
 		this.ensBoutonActifs = new ArrayList<JToggleButton>(4);
 
-		this.tabTypeEspece   = new JToggleButton[this.ctrl.getNbEspeces ()];
-		this.tabTypePlanete  = new JToggleButton[this.ctrl.getNbPlanetes()];
+		this.tabTypeEspece   = new JToggleButton[this.ctrl.getNbTypeEspeces ()];
+		this.tabTypePlanete  = new JToggleButton[this.ctrl.getNbTypePlanetes()];
 
 
 		// Création des JToggleButton pour les espèces
@@ -103,8 +103,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		panelLotBaseA     = new JPanel(new GridLayout(1,2) );
 		panelLotBaseB     = panelLotPlaneteB = null;
 
-		if (this.ctrl.getNbPlanetes() >= 3 ) panelLotPlaneteB = new JPanel( new GridLayout(1,this.ctrl.getNbPlanetes() /2) );
-		if (this.ctrl.getNbEspeces () >= 3 ) panelLotBaseB    = new JPanel( new GridLayout(1,this.ctrl.getNbPlanetes() /2) );
+		if (this.ctrl.getNbTypePlanetes() >= 3 ) panelLotPlaneteB = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
+		if (this.ctrl.getNbTypeEspeces () >= 3 ) panelLotBaseB    = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
 
 		// Panel d'affichage du Plateau
 		this.panelPlateau   = new PanelPlateau      (this.ctrl);
@@ -155,12 +155,12 @@ public class PanelEdition extends JPanel implements ActionListener
 
 		panelPlanete.add( panelLotPlaneteA);
 		
-		if ( this.ctrl.getNbPlanetes() >= 3 )
+		if ( this.ctrl.getNbTypePlanetes() >= 3 )
 		{
 			panelLotPlaneteB    .add(this.tabTypePlanete[2] );
 			this.ensBoutonActifs.add(this.tabTypePlanete[2] );
 
-			if ( this.ctrl.getNbPlanetes() == 4 )
+			if ( this.ctrl.getNbTypePlanetes() == 4 )
 			{
 				panelLotPlaneteB    .add(tabTypePlanete[3] );
 				this.ensBoutonActifs.add(tabTypePlanete[3] );
@@ -179,12 +179,12 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.ensBoutonActifs.add(this.tabTypeEspece[1] );
 		panelPlanete        .add( panelLotBaseA        );
 
-		if ( this.ctrl.getNbEspeces() >= 3 )
+		if ( this.ctrl.getNbTypeEspeces() >= 3 )
 		{
 			panelLotBaseB       .add( this.tabTypeEspece[2] );
 			this.ensBoutonActifs.add(this.tabTypeEspece [2] );
 			
-			if ( this.ctrl.getNbEspeces() == 4 )
+			if ( this.ctrl.getNbTypeEspeces() == 4 )
 			{
 				panelLotBaseB       .add( this.tabTypeEspece[3]);
 				this.ensBoutonActifs.add(this.tabTypeEspece [3]);
@@ -222,15 +222,15 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.panelPlateau.addMouseListener( this.gererSouris() );
 	}
 	
-	/*----------------------------------*/
-	/* Gestion de selection des boutons */
-	/*----------------------------------*/
+	/*----------------------------------------*/
+	/*    Gestion de selection des boutons    */
+	/*----------------------------------------*/
 	public void actionPerformed( ActionEvent e )
 	{
 		// On parcours les boutons Planete pour voir si il est pressé
 		for ( int cpt=0 ; cpt < this.tabTypePlanete.length ; cpt++ )
 		{
-			if ( e.getSource() == this.tabTypePlanete[cpt] ) { this.typeBtnSlct = "" + this.ctrl.getNomPlanete(cpt).charAt(0) ; }
+			if ( e.getSource() == this.tabTypePlanete[cpt] ) { this.typeBtnSlct = this.ctrl.getNomPlanete(cpt) ; }
 		}
 		
 		// On parcours les boutons Espece pour voir si il est pressé
@@ -245,14 +245,36 @@ public class PanelEdition extends JPanel implements ActionListener
 		// System.out.println( "Bouton Selectionné : " + this.typeBtnSlct );
 	}
 	
+	/*----------------------------------------------------*/
+	/*    Gestion de l'ajout d'éléments sur le Plateau    */
+	/*----------------------------------------------------*/
+	
 	private MouseAdapter gererSouris()
 	{
 		return new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e)
 			{
-				// System.out.println( e.paramString() );
+				if( e.getButton() == MouseEvent.BUTTON1 ) { ajouterElement(e); }
 			}
 		} ;
+	}
+	
+	// Méthode utiliser par notre MouseAdapter
+	private void ajouterElement(MouseEvent e)
+	{
+		int posLigClk = (int) ( e.getY() / this.panelPlateau.getTailleCase() ) ;
+		int posColClk = (int) ( e.getX() / this.panelPlateau.getTailleCase() ) ;
+		
+		// Ajout d'une Planète
+		for( int ind=0 ; ind < this.ctrl.getNbTypePlanetes() ; ind++ )
+		{
+			if ( this.ctrl.getNomPlanete(ind) == this.typeBtnSlct )
+			{
+				this.ctrl.ajouterPlanete( posColClk, posLigClk, this.typeBtnSlct );
+			}
+		}
+		
+		this.panelPlateau.repaint();
 	}
 }
