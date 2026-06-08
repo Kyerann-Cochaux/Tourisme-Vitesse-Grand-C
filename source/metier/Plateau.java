@@ -386,22 +386,13 @@ public class Plateau
 				}
 			}
 		}
-
+		
 		//System.out.println("AJOUT PLANETE");
-
+		
 		this.ensCases[y][x].setPlanete(p);
-
-		for (int lig = 0; lig < this.ensCases.length; lig++) 
-		{
-			for (int col = 0; col < this.ensCases[lig].length; col++)
-			{
-				this.ajouterVoyage(this.getCase(x, y), this.getCase(col, lig) );
-				
-			}
-			
-		}
-
-
+		
+		this.actualiserVoyages();
+		
 		return true;
 	}
 
@@ -414,31 +405,58 @@ public class Plateau
 		return true;
 	}
 
-	public boolean ajouterVoyage(Case source, Case destination)
+	public void actualiserVoyages()
 	{
-		if (source     .estVide()                  ) return false;
-		if (destination.estVide()                  ) return false;
-		//if (this.voyageExiste(source, destination) ) return false;
-
-		int dX =  Math.abs(destination.getPosX() - source.getPosX() );
-		int dY =  Math.abs(destination.getPosY() - source.getPosY() );
-
-		//         Orthogonal      Diagonal
-		//if ( dX == 0 ^ dY == 0  || dX == dY)
+		this.lstVoyages = new ArrayList<Voyage>();
 		
-		for (int cpt = 1; cpt < Math.max(dX, dY); cpt++) 
+		int[][] dDir = 
+		{//	 dx  dy
+			{ 0, -1},
+			{+1, -1},
+			{+1,  0},
+			{+1, +1}
+		};
+		
+		// parcours de toutes les cases
+		for (int lig = 0; lig < this.nbLignes; lig++)
 		{
-			// même colonne                 // Case vide
-			if (dX == 0  && !this.getCase(source.getPosX()       , source.getPosY() + cpt ).estVide() ) return false;
-			if (dY == 0  && !this.getCase(source.getPosX()       , source.getPosY() + cpt ).estVide() ) return false;
-			if (dX == dY && !this.getCase(source.getPosX() + cpt , source.getPosY() - cpt ).estVide() ) return false;
-			if (dX == dY && !this.getCase(source.getPosX() - cpt , source.getPosY() + cpt ).estVide() ) return false;
-
+			for (int col = 0; col < this.nbColonnes; col++)
+			{
+				Case caseDep = this.ensCases[lig][col];
+					
+				if (!caseDep.estVide())
+				{
+					
+					// parcours dans 4 directions
+					// jusqu'as tomber sur 
+					// soit une planete, soit le bord
+					for (int indDeltaDir = 0; indDeltaDir < dDir.length; indDeltaDir++)
+					{
+						int nX = col + dDir[indDeltaDir][0];
+						int nY = lig + dDir[indDeltaDir][1];
+						
+						Case caseDest = this.ensCases[nY][nX];
+						
+						while ( nX >= 0 && nX < this.nbColonnes &&
+						        nY >= 0 && nY < this.nbLignes   &&
+						        caseDest.estVide()                 )
+						{
+							nX += dDir[indDeltaDir][0];
+							nY += dDir[indDeltaDir][1];
+							
+							caseDest = this.ensCases[nY][nX];
+						}
+						
+						if ( !caseDep.estVide() )
+						{
+							this.lstVoyages.add(Voyage.creerVoyage(caseDep, caseDest));
+						}
+						
+					}
+					
+				}
+			}
 		}
-	
-		this.lstVoyages.add(Voyage.creerVoyage(source, destination) );
-		System.out.println("NbVoyage Metier -> " + this.getNbVoyages() );
-		return true;
 	}
 
 	public void viderPlateau()

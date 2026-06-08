@@ -194,7 +194,7 @@ public class TestMetier
 		System.out.println("/* ---------------------------------- */");
 		System.out.println();
 		p.viderPlateau();
-		//System.out.println("source inexistante : " + (p.ajouterVoyage(p.getCase(0, 0), p.getCase(5, 0) ) == false ? "OK" : "ERREUR") );
+		//System.out.println("source inexistante : " + (p.ajouterVoyage(p.getCase(0, 0), p.getCase(5, 0) ) == false ? "OK" : "ERREUR") ); // la methode n'existe plus
 		//System.out.println("dest   inexistante : " + (p.ajouterVoyage(p.getCase(5, 0), p.getCase(0, 0) ) == false ? "OK" : "ERREUR") );
 
 		/* ---------------------------------- */
@@ -245,65 +245,10 @@ public class TestMetier
 
 		p.ajouterPlanete(2, 8, Planete.creerPlanete('G') );
 		p.ajouterPlanete(8, 8, Planete.creerPlanete('G') );
-
-
-
-
-
-		/* ---------------------------------- */
-		/*         Ajout des Liaisons         */
-		/* ---------------------------------- */
-
 		
-
-		// Ajout d'un voyage sur l'axe horizontal
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 5) )                                        == true  ? "OK" : "Erreur"); 
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 5) )                                        == true  ? "OK" : "Erreur"); 
-		System.out.println("Voyage horizontal déjà présent (1): " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 5) ) == false ? "OK" : "Erreur") ); 
-		System.out.println("Voyage horizontal déjà présent (2): " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 5) ) == false ? "OK" : "Erreur") ); 
-		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ((p.getNbVoyages() == 2 ? "OK" : "Erreur") ) );
-
-		// Ajout d'un voyage sur l'axe vertical
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 4) ) == true ? "OK" : "Erreur"); 
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 6) ) == true ? "OK" : "Erreur"); 
-		System.out.println("Voyage vertical déjà présent (1) : " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 4) ) == false ? "OK" : "Erreur") ); 
-		System.out.println("Voyage vertical déjà présent (2) : " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 6) ) == false ? "OK" : "Erreur") ); 
-		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ((p.getNbVoyages() == 4 ? "OK" : "Erreur") ) );
-
-		// Ajout d'un voyage sur l'axe diagonal SE / NO
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 4) ) == true ? "OK" : "Erreur"); 
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 6) ) == true ? "OK" : "Erreur"); 
-		System.out.println("Voyage diagonal SE / NO déjà présent (1): " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 4) ) == false ? "OK" : "Erreur") ); 
-		System.out.println("Voyage diagonal SE / NO déjà présent (2): " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 6) ) == false ? "OK" : "Erreur") ); 
-		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ( (p.getNbVoyages() == 6 ? "OK" : "Erreur") ) );
-
-		//Ajout d'un voyage sur l'axe SO / NE
-
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 6) ) == true ? "OK" : "Erreur"); 
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 4) ) == true ? "OK" : "Erreur"); 
-		System.out.println("Voyage diagonal SO / NE déjà présent : " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(6, 6) ) == false ? "OK" : "Erreur") ); 
-		System.out.println("Voyage diagonal SO / NE déjà présent : " + (p.ajouterVoyage(p.getCase(5, 5), p.getCase(4, 4) ) == false ? "OK" : "Erreur") ); 
-		System.out.println("NbVoyages total : " + p.getNbVoyages()  + " ==> " + ( (p.getNbVoyages() == 8 ? "OK" : "Erreur") ) );
-
-		System.out.println();
-		System.out.println("/* -- Ajout sur les axes ++ -- */");
-		System.out.println("\n\n");
-
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(8, 5) ) == false ? "OK" : "Erreur"); 
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(2, 5) ) == false ? "OK" : "Erreur"); 
-
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 2) ) == false ? "OK" : "Erreur"); 
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(5, 8) ) == false ? "OK" : "Erreur"); 
-
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(8, 2) ) == false ? "OK" : "Erreur"); 
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(8, 8) ) == false ? "OK" : "Erreur"); 
-
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(2, 2) ) == false ? "OK" : "Erreur"); 
-		System.out.println(p.ajouterVoyage(p.getCase(5, 5), p.getCase(2, 8) ) == false ? "OK" : "Erreur"); 
-
-		System.out.println(p.afficherPlanetes() );
-		System.out.println(p.afficherVoyages() );
-
+		
+		
+		
 		System.out.println("/* ---------------------------------- */");
 		System.out.println("/*       Test Génération Plateau      */");
 		System.out.println("/* ---------------------------------- */");
