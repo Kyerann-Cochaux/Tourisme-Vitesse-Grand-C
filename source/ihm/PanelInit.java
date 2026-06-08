@@ -210,9 +210,12 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 				
 				JFileChooser jfc = new JFileChooser("./metier/sauvegardes/");
 
+				
+			
 				for (File fExistant : jfc.getCurrentDirectory().listFiles() ) 
 				{
-					if (this.tabZoneTxt[0].getText() == null || this.tabZoneTxt[0].getText().equals("") )
+
+					if (this.tabZoneTxt[0].getText().equals("Entrez un nom pour le plateau") )
 					{
 						JOptionPane.showMessageDialog
 						(this, "Le nom du fichier n'est pas renseigné",
@@ -220,7 +223,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 						return;
 
 					}
-					else if (this.frameCreation.getNomSauvegarde().equals(fExistant.getName() ) )
+					if ((this.frameCreation.getNomSauvegarde() + ".data").equals(fExistant.getName() ) )
 					{
 						JOptionPane.showMessageDialog
 						(this, "Le nom du fichier existe déjà",
@@ -232,7 +235,9 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 					
 				}
 				
-				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
+
+				
+				this.ctrl         .initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 				this.frameCreation.ouvrirPanel(FrameCreation.PANEL_EDITION);
 
 
