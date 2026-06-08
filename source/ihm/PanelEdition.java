@@ -41,15 +41,15 @@ public class PanelEdition extends JPanel implements ActionListener
 	private JToggleButton[] tabTypeEspece ; // Partie Espece
 
 	// Partie Plateau
-	private JScrollPane  scrollPlateau;
+	private JScrollPane  spPlateau;
 	private PanelPlateau panelPlateau;
 
 	// Partie Système
 	private JToggleButton tbgOutilZone;
 
-	private JLabel        lblSelectionZone;
-	private JButton       plusZone;
-	private JButton       moinsZone;
+	private JLabel  lblSelectionZone;
+	private JButton btnPlusZone;
+	private JButton btnMoinsZone;
 	
 	public PanelEdition( AppliCreation ctrl, FrameCreation frameCreation )
 	{
@@ -121,7 +121,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		panelCentrer.setBackground( FrameCreation.COULEUR_FOND_FONCE                                   );
 		panelCentrer.add          ( this.panelPlateau, new GridBagConstraints()                        );
 
-		this.scrollPlateau = new JScrollPane( panelCentrer );
+		this.spPlateau = new JScrollPane( panelCentrer );
 		
 		// Panel des Systèmes
 		panelSysteme          = new JPanel( new GridLayout(10,1) );
@@ -131,8 +131,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		widgetSelectionZone = new JPanel ( new GridLayout( 2,1 ) );
 		this.lblSelectionZone    = new JLabel ( "0", JLabel.CENTER );
-		this.plusZone            = new JButton( "+" );
-		this.moinsZone           = new JButton( "-" );
+		this.btnPlusZone            = new JButton( "+" );
+		this.btnMoinsZone           = new JButton( "-" );
 		
 		/*------------------------------------*/
 		/*    Configuration des Composants    */
@@ -144,9 +144,9 @@ public class PanelEdition extends JPanel implements ActionListener
 		panelPlanete.setPreferredSize( new Dimension ( 200 , 900 ) );
 
 		// Panel d'affichage du Plateau
-		this.scrollPlateau.setBackground               (FrameCreation.COULEUR_FOND_FONCE          );
-		this.scrollPlateau.setVerticalScrollBarPolicy  (JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED  );
-		this.scrollPlateau.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.spPlateau.setBackground               (FrameCreation.COULEUR_FOND_FONCE          );
+		this.spPlateau.setVerticalScrollBarPolicy  (JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED  );
+		this.spPlateau.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		// Panel des Système
 		panelSysteme.setBackground   ( FrameCreation.COULEUR_FOND_CLAIR          );
@@ -206,16 +206,16 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.add( panelPlanete, BorderLayout.WEST );
 		
 		// Panel Plateau
-		this.add( this.scrollPlateau, BorderLayout.CENTER );
+		this.add( this.spPlateau, BorderLayout.CENTER );
 		this.panelPlateau.repaint();
 		
 		// Panel Système
 		widgetSelectionZone.add(this.lblSelectionZone);
 		JPanel panelPlusMoins = new JPanel( new GridLayout(1,2) );
-		panelPlusMoins.add( this.moinsZone );
-		panelPlusMoins.add( this.plusZone );
+		panelPlusMoins.add( this.btnMoinsZone );
+		panelPlusMoins.add( this.btnPlusZone );
 		widgetSelectionZone.add(panelPlusMoins);
-		
+
 		panelZone           .add(this.tbgOutilZone);
 		this.ensBoutonActifs.add(this.tbgOutilZone);
 		panelZone           .add(widgetSelectionZone);
@@ -236,8 +236,8 @@ public class PanelEdition extends JPanel implements ActionListener
 			btn.addActionListener(this);
 		
 		// Activation des Boutons du Widget de Selection de Zone
-		this.moinsZone.addActionListener(this);
-		this.plusZone .addActionListener(this);
+		this.btnMoinsZone.addActionListener(this);
+		this.btnPlusZone .addActionListener(this);
 		
 		// Activation du Panel Plateau
 		this.panelPlateau.addMouseListener( this.gererSouris() );
@@ -264,7 +264,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		if ( e.getSource() == this.tbgOutilZone ) { this.typeBtnSlct = "Zone" ; }
 		
 		// Code de la gestion de la selection de zone
-		if ( e.getSource() == this.moinsZone )
+		if ( e.getSource() == this.btnMoinsZone )
 		{
 			int nbZoneAct = Integer.parseInt( this.lblSelectionZone.getText() );
 			
@@ -276,7 +276,7 @@ public class PanelEdition extends JPanel implements ActionListener
 			}
 		}
 		
-		if ( e.getSource() == this.plusZone )
+		if ( e.getSource() == this.btnPlusZone )
 		{
 			int nbZoneAct = Integer.parseInt( this.lblSelectionZone.getText() );
 			
