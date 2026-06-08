@@ -65,7 +65,6 @@ public class Metier
 		int nbFormes   = 0;
 		int nbEspeces  = 0;
 		
-		
 		try
 		{
 			Scanner sc = new Scanner ( new FileInputStream ( cheminSauvegarde ), "UTF8" );
@@ -157,6 +156,8 @@ public class Metier
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			return false;
 		}
+		
+		this.plateauJeu.actualiserVoyages();
 		
 		return true;
 	}
