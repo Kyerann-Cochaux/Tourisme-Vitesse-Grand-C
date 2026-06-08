@@ -65,7 +65,7 @@ public class PanelPlateau extends JPanel
 		this.affichageZones(g2);
 		
 		// Affichage des Liens
-		this.affichageLiens(g2);
+		// this.affichageLiens(g2);
 		
 		// Affichage des Planètes
 		this.affichagePlanetes(g2);
@@ -208,22 +208,22 @@ public class PanelPlateau extends JPanel
 		g2.setColor( Color.WHITE );
 		
 		int nbVoyage = this.ctrl.getNbVoyages();
-		System.out.println("NbVoyages -> " + nbVoyage);
+		//System.out.println("NbVoyages -> " + nbVoyage);
 		
 		// System.out.println("Nombre de Voyage à render : " + nbVoyage);
 		if (nbVoyage >= 1)
 		{
 
-			for( int ind=0 ; ind < nbVoyage ; ind++ )
+			for( int ind = 0 ; ind < nbVoyage ; ind++ )
 			{
-				int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE / 2 ;
-				int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE / 2 ;
-				int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE / 2 ;
-				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE / 2 ;
+				//int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE / 2 ;
+				//int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE / 2 ;
+				//int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE / 2 ;
+				//int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE / 2 ;
 				
 				// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				
-				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
+				//g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 			}
 		}
 	}

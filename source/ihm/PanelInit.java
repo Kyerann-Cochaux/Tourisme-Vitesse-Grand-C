@@ -32,7 +32,14 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	// Création de 2 tableaux pour faciliter la modification des composants
 	private JLabel    [] tabLbl;
 	private JTextField[] tabZoneTxt;
+<<<<<<< HEAD
 	
+=======
+
+	private JLabel     lblNomFichier;
+	private JTextField txtNomFichier;
+
+>>>>>>> 616711ee176ae73f28a01b8e5086c5c979f040f1
 	private int[] tabParametreEntrer;
 	
 	private JButton btnLancer;
@@ -94,6 +101,17 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		panelAction       .setOpaque(false);
 		panelSaisie       .setOpaque(false);
+<<<<<<< HEAD
+=======
+		panelNomFichier   .setOpaque(false);
+		this.txtNomFichier.setOpaque(false);
+
+		this.txtNomFichier.setFont      (FrameCreation.POLICE_TEXTE );
+		this.lblNomFichier.setFont      (FrameCreation.POLICE_TEXTE );
+		this.txtNomFichier.setForeground(FrameCreation.COULEUR_ZONE );
+		this.lblNomFichier.setForeground(FrameCreation.COULEUR_TITRE);
+
+>>>>>>> 616711ee176ae73f28a01b8e5086c5c979f040f1
 		
 		/*--- COULEURS ET POLICES ---*/
 		
@@ -120,6 +138,13 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
+<<<<<<< HEAD
+=======
+		
+		panelNomFichier.add(this.lblNomFichier);
+		panelNomFichier.add(this.txtNomFichier);
+		
+>>>>>>> 616711ee176ae73f28a01b8e5086c5c979f040f1
 		panelSaisie.add(this.tabLbl[0]); // Titre
 		// On part de 1 car on ajoute pas le titre, déjà ajouté au dessus, et qu'il n'a pas besoin d'être sur un sous panel
 		
@@ -233,8 +258,34 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 
 				//this.frameCreation.ouvrirPanelEdition(nbLignes, nbColonnes, nbFormes, nbEspeces);
 
+				JFileChooser jfc = new JFileChooser("./metier/sauvegardes/");
+
+				for (File fExistant : jfc.getCurrentDirectory().listFiles() ) 
+				{
+					if (this.txtNomFichier.getText() == null || this.txtNomFichier.getText().equals("") )
+					{
+						JOptionPane.showMessageDialog
+						(this, "Le nom du fichier n'est pas renseigné",
+						"Nom du fichier inexistant", JOptionPane.ERROR_MESSAGE);
+						return;
+
+					}
+					else if ( (this.txtNomFichier.getText() + ".data").equals(fExistant.getName() ) )
+					{
+						JOptionPane.showMessageDialog
+						(this, "Le nom du fichier existe déjà",
+						"Fichier déjà existant", JOptionPane.ERROR_MESSAGE);
+						return;
+
+					}
+					else this.frameCreation.setNomSauvegarde(this.txtNomFichier.getText() );
+					
+				}
+
 				this.ctrl.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 				this.frameCreation.ouvrirPanel(FrameCreation.PANEL_EDITION);
+
+
 
 			}
 		}

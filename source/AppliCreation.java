@@ -33,8 +33,7 @@ public class AppliCreation
 	
 	public Planete getPlanete( int indCol, int indLig ) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
 	
-	
-	
+
 	/* ---------------------------------- */
 	/*            Modificateurs           */
 	/* ---------------------------------- */

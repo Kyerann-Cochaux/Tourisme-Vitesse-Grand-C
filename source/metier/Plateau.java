@@ -353,9 +353,9 @@ public class Plateau
 		if (!planeteValide    (p, x, y        ) ) return false;
 		if (!planeteExiste    (p.getSymbole() ) ) return false;
 
-		System.out.println("AJOUT PLANETE");
-
-
+		System.out.println("AJOUT PLANETE : " + x + "/" + y );
+		
+		
 		// Dans le cas où la planète fournie en paramètre est une base, il faut vérifier qu'elle n'est pas 
 		// déjà présente sur le plateau.
 		
@@ -395,7 +395,7 @@ public class Plateau
 		{
 			for (int col = 0; col < this.ensCases[lig].length; col++)
 			{
-				this.ajouterVoyage(this.getCase(y, x), this.getCase(col, lig) );
+				this.ajouterVoyage(this.getCase(x, y), this.getCase(col, lig) );
 				
 			}
 			
@@ -425,18 +425,19 @@ public class Plateau
 
 		//         Orthogonal      Diagonal
 		//if ( dX == 0 ^ dY == 0  || dX == dY)
-
+		
 		for (int cpt = 1; cpt < Math.max(dX, dY); cpt++) 
 		{
 			// même colonne                 // Case vide
-			if (dX == 0  && !this.getCase(source.getPosY() + cpt , source.getPosX()      ).estVide() ) return false;
-			if (dY == 0  && !this.getCase(source.getPosY() + cpt , source.getPosX()      ).estVide() ) return false;
-			if (dX == dY && !this.getCase(source.getPosY() - cpt, source.getPosX() +  cpt).estVide() ) return false;
-			if (dX == dY && !this.getCase(source.getPosY() + cpt, source.getPosX() -  cpt).estVide() ) return false;
+			if (dX == 0  && !this.getCase(source.getPosX()       , source.getPosY() + cpt ).estVide() ) return false;
+			if (dY == 0  && !this.getCase(source.getPosX()       , source.getPosY() + cpt ).estVide() ) return false;
+			if (dX == dY && !this.getCase(source.getPosX() + cpt , source.getPosY() - cpt ).estVide() ) return false;
+			if (dX == dY && !this.getCase(source.getPosX() - cpt , source.getPosY() + cpt ).estVide() ) return false;
 
 		}
 	
 		this.lstVoyages.add(Voyage.creerVoyage(source, destination) );
+		System.out.println("NbVoyage Metier -> " + this.getNbVoyages() );
 		return true;
 	}
 
