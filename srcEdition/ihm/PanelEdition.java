@@ -6,12 +6,11 @@ import javax.swing.*;
 import java.awt.event.* ;
 
 import java.awt.BorderLayout ;
-import java.awt.Color;
 import java.awt.GridLayout ;
 import java.awt.GridBagLayout ;
 import java.awt.GridBagConstraints ;
 import java.awt.Dimension ;
-
+import java.awt.Font;
 import java.util.ArrayList ;
 
 /**
@@ -47,7 +46,6 @@ public class PanelEdition extends JPanel implements ActionListener
 	// Partie composants à ajouter sur le plateau.
 	private JLabel lblSelectionZone;
 
-
 	private JButton btnPlusZone;
 	private JButton btnMoinsZone;
 	
@@ -59,8 +57,14 @@ public class PanelEdition extends JPanel implements ActionListener
 
 		JPanel panelLotBaseA;
 		JPanel panelLotPlaneteA;
+		JPanel panelLblPlaneteA;
+		JPanel panelLblBaseA;
+
 		JPanel panelLotBaseB;
 		JPanel panelLotPlaneteB;
+		JPanel panelLblPlaneteB;
+		JPanel panelLblBaseB;
+
 
 		JPanel panelCentrer;
 
@@ -86,25 +90,40 @@ public class PanelEdition extends JPanel implements ActionListener
 
 		panelComposants = new JPanel(new GridLayout  (11,2) );
 
-		panelLotPlaneteA  = new JPanel(new GridLayout(1,2) );
-		panelLotBaseA     = new JPanel(new GridLayout(1,2) );
-		panelLotBaseB     = null;
-		panelLotPlaneteB  = null;
+		panelLotPlaneteA = new JPanel(new GridLayout(1,2) );
+		panelLblPlaneteA = new JPanel(new GridLayout(1,2) );
+		panelLotBaseA    = new JPanel(new GridLayout(1,2) );
+		panelLblBaseA    = new JPanel(new GridLayout(1,2) );
 
-		if (this.ctrl.getNbTypePlanetes() >= 3 ) panelLotPlaneteB = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
-		if (this.ctrl.getNbTypeEspeces () >= 3 ) panelLotBaseB    = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
+		panelLotBaseB    = null;
+		panelLblPlaneteB = null;
+		panelLotPlaneteB = null;
+		panelLblBaseB    = null;
+
+
+		if (this.ctrl.getNbTypePlanetes() >= 3 )
+		{
+			panelLotPlaneteB = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() / 2) );
+			panelLblPlaneteB = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() / 2) );
+		} 
+		if (this.ctrl.getNbTypeEspeces () >= 3 )
+		{
+			panelLotBaseB = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
+			panelLblBaseB = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
+
+		} 
 
 		 /* -- Panel d'affichage du Plateau -- */
 
-		this.panelPlateau   = new PanelPlateau(this.ctrl      );
-		panelCentrer        = new JPanel( new GridBagLayout() );
+		this.panelPlateau = new PanelPlateau(this.ctrl      );
+		panelCentrer      = new JPanel( new GridBagLayout() );
 
 		 /* ------- Panel des Systèmes ------- */
 
-		panelSysteme          = new JPanel( new GridLayout(10,1 ) );
-		panelZone             = new JPanel( new GridLayout(1 ,2 ) );
-		widgetSelectionZone   = new JPanel( new GridLayout(2 ,1 ) );
-		panelPlusMoins        = new JPanel( new GridLayout(1 ,2 ) );
+		panelSysteme        = new JPanel( new GridLayout(10,1 ) );
+		panelZone           = new JPanel( new GridLayout(1 ,2 ) );
+		widgetSelectionZone = new JPanel( new GridLayout(2 ,1 ) );
+		panelPlusMoins      = new JPanel( new GridLayout(1 ,2 ) );
 
 		panelCentrer.add( this.panelPlateau, new GridBagConstraints() );
 
@@ -168,6 +187,12 @@ public class PanelEdition extends JPanel implements ActionListener
 		lblGrpPlanetes.setForeground(FrameCreation.COULEUR_ZONE);
 		lblGrpBases   .setForeground(FrameCreation.COULEUR_ZONE);
 
+		panelLblBaseA   .setOpaque(false);
+		panelLblPlaneteA.setOpaque(false);
+		panelLblBaseB   .setOpaque(false);
+		panelLblPlaneteB.setOpaque(false);
+
+
 		// 
 		/*-------------------------------------*/
 		/*    Positionnement des Composants    */
@@ -176,12 +201,36 @@ public class PanelEdition extends JPanel implements ActionListener
 		/* Panel Planètes */
 		// Partie Planete
 
-		panelLotPlaneteA    .add(this.tabTypePlanete[0]);
-		panelLotPlaneteA    .add(this.tabTypePlanete[1]);
-		this.ensBoutonActifs.add(this.tabTypePlanete[0]);
-		this.ensBoutonActifs.add(this.tabTypePlanete[1]);
+		panelLotPlaneteA    .add(this.tabTypePlanete[0] );
+		panelLotPlaneteA    .add(this.tabTypePlanete[1] );
+		this.ensBoutonActifs.add(this.tabTypePlanete[0] );
+		this.ensBoutonActifs.add(this.tabTypePlanete[1] );
+
+		for (int cpt = 0; cpt < this.ctrl.getNbTypePlanetes(); cpt++)
+		{
+			JLabel lblTemp = new JLabel(this.ctrl.getNomPlanete(cpt), SwingConstants.CENTER );
+
+			lblTemp.setOpaque          (false                   );
+			lblTemp.setForeground(FrameCreation.COULEUR_ZONE              );
+			lblTemp.setFont(new Font("Goldman", Font.BOLD, 17) );
+
+			if (cpt < 2) panelLblPlaneteA.add(lblTemp);
+			else       panelLblPlaneteB.add(lblTemp );
+		}
+
+		for (int cpt = 0; cpt < this.ctrl.getNbTypeEspeces(); cpt++)
+		{
+			JLabel lblTemp = new JLabel(this.ctrl.getNomEspece(cpt), SwingConstants.CENTER);
+			lblTemp.setOpaque          (false                         );
+			lblTemp.setForeground      (FrameCreation.COULEUR_ZONE              );
+			lblTemp.setFont            (new Font("Goldman", Font.BOLD, 17) );
+
+			if (cpt  < 2) panelLblBaseA.add(lblTemp);
+			else          panelLblBaseB.add(lblTemp);
+		}
 
 		panelComposants.add(lblGrpPlanetes  );
+		panelComposants.add(panelLblPlaneteA);
 		panelComposants.add(panelLotPlaneteA);
 		
 		if ( this.ctrl.getNbTypePlanetes() >= 3 )
@@ -195,10 +244,12 @@ public class PanelEdition extends JPanel implements ActionListener
 				this.ensBoutonActifs.add(tabTypePlanete[3] );
 			}
 
-			panelComposants.add( panelLotPlaneteB );
+			panelComposants.add(panelLotPlaneteB);
+			panelComposants.add(panelLblPlaneteB);
 		}
 
 		panelComposants.add( lblGrpBases ); // Séparateur
+		panelComposants.add(panelLblBaseA);
 
 		// Partie Base
 
@@ -220,6 +271,8 @@ public class PanelEdition extends JPanel implements ActionListener
 				this.ensBoutonActifs.add(this.tabTypeEspece [3]);
 			}
 			panelComposants.add( panelLotBaseB );
+			panelComposants.add(panelLblBaseB);
+
 		}
 		
 		this.panelPlateau.repaint();
@@ -308,12 +361,10 @@ public class PanelEdition extends JPanel implements ActionListener
 			if ( nbZoneAct <= this.ctrl.getNbSysteme()-1 )
 			{
 				nbZoneAct++;
-				// System.out.println( "On passe à la zone suivante : " + nbZoneAct );
 				this.lblSelectionZone.setText( "" + nbZoneAct );
 			}
 		}
 		
-		// System.out.println( "Bouton Selectionné : " + this.typeBtnSlct );
 	}
 	
 	/*----------------------------------------------------*/

@@ -11,7 +11,7 @@ import srcJeu.AppliJeu ;
 
 public class PanelMenu extends JPanel implements ActionListener
 {
-	private AppliJeu    ctrl;
+	private AppliJeu ctrl;
 	
 	private FrameJeu frameJeu;
 	
@@ -77,7 +77,7 @@ public class PanelMenu extends JPanel implements ActionListener
 		if (e.getSource() == this.btnSolo)
 		{
 			JFileChooser explorateur = new JFileChooser();
-			explorateur.setDialogTitle("Ouvrir un plateau existant");
+			explorateur.setDialogTitle("Choisir Plateau...");
 			
 			explorateur.setCurrentDirectory(new File("../sauvegardes/"));
 			
