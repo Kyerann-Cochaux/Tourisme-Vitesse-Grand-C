@@ -1,6 +1,6 @@
 package source.ihm;
 
-import source.AppliCreation;
+import source.AppliJeu;
 
 import javax.swing.*;
 import java.awt.Color;
@@ -13,17 +13,17 @@ public class FrameJeu extends JFrame
 	protected static final Color COULEUR_TITRE       = Color.decode("#f1c232");
 	protected static final Color COULEUR_ZONE        = Color.decode("#f3f3f3");
 
-	protected static final Color COULEUR_FOND_FONCE  = new Color (37, 37, 37);
+	protected static final Color COULEUR_FOND_FONCE  = new Color (85, 64, 98);
 	protected static final Color COULEUR_FOND_CLAIRE = new Color (70, 70, 70);
 	
-	private AppliCreation ctrl;
+	private AppliJeu ctrl;
 	private JPanel        panelActuelle;
 	
-	public FrameJeu(AppliCreation ctrl)
+	public FrameJeu(AppliJeu ctrl)
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
-		this.setSize(500, 250);
-		this.setLocation(700, 450);
+		this.setSize(500, 300);
+		this.setLocation(675, 400);
 		
 		/* ---------------------------------- */
 		/*       Création des composants      */

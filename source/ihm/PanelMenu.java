@@ -7,11 +7,11 @@ import java.io.File;
 
 import javax.swing.*;
 
-import source.AppliCreation ;
+import source.AppliJeu ;
 
 public class PanelMenu extends JPanel implements ActionListener
 {
-	private AppliCreation    ctrl;
+	private AppliJeu    ctrl;
 	
 	private FrameJeu frameJeu;
 	
@@ -19,9 +19,11 @@ public class PanelMenu extends JPanel implements ActionListener
 	
 	private JLabel lblMenu;
 	
-	private JButton btnCharger ;
+	private JButton btnSolo ;
+	private JButton btnLocal ;
+	private JButton btnMultijoueur ;
 	
-	public PanelMenu(AppliCreation ctrl, FrameJeu frameJeu)
+	public PanelMenu(AppliJeu ctrl, FrameJeu frameJeu)
 	{
 		this.ctrl     = ctrl;
 		this.frameJeu = frameJeu;
@@ -33,13 +35,15 @@ public class PanelMenu extends JPanel implements ActionListener
 		/* ---------------------------------- */
 		
 		this.panelAccueil = new JPanel();
-		this.panelAccueil.setLayout(new GridLayout(4, 1, 0, 20) );
+		this.panelAccueil.setLayout(new GridLayout(5, 1, 0, 20) );
 		
 		this.lblMenu = new JLabel ("Tourisme à Vitesse Grand C", SwingConstants.CENTER);
 		this.lblMenu.setFont      (FrameJeu.POLICE_TEXTE         );
 		this.lblMenu.setForeground(FrameJeu.COULEUR_TITRE        );
 		
-		this.btnCharger  = new JButton("Charger un plateau" );
+		this.btnSolo         = new JButton("Partie Solo" );
+		this.btnLocal        = new JButton("Partie Multijoueur Local" );
+		this.btnMultijoueur  = new JButton("Partie Multijoueur" );
 		
 		
 		/* ---------------------------------- */
@@ -50,7 +54,9 @@ public class PanelMenu extends JPanel implements ActionListener
 		JPanel panelVide = new JPanel();
 		panelVide.setOpaque(false);
 		this.panelAccueil.add( panelVide );
-		this.panelAccueil.add( this.btnCharger );
+		this.panelAccueil.add( this.btnSolo );
+		this.panelAccueil.add( this.btnLocal );
+		this.panelAccueil.add( this.btnMultijoueur );
 		
 		this.panelAccueil.setOpaque(false);
 		
@@ -61,17 +67,19 @@ public class PanelMenu extends JPanel implements ActionListener
 		/*    Activation des Composants    */
 		/* ------------------------------- */
 		
-		this.btnCharger.addActionListener(this);
+		this.btnSolo.addActionListener(this);
+		this.btnLocal.addActionListener(this);
+		this.btnMultijoueur.addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
-		if (e.getSource() == this.btnCharger)
+		if (e.getSource() == this.btnSolo)
 		{
 			JFileChooser explorateur = new JFileChooser();
 			explorateur.setDialogTitle("Ouvrir un plateau existant");
 			
-			explorateur.setCurrentDirectory(new File("."));
+			explorateur.setCurrentDirectory(new File("../source/metier/sauvegardes/"));
 			
 			int resultat = explorateur.showOpenDialog(this.frameJeu);
 			
