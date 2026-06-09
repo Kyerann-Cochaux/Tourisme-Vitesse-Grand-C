@@ -67,6 +67,17 @@ public class AppliCreation
 	{
 		this.getPlanete( indCol, indLig ).setEspece(null);
 	}
+
+	public int getNbEspeces()
+	{
+		return metier.getNbEspeces();
+	}
+
+	public int getNbEspecesPosees()
+	{
+		return metier.getNbEspecesPosees ();
+	}
+	
 	
 	public void ajouterSysteme( int numSysteme, int indCol, int indLig )
 	{
