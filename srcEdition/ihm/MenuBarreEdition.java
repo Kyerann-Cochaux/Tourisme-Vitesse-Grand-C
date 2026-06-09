@@ -121,8 +121,19 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 			}
 
 			if (menui.getText().equals("Enregistrer"      ) && this.ctrl.getNbEspeces () == this.ctrl.getNbEspecesPosees ()) this.ctrl.sauvegarderPlateau     (this.frameMere.getNomSauvegarde() );
-			if (menui.getText().equals("Enregistrer Copie") && this.ctrl.getNbEspeces () == this.ctrl.getNbEspecesPosees ()) this.ctrl.sauvegarderCopiePlateau(this.frameMere.getNomSauvegarde() );
-
+			else 
+			{
+				JOptionPane.showMessageDialog
+				(this, "Certaines éspeces ne sont pas placer sur le plateau",
+				 "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+			}
+			 if (menui.getText().equals("Enregistrer Copie") && this.ctrl.getNbEspeces () == this.ctrl.getNbEspecesPosees ()) this.ctrl.sauvegarderCopiePlateau(this.frameMere.getNomSauvegarde() );
+			else 
+			{
+				JOptionPane.showMessageDialog
+				(this, "Certaines éspeces ne sont pas placer sur le plateau",
+				 "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	
