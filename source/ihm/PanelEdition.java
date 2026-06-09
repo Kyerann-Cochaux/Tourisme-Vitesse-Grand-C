@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.* ;
 
 import java.awt.BorderLayout ;
+import java.awt.Color;
 import java.awt.GridLayout ;
 import java.awt.GridBagLayout ;
 import java.awt.GridBagConstraints ;
@@ -43,47 +44,78 @@ public class PanelEdition extends JPanel implements ActionListener
 	// Partie Système
 	private JToggleButton tbgOutilZone;
 
-	private JLabel  lblSelectionZone;
+	// Partie composants à ajouter sur le plateau.
+	private JLabel lblSelectionZone;
+
+
 	private JButton btnPlusZone;
 	private JButton btnMoinsZone;
 	
 	public PanelEdition( AppliCreation ctrl, FrameCreation frameCreation )
 	{
-		JPanel panelPlanete;
+		JPanel panelComposants;
 		JPanel panelSysteme;
 		JPanel panelZone;
 
 		JPanel panelLotBaseA;
 		JPanel panelLotPlaneteA;
-
 		JPanel panelLotBaseB;
 		JPanel panelLotPlaneteB;
+
+		JPanel panelCentrer;
 
 		JPanel widgetSelectionZone;
 		JPanel panelPlusMoins;
 		
 		ButtonGroup btgBtnActifs;
 
-		/*------------------------------*/
-		/*    Configuration du Panel    */
-		/*------------------------------*/
+		JLabel lblGrpPlanetes;
+		JLabel lblGrpBases;
+
+
+		this.setLayout( new BorderLayout() );
+
 		this.ctrl          = ctrl ;
 		this.frameCreation = frameCreation;
-		
-		this.typeBtnSlct   = null ;
-		
-		this.setLayout( new BorderLayout() );
 		
 		/*-------------------------------*/
 		/*    Création des Composants    */
 		/*-------------------------------*/
 		
-		btgBtnActifs    = new ButtonGroup();
+		/* ------- Panel des Planètes ------- */
+
+		panelComposants = new JPanel(new GridLayout  (11,2) );
+
+		panelLotPlaneteA  = new JPanel(new GridLayout(1,2) );
+		panelLotBaseA     = new JPanel(new GridLayout(1,2) );
+		panelLotBaseB     = null;
+		panelLotPlaneteB  = null;
+
+		if (this.ctrl.getNbTypePlanetes() >= 3 ) panelLotPlaneteB = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
+		if (this.ctrl.getNbTypeEspeces () >= 3 ) panelLotBaseB    = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
+
+		 /* -- Panel d'affichage du Plateau -- */
+
+		this.panelPlateau   = new PanelPlateau(this.ctrl      );
+		panelCentrer        = new JPanel( new GridBagLayout() );
+
+		 /* ------- Panel des Systèmes ------- */
+
+		panelSysteme          = new JPanel( new GridLayout(10,1 ) );
+		panelZone             = new JPanel( new GridLayout(1 ,2 ) );
+		widgetSelectionZone   = new JPanel( new GridLayout(2 ,1 ) );
+		panelPlusMoins        = new JPanel( new GridLayout(1 ,2 ) );
+
+		panelCentrer.add( this.panelPlateau, new GridBagConstraints() );
+
+		this.spPlateau = new JScrollPane( panelCentrer );
+
+		this.typeBtnSlct     = null ;
+		btgBtnActifs         = new ButtonGroup();
 		this.ensBoutonActifs = new ArrayList<JToggleButton>(4);
 
 		this.tabTypeEspece   = new JToggleButton[this.ctrl.getNbTypeEspeces ()];
 		this.tabTypePlanete  = new JToggleButton[this.ctrl.getNbTypePlanetes()];
-
 
 		// Création des JToggleButton pour les espèces
 		for (int cpt = 0; cpt < this.tabTypeEspece.length; cpt++) 
@@ -99,38 +131,14 @@ public class PanelEdition extends JPanel implements ActionListener
 			);
 		}
 		
-
-		//Panel des Planètes 
-		panelPlanete = new JPanel    (new GridLayout  (10,2) );
-
-		panelLotPlaneteA  = new JPanel(new GridLayout(1,2) );
-		panelLotBaseA     = new JPanel(new GridLayout(1,2) );
-		panelLotBaseB     = panelLotPlaneteB = null;
-
-		if (this.ctrl.getNbTypePlanetes() >= 3 ) panelLotPlaneteB = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
-		if (this.ctrl.getNbTypeEspeces () >= 3 ) panelLotBaseB    = new JPanel( new GridLayout(1,this.ctrl.getNbTypePlanetes() /2) );
-
-		// Panel d'affichage du Plateau
-		this.panelPlateau   = new PanelPlateau      (this.ctrl);
-		JPanel panelCentrer = new JPanel( new GridBagLayout() );
-
-		panelCentrer.setSize      ( this.panelPlateau.getWidth() + 2, this.panelPlateau.getHeight() +2 );
-		panelCentrer.setBackground( FrameCreation.COULEUR_FOND_FONCE                                   );
-		panelCentrer.add          ( this.panelPlateau, new GridBagConstraints()                        );
-
-		this.spPlateau = new JScrollPane( panelCentrer );
+		this.tbgOutilZone = new JToggleButton( "Zone");
 		
-		// Panel des Systèmes
-		panelSysteme          = new JPanel( new GridLayout(10,1) );
-		panelZone             = new JPanel( new GridLayout(1,2 ) );
+		this.lblSelectionZone = new JLabel( "" + this.ctrl.getNbSysteme(), JLabel.CENTER );
+		lblGrpPlanetes        = new JLabel("Planètes : ");
+		lblGrpBases           = new JLabel("Bases    : ");
 
-		this.tbgOutilZone     = new JToggleButton( "Zone"                     );
-		
-		widgetSelectionZone = new JPanel ( new GridLayout( 2,1 ) );
-		this.lblSelectionZone    = new JLabel ( ""+this.ctrl.getNbSysteme(), JLabel.CENTER );
-		panelPlusMoins           = new JPanel( new GridLayout(1,2) );
-		this.btnPlusZone            = new JButton( "+" );
-		this.btnMoinsZone           = new JButton( "-" );
+		this.btnPlusZone  = new JButton( "+" );
+		this.btnMoinsZone = new JButton( "-" );
 		
 		/*------------------------------------*/
 		/*    Configuration des Composants    */
@@ -138,18 +146,29 @@ public class PanelEdition extends JPanel implements ActionListener
 		
 		// Panel des Planètes
 
-		panelPlanete.setBackground   ( FrameCreation.COULEUR_FOND_CLAIR          );
-		panelPlanete.setPreferredSize( new Dimension ( 200 , 900 ) );
+		panelComposants.setBackground   ( FrameCreation.COULEUR_FOND_CLAIR          );
+		panelComposants.setPreferredSize( new Dimension ( 200 , 900 ) );
 
 		// Panel d'affichage du Plateau
 		this.spPlateau.setBackground               (FrameCreation.COULEUR_FOND_FONCE          );
 		this.spPlateau.setVerticalScrollBarPolicy  (JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED  );
 		this.spPlateau.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
+		panelCentrer.setSize      ( this.panelPlateau.getWidth() + 2, this.panelPlateau.getHeight() +2 );
+		panelCentrer.setBackground( FrameCreation.COULEUR_FOND_FONCE                                   );
+
 		// Panel des Système
 		panelSysteme.setBackground   ( FrameCreation.COULEUR_FOND_CLAIR          );
 		panelSysteme.setPreferredSize( new Dimension ( 200 , 900 ) );
-		
+
+		// JLabel Indicatifs
+
+		lblGrpBases   .setFont(FrameCreation.POLICE_TEXTE);
+		lblGrpPlanetes.setFont(FrameCreation.POLICE_TEXTE);
+		lblGrpPlanetes.setForeground(FrameCreation.COULEUR_ZONE);
+		lblGrpBases   .setForeground(FrameCreation.COULEUR_ZONE);
+
+		// 
 		/*-------------------------------------*/
 		/*    Positionnement des Composants    */
 		/*-------------------------------------*/
@@ -158,11 +177,12 @@ public class PanelEdition extends JPanel implements ActionListener
 		// Partie Planete
 
 		panelLotPlaneteA    .add(this.tabTypePlanete[0]);
-		this.ensBoutonActifs.add(this.tabTypePlanete[0]);
 		panelLotPlaneteA    .add(this.tabTypePlanete[1]);
+		this.ensBoutonActifs.add(this.tabTypePlanete[0]);
 		this.ensBoutonActifs.add(this.tabTypePlanete[1]);
 
-		panelPlanete.add( panelLotPlaneteA);
+		panelComposants.add(lblGrpPlanetes  );
+		panelComposants.add(panelLotPlaneteA);
 		
 		if ( this.ctrl.getNbTypePlanetes() >= 3 )
 		{
@@ -175,18 +195,19 @@ public class PanelEdition extends JPanel implements ActionListener
 				this.ensBoutonActifs.add(tabTypePlanete[3] );
 			}
 
-			panelPlanete.add( panelLotPlaneteB );
+			panelComposants.add( panelLotPlaneteB );
 		}
 
-		panelPlanete.add( new JLabel("") ); // Séparateur
+		panelComposants.add( lblGrpBases ); // Séparateur
 
 		// Partie Base
 
 		panelLotBaseA       .add(this.tabTypeEspece[0] );
-		this.ensBoutonActifs.add(this.tabTypeEspece[0] );
 		panelLotBaseA       .add(this.tabTypeEspece[1] );
+		this.ensBoutonActifs.add(this.tabTypeEspece[0] );
 		this.ensBoutonActifs.add(this.tabTypeEspece[1] );
-		panelPlanete        .add( panelLotBaseA        );
+
+		panelComposants     .add( panelLotBaseA        );
 
 		if ( this.ctrl.getNbTypeEspeces() >= 3 )
 		{
@@ -198,31 +219,31 @@ public class PanelEdition extends JPanel implements ActionListener
 				panelLotBaseB       .add( this.tabTypeEspece[3]);
 				this.ensBoutonActifs.add(this.tabTypeEspece [3]);
 			}
-			panelPlanete.add( panelLotBaseB );
+			panelComposants.add( panelLotBaseB );
 		}
 		
-		this.add( panelPlanete, BorderLayout.WEST );
-		
-		// Panel Plateau
-		this.add( this.spPlateau, BorderLayout.CENTER );
 		this.panelPlateau.repaint();
 		
 		// Panel Système
 		widgetSelectionZone.add(this.lblSelectionZone);
-		panelPlusMoins.add( this.btnMoinsZone );
-		panelPlusMoins.add( this.btnPlusZone );
-		widgetSelectionZone.add(panelPlusMoins);
+		panelPlusMoins     .add( this.btnMoinsZone   );
+		panelPlusMoins     .add( this.btnPlusZone    );
+		widgetSelectionZone.add(panelPlusMoins       );
 
-		panelZone           .add(this.tbgOutilZone);
-		this.ensBoutonActifs.add(this.tbgOutilZone);
+		panelZone           .add(this.tbgOutilZone  );
 		panelZone           .add(widgetSelectionZone);
 		
-		panelSysteme.add(panelZone);
-		this.add( panelSysteme, BorderLayout.EAST );
+		this.ensBoutonActifs.add(this.tbgOutilZone  );
 		
+		panelSysteme.add(panelZone);
+
 		// Ajout des Boutons dans le ButtonGroup
 		for ( JToggleButton btn : this.ensBoutonActifs )
 			btgBtnActifs.add(btn);
+
+		this.add( panelComposants, BorderLayout.WEST  );
+		this.add( this.spPlateau , BorderLayout.CENTER);
+		this.add( panelSysteme   , BorderLayout.EAST  );
 	
 		/*---------------------------------*/
 		/*    Activation des Composants    */
