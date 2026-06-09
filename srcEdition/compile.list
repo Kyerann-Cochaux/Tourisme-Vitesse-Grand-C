@@ -1,6 +1,6 @@
 ./ihm/FrameCreation.java
-./ihm/PanelCreation.java
 ./ihm/PanelEdition.java
+./ihm/PanelCreation.java
 ./ihm/PanelInit.java
 ./ihm/PanelPlateau.java
 ./ihm/MenuBarreEdition.java

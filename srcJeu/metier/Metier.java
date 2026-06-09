@@ -1,12 +1,10 @@
-package srcEdition.metier;
+package srcJeu.metier;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
-
-import srcEdition.*;
 
 public class Metier
 {

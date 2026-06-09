@@ -1,9 +1,7 @@
-package srcJeu;
+package srcJeu.metier;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import srcEdition.metier.Plateau;
 
 public class Pioche
 {

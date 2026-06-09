@@ -1,4 +1,4 @@
-package source.ihm;
+package srcJeu.ihm;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +7,7 @@ import java.io.File;
 
 import javax.swing.*;
 
-import source.AppliJeu ;
+import srcJeu.AppliJeu ;
 
 public class PanelMenu extends JPanel implements ActionListener
 {
@@ -79,7 +79,7 @@ public class PanelMenu extends JPanel implements ActionListener
 			JFileChooser explorateur = new JFileChooser();
 			explorateur.setDialogTitle("Ouvrir un plateau existant");
 			
-			explorateur.setCurrentDirectory(new File("../source/metier/sauvegardes/"));
+			explorateur.setCurrentDirectory(new File("../sauvegardes/"));
 			
 			int resultat = explorateur.showOpenDialog(this.frameJeu);
 			

@@ -1,6 +1,6 @@
-package source.ihm;
+package srcJeu.ihm;
 
-import source.AppliJeu;
+import srcJeu.AppliJeu;
 
 import javax.swing.*;
 import java.awt.Color;
