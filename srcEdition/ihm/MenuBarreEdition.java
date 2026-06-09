@@ -119,9 +119,9 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 					this.frameMere.ouvrirPanel(FrameCreation.PANEL_EDITION);
 				}
 			}
-			
-			if (menui.getText().equals("Enregistrer"      ) ) this.ctrl.sauvegarderPlateau     (this.frameMere.getNomSauvegarde() );
-			if (menui.getText().equals("Enregistrer Copie") ) this.ctrl.sauvegarderCopiePlateau(this.frameMere.getNomSauvegarde() );
+
+			if (menui.getText().equals("Enregistrer"      ) && this.ctrl.getNbEspeces () == this.ctrl.getNbEspecesPosees ()) this.ctrl.sauvegarderPlateau     (this.frameMere.getNomSauvegarde() );
+			if (menui.getText().equals("Enregistrer Copie") && this.ctrl.getNbEspeces () == this.ctrl.getNbEspecesPosees ()) this.ctrl.sauvegarderCopiePlateau(this.frameMere.getNomSauvegarde() );
 
 		}
 	}

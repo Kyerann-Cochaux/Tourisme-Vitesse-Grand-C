@@ -99,7 +99,9 @@ public class Plateau
 			// On parcours les colonnes
 			for (int col = 0; col < this.ensCases[lig].length; col++) 
 			{
-				if (this.ensCases[lig][col].getPlanete().getEspece() != null)
+				if (this.ensCases[lig][col] != null                         &&
+				    this.ensCases[lig][col].getPlanete() != null            &&
+				    this.ensCases[lig][col].getPlanete().getEspece() != null   )
 					nbEspecePosees++;
 					
 				

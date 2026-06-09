@@ -36,6 +36,17 @@ public class Metier
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
+
+	public int getNbEspeces()
+	{
+		return plateauJeu.getNbEspeces();
+	}
+
+	public int getNbEspecesPosees()
+	{
+		return plateauJeu.getNbEspecesPosees ();
+	}
+	
 	
 	public boolean sauvegardeExiste(String nomSauvegarde)
 	{
