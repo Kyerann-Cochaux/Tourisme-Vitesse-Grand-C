@@ -57,7 +57,8 @@ public class PanelPlateau extends JPanel
 		Graphics2D g2 = (Graphics2D) g;
 		
 		// Affichage du Fond
-		this.affichageFond(g2);
+		//pas pour l'edition
+		//this.affichageFond(g2);
 		
 		// Affichage des Cases
 		this.affichageCases(g2);
