@@ -113,6 +113,8 @@ public class FrameCreation extends JFrame
 				this.panelActuelle = new PanelEdition(this.ctrl, this      );
 				this.setExtendedState                (JFrame.MAXIMIZED_BOTH);
 				this.setJMenuBar                     (this.menuBarreEdition);
+				this.setTitle(this.getNomSauvegarde());
+
 			}
 
 			case FrameCreation.PANEL_CREATION ->
@@ -167,7 +169,6 @@ public class FrameCreation extends JFrame
 				.getSelectedFile()
 				.getAbsolutePath();
 		}
-		
 		return retFichier;
 
 	}
