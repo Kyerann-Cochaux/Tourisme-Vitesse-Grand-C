@@ -172,6 +172,8 @@ public class Plateau
 		if ( y < 0 || y >= this.nbLignes   ) return false;
 		if ( numSysteme >  this.nbSysteme  ) return false;
 		
+		
+		
 		if ( numSysteme == this.nbSysteme )
 		{
 			this.nbSysteme++;
@@ -183,20 +185,16 @@ public class Plateau
 		}
 		
 		
-		boolean estAdjascent = false;
-
-		// en haut
-		if ( y-1 >= 0              ) estAdjascent |= this.ensCases[y-1][x  ].getNumSysteme() == numSysteme;
-		// en bas
-		if ( y+1 < this.nbLignes   ) estAdjascent |= this.ensCases[y+1][x  ].getNumSysteme() == numSysteme;
-		// à droite
-		if ( x+1 < this.nbColonnes ) estAdjascent |= this.ensCases[y  ][x+1].getNumSysteme() == numSysteme;
-		// à gauche
-		if ( x-1 >= 0              ) estAdjascent |= this.ensCases[y  ][x-1].getNumSysteme() == numSysteme;
-		
-		if (!estAdjascent) return false;
+		int numSystemeInitial = this.ensCases[y][x].getNumSysteme();
 		
 		this.ensCases[y][x].setNumSysteme(numSysteme);
+		
+		if( this.estZoneScindee(numSysteme) )
+		{
+			this.ensCases[y][x].setNumSysteme(numSystemeInitial);
+			
+			return false;
+		}
 		
 		this.corrigerDecoupeZone(x, y);
 		
