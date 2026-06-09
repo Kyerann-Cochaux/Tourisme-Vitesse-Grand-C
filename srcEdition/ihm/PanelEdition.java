@@ -212,7 +212,7 @@ public class PanelEdition extends JPanel implements ActionListener
 
 			lblTemp.setOpaque          (false                   );
 			lblTemp.setForeground(FrameCreation.COULEUR_ZONE              );
-			lblTemp.setFont(new Font("Goldman", Font.BOLD, 17) );
+			lblTemp.setFont(new Font("Goldman", Font.BOLD, 15) );
 
 			if (cpt < 2) panelLblPlaneteA.add(lblTemp);
 			else       panelLblPlaneteB.add(lblTemp );
@@ -223,7 +223,7 @@ public class PanelEdition extends JPanel implements ActionListener
 			JLabel lblTemp = new JLabel(this.ctrl.getNomEspece(cpt), SwingConstants.CENTER);
 			lblTemp.setOpaque          (false                         );
 			lblTemp.setForeground      (FrameCreation.COULEUR_ZONE              );
-			lblTemp.setFont            (new Font("Goldman", Font.BOLD, 17) );
+			lblTemp.setFont            (new Font("Goldman", Font.BOLD, 15) );
 
 			if (cpt  < 2) panelLblBaseA.add(lblTemp);
 			else          panelLblBaseB.add(lblTemp);
