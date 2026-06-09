@@ -287,6 +287,8 @@ public class PanelEdition extends JPanel implements ActionListener
 			int nbZoneAct = Integer.parseInt( this.lblSelectionZone.getText() );
 			
 			// System.out.println( "Nombre de Système Actuelle : " + this.ctrl.getNbSysteme() );
+			this.tbgOutilZone.setSelected(true);
+			this.typeBtnSlct = "Zone" ;
 			
 			if ( nbZoneAct > 0 )
 			{
@@ -300,6 +302,8 @@ public class PanelEdition extends JPanel implements ActionListener
 			int nbZoneAct = Integer.parseInt( this.lblSelectionZone.getText() );
 			
 			// System.out.println( "Nombre de Système Actuelle : " + this.ctrl.getNbSysteme() );
+			this.tbgOutilZone.setSelected(true);
+			this.typeBtnSlct = "Zone" ;
 			
 			if ( nbZoneAct <= this.ctrl.getNbSysteme()-1 )
 			{
