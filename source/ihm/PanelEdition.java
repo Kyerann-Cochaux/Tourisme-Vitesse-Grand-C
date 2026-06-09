@@ -7,13 +7,9 @@ import java.awt.event.* ;
 
 import java.awt.BorderLayout ;
 import java.awt.GridLayout ;
-import java.awt.Panel;
 import java.awt.GridBagLayout ;
 import java.awt.GridBagConstraints ;
-import java.awt.FlowLayout ;
 import java.awt.Dimension ;
-import java.awt.Graphics ;
-import java.awt.Graphics2D ;
 
 import java.util.ArrayList ;
 

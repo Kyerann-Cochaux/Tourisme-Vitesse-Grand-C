@@ -7,7 +7,6 @@ import java.io.File;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Menu;
 import java.awt.Toolkit;
 
 public class FrameCreation extends JFrame

@@ -1,6 +1,5 @@
 package source.ihm;
 
-import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing   .*;
 
@@ -52,10 +51,10 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 
 				if (modeleBarre[cptLig][cptCol].equals("I") )
 				{
-					JMenuItem menui = new JMenuItem(modeleBarre[cptLig][cptCol +1] );
-					menui.setMnemonic( modeleBarre[cptLig][cptCol +2].charAt(0) );
+					menuItem = new JMenuItem(modeleBarre[cptLig][cptCol +1] );
+					menuItem.setMnemonic( modeleBarre[cptLig][cptCol +2].charAt(0) );
 
-					menui.addActionListener(this);
+					menuItem.addActionListener(this);
 
 					if (modeleBarre[cptLig][modeleBarre[cptLig].length -1].contains("+") )
 					{
@@ -80,10 +79,10 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 						if (sInput.contains("SHIFT") ) kStroke += "shift "  ;
 						if (sInput.contains("ALT"  ) ) kStroke += "alt "    ;
 
-						menui.setAccelerator(KeyStroke.getKeyStroke(kStroke += sAccelerator) );
+						menuItem.setAccelerator(KeyStroke.getKeyStroke(kStroke += sAccelerator) );
 					}
 	
-					menu.add( menui);
+					menu.add( menuItem);
 				}
 
 				if (modeleBarre[cptLig][0].equals("S") ) menu.addSeparator();

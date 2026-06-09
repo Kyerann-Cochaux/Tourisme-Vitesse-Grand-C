@@ -6,11 +6,6 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.awt.GridLayout;
 
-
-import java.io.File;
-
-
-
 public class PanelCreation extends JPanel implements ActionListener
 {
 	// Multiplicités IHM
