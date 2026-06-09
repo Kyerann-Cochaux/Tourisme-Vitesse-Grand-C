@@ -50,9 +50,7 @@ public class AppliCreation
 	
 	public void ajouterPlanete( int indCol, int indLig, String nomPlanete )
 	{
-		Planete pTmp = Planete.creerPlanete( nomPlanete.charAt(0) );
-		
-		this.metier.getPlateau().ajouterPlanete(indCol, indLig, pTmp);
+		this.metier.getPlateau().ajouterPlanete(indCol, indLig, Planete.creerPlanete( nomPlanete.charAt(0) ) );
 	}
 	
 	public void supprimerPlanete( int indCol, int indLig )
@@ -62,10 +60,7 @@ public class AppliCreation
 	
 	public void ajouterEspece( int indLig, int indCol, String nomEspece )
 	{
-		this.metier.getPlateau().setEspece( 
-		                                    this.getPlanete( indLig, indCol ),
-		                                    nomEspece
-		                                  );
+		this.metier.getPlateau().setEspece( this.getPlanete( indLig, indCol ), nomEspece);
 	}
 	
 	public void supprimerEspece( int indCol, int indLig )

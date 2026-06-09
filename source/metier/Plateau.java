@@ -225,8 +225,6 @@ public class Plateau
 			}
 		}
 		
-		if (planete == null) return false;
-
 		planete.setEspece(espece);
 		return true;
 	}

@@ -111,7 +111,7 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 			if (menui.getText().equals("Ouvrir"  ) )
 			{
 				
-				String cheminFichier = this.frameMere.chargerFichier  ();
+				String cheminFichier = this.frameMere.chargerFichier();
 
 				if (!cheminFichier.isEmpty())
 				{
