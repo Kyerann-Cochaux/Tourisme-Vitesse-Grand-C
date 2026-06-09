@@ -338,8 +338,10 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	public void focusGained( FocusEvent e )
 	{
 		JTextField focusTxtField = (JTextField) e.getSource();
-		focusTxtField.setText("");
-	
+		if(focusTxtField.getText().equals(PanelInit.TEXTE_TAILLE) || focusTxtField.getText().equals(PanelInit.TEXTE_QUANTITE) || focusTxtField.getText().equals("Entrez le nom du plateau"))
+			focusTxtField.setText("");
+		else
+			focusTxtField.setText(focusTxtField.getText());
 	}
 	
 	public void focusLost( FocusEvent e )
@@ -358,7 +360,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		if (txtActuelle.equals( PanelInit.TEXTE_TAILLE ) || txtActuelle.equals("") )
 		{
-			if (indTxtClc == 0                  ) unfocusTxtField.setText( "Entrez un nom pour le plateau");
+			if (indTxtClc == 0                  ) unfocusTxtField.setText( "Entrez le nom pour le plateau");
 			if (indTxtClc == 1 || indTxtClc == 2) unfocusTxtField.setText( PanelInit.TEXTE_TAILLE         );
 			if (indTxtClc == 3 || indTxtClc == 4) unfocusTxtField.setText( PanelInit.TEXTE_QUANTITE       );
 		}
