@@ -77,7 +77,7 @@ public class Metier
 				for (int numCol = 0; numCol < nbColonnes; numCol++)
 				{
 					int numZone = Integer.parseInt( "" + ligne.charAt(numCol) );
-					this.plateauJeu.setNumSysteme(numZone, numCol, numLig, true);
+					this.plateauJeu.setNumSysteme(numZone, numCol, numLig);
 				}
 			}
 			

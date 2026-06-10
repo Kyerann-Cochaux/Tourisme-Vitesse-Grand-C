@@ -49,29 +49,9 @@ public class AppliJeu
 		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
 	
-	public void ajouterPlanete( int indCol, int indLig, String nomPlanete )
-	{
-		this.metier.getPlateau().ajouterPlanete(indCol, indLig, Planete.creerPlanete( nomPlanete.charAt(0) ) );
-	}
-	
-	public void supprimerPlanete( int indCol, int indLig )
-	{
-		this.metier.getPlateau().retirerPlanete( indCol, indLig );
-	}
-	
-	public void ajouterEspece( int indLig, int indCol, String nomEspece )
-	{
-		this.metier.getPlateau().setEspece( this.getPlanete( indLig, indCol ), nomEspece);
-	}
-	
 	public void supprimerEspece( int indCol, int indLig )
 	{
 		this.getPlanete( indCol, indLig ).setEspece(null);
-	}
-	
-	public void ajouterSysteme( int numSysteme, int indCol, int indLig )
-	{
-		this.metier.getPlateau().setNumSysteme( numSysteme, indCol, indLig );
 	}
 	
 	public void chargerPlateau         (String fichier)       { this.metier.chargerPlateau    (fichier)              ;}

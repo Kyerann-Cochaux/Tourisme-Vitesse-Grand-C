@@ -67,48 +67,26 @@ public class Plateau
 	/* ---------------------------------- */
 	/*            Accesseurs              */
 	/* ---------------------------------- */
-
-	public String getNomEspece (int indice) { return this.ensEspeces [indice];}
-	public String getNomPlanete(int indice) { return this.ensPlanetes[indice];}
 	
-	public int getNbLignes  () { return this.nbLignes         ;}
-	public int getNbColonnes() { return this.nbColonnes       ;}
-	public int getNbSysteme () { return this.nbSysteme        ;}
-
-	public int getNbEspeces () { return this.ensEspeces.length;}
-	public int getNbPlanetes  () { return this.ensPlanetes .length;}
+	public String getNomEspece (int indice) { return this.ensEspeces [indice]; }
+	public String getNomPlanete(int indice) { return this.ensPlanetes[indice]; }
 	
-	public String[] getEnsPlanetes() {return this.ensPlanetes;}
-	public String[] getEnsEspeces () {return this.ensEspeces ;}
+	public int getNbLignes  () { return this.nbLignes;   }
+	public int getNbColonnes() { return this.nbColonnes; }
+	public int getNbSysteme () { return this.nbSysteme;  }
 	
-	public Voyage getVoyage   (int indice) { return this.lstVoyages .get(indice);}
-	public int    getNbVoyages()           { return this.lstVoyages.size()      ;}
+	public int getNbEspeces  () { return this.ensEspeces .length; } // retourne le nombre d'especes  différentes
+	public int getNbPlanetes () { return this.ensPlanetes.length; } // retourne le nombre de planete différentes
 	
-	public Case     getCase    (int x, int y) {return this.ensCases[y][x];}
-	public Case[][] getEnsCases()             {return this.ensCases      ;}
-
-	public int getNbEspecesPosees()
-	{
-		int nbEspecePosees = 0;
-
-
-		for (int lig = 0; lig < this.ensCases.length; lig++) 
-		{
-			// On parcours les colonnes
-			for (int col = 0; col < this.ensCases[lig].length; col++) 
-			{
-				if (this.ensCases[lig][col].getPlanete().getEspece() != null)
-					nbEspecePosees++;
-					
-				
-			}
-		}
-
-		return nbEspecePosees;
-	}
-
-
-
+	public String[] getEnsPlanetes() { return this.ensPlanetes; }
+	public String[] getEnsEspeces () { return this.ensEspeces ; }
+	
+	public Voyage getVoyage   (int indice) { return this.lstVoyages .get(indice); }
+	public int    getNbVoyages()           { return this.lstVoyages.size()      ; }
+	
+	public Case     getCase    (int x, int y) { return this.ensCases[y][x]; }
+	public Case[][] getEnsCases()             { return this.ensCases      ; }
+	
 	
 	
 	/* ---------------------------------- */
@@ -122,301 +100,22 @@ public class Plateau
 	 
 	*/
 	
-	private void corrigerDecoupeZone(int x, int y)
-	{
-		// création de nouvelles zones si besoin
-		int[][] dPos = 
-		{//   dx  dy
-			{ 0, -1},
-			{+1,  0},
-			{ 0, +1},
-			{-1,  0}
-		};
-		
-		for (int indDPos = 0; indDPos < dPos.length; indDPos++)
-		{
-			int nX = dPos[indDPos][0] + x;
-			int nY = dPos[indDPos][1] + y;
-			
-			if ( nX >= 0 && nX < this.nbColonnes &&
-				nY >= 0 && nY < this.nbLignes      )
-			{
-				Case caseTemp = this.getCase(nX, nY);
-				
-				if ( caseTemp.getNumSysteme() != -1 && this.estZoneScindee(caseTemp.getNumSysteme()) )
-				{
-					this.remplirZone(this.nbSysteme, caseTemp);
-				}
-			}
-		}
-	}
-	
 	public boolean setNumSysteme(int numSysteme, int x, int y)
 	{
-		return this.setNumSysteme(numSysteme, x, y, false);
-	}
-	
-	public boolean setNumSysteme(int numSysteme, int x, int y, boolean forcerPlacement)
-	{
-		if (forcerPlacement)
-		{
-			this.ensCases[y][x].setNumSysteme(numSysteme);
-			if ( numSysteme >= this.nbSysteme ) this.nbSysteme = numSysteme + 1 ;
-			return true;
-		}
-		
-		
 		if ( x < 0 || x >= this.nbColonnes ) return false;
 		if ( y < 0 || y >= this.nbLignes   ) return false;
 		if ( numSysteme >  this.nbSysteme  ) return false;
 		
-		if ( numSysteme == this.nbSysteme )
-		{
-			this.nbSysteme++;
-			this.ensCases[y][x].setNumSysteme(numSysteme);
-			
-			this.corrigerDecoupeZone(x, y);
-			
-			return true;
-		}
-		
-		
-		boolean estAdjascent = false;
-
-		// en haut
-		if ( y-1 >= 0              ) estAdjascent |= this.ensCases[y-1][x  ].getNumSysteme() == numSysteme;
-		// en bas
-		if ( y+1 < this.nbLignes   ) estAdjascent |= this.ensCases[y+1][x  ].getNumSysteme() == numSysteme;
-		// à droite
-		if ( x+1 < this.nbColonnes ) estAdjascent |= this.ensCases[y  ][x+1].getNumSysteme() == numSysteme;
-		// à gauche
-		if ( x-1 >= 0              ) estAdjascent |= this.ensCases[y  ][x-1].getNumSysteme() == numSysteme;
-		
-		if (!estAdjascent) return false;
-		
 		this.ensCases[y][x].setNumSysteme(numSysteme);
-		
-		this.corrigerDecoupeZone(x, y);
-		
+		if ( numSysteme >= this.nbSysteme ) this.nbSysteme = numSysteme + 1 ;
 		return true;
 		
-	}
-
-	public boolean setEspece(Planete planete, String espece)
-	{
-		if ( !this.especeExiste(espece) ) return false;
-		if ( planete == null            ) return false;
-		
-		Planete planeteTemp = null;
-		
-		// On parcours les lignes
-		for (int lig = 0; lig < this.ensCases.length; lig++) 
-		{
-			// On parcours les colonnes
-			for (int col = 0; col < this.ensCases[lig].length; col++) 
-			{
-				planeteTemp = this.ensCases[lig][col].getPlanete();
-
-				if ( planeteTemp != null && planeteTemp.getEspece() != null && planeteTemp.getEspece().equals(espece) )
-					planeteTemp.setEspece(null);
-				
-			}
-		}
-		
-		planete.setEspece(espece);
-		return true;
 	}
 	
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 	
-	public ArrayList<Case> parcoursZone(Case caseDep)
-	{
-		if ( caseDep == null          ) return null;
-		int numZone = caseDep.getNumSysteme();
-		if ( numZone > this.nbSysteme ) return null;
-		if ( numZone < -1             ) return null;
-		
-		int nbCasesMarquee = 0;
-		ArrayList<Case>    lstCaseZonee    = new ArrayList<Case>();
-		
-		Case caseActuelle = caseDep;
-		lstCaseZonee   .add(caseActuelle);
-		
-		do
-		{
-			int[][] dPos = 
-			{//	 dx  dy
-				{ 0, -1},
-				{+1,  0},
-				{ 0, +1},
-				{-1,  0}
-			};
-			
-			int x = caseActuelle.getPosX();
-			int y = caseActuelle.getPosY();
-			
-			for (int indDPos = 0; indDPos < dPos.length; indDPos++)
-			{
-				int nX = dPos[indDPos][0] + x;
-				int nY = dPos[indDPos][1] + y;
-				
-				
-				if ( nX >= 0 && nX < this.nbColonnes &&
-				     nY >= 0 && nY < this.nbLignes      )
-				{
-					Case caseVerif = this.ensCases[nY][nX];
-					
-					if ( caseVerif.getNumSysteme() == numZone && !lstCaseZonee.contains(caseVerif) )
-						lstCaseZonee.add(caseVerif);
-				}
-				
-			}
-			
-			nbCasesMarquee++;
-			
-			// passer a la case suivante apres l'avoir explorée
-			if ( nbCasesMarquee < lstCaseZonee.size() )
-				caseActuelle = lstCaseZonee.get(nbCasesMarquee);
-		}
-		while ( nbCasesMarquee < lstCaseZonee.size() );
-		
-		return lstCaseZonee;
-	}
-	
-	public boolean estZoneScindee(int numZone)
-	{
-		Case caseActuelle = null;
-		
-		// récuperation de la dernière case de la zone
-		for (int lig = 0; lig < this.ensCases.length; lig++)
-			for (int col = 0; col < this.ensCases[lig].length; col++)
-				if ( this.ensCases[lig][col].getNumSysteme() == numZone )
-					caseActuelle = this.ensCases[lig][col];
-		
-		if ( caseActuelle == null ) return false;
-		
-		return this.tailleZone(numZone) != this.parcoursZone(caseActuelle).size();
-	}
-	
-	
-	// nombre de cases appartenant a la zone numZone
-	public int tailleZone(int numZone)
-	{
-		int nbCases = 0;
-		
-		for (int numLig = 0; numLig < this.ensCases.length; numLig++)
-			for (int numCol = 0; numCol < this.ensCases[numLig].length; numCol++)
-				if ( this.ensCases[numLig][numCol].getNumSysteme() == numZone )
-					nbCases++;
-		
-		return nbCases;
-	}
-	
-	// parcours logique pour remplir une zone
-	// retourne si la zone as été remplie ou non
-	public boolean remplirZone(int numZone, Case caseDep)
-	{
-		int numZoneInitiale = caseDep.getNumSysteme();
-		if ( numZone == numZoneInitiale ) return false; // pas besoin de modifications
-		
-		if ( numZone >  this.nbSysteme  ) return false;
-		if ( this.nbSysteme == numZone )
-			this.nbSysteme++;
-		
-		ArrayList<Case> lstCaseZonee = this.parcoursZone(caseDep);
-		
-		if ( lstCaseZonee == null ) return false;
-		
-		for (Case caseAnulation : lstCaseZonee)
-			caseAnulation.setNumSysteme(numZone);
-		
-		if ( this.estZoneScindee(numZone) )
-		{
-			for (Case caseAnulation : lstCaseZonee)
-			{
-				caseAnulation.setNumSysteme(numZoneInitiale);
-			}
-			return false;
-		}
-		
-		return true;
-	}
-	
-	public void remplirZoneVide()
-	{
-		for (int numLig = 0; numLig < this.ensCases.length; numLig++)
-			for (int numCol = 0; numCol < this.ensCases[numLig].length; numCol++)
-			{
-				if(this.ensCases[numLig][numCol].getNumSysteme() == -1)
-				{
-					this.remplirZone(this.nbSysteme, this.ensCases[numLig][numCol]);
-				}
-			}
-	}
-	
-
-	public boolean ajouterPlanete(int x, int y, Planete p) 
-	{
-
-		if (!coordonneesValide(   x, y        ) ) return false;
-		if (!planeteValide    (p, x, y        ) ) return false;
-		if (!planeteExiste    (p.getSymbole() ) ) return false;
-
-		// System.out.println("AJOUT PLANETE : " + x + "/" + y );
-		
-		
-		// Dans le cas où la planète fournie en paramètre est une base, il faut vérifier qu'elle n'est pas 
-		// déjà présente sur le plateau.
-		
-		// On regarde si le jeton en paramètres est une base.
-		if (p.estBase() )
-		{
-			// On parcours les lignes
-			for (int lig = 0; lig < this.ensCases.length; lig++) 
-			{
-				// On parcours les colonnes
-				for (int col = 0; col < this.ensCases[lig].length; col++) 
-				{
-					Case cTemp = this.ensCases[lig][col];
-
-					// On regarde si la case à une planète
-					if (!cTemp.estVide() )
-					{
-						// On regarde si la planète de cTemp est une base
-						if (cTemp.getPlanete().estBase() )
-						{
-							// On regarde si les 2 planètes ont la même esp
-							if (cTemp.getPlanete().getEspece().equals(p.getEspece() ) )
-
-								return false;
-						}
-						
-					}
-				}
-			}
-		}
-		
-		//System.out.println("AJOUT PLANETE");
-		
-		this.ensCases[y][x].setPlanete(p);
-		
-		this.actualiserVoyages();
-		
-		return true;
-	}
-
-	public boolean retirerPlanete(int x, int y)
-	{
-		if (this.ensCases[y][x].getPlanete() == null) return false;
-
-		this.ensCases[y][x].setPlanete(null);
-		
-		this.actualiserVoyages();
-		return true;
-	}
-
 	public void actualiserVoyages()
 	{
 		this.lstVoyages = new ArrayList<Voyage>();
@@ -484,20 +183,8 @@ public class Plateau
 				this.ensCases[lig][col].setPlanete(null);
 
 	}
-
-	private boolean coordonneesValide(int x, int  y)
-	{
-		return (x >= 0 && x < this.nbColonnes && y >= 0 && y < this.nbLignes);
-	}
-
-	// Vérifie si la planète n'est pas null, que la Case ne possède pas déjà 
-
-	private boolean planeteValide(Planete j, int x, int y)
-	{
-		return j != null && j != this.ensCases [y][x].getPlanete()  &&
-		                         this.ensCases [y][x].getPlanete() == null ;
-	}
 	
+	// deveras surment etre modifiée pour check si le voyage es possible
 	public boolean voyageExiste(Case source, Case destination)
 	{
 
@@ -510,40 +197,12 @@ public class Plateau
 				bVexiste = true;
 			
 		}
-
+		
 		return bVexiste;
-
 	}
 	
-	// Vérifie si la planète est dans le tableau de jeu
-	private boolean planeteExiste(char forme)
-	{
-		for(String nomPlanete : this.ensPlanetes)
-		{
-			if(nomPlanete.charAt(0) == forme){return true;}
-		}
-		return false;
-	}
-	
-	// Vérifie si l'espèce est dans le tableau de jeu et
-	// que la 
-
-	private boolean especeExiste(String espece)
-	{
-		boolean bExiste = false;
-
-		// Regarde si l'espèce existe dans le tableau d'espèces utilisées si l'espèce existe dans le tableau d'espèces utilisées
-		for(String nomEspece : this.ensEspeces)
-		{
-			if ( nomEspece.equals(espece) ) bExiste |= true;
-			else                            bExiste |= false;
-		}
-
-		return bExiste;
-	}
 	
 	// Méthodes pour voir l'état du plateau en CUI
-	
 	public String afficherPlanetes()
 	{
 		String sRet = "";
