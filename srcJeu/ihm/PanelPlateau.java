@@ -204,7 +204,7 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageLiens( Graphics2D g2 )
 	{
-		g2.setStroke( new BasicStroke(2) );
+		g2.setStroke( new BasicStroke(3) );
 		
 		int nbVoyage = this.ctrl.getNbVoyages();
 		//System.out.println("NbVoyages -> " + nbVoyage);
@@ -226,8 +226,8 @@ public class PanelPlateau extends JPanel
 					case "Felinoid"    -> g2.setColor( new Color( 36, 159, 222) );
 					case "Azimae"      -> g2.setColor( new Color(255, 213,  65) );
 					case "Silikon"     -> g2.setColor( new Color( 50, 132, 100) );
-					case null          -> g2.setColor( new Color(200, 200, 200) );
-					default            -> g2.setColor( new Color(200, 200, 200) );
+					case null          -> g2.setColor( Color.WHITE              );
+					default            -> g2.setColor( Color.WHITE              );
 				}
 				
 				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
