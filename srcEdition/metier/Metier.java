@@ -97,11 +97,12 @@ public class Metier
 			// placement des systèmes
 			for (int numLig = 0; numLig < nbLignes; numLig++)
 			{
-				String ligne = sc.nextLine();
+				String   ligne  = sc.nextLine();
+				String[] numSys = ligne.split("\t");
 				
 				for (int numCol = 0; numCol < nbColonnes; numCol++)
 				{
-					int numZone = Integer.parseInt( "" + ligne.charAt(numCol) );
+					int numZone = Integer.parseInt( numSys[numCol] );
 					this.plateauJeu.setNumSysteme(numZone, numCol, numLig, true);
 				}
 			}
@@ -110,13 +111,14 @@ public class Metier
 			// placement des planetes
 			for (int numLig = 0; numLig < nbLignes; numLig++)
 			{
-				String ligne = sc.nextLine();
+				String   ligne   = sc.nextLine();
+				String[] numPlan = ligne.split("\t");
 				
 				for (int numCol = 0; numCol < nbColonnes; numCol++)
 				{
-					char sIndPlanete = ligne.charAt(numCol);
+					String sIndPlanete = numPlan[numCol];
 					
-					if( sIndPlanete != '.' )
+					if( !sIndPlanete.equals(".") )
 					{
 						int indPlanete = Integer.parseInt("" + sIndPlanete);
 						
@@ -135,14 +137,15 @@ public class Metier
 			// placement des bases
 			for (int numLig = 0; numLig < nbLignes; numLig++)
 			{
-				String ligne = sc.nextLine();
+				String ligne     = sc.nextLine();
+				String[] numBase = ligne.split("\t");
 				
 				for (int numCol = 0; numCol < nbColonnes; numCol++)
 				{
 					
-					char sIndEspece = ligne.charAt(numCol);
+					String sIndEspece = numBase[numCol];
 					
-					if( sIndEspece != '-' )
+					if( !sIndEspece.equals("-") )
 					{
 						int indEspece = Integer.parseInt("" + sIndEspece);
 						String typeEspece = Plateau.TAB_ESPECES[indEspece];
@@ -237,7 +240,7 @@ public class Metier
 				String ligne = "";
 				
 				for (int numCol = 0; numCol < this.getPlateau().getNbColonnes(); numCol++)
-					ligne += this.getPlateau().getCase(numCol, numLig).getNumSysteme();
+					ligne += this.getPlateau().getCase(numCol, numLig).getNumSysteme() + "\t";
 				
 				pw.println ( ligne );
 			}
@@ -267,7 +270,7 @@ public class Metier
 						}
 					}
 					
-					ligne += symolePlanete;
+					ligne += symolePlanete + "\t";
 				}
 				
 				pw.println ( ligne );
@@ -298,7 +301,7 @@ public class Metier
 						}
 					}
 					
-					ligne += symoleEspece;
+					ligne += symoleEspece + "\t";
 				}
 				
 				pw.println ( ligne );
