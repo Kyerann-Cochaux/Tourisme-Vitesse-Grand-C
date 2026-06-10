@@ -2,12 +2,15 @@
 ./ihm/PanelMenu.java
 ./ihm/PanelPlateau.java
 
-./metier/Carte.java
-./metier/Case.java
+
 ./metier/Metier.java
-./metier/Pioche.java
-./metier/Planete.java
-./metier/Plateau.java
-./metier/Voyage.java
+
+./metier/manches/Carte.java
+./metier/manches/Pioche.java
+
+./metier/plateau/Case.java
+./metier/plateau/Planete.java
+./metier/plateau/Plateau.java
+./metier/plateau/Voyage.java
 
 ./AppliJeu.java
