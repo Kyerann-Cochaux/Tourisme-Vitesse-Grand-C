@@ -1,6 +1,9 @@
 package srcJeu.metier;
 
 import java.io.FileInputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import srcJeu.metier.manches.*;
@@ -12,19 +15,20 @@ public class Metier
 	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felinoid", "Azimae",      "Silikon"   };
 	                                           // Marron         BLeu        Rouge          Vert
 	
-	private Plateau plateauJeu;
-	private Pioche  pioche    ;
-	
+	private Plateau      plateauJeu;
+	private List<Manche> lstManches;
+	private int mancheCourante = 1 ;
 	
 	public Metier()
 	{
 		this.plateauJeu = null;
-		this.pioche     = new Pioche();
+		this.lstManches = null;
 	}
 	
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.plateauJeu = Plateau.creerPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
+		this.lstManches = new ArrayList<Manche>(nbEspeces);
 	}
 	
 	/* ---------------------------------- */
@@ -32,10 +36,7 @@ public class Metier
 	/* ---------------------------------- */
 	
 	public Plateau getPlateau() { return this.plateauJeu;}
-	public Pioche  getPioche () { return this.pioche    ;}
-	
-	
-	
+	public Manche  getManche () { return this.lstManches.get(this.mancheCourante);}
 	
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
@@ -127,6 +128,8 @@ public class Metier
 					
 				}
 			}
+
+			this.lstManches = new ArrayList<Manche>(nbEspeces);
 			
 			// fermeture du scanner
 			sc.close();
@@ -145,4 +148,14 @@ public class Metier
 		return true;
 	}
 	
+	public boolean mancheSuivante()
+	{
+		if(mancheCourante + 1 >= this.lstManches.size())
+			return false;
+		if(!this.getManche().estMancheFinie())
+			return false;
+
+		mancheCourante++;
+		return true;
+	}
 }
