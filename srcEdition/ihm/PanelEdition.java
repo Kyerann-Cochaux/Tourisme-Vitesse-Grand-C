@@ -189,8 +189,9 @@ public class PanelEdition extends JPanel implements ActionListener
 
 		panelLblBaseA   .setOpaque(false);
 		panelLblPlaneteA.setOpaque(false);
-		panelLblBaseB   .setOpaque(false);
-		panelLblPlaneteB.setOpaque(false);
+
+		if (this.ctrl.getNbTypeEspeces() > 2) panelLblBaseB   .setOpaque(false);
+		if (this.ctrl.getNbTypePlanetes() >2) panelLblPlaneteB.setOpaque(false);
 
 
 		// 

@@ -120,7 +120,7 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 				}
 			}
 
-			if (menui.getText().equals("Enregistrer"      ) && !(this.ctrl.getNbEspeces () == this.ctrl.getNbEspecesPosees ()))
+			if (menui.getText().equals("Enregistrer"      ) && !(this.ctrl.getNbTypeEspeces () == this.ctrl.getNbEspecesPosees ()))
 			{
 				JOptionPane.showMessageDialog
 				(this, "Certaines éspeces ne sont pas placer sur le plateau",
@@ -130,7 +130,7 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 			{
 				this.ctrl.sauvegarderPlateau     (this.frameMere.getNomSauvegarde() );
 			}
-			 if (menui.getText().equals("Enregistrer Copie") && !(this.ctrl.getNbEspeces () == this.ctrl.getNbEspecesPosees ()))
+			 if (menui.getText().equals("Enregistrer Copie") && !(this.ctrl.getNbTypeEspeces () == this.ctrl.getNbEspecesPosees ()))
 			{
 				JOptionPane.showMessageDialog
 				(this, "Certaines éspeces ne sont pas placer sur le plateau",
