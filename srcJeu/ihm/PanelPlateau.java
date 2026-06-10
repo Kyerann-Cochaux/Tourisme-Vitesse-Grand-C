@@ -156,10 +156,22 @@ public class PanelPlateau extends JPanel
 		{
 			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
+				int zoneCaseAct = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
+				
+				int opacite = (int) ( (1.0 * zoneCaseAct / this.ctrl.getNbSysteme()) * 100 );
+				
+				g2.setColor( new Color( 255, 255, 255, opacite ) );
+				
+				g2.fillRect(
+				             TAILLE_CASE * cptCol,
+				             TAILLE_CASE * cptLig,
+				             TAILLE_CASE,
+				             TAILLE_CASE
+				           );
+				
 				// System.out.println( "Vérification de la case à " + cptLig + " Lig " + cptCol + " Col" );
 				g2.setColor( Color.RED );
 				
-				int zoneCaseAct     = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
 				int zoneCaseADroite = -1;
 				int zoneCaseEnBas   = -1;
 				

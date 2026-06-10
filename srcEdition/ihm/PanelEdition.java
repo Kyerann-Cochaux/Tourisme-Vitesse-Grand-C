@@ -312,7 +312,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.btnPlusZone .addActionListener(this);
 		
 		// Activation du Panel Plateau
-		this.panelPlateau.addMouseListener( this.gererSouris() );
+		this.panelPlateau.addMouseListener( this.gererClic() );
+		this.panelPlateau.addMouseMotionListener( this.gererClic() );
 	}
 	
 	/*----------------------------------------*/
@@ -372,12 +373,26 @@ public class PanelEdition extends JPanel implements ActionListener
 	/*    Gestion de l'ajout d'éléments sur le Plateau    */
 	/*----------------------------------------------------*/
 	
-	private MouseAdapter gererSouris()
+	private MouseAdapter gererClic()
 	{
 		return new MouseAdapter()
 		{
-			public void mouseClicked(MouseEvent e)
+			public void mousePressed(MouseEvent e)
 			{
+				// System.out.println( e.paramString() );
+				
+				if( e.getButton() == MouseEvent.BUTTON1 && typeBtnSlct != null ) 
+				{
+					ajouterElement(e);
+				}
+				
+				if( e.getButton() == MouseEvent.BUTTON3 ) { supprimerElement(e) ; }
+			}
+			
+			public void mouseDragged(MouseEvent e)
+			{
+				// System.out.println( e.paramString() );
+				
 				if( e.getButton() == MouseEvent.BUTTON1 && typeBtnSlct != null ) 
 				{
 					ajouterElement(e);
