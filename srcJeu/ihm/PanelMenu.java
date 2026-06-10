@@ -16,10 +16,10 @@ public class PanelMenu extends JPanel implements ActionListener
 	
 	private JLabel lblMenu;
 	
-	private JButton btnSolo ;
-	private JButton btnLocal ;
-	private JButton btnMultijoueur ;
-	private JButton btnQuitter ;
+	private JButton btnSolo;
+	private JButton btnLocal;
+	private JButton btnMultijoueur;
+	private JButton btnQuitter;
 	
 	public PanelMenu(AppliJeu ctrl, FrameJeu frameJeu)
 	{
@@ -74,8 +74,14 @@ public class PanelMenu extends JPanel implements ActionListener
 	{
 		if (e.getSource() == this.btnSolo)
 		{
-			this.ctrl.chargerPlateau(this.frameJeu.chargerFichier() );
-			this.frameJeu.ouvrirPanel(FrameJeu.PANEL_JEU);
+			String fichier = this.frameJeu.chargerFichier();
+
+			if (fichier != null && !fichier.equals("") )
+			{
+				this.ctrl    .chargerPlateau( fichier);
+				this.frameJeu.ouvrirPanel(FrameJeu.PANEL_JEU);
+
+			}
 		}
 		
 		if (e.getSource() == this.btnQuitter)
