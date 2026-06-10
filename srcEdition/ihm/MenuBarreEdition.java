@@ -98,47 +98,51 @@ public class MenuBarreEdition extends JMenuBar implements ActionListener
 		{
 			JMenuItem menui = ( (JMenuItem) e.getSource() );
 
-			if (menui.getText().equals("Nouveau" ) ) 
+			if ( menui.getText().equals("Nouveau" ) ) 
 			{
 				this.ctrl.sauvegarderPlateau( this.frameMere.getNomSauvegarde() );
 				
 				this.frameMere.ouvrirPanel(FrameCreation.PANEL_INIT);
 			}
-			
-			if (menui.getText().equals("Fermer" ) )  this.frameMere.ouvrirPanel(FrameCreation.PANEL_CREATION);
-			if (menui.getText().equals("Quitter" ) ) System.exit(JFrame.EXIT_ON_CLOSE);
-			if (menui.getText().equals("Ouvrir"  ) )
+			else
 			{
 				
-				String cheminFichier = this.frameMere.chargerFichier();
-
-				if (!cheminFichier.isEmpty())
+				if (menui.getText().equals("Fermer" ) )  this.frameMere.ouvrirPanel(FrameCreation.PANEL_CREATION);
+				if (menui.getText().equals("Quitter" ) ) System.exit(JFrame.EXIT_ON_CLOSE);
+				if (menui.getText().equals("Ouvrir"  ) )
 				{
-					// Appelez ici la méthode qui va lire le fichier et actualiser le plateau
-					this.ctrl.chargerPlateau(cheminFichier);
-					this.frameMere.ouvrirPanel(FrameCreation.PANEL_EDITION);
+					
+					String cheminFichier = this.frameMere.chargerFichier();
+					
+					if (!cheminFichier.isEmpty())
+					{
+						// Appelez ici la méthode qui va lire le fichier et actualiser le plateau
+						this.ctrl.chargerPlateau(cheminFichier);
+						this.frameMere.ouvrirPanel(FrameCreation.PANEL_EDITION);
+					}
 				}
-			}
-
-			if (menui.getText().equals("Enregistrer"      ) && !(this.ctrl.getNbTypeEspeces () == this.ctrl.getNbEspecesPosees ()))
-			{
-				JOptionPane.showMessageDialog
-				(this, "Certaines éspeces ne sont pas placer sur le plateau",
-				 "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-			}
-			else 
-			{
-				this.ctrl.sauvegarderPlateau     (this.frameMere.getNomSauvegarde() );
-			}
-			 if (menui.getText().equals("Enregistrer Copie") && !(this.ctrl.getNbTypeEspeces () == this.ctrl.getNbEspecesPosees ()))
-			{
-				JOptionPane.showMessageDialog
-				(this, "Certaines éspeces ne sont pas placer sur le plateau",
-				 "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
-			}
-			else 
-			{
-				this.ctrl.sauvegarderCopiePlateau(this.frameMere.getNomSauvegarde() );
+				
+				if (menui.getText().equals("Enregistrer"      ) && !(this.ctrl.getNbTypeEspeces () == this.ctrl.getNbEspecesPosees ()))
+				{
+					JOptionPane.showMessageDialog
+					(this, "Certaines éspeces ne sont pas placer sur le plateau",
+					"Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+				}
+				else 
+				{
+					this.ctrl.sauvegarderPlateau     (this.frameMere.getNomSauvegarde() );
+				}
+				
+				if (menui.getText().equals("Enregistrer Copie") && !(this.ctrl.getNbTypeEspeces () == this.ctrl.getNbEspecesPosees ()))
+				{
+					JOptionPane.showMessageDialog
+					(this, "Certaines éspeces ne sont pas placer sur le plateau",
+					"Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+				}
+				else 
+				{
+					this.ctrl.sauvegarderCopiePlateau( this.frameMere.getNomSauvegarde() );
+				}
 			}
 		}
 	}
