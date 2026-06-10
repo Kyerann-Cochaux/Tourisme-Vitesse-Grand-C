@@ -16,5 +16,6 @@
 ./metier/plateau/Voyage.java
 
 ./TestManches.java
+./TestZone.java
 
 ./AppliJeu.java
