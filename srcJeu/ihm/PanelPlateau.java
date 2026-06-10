@@ -204,7 +204,6 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageLiens( Graphics2D g2 )
 	{
-		g2.setColor( new Color(200, 200, 200) );
 		g2.setStroke( new BasicStroke(2) );
 		
 		int nbVoyage = this.ctrl.getNbVoyages();
@@ -220,8 +219,18 @@ public class PanelPlateau extends JPanel
 				int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE + TAILLE_CASE / 2 ;
 				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE + TAILLE_CASE / 2 ;
 				
-				// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
+				String especeVoyAct = this.ctrl.getVoyage(ind).getEspece() ;
+				switch ( especeVoyAct )
+				{
+					case "Chlorophite" -> g2.setColor( new Color(113,  65,  59) );
+					case "Felinoid"    -> g2.setColor( new Color( 36, 159, 222) );
+					case "Azimae"      -> g2.setColor( new Color(255, 213,  65) );
+					case "Silikon"     -> g2.setColor( new Color( 50, 132, 100) );
+					case null          -> g2.setColor( new Color(200, 200, 200) );
+					default            -> g2.setColor( new Color(200, 200, 200) );
+				}
 				
+				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 			}
 		}
