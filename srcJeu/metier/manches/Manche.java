@@ -24,8 +24,9 @@ public class Manche
 	/*            Accesseurs              */
 	/* ---------------------------------- */
 
-	public String getEspece(){return this.espece;}
-	public Pioche getPioche(){return this.pioche;}
+	public String getEspece(){return this.espece;           }
+	public Pioche getPioche(){return this.pioche;           }
+	public Carte  getCarte (){return this.pioche.getCarte();}
 
 	/* ---------------------------------- */
 	/*           Autres Méthodes          */
@@ -41,6 +42,11 @@ public class Manche
 		if(this.pioche.resteCartePremium())
 			return false;
 		return true;
+	}
+
+	public boolean decouvrirCarte()
+	{
+		return this.pioche.decouvrirCarte();
 	}
 
 	/* ---------------------------------- */

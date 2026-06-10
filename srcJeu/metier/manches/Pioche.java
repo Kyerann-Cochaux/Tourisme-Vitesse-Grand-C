@@ -1,6 +1,7 @@
 package srcJeu.metier.manches;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import srcJeu.metier.Metier;
@@ -13,7 +14,7 @@ public class Pioche
 	{
 		this.pioche = new ArrayList<Carte>();
 		
-	for (int cpt = 0; cpt < Metier.TAB_PLANETES.length; cpt++) 
+		for (int cpt = 0; cpt < Metier.TAB_PLANETES.length; cpt++) 
 		{
 			this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], false) );
 			this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], true ) );
@@ -21,16 +22,17 @@ public class Pioche
 
 		this.pioche.add(Carte.creerCarte("Joker", false) );
 		this.pioche.add(Carte.creerCarte("Joker", true ) );
+
+		Collections.shuffle(this.pioche);
 	}
 	
 	/* ---------------------------------- */
 	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
-	public Carte getCarte(int indice)
+	public Carte getCarte()
 	{
-		if (indice >= this.pioche.size() || indice < 0) return null;
-		return this.pioche.get(indice);
+		return this.pioche.getFirst();
 	}
 
 	/* ---------------------------------- */
@@ -61,6 +63,15 @@ public class Pioche
 				return true;
 		}
 		return false;
+	}
+
+	public boolean decouvrirCarte()
+	{
+		if(this.pioche.size() == 1 ){return false;}
+		if(this.resteCartePremium()){return false;}
+		
+		this.pioche.removeFirst();
+		return true;
 	}
 	
 	/* ---------------------------------- */

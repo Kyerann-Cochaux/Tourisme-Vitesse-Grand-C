@@ -12,6 +12,8 @@ public class TestManches
         System.out.println("Espece manche :" + manche.getEspece());
         System.out.println("Manche finie: " + manche.estMancheFinie());
 
+        System.out.println(manche.getCarte());
+
         manche.getPioche().enleverCarte("Gazeuze", true);
         manche.getPioche().enleverCarte("Océan", true);
         manche.getPioche().enleverCarte("Tellurique", true);
@@ -20,5 +22,10 @@ public class TestManches
         System.out.println(manche);
 
         System.out.println("Manche finie: " + manche.estMancheFinie());
+
+        manche.decouvrirCarte();
+        System.out.println(manche);
+        manche.decouvrirCarte();
+        System.out.println(manche);
     }
 }
