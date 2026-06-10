@@ -19,7 +19,8 @@ public class PanelMenu extends JPanel implements ActionListener
 	private JButton btnSolo ;
 	private JButton btnLocal ;
 	private JButton btnMultijoueur ;
-
+	private JButton btnQuitter ;
+	
 	public PanelMenu(AppliJeu ctrl, FrameJeu frameJeu)
 	{
 
@@ -33,7 +34,7 @@ public class PanelMenu extends JPanel implements ActionListener
 		/* ---------------------------------- */
 		
 
-		this.panelAccueil = new JPanel(new GridLayout(5, 1, 0, 20) );
+		this.panelAccueil = new JPanel(new GridLayout(6, 1, 0, 20) );
 		this.panelAccueil.setOpaque(false);
 
 		this.lblMenu = new JLabel ("Jouer une partie", SwingConstants.CENTER);
@@ -43,6 +44,7 @@ public class PanelMenu extends JPanel implements ActionListener
 		this.btnSolo        = new JButton("Partie Solo"             );
 		this.btnLocal       = new JButton("Partie Multijoueur Local");
 		this.btnMultijoueur = new JButton("Partie Multijoueur"      );
+		this.btnQuitter     = new JButton("Quitter"                 );
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
@@ -53,6 +55,8 @@ public class PanelMenu extends JPanel implements ActionListener
 		this.panelAccueil.add(this.btnSolo       );
 		this.panelAccueil.add(this.btnLocal      );
 		this.panelAccueil.add(this.btnMultijoueur);
+		this.panelAccueil.add(this.btnQuitter    );
+		
 		
 		this.add(this.panelAccueil);
 		
@@ -63,6 +67,7 @@ public class PanelMenu extends JPanel implements ActionListener
 		this.btnSolo       .addActionListener(this);
 		this.btnLocal      .addActionListener(this);
 		this.btnMultijoueur.addActionListener(this);
+		this.btnQuitter    .addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e)
@@ -71,6 +76,11 @@ public class PanelMenu extends JPanel implements ActionListener
 		{
 			this.ctrl.chargerPlateau(this.frameJeu.chargerFichier() );
 			this.frameJeu.ouvrirPanel(FrameJeu.PANEL_JEU);
+		}
+		
+		if (e.getSource() == this.btnQuitter)
+		{
+			this.frameJeu.dispose();
 		}
 	}
 }

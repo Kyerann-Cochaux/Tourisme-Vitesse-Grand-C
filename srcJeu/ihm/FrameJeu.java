@@ -27,7 +27,7 @@ public class FrameJeu extends JFrame
 	public FrameJeu(AppliJeu ctrl)
 	{
 		this.setTitle("Tourisme à Vitesse Grand C");
-		this.setSize(500, 300);
+		this.setSize(500, 350);
 		this.setLocation(675, 400);
 		
 		/* ---------------------------------- */
