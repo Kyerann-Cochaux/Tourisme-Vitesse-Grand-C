@@ -1,6 +1,7 @@
 ./ihm/FrameJeu.java
 ./ihm/PanelMenu.java
 ./ihm/PanelPlateau.java
+./ihm/PanelJeu.java
 
 
 ./metier/Metier.java
@@ -15,5 +16,6 @@
 ./metier/plateau/Voyage.java
 
 ./TestManches.java
+./TestZone.java
 
 ./AppliJeu.java

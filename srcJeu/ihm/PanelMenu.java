@@ -1,13 +1,10 @@
 package srcJeu.ihm;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-
-import javax.swing.*;
-
 import srcJeu.AppliJeu ;
+
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.GridLayout;
 
 public class PanelMenu extends JPanel implements ActionListener
 {
@@ -22,43 +19,43 @@ public class PanelMenu extends JPanel implements ActionListener
 	private JButton btnSolo ;
 	private JButton btnLocal ;
 	private JButton btnMultijoueur ;
+	private JButton btnQuitter ;
 	
 	public PanelMenu(AppliJeu ctrl, FrameJeu frameJeu)
 	{
+
 		this.ctrl     = ctrl;
 		this.frameJeu = frameJeu;
 
 		this.setBackground(FrameJeu.COULEUR_FOND_FONCE);
-		
+
 		/* ---------------------------------- */
 		/*       Création des composants      */
 		/* ---------------------------------- */
 		
-		this.panelAccueil = new JPanel();
-		this.panelAccueil.setLayout(new GridLayout(5, 1, 0, 20) );
+
+		this.panelAccueil = new JPanel(new GridLayout(6, 1, 0, 20) );
+		this.panelAccueil.setOpaque(false);
+
+		this.lblMenu = new JLabel ("Jouer une partie", SwingConstants.CENTER);
+		this.lblMenu.setFont      (FrameJeu.POLICE_TEXTE );
+		this.lblMenu.setForeground(FrameJeu.COULEUR_TITRE);
 		
-		this.lblMenu = new JLabel ("Tourisme à Vitesse Grand C", SwingConstants.CENTER);
-		this.lblMenu.setFont      (FrameJeu.POLICE_TEXTE         );
-		this.lblMenu.setForeground(FrameJeu.COULEUR_TITRE        );
-		
-		this.btnSolo         = new JButton("Partie Solo" );
-		this.btnLocal        = new JButton("Partie Multijoueur Local" );
-		this.btnMultijoueur  = new JButton("Partie Multijoueur" );
-		
+		this.btnSolo        = new JButton("Partie Solo"             );
+		this.btnLocal       = new JButton("Partie Multijoueur Local");
+		this.btnMultijoueur = new JButton("Partie Multijoueur"      );
+		this.btnQuitter     = new JButton("Quitter"                 );
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
-		this.panelAccueil.add( this.lblMenu );
-		JPanel panelVide = new JPanel();
-		panelVide.setOpaque(false);
-		this.panelAccueil.add( panelVide );
-		this.panelAccueil.add( this.btnSolo );
-		this.panelAccueil.add( this.btnLocal );
-		this.panelAccueil.add( this.btnMultijoueur );
-		
-		this.panelAccueil.setOpaque(false);
+		this.panelAccueil.add(this.lblMenu       );
+		this.panelAccueil.add(new JLabel()       );
+		this.panelAccueil.add(this.btnSolo       );
+		this.panelAccueil.add(this.btnLocal      );
+		this.panelAccueil.add(this.btnMultijoueur);
+		this.panelAccueil.add(this.btnQuitter    );
 		
 		
 		this.add(this.panelAccueil);
@@ -67,26 +64,23 @@ public class PanelMenu extends JPanel implements ActionListener
 		/*    Activation des Composants    */
 		/* ------------------------------- */
 		
-		this.btnSolo.addActionListener(this);
-		this.btnLocal.addActionListener(this);
+		this.btnSolo       .addActionListener(this);
+		this.btnLocal      .addActionListener(this);
 		this.btnMultijoueur.addActionListener(this);
+		this.btnQuitter    .addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e)
 	{
 		if (e.getSource() == this.btnSolo)
 		{
-			JFileChooser explorateur = new JFileChooser();
-			explorateur.setDialogTitle("Choisir Plateau...");
-			
-			explorateur.setCurrentDirectory(new File("../sauvegardes/"));
-			
-			int resultat = explorateur.showOpenDialog(this.frameJeu);
-			
-			if (resultat == JFileChooser.APPROVE_OPTION)
-			{
-				File fichierSelectionne = explorateur.getSelectedFile();
-			}
+			this.ctrl.chargerPlateau(this.frameJeu.chargerFichier() );
+			this.frameJeu.ouvrirPanel(FrameJeu.PANEL_JEU);
+		}
+		
+		if (e.getSource() == this.btnQuitter)
+		{
+			this.frameJeu.dispose();
 		}
 	}
 }
