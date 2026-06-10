@@ -29,4 +29,8 @@ replay_pid*
 
 // sauvegardes par défaut
 !plateauExemple.data
-!plateauExemple2.data
+
+!plateauMael.data
+!plateauClement.data
+!plateauTheo.data
+!plateauKyerann.data
