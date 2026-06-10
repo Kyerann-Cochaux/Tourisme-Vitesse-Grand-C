@@ -57,11 +57,10 @@ public class PanelPlateau extends JPanel
 		Graphics2D g2 = (Graphics2D) g;
 		
 		// Affichage du Fond
-		//pas pour l'edition
 		this.affichageFond(g2);
 		
 		// Affichage des Cases
-		this.affichageCases(g2);
+		// this.affichageCases(g2);
 		
 		// Affichage des Zones
 		this.affichageZones(g2);
@@ -73,7 +72,7 @@ public class PanelPlateau extends JPanel
 		this.affichagePlanetes(g2);
 		
 		// Affichage du Numéro des Zones
-		this.affichageNumeroZone(g2);
+		// this.affichageNumeroZone(g2);
 		
 		// Affichage des Départs des Espèces
 		this.affichageDepartEspece(g2);
@@ -120,6 +119,8 @@ public class PanelPlateau extends JPanel
 		}
 	}
 	
+	// Pas utiliser pour le Jeu
+	/*
 	private void affichageCases( Graphics2D g2 )
 	{
 		g2.setColor( new Color(194, 231, 242) );
@@ -132,14 +133,15 @@ public class PanelPlateau extends JPanel
 			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				g2.drawRect(
-				             TAILLE_CASE * cptCol, /*  Position X  */
-				             TAILLE_CASE * cptLig, /*  Position Y  */
-				             TAILLE_CASE,          /* LARGEUR CASE */
-				             TAILLE_CASE           /* LONGEUR CASE */
+				             TAILLE_CASE * cptCol,
+				             TAILLE_CASE * cptLig,
+				             TAILLE_CASE,
+				             TAILLE_CASE
 				           );
 			}
 		}
 	}
+	*/
 	
 	private void affichageZones( Graphics2D g2 )
 	{
@@ -225,6 +227,8 @@ public class PanelPlateau extends JPanel
 		}
 	}
 	
+	// Pas utiliser pour le Jeu
+	/*
 	private void affichageNumeroZone( Graphics2D g2 )
 	{
 		g2.setColor( Color.YELLOW );
@@ -247,6 +251,7 @@ public class PanelPlateau extends JPanel
 			}
 		}
 	}
+	*/
 	
 	private void affichagePlanetes( Graphics2D g2 )
 	{
