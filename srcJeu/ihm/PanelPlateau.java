@@ -5,14 +5,16 @@ import javax.imageio.ImageIO ;
 
 import java.io.File;
 import java.io.IOException ;
+
 import java.awt.Dimension ;
 import java.awt.Graphics ;
 import java.awt.Graphics2D ;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.image.BufferedImage ;
 
-import srcJeu.AppliJeu;
+import srcJeu.AppliJeu ;
 
 /**
  * Panel Plateau
@@ -39,8 +41,8 @@ public class PanelPlateau extends JPanel
 		this.dimPlateau = new Dimension( this.ctrl.getNbColonnes() * PanelPlateau.TAILLE_CASE + 1,
 		                                 this.ctrl.getNbLignes  () * PanelPlateau.TAILLE_CASE + 1 );
 		
-		this.setPreferredSize(this.dimPlateau            );
-		this.setBackground   (FrameJeu.COULEUR_FOND_FONCE);
+		this.setPreferredSize( this.dimPlateau                  );
+		this.setBackground   ( FrameJeu.COULEUR_FOND_FONCE );
 	}
 	
 	public int getTailleCase()
@@ -55,12 +57,13 @@ public class PanelPlateau extends JPanel
 		Graphics2D g2 = (Graphics2D) g;
 		
 		// Affichage du Fond
+		//pas pour l'edition
 		this.affichageFond(g2);
 		
 		// Affichage des Cases
 		this.affichageCases(g2);
 		
-		// Affichage des Zones (Non Fonctionnel)
+		// Affichage des Zones
 		this.affichageZones(g2);
 		
 		// Affichage des Liens
@@ -68,6 +71,9 @@ public class PanelPlateau extends JPanel
 		
 		// Affichage des Planètes
 		this.affichagePlanetes(g2);
+		
+		// Affichage du Numéro des Zones
+		this.affichageNumeroZone(g2);
 		
 		// Affichage des Départs des Espèces
 		this.affichageDepartEspece(g2);
@@ -190,20 +196,14 @@ public class PanelPlateau extends JPanel
 						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE  /* Arrivé Y */
 					);
 				}
-				
-				// Dessin du Numéro de la Zone dans la case
-				g2.setColor( Color.YELLOW );
-				g2.drawString( ""+zoneCaseAct, 
-				               cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE - 10,
-				               cptLig * PanelPlateau.TAILLE_CASE + 15
-				             );
 			}
 		}
 	}
 	
 	private void affichageLiens( Graphics2D g2 )
 	{
-		g2.setColor( Color.WHITE );
+		g2.setColor( new Color(200, 200, 200) );
+		g2.setStroke( new BasicStroke(2) );
 		
 		int nbVoyage = this.ctrl.getNbVoyages();
 		//System.out.println("NbVoyages -> " + nbVoyage);
@@ -221,6 +221,29 @@ public class PanelPlateau extends JPanel
 				// System.out.println("Render du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
+			}
+		}
+	}
+	
+	private void affichageNumeroZone( Graphics2D g2 )
+	{
+		g2.setColor( Color.YELLOW );
+		g2.setFont(new Font("default", Font.BOLD, 14));
+		
+		int nbLigne   = this.ctrl.getNbLignes  ();
+		int nbColonne = this.ctrl.getNbColonnes();
+		
+		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
+		{
+			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
+			{
+				int zoneCaseAct = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
+				
+				// Dessin du Numéro de la Zone dans la case
+				g2.drawString( String.format("%3d", zoneCaseAct),
+				               cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE - 25,
+				               cptLig * PanelPlateau.TAILLE_CASE + 15
+				             );
 			}
 		}
 	}
