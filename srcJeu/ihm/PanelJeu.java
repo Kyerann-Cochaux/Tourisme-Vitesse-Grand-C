@@ -123,7 +123,7 @@ public class PanelJeu extends JPanel
 
 		for (int cpt = 0; cpt < this.ctrl.getNbTypeEspeces(); cpt++) 
 		{
-			JLabel lbl = new JLabel("test", new ImageIcon("../images/Tuiles/Espece-" + this.ctrl.getNomEspece(cpt) + ".png" ), SwingConstants.CENTER ) ;
+			JLabel lbl = new JLabel(this.ctrl.getNomEspece(cpt), new ImageIcon("../images/Tuiles/Centre-Espece-" + this.ctrl.getNomEspece(cpt) + ".png" ), SwingConstants.CENTER ) ;
 			lbl.setFont      (FrameJeu.POLICE_TEXTE);
 			lbl.setForeground(FrameJeu.COULEUR_ZONE);
 			lbl.setOpaque    (false       );
