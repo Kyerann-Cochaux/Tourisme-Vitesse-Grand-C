@@ -139,7 +139,7 @@ public class PanelEdition extends JPanel implements ActionListener
 		// Création des JToggleButton pour les espèces
 		for (int cpt = 0; cpt < this.tabTypeEspece.length; cpt++) 
 			this.tabTypeEspece[cpt] = 
-			new JToggleButton(new ImageIcon(PanelEdition.REP_IMAGES + "Espece-" + this.ctrl.getNomEspece(cpt) + ".png") );
+			new JToggleButton(new ImageIcon(PanelEdition.REP_IMAGES + "Centre-Espece-" + this.ctrl.getNomEspece(cpt) + ".png") );
 
 		// Création des JToggleButton pour les planètes
 		for (int cpt = 0; cpt < this.tabTypePlanete.length; cpt++) 
