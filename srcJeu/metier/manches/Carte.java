@@ -1,4 +1,6 @@
-package srcJeu.metier;
+package srcJeu.metier.manches;
+
+import srcJeu.metier.Metier;
 
 public class Carte
 {
@@ -10,7 +12,7 @@ public class Carte
 	  
 	public static Carte creerCarte(String symbole, boolean premium)
 	{
-		for(String esp : Plateau.TAB_PLANETES)
+		for(String esp : Metier.TAB_PLANETES)
 		{
 			if(esp.equals(symbole) )
 				return new Carte(symbole, premium);

@@ -1,4 +1,6 @@
-package srcJeu.metier;
+package srcJeu.metier.plateau;
+
+import srcJeu.metier.Metier;
 
 public class Planete
 {
@@ -72,9 +74,9 @@ public class Planete
 	// Vérifie si le String est bien dans le tableau d'espèces disponible
 	private static boolean especeValide(String espece)
 	{
-		for (int cpt = 0; cpt < Plateau.TAB_ESPECES.length; cpt++)
+		for (int cpt = 0; cpt < Metier.TAB_ESPECES.length; cpt++)
 		{
-			if ( Plateau.TAB_ESPECES[cpt].equals(espece) )
+			if ( Metier.TAB_ESPECES[cpt].equals(espece) )
 				return true;
 		}
 		

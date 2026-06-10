@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class Metier
 {
+	public static final String[] TAB_PLANETES = {"Gazeuze",     "Océan",    "Tellurique", "Volcanique" };
+	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felinoid", "Azimae",      "Silikon"   };
+	                                           // Marron         BLeu        Rouge          Vert
+	
 	private Plateau plateauJeu;
 	private Pioche  pioche    ;
 	

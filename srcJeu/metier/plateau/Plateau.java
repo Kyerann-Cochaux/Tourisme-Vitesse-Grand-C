@@ -1,16 +1,14 @@
-package srcJeu.metier;
+package srcJeu.metier.plateau;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import srcJeu.metier.Metier;
 
 public class Plateau
 {
 	
 	private static final int TAILLE_MAX = 30;
-	
-	public static final String[] TAB_PLANETES = {"Gazeuze","Océan", "Tellurique", "Volcanique" };
-	public static final String[] TAB_ESPECES  = {"Chlorophite", "Felinoid", "Azimae", "Silikon"};
-	                                          // Marron         BLeu        Rouge     Vert
 	
 	private Case[][] ensCases;
 	private String[] ensEspeces;   // Nom des Espèces  utilisées dans le Plateau, entre 2 et 4
@@ -54,10 +52,10 @@ public class Plateau
 		*/
 		
 		for (int cpt = 0; cpt < this.ensPlanetes.length; cpt++)
-			this.ensPlanetes[cpt] = Plateau.TAB_PLANETES[cpt];
+			this.ensPlanetes[cpt] = Metier.TAB_PLANETES[cpt];
 		
 		for (int cpt = 0; cpt < this.ensEspeces.length; cpt++)
-			this.ensEspeces[cpt] = Plateau.TAB_ESPECES[cpt];
+			this.ensEspeces[cpt] = Metier.TAB_ESPECES[cpt];
 		
 		this.ensCases = new Case[this.nbLignes][this.nbColonnes];
 		
@@ -361,7 +359,6 @@ public class Plateau
 
 	public boolean ajouterPlanete(int x, int y, Planete p) 
 	{
-		boolean baseExiste = false;
 
 		if (!coordonneesValide(   x, y        ) ) return false;
 		if (!planeteValide    (p, x, y        ) ) return false;

@@ -1,4 +1,4 @@
-package srcJeu.metier;
+package srcJeu.metier.plateau;
 
 public class Case 
 {

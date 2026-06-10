@@ -1,7 +1,9 @@
-package srcJeu.metier;
+package srcJeu.metier.manches;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import srcJeu.metier.Metier;
 
 public class Pioche
 {
@@ -11,10 +13,10 @@ public class Pioche
 	{
 		this.pioche = new ArrayList<Carte>();
 		
-		for (int cpt = 0; cpt < Plateau.TAB_ESPECES.length; cpt++) 
+		for (int cpt = 0; cpt < Metier.TAB_ESPECES.length; cpt++) 
 		{
-			this.pioche.add(Carte.creerCarte(Plateau.TAB_ESPECES[cpt], false) );
-			this.pioche.add(Carte.creerCarte(Plateau.TAB_ESPECES[cpt], true ) );
+			this.pioche.add(Carte.creerCarte(Metier.TAB_ESPECES[cpt], false) );
+			this.pioche.add(Carte.creerCarte(Metier.TAB_ESPECES[cpt], true ) );
 		}
 
 		this.pioche.add(Carte.creerCarte("Joker", false) );
