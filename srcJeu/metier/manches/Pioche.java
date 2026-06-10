@@ -13,10 +13,10 @@ public class Pioche
 	{
 		this.pioche = new ArrayList<Carte>();
 		
-		for (int cpt = 0; cpt < Metier.TAB_ESPECES.length; cpt++) 
+	for (int cpt = 0; cpt < Metier.TAB_PLANETES.length; cpt++) 
 		{
-			this.pioche.add(Carte.creerCarte(Metier.TAB_ESPECES[cpt], false) );
-			this.pioche.add(Carte.creerCarte(Metier.TAB_ESPECES[cpt], true ) );
+			this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], false) );
+			this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], true ) );
 		}
 
 		this.pioche.add(Carte.creerCarte("Joker", false) );
@@ -50,6 +50,16 @@ public class Pioche
 			}
 		}
 		
+		return false;
+	}
+
+	public boolean resteCartePremium()
+	{
+		for (Carte c : this.pioche)
+		{
+			if(c.getPremium ())
+				return true;
+		}
 		return false;
 	}
 	

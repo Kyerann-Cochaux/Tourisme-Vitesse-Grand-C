@@ -12,6 +12,9 @@ public class Carte
 	  
 	public static Carte creerCarte(String symbole, boolean premium)
 	{
+		if (symbole.equals("Joker")) 
+			return new Carte(symbole, premium);
+
 		for(String esp : Metier.TAB_PLANETES)
 		{
 			if(esp.equals(symbole) )
