@@ -156,7 +156,7 @@ public class Plateau
 		return this.setNumSysteme(numSysteme, x, y, false);
 	}
 	
-	protected boolean setNumSysteme(int numSysteme, int x, int y, boolean forcerPlacement)
+	public boolean setNumSysteme(int numSysteme, int x, int y, boolean forcerPlacement)
 	{
 		if (forcerPlacement)
 		{

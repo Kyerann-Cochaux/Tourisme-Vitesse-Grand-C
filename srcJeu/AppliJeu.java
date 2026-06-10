@@ -1,6 +1,9 @@
 package srcJeu;
 
 import srcJeu.metier.*;
+import srcJeu.metier.plateau.Case;
+import srcJeu.metier.plateau.Planete;
+import srcJeu.metier.plateau.Voyage;
 import srcJeu.ihm.*;
 
 public class AppliJeu
@@ -72,10 +75,8 @@ public class AppliJeu
 	}
 	
 	public void chargerPlateau         (String fichier)       { this.metier.chargerPlateau    (fichier)              ;}
-	public void sauvegarderPlateau     (String nomSauvegarde) { this.metier.sauvegarderPlateau(nomSauvegarde, true)  ;}
-	public void sauvegarderCopiePlateau(String nomSauvegarde) { this.metier.sauvegarderPlateau(nomSauvegarde,false)  ;}
 
-    public static void main(String[] args) 
+	public static void main(String[] args) 
 	{
 		new AppliJeu();
 	}

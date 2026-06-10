@@ -3,6 +3,9 @@ package srcJeu.metier;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
+import srcJeu.metier.manches.*;
+import srcJeu.metier.plateau.*;
+
 public class Metier
 {
 	public static final String[] TAB_PLANETES = {"Gazeuze",     "Océan",    "Tellurique", "Volcanique" };
@@ -92,7 +95,7 @@ public class Metier
 					{
 						int indPlanete = Integer.parseInt("" + sIndPlanete);
 						
-						Planete tempPlanete = Planete.creerPlanete(Plateau.TAB_PLANETES[indPlanete].charAt(0) );
+						Planete tempPlanete = Planete.creerPlanete(Metier.TAB_PLANETES[indPlanete].charAt(0) );
 						
 						this.plateauJeu.getCase(numCol, numLig).setPlanete(tempPlanete);
 						// System.out.println(tempPlanete.getSymbole() + " : numCol -> " + numCol + "\n" + "    numLig -> " + numLig );
@@ -117,7 +120,7 @@ public class Metier
 					if( sIndEspece != '-' )
 					{
 						int indEspece = Integer.parseInt("" + sIndEspece);
-						String typeEspece = Plateau.TAB_ESPECES[indEspece];
+						String typeEspece = Metier.TAB_ESPECES[indEspece];
 						
 						this.plateauJeu.getCase(numCol, numLig).getPlanete().setEspece(typeEspece);
 					}
