@@ -84,7 +84,7 @@ public class PanelJeu extends JPanel
 			"<html>"+
 				"<body> "+
 					"<h1 style='text-align : center;'>"+ 
-						"Croisière des <br> " + this.ctrl.getNomEspece(3) + 
+						"Croisière des <br> " + this.ctrl.getNomEspece(0) + 
 					"</h1>"+
 				" </body> "
 			+"</html>", SwingConstants.CENTER
