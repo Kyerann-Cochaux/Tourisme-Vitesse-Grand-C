@@ -39,12 +39,16 @@ public class PanelJeu extends JPanel
 		/* -------- Panels principaux ------- */
 
 		JPanel panelCentre;
-		JPanel panelPioche;
+		JPanel panelCartes;
 		JPanel panelScore;
 
 		//sous panels du panelScore
 		JPanel panelScoreEspeces;
 		JPanel panelScoreLabels;
+
+		//sous panels du panelCartes
+		JPanel panelPioche;
+
 
 		ButtonGroup btgEspeces;
 
@@ -64,19 +68,20 @@ public class PanelJeu extends JPanel
 		this.panelPlateau = new PanelPlateau(ctrl);
 		panelCentre       = new JPanel(new GridBagLayout() );
 
+		this.ensLblCartes = new JLabel[this.ctrl.getNbTypeEspeces() +2];
+
 		GridLayout gl1 = new GridLayout(5,1,0,9);
 		if (this.ctrl.getNbTypeEspeces() >= 3) 
 		{
 			gl1.setRows(gl1.getRows() + this.ctrl.getNbTypeEspeces() /2);
-			this.ensLblCartes = new JLabel[6 + this.ctrl.getNbTypeEspeces() /2];
 
 		}
-		panelScoreEspeces.setLayout(gl1);
-		
-		panelPioche               = new JPanel(new GridLayout(8,1) );
 
-		this.ensLblCartes = new JLabel[10];
-		btgEspeces        = new ButtonGroup();
+		panelScoreEspeces.setLayout(gl1);
+	
+		panelCartes = new JPanel(new GridLayout(4,1) );
+
+		btgEspeces  = new ButtonGroup();
 	
 		this.spPlateau = new JScrollPane(panelCentre);
 
@@ -85,6 +90,8 @@ public class PanelJeu extends JPanel
 
 		this.panelCartesPremium   = this.creerPanelCarte();
 		this.panelCartesStandards = this.creerPanelCarte();
+
+		this.panelCartesPremium.setPreferredSize(panelCartes.getPreferredSize() );
 
 		this.lblTexteEspece = new JLabel
 		(
@@ -109,7 +116,7 @@ public class PanelJeu extends JPanel
 		panelScoreLabels .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 
 		panelCentre.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
-		panelPioche.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
+		panelCartes.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 
 		this.spPlateau.setBackground               (FrameJeu.COULEUR_FOND_FONCE               );
 		this.spPlateau.setVerticalScrollBarPolicy  (JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED  );
@@ -162,18 +169,20 @@ public class PanelJeu extends JPanel
 		panelScore.add(panelScoreLabels );
 		panelScore.add(panelScoreEspeces);
 
-		panelPioche.add(new JButton("PIOCHE") );
-		panelPioche.add(new JLabel("    NOM CARTE JEU", SwingConstants.CENTER) );
-		panelPioche.add(this.panelCartesPremium);
+		panelCartes.add(new JButton("PIOCHE") );
+		panelCartes.add(this.panelCartesPremium);
+		panelCartes.add(new JLabel() );
+		panelCartes.add(this.panelCartesStandards);
 
-		panelPioche.add(new JLabel("LABEL PREMIUM", SwingConstants.CENTER) );
 
-		panelPioche.add(new JLabel("LABEL STANDARD", SwingConstants.CENTER) );
+		//panelCartes.add(new JLabel("LABEL PREMIUM", SwingConstants.CENTER) );
+
+		//panelCartes.add(new JLabel("LABEL STANDARD", SwingConstants.CENTER) );
 
 
 		this.add(panelScore    , BorderLayout.WEST  );
 		this.add(this.spPlateau, BorderLayout.CENTER);
-		this.add(panelPioche   , BorderLayout.EAST  );
+		this.add(panelCartes   , BorderLayout.EAST  );
 
 
 
