@@ -27,21 +27,18 @@ public class Pioche
 		this.pioche = new ArrayList<Carte>();
 		
 		for (int cpt = 0; cpt < Pioche.TAB_CARTES.length; cpt++) 
-		{
 			this.pioche.add(Pioche.TAB_CARTES[cpt] );
-		}
-
-
-		//Collections.shuffle(this.pioche);
+		
+		Collections.shuffle(this.pioche);
 	}
 	
 	/* ---------------------------------- */
 	/*               Accesseurs           */
 	/* ---------------------------------- */
 
-	public Carte getCarte(int indice)
+	public Carte getCarteInit(int indice)
 	{
-		return this.pioche.get(indice);
+		return Pioche.TAB_CARTES[indice];
 	}
 	
 	public Carte getSommet()
@@ -81,8 +78,8 @@ public class Pioche
 
 	public boolean decouvrirCarte()
 	{
-		if(this.pioche.size() == 1 ) {return false;}
-		if(!this.resteCartePremium()){return false;}
+		if(this.pioche.size() == 1   ) return false;
+		if(!this.resteCartePremium() ) return false;
 		
 		this.pioche.removeFirst();
 		return true;
@@ -94,11 +91,10 @@ public class Pioche
 	
 	public String toString()
 	{
-		String sRet = "";
-		
-		sRet += "Pioche :\n";
+		String sRet = "Pioche :\n";
+
 		for(Carte carte : this.pioche)
-			sRet += carte.toString() + "\n";
+			sRet += carte + "\n";
 		
 		return sRet;
 	}

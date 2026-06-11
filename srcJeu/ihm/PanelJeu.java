@@ -43,8 +43,11 @@ public class PanelJeu extends JPanel
 		JPanel panelScoreLabels;
 
 		// sous panel du panelPioche
-		JPanel panelCartesStandards;
-		JPanel panelCartesPremium;
+
+		JPanel panelCartesStandardsA;
+		JPanel panelCartesStandardsB;
+		JPanel panelCartesPremiumA;
+		JPanel panelCartesPremiumB;
 
 		ButtonGroup btgEspeces;
 
@@ -61,18 +64,19 @@ public class PanelJeu extends JPanel
 		panelCentre       = new JPanel(new GridBagLayout() );
 
 		panelScore        = new JPanel(new GridLayout(4,1) );
+		panelScoreLabels  = new JPanel(new GridLayout(2,1) );
 		panelScoreEspeces = new JPanel();
 
-		GridLayout gl = new GridLayout(5,1,0,9);
-		if (this.ctrl.getNbTypeEspeces() >= 3) gl.setRows(gl.getRows() + this.ctrl.getNbTypeEspeces() /2);
-		panelScoreEspeces.setLayout(gl);
+		GridLayout gl1 = new GridLayout(5,1,0,9);
+		if (this.ctrl.getNbTypeEspeces() >= 3) gl1.setRows(gl1.getRows() + this.ctrl.getNbTypeEspeces() /2);
+		panelScoreEspeces.setLayout(gl1);
 		
-		panelPioche          = new JPanel(new GridLayout(3,1) );
-		panelCartesStandards = new JPanel(new GridLayout(1,3) );
+		panelPioche           = new JPanel(new GridLayout(3,1) );
+		panelCartesStandardsA = new JPanel();
+		panelCartesStandardsB = new JPanel();
+		panelCartesPremiumA   = new JPanel();
+		panelCartesPremiumB   = new JPanel();
 
-		panelCartesPremium   = new JPanel(new GridLayout(1,3) );
-
-		panelScoreLabels  = new JPanel(new GridLayout(2,1) );
 
 		this.ensLblCartes = new JLabel[10];
 		btgEspeces        = new ButtonGroup();
@@ -81,8 +85,7 @@ public class PanelJeu extends JPanel
 
 		for (int cpt = 0; cpt < this.ensLblCartes.length; cpt++) 
 		{
-			this.ensLblCartes[cpt] = new JLabel(new ImageIcon("../images/Cartes/Carte-" + 
-			                         this.ctrl.getCarte(cpt).getSymbole().charAt(0)+".png") );
+			this.ensLblCartes[cpt] = new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") );
 
 		}
 
@@ -161,18 +164,23 @@ public class PanelJeu extends JPanel
 		// panelCartes
 		for (int cpt = 0; cpt < this.ensLblCartes.length ; cpt++) 
 		{	
-			if (cpt < 5) panelCartesStandards.add(this.ensLblCartes[cpt] );
-			else         panelCartesPremium  .add(this.ensLblCartes[cpt] );
+			if (cpt < 3)              panelCartesPremiumA.add(this.ensLblCartes[cpt] );
+			if (cpt == 3 || cpt == 4) panelCartesPremiumB.add(this.ensLblCartes[cpt] );
+			if (cpt > 4  ||cpt < 8)   panelCartesStandardsA.add(this.ensLblCartes[cpt] );
+			if (cpt >=8)              panelCartesStandardsB.add(this.ensLblCartes[cpt] );
 		}
 		
 		
 		panelScore.add(panelScoreLabels );
 		panelScore.add(panelScoreEspeces);
 
-		panelPioche.add(new JLabel("PIOCHE") );
+		panelPioche.add(new JLabel(new ImageIcon() ) );
 
-		panelPioche.add(panelCartesPremium  , BorderLayout.CENTER);
-		panelPioche.add(panelCartesStandards);
+		panelPioche.add(panelCartesPremiumA  , BorderLayout.CENTER);
+		panelPioche.add(panelCartesPremiumB  , BorderLayout.CENTER);
+		panelPioche.add(panelCartesStandardsA, BorderLayout.CENTER);
+		panelPioche.add(panelCartesStandardsB, BorderLayout.CENTER);
+		panelPioche.add(panelCartesStandardsA);
 
 		this.add(panelScore    , BorderLayout.WEST  );
 		this.add(this.spPlateau, BorderLayout.CENTER);

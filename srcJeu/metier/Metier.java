@@ -45,12 +45,12 @@ public class Metier
 	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
-	public Plateau getPlateau       ()           {return this.plateauJeu                                       ;}
+	public Plateau getPlateau       () {return this.plateauJeu ;}
 	public Manche  getMancheCourante()           
 	{
-		return this.lstManches         .get(this.mancheCourante - 1 );
+		return this.lstManches.get(this.mancheCourante - 1 );
 	}
-	public Carte   getCarte         (int indice) {return this.getMancheCourante().getCarte(indice)             ;}
+	public Carte getCarteInit(int indice) {return this.getMancheCourante().getCarteInit(indice);}
 	
 	/* ---------------------------------- */
 	/*          Autres méthodes           */

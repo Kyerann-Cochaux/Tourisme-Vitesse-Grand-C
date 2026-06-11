@@ -1,8 +1,11 @@
 package srcJeu.metier.manches;
 
-import java.util.ArrayList;
+import srcJeu.metier.Metier;
 import srcJeu.metier.plateau.Case;
+
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class Manche
 {
@@ -10,19 +13,22 @@ public class Manche
 	private String espece;
 	private List<Case> lstCases;
 
-	/*Factory pour verifier si l'espece en parametre est une espece valide  */
+	/*Factory pour vérifier si l'espèce en paramètre est une espèce valide  */
 	public static Manche creerManche(String espece)
 	{
-		if(!espece.equals("Chlorophite") && !espece.equals("Felinoid") && 
-		   !espece.equals("Azimae")      && !espece.equals("Silikon")    )
-			return null;
-		return new Manche(espece);
+		for (int cpt = 0; cpt < Metier.TAB_ESPECES.length; cpt++)
+		{
+			if ( Metier.TAB_ESPECES[cpt].equals(espece) )
+				return new Manche(espece);
+		}
+		
+		return null;
 	}
 
 	private Manche(String espece)
 	{
-		this.espece = espece;
-		this.pioche = new Pioche();
+		this.espece   = espece;
+		this.pioche   = new Pioche();
 		this.lstCases = new ArrayList<Case>();
 	}
 
@@ -33,7 +39,7 @@ public class Manche
 	public String     getEspece   ()           {return this.espece;                 }
 	public Pioche     getPioche   ()           {return this.pioche;                 }
 	public Carte      getSommet   ()           {return this.pioche.getSommet();     }
-	public Carte      getCarte    (int indice) {return this.pioche.getCarte(indice);}
+	public Carte      getCarteInit(int indice) {return this.pioche.getCarteInit(indice);}
 	public List<Case> getlstCases ()           {return this.lstCases;               }
 	public Case       getPremier  ()           {return this.lstCases.getFirst();    }
 	public Case       getDernier  ()           {return this.lstCases.getLast() ;    }

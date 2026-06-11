@@ -56,12 +56,17 @@ public class PanelPlateau extends JPanel
 		this.posExtremiteSlct = null ;
 	}
 
-	// Accesseurs
-	public int getTailleCase() { return PanelPlateau.TAILLE_CASE ; }
+	 /* ---------------------------------- */
+	 /*             Accesseurs             */
+	 /* ---------------------------------- */
 
+	public int getTailleCase        () { return PanelPlateau.TAILLE_CASE ; }
 	public Point getPosExtremiteSlct() { return this.posExtremiteSlct ; }
 
-	// Modifieurs
+	/* ---------------------------------- */
+	/*            Modificateurs           */
+	/* ---------------------------------- */
+
 	public void setExtremiteSlct( Point posClk )
 	{
 		System.out.println( "Nouvelle Extremité Selectionnée : " + (int) posClk.getX() + "/" + (int) posClk.getY() );
@@ -75,12 +80,6 @@ public class PanelPlateau extends JPanel
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
-		// Affichage du Fond
-		// this.affichageFond(g2);
-		
-		// Affichage des Cases
-		// this.affichageCases(g2);
-		
 		// Affichage des Zones
 		this.affichageZones(g2);
 		
@@ -90,14 +89,12 @@ public class PanelPlateau extends JPanel
 		// Affichage des Planètes
 		this.affichagePlanetes(g2);
 		
-		// Affichage du Numéro des Zones
-		// this.affichageNumeroZone(g2);
 		
 		// Affichage des Départs des Espèces
 		this.affichageDepartEspece(g2);
 
 		// Affichage de l'Extremité Selectionner
-		if ( this.posExtremiteSlct != null ) { this.affichageExtremiteSelectionnee( g2 ); }
+		if ( this.posExtremiteSlct != null ) { this.affichageExtremiteSelectionnee( g2 ); System.out.println("On rentre dans la condition de dessin de selection"); }
 
 	}
 	
@@ -338,10 +335,10 @@ public class PanelPlateau extends JPanel
 		int posExSelcY = (int) this.posExtremiteSlct.getY() * TAILLE_CASE + TAILLE_CASE / 2 ;
 
 		System.out.println( "Affichage de l'Extremité : " + (int) this.posExtremiteSlct.getX() + "/" + (int) this.posExtremiteSlct.getY() );
-		g2.drawOval( posExSelcX,
+		g2.fillOval( posExSelcX,
 		             posExSelcY,
-		             TAILLE_CASE / 4,
-		             TAILLE_CASE / 4
+		             (int) TAILLE_CASE / 4,
+		             (int) TAILLE_CASE / 4
 		           );
 	}
 }
