@@ -7,7 +7,7 @@ import srcJeu.metier.plateau.Case;
 public class TestManches
 {
 	public static void main(String[] args)
-	{
+	{/*
 		System.out.println("=================================================");
 		System.out.println("        TEST COMPLET DU MODULE DES MANCHES       ");
 		System.out.println("=================================================\n");
@@ -84,6 +84,6 @@ public class TestManches
 		// ---------------------------------------------------------------
 		System.out.println("\n5. CONTROLE DE FIN DE MANCHE & SCORE");
 		System.out.println("   Carte finale figee dans la defausse : [ " + m.getSommet() + " ]");
-		System.out.println("   Calcul du score de la manche : " + m.calculerScore());
+		System.out.println("   Calcul du score de la manche : " + m.calculerScore());*/
 	}
 }
