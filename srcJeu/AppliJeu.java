@@ -35,6 +35,8 @@ public class AppliJeu
 	public Planete getPlanete  (int indCol, int indLig) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
 	public Carte   getCarteInit(int indice)             {return this.metier.getCarteInit(indice)                            ;}
 	
+	// Retourne le nom de l'espèce en croisières dans la manche actuelle
+	public String getEspCroisiereCrt() { return this.metier.getMancheCourante().getEspece() ; }
 
 	/* ---------------------------------- */
 	/*            Modificateurs           */
@@ -56,7 +58,7 @@ public class AppliJeu
 	
 	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null);}
 	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)                      ;}
-	public int calculerScore   ()                         {return this.metier.calculerScore()                        ;}
+	public int  calculerScore   ()                         {return this.metier.calculerScore()                        ;}
 
 	public boolean estExtremite(int col, int lig) {return this.metier.estExtremite(col, lig);}
 	public static void main(String[] args) 

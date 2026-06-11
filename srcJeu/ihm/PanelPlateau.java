@@ -62,8 +62,8 @@ public class PanelPlateau extends JPanel
 	 /*             Accesseurs             */
 	 /* ---------------------------------- */
 
-	public int getTailleCase        () { return PanelPlateau.TAILLE_CASE ; }
-	public Point getPosExtremiteSlct() { return this.posExtremiteSlct ; }
+	public int   getTailleCase      () { return PanelPlateau.TAILLE_CASE ; }
+	public Point getPosExtremiteSlct() { return this.posExtremiteSlct    ; }
 
 	/* ---------------------------------- */
 	/*            Modificateurs           */
@@ -212,9 +212,9 @@ public class PanelPlateau extends JPanel
 				{
 					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) { g2.setColor( TAB_COUL_LIENS[cpt] ); }
 				}
-
+				
 				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); }
-
+				
 				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 			}
