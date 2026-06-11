@@ -125,6 +125,39 @@ public class Plateau
 	 
 	*/
 	
+	
+	// 
+	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
+	{
+		Voyage voyAColorer = null;
+		
+		for (int indVoyage = 0; indVoyage < lstVoyages.size(); indVoyage++)
+		{
+			Voyage voyTemp = lstVoyages.get(indVoyage);
+			
+			if ( ( voyTemp.getPlaneteSource     () == this.ensCases[yDep][xDep] || 
+			       voyTemp.getPlaneteDestination() == this.ensCases[yDep][xDep]    ) &&
+			     
+			     ( voyTemp.getPlaneteSource     () == this.ensCases[yFin][xFin] || 
+			       voyTemp.getPlaneteDestination() == this.ensCases[yFin][xFin]    ) )
+			{
+				voyAColorer = voyTemp;
+			}
+		}
+		
+		for (int indVoyage = 0; indVoyage < lstVoyages.size(); indVoyage++)
+		{
+			Voyage voyTestCoupe = lstVoyages.get(indVoyage);
+			
+			if ( voyAColorer.coupe(voyTestCoupe) )
+				return false;
+		}
+		
+		return true;
+	}
+	
+	
+	
 	private void corrigerDecoupeZone(int x, int y)
 	{
 		// création de nouvelles zones si besoin
@@ -202,10 +235,6 @@ public class Plateau
 		return true;
 		
 	}
-	
-	/* ---------------------------------- */
-	/*           Autres méthodes          */
-	/* ---------------------------------- */
 	
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
