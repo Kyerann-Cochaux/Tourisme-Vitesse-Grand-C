@@ -29,26 +29,6 @@ public class Metier
 	{
 		this.plateauJeu = Plateau.creerPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 		this.lstManches = new ArrayList<Manche>(nbEspeces);
-
-		for (int cpt = 0; cpt < this.plateauJeu.getNbEspeces(); cpt++) 
-		{
-			for(int col = 0; col < this.plateauJeu.getNbColonnes(); col++)
-			{
-				for(int lig = 0; lig < this.plateauJeu.getNbLignes(); lig++)
-				{
-					if(this.plateauJeu.getCase(col, lig).getPlanete() != null &&
-					   this.plateauJeu.getCase(col, lig).getPlanete().getEspece() != null &&
-					   this.plateauJeu.getCase(col, lig).getPlanete().getEspece().equals(this.plateauJeu.getNomEspece(cpt)))
-					{
-						Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt), this.plateauJeu.getCase(col, lig));
-						
-						System.out.println(m);
-						lstManches.add(m );
-						System.out.println("nbManches : " + lstManches.size());
-					}
-				}
-			}
-		}
 	}
 	
 	/* ---------------------------------- */
@@ -178,6 +158,27 @@ public class Metier
 			
 			this.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 			return false;
+		}
+		
+		// Ajout de la base dans les manches
+		for (int cpt = 0; cpt < this.plateauJeu.getNbEspeces(); cpt++) 
+		{
+			for(int col = 0; col < this.plateauJeu.getNbColonnes(); col++)
+			{
+				for(int lig = 0; lig < this.plateauJeu.getNbLignes(); lig++)
+				{
+					if(this.plateauJeu.getCase(col, lig).getPlanete() != null &&
+					   this.plateauJeu.getCase(col, lig).getPlanete().getEspece() != null &&
+					   this.plateauJeu.getCase(col, lig).getPlanete().getEspece().equals(this.plateauJeu.getNomEspece(cpt)))
+					{
+						Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt), this.plateauJeu.getCase(col, lig));
+						
+						System.out.println(m);
+						lstManches.add(m);
+						System.out.println("nbManches : " + lstManches.size());
+					}
+				}
+			}
 		}
 		
 		this.plateauJeu.actualiserVoyages();

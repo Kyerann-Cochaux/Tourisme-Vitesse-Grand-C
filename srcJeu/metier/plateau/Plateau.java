@@ -126,7 +126,7 @@ public class Plateau
 	*/
 	
 	
-	// 
+	/*
 	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
 		Voyage voyAColorer = null;
@@ -155,7 +155,7 @@ public class Plateau
 		
 		return true;
 	}
-	
+	 */
 	
 	
 	private void corrigerDecoupeZone(int x, int y)
