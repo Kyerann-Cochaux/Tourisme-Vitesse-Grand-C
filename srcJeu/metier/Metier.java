@@ -32,12 +32,20 @@ public class Metier
 
 		for (int cpt = 0; cpt < this.plateauJeu.getNbEspeces(); cpt++) 
 		{
-			Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt) );
-
-			System.out.println(m);
-			lstManches.add(m );
-			System.out.println("nbManches : " + lstManches.size());
-			
+			for(int col = 0; col < this.plateauJeu.getNbColonnes(); col++)
+			{
+				for(int lig = 0; lig < this.plateauJeu.getNbLignes(); lig++)
+				{
+					if(this.plateauJeu.getCase(col, lig).getPlanete().getEspece().equals(this.plateauJeu.getNomEspece(cpt)))
+					{
+						Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt), this.plateauJeu.getCase(col, lig));
+						
+						System.out.println(m);
+						lstManches.add(m );
+						System.out.println("nbManches : " + lstManches.size());
+					}
+				}
+			}
 		}
 	}
 	
