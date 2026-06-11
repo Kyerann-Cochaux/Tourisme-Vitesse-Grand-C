@@ -58,7 +58,7 @@ public class PanelPlateau extends JPanel
 		
 		// Affichage du Fond
 		//pas pour l'edition
-		this.affichageFond(g2);
+		//this.affichageFond(g2);
 		
 		// Affichage des Cases
 		this.affichageCases(g2);

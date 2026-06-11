@@ -379,35 +379,46 @@ public class PanelEdition extends JPanel implements ActionListener
 		{
 			public void mousePressed(MouseEvent e)
 			{
-				// System.out.println( e.paramString() );
+
+				int posLigClk = (int) ( e.getY() / PanelEdition.this.panelPlateau.getTailleCase() ) ;
+				int posColClk = (int) ( e.getX() / PanelEdition.this.panelPlateau.getTailleCase() ) ;
 				
 				if( e.getButton() == MouseEvent.BUTTON1 && typeBtnSlct != null ) 
 				{
-					ajouterElement(e);
+
+					
+					ajouterElement(e, posLigClk, posColClk);
+					PanelEdition.this.repaint();
+					
 				}
 				
-				if( e.getButton() == MouseEvent.BUTTON3 ) { supprimerElement(e) ; }
+				if( e.getButton() == MouseEvent.BUTTON3 ) { supprimerElement(e,posLigClk, posColClk) ; }	
 			}
 			
 			public void mouseDragged(MouseEvent e)
 			{
-				// System.out.println( e.paramString() );
+
+				int posLigClk = (int) ( e.getY() / PanelEdition.this.panelPlateau.getTailleCase() ) ;
+				int posColClk = (int) ( e.getX() / PanelEdition.this.panelPlateau.getTailleCase() ) ;
+
+				System.out.println(e.getModifiersEx() );
 				
-				if( e.getButton() == MouseEvent.BUTTON1 && typeBtnSlct != null ) 
+				if( e.getModifiersEx()  == 1024 && typeBtnSlct != null ) 
 				{
-					ajouterElement(e);
+
+					ajouterElement(e, posLigClk, posColClk);
+					PanelEdition.this.repaint();
 				}
 				
-				if( e.getButton() == MouseEvent.BUTTON3 ) { supprimerElement(e) ; }
+				if( e.getModifiersEx() == 4096 ) { supprimerElement(e, posLigClk, posColClk) ; }
 			}
-		} ;
+		};
 	}
 	
 	// Méthode utiliser par notre MouseAdapter
-	private void ajouterElement(MouseEvent e)
+	private void ajouterElement(MouseEvent e, int posLigClk, int posColClk)
 	{
-		int posLigClk = (int) ( e.getY() / this.panelPlateau.getTailleCase() ) ;
-		int posColClk = (int) ( e.getX() / this.panelPlateau.getTailleCase() ) ;
+
 		
 		// Ajout d'une Planète
 		for( int ind=0 ; ind < this.ctrl.getNbTypePlanetes() ; ind++ )
@@ -440,10 +451,8 @@ public class PanelEdition extends JPanel implements ActionListener
 		this.panelPlateau.repaint();
 	}
 	
-	private void supprimerElement(MouseEvent e)
+	private void supprimerElement(MouseEvent e, int posLigClk, int posColClk)
 	{
-		int posLigClk = (int) ( e.getY() / this.panelPlateau.getTailleCase() ) ;
-		int posColClk = (int) ( e.getX() / this.panelPlateau.getTailleCase() ) ;
 		
 		boolean especeDejaSupprimer = false ;
 		

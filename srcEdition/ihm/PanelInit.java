@@ -79,7 +79,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		for (int cpt = 0; cpt < tabZoneTxt.length; cpt++) 
 		{
-			if (cpt == 0)             this.tabZoneTxt[cpt] = new JTextField("Entrez le nom du plateau", PanelInit.NB_CARA);
+			if (cpt == 0)             this.tabZoneTxt[cpt] = new JTextField("Entrez un nom pour le plateau", PanelInit.NB_CARA);
 			if (cpt == 1 || cpt == 2) this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_TAILLE  , PanelInit.NB_CARA);
 			if (cpt > 2             ) this.tabZoneTxt[cpt] = new JTextField(PanelInit.TEXTE_QUANTITE, PanelInit.NB_CARA);
 		}
@@ -258,7 +258,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	{
 		for (int cpt = 0; cpt < tabZoneTxt.length ; cpt++) 
 		{
-			if (cpt == 0)             this.tabZoneTxt[cpt].setText("Entrez le nom du plateau");
+			if (cpt == 0)             this.tabZoneTxt[cpt].setText("Entrez un nom pour le plateau");
 			if (cpt == 1 || cpt == 2) this.tabZoneTxt[cpt].setText(PanelInit.TEXTE_TAILLE  );
 			if (cpt > 2             ) this.tabZoneTxt[cpt].setText(PanelInit.TEXTE_QUANTITE);
 		}
@@ -338,10 +338,12 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 	public void focusGained( FocusEvent e )
 	{
 		JTextField focusTxtField = (JTextField) e.getSource();
-		if(focusTxtField.getText().equals(PanelInit.TEXTE_TAILLE) || focusTxtField.getText().equals(PanelInit.TEXTE_QUANTITE) || focusTxtField.getText().equals("Entrez le nom du plateau"))
+		if(focusTxtField.getText().equals(PanelInit.TEXTE_TAILLE)                  || 
+		   focusTxtField.getText().equals(PanelInit.TEXTE_QUANTITE)                || 
+		   focusTxtField.getText().equals("Entrez un nom pour le plateau") )
+
 			focusTxtField.setText("");
-		else
-			focusTxtField.setText(focusTxtField.getText());
+		else focusTxtField.setText(focusTxtField.getText());
 	}
 	
 	public void focusLost( FocusEvent e )
@@ -360,7 +362,7 @@ public class PanelInit extends JPanel implements ActionListener, FocusListener
 		
 		if (txtActuelle.equals( PanelInit.TEXTE_TAILLE ) || txtActuelle.equals("") )
 		{
-			if (indTxtClc == 0                  ) unfocusTxtField.setText( "Entrez le nom pour le plateau");
+			if (indTxtClc == 0                  ) unfocusTxtField.setText( "Entrez un nom pour le plateau");
 			if (indTxtClc == 1 || indTxtClc == 2) unfocusTxtField.setText( PanelInit.TEXTE_TAILLE         );
 			if (indTxtClc == 3 || indTxtClc == 4) unfocusTxtField.setText( PanelInit.TEXTE_QUANTITE       );
 		}
