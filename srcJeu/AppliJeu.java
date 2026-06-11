@@ -39,7 +39,12 @@ public class AppliJeu
 	/* ---------------------------------- */
 	/*            Modificateurs           */
 	/* ---------------------------------- */
-
+	
+	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
+	{
+		return this.metier.setEspece(xDep, yDep, xFin, yFin, espece);
+	}
+	
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */

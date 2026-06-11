@@ -52,6 +52,15 @@ public class Metier
 	}
 	public Carte getCarteInit(int indice) {return this.getMancheCourante().getCarteInit(indice);}
 	
+	
+	
+	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
+	{
+		if(!this.getMancheCourante().estExtremite(xDep, yDep))
+			return false;
+		
+		return this.plateauJeu.setEspece(xDep, yDep, xFin, yFin, espece);
+	}
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
