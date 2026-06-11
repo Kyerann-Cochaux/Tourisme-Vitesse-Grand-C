@@ -210,20 +210,28 @@ public class PanelJeu extends JPanel
 				int posColClk = (int) ( e.getX() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 				int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 				
-				// Gestion de la selection d'extremite
-				if ( e.getButton() == MouseEvent.BUTTON1  /* && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) */ )
-				{
-					PanelJeu.this.panelPlateau.setExtremiteSlct( new Point( posColClk, posLigClk ) );
-				}
-
 				// Gestion de la création de Voyage
 				/*
 				if ( e.getButton() == MouseEvent.BUTTON1                  &&
-				     PanelJeu.this.plateauJeu.getPosExtremiteSlct != null &&
-				     PanelJeu.this.ctrl.
+				     PanelJeu.this.plateauJeu.getPosExtremiteSlct != null
 				   )
+				{
+					
+				}
 				*/
+				
+				// Gestion de la selection d'extremite
+				if ( e.getButton() == MouseEvent.BUTTON1  /* && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) */ )
+				{
+					selectionnerExtremite( posColClk, posLigClk );
+				}
 			}
 		};
+	}
+	
+	private void selectionnerExtremite( int posColClk, int posLigClk )
+	{
+		this.panelPlateau.setExtremiteSlct( new Point( posColClk, posLigClk ) );
+		this.panelPlateau.repaint();
 	}
 }

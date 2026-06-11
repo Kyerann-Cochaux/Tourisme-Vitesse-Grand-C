@@ -37,6 +37,8 @@ public class PanelPlateau extends JPanel
 	                                                new Color( 50, 132, 100)  // Silikon
 	                                              };
 	
+	private static final int TAILLE_CURSEUR = 1 ; // Plus ce chiffre est grand plus le curseur est petit
+	
 	private AppliJeu ctrl ;
 
 	private Dimension dimPlateau ;
@@ -69,7 +71,7 @@ public class PanelPlateau extends JPanel
 
 	public void setExtremiteSlct( Point posClk )
 	{
-		System.out.println( "Nouvelle Extremité Selectionnée : " + (int) posClk.getX() + "/" + (int) posClk.getY() );
+		// System.out.println( "Nouvelle Extremité Selectionnée : " + (int) posClk.getX() + "/" + (int) posClk.getY() );
 		this.posExtremiteSlct = posClk ;
 	}
 	
@@ -80,21 +82,24 @@ public class PanelPlateau extends JPanel
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
+		// Affichage des Cases
+		// |!| NE PAS UTILISER DANS LA VERSION FINAL  |!|
+		// this.affichageCases(g2);
+		
 		// Affichage des Zones
 		this.affichageZones(g2);
 		
 		// Affichage des Liens
 		this.affichageLiens(g2);
 		
+		// Affichage de l'Extremité Selectionner
+		if ( this.posExtremiteSlct != null ) { this.affichageExtremiteSelectionnee( g2 ); }
+		
 		// Affichage des Planètes
 		this.affichagePlanetes(g2);
 		
-		
 		// Affichage des Départs des Espèces
 		this.affichageDepartEspece(g2);
-
-		// Affichage de l'Extremité Selectionner
-		if ( this.posExtremiteSlct != null ) { this.affichageExtremiteSelectionnee( g2 ); System.out.println("On rentre dans la condition de dessin de selection"); }
 
 	}
 	
@@ -102,42 +107,27 @@ public class PanelPlateau extends JPanel
 	/* Méthodes d'Affichages */
 	/*-----------------------*/
 	
-	private void affichageFond( Graphics2D g2 )
+	// |!| NE PAS UTILISER DANS LA VERSION FINAL  |!|
+	private void affichageCases( Graphics2D g2 )
 	{
-		BufferedImage image = null ;
-
+		g2.setColor( new Color(194, 231, 242) );
+		
 		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
-
+		
 		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
 			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
-				
-				try
-				{
-					File inputFile = new File("../images/Tuiles/Fond.png");
-					image = ImageIO.read(inputFile);
-					
-					if ( image != null )
-					{
-						g2.drawImage( image               , /* L'image à afficher */
-						              null             ,    /* Traitement d'Image (Innutile ici) */
-						              TAILLE_CASE * cptCol, /* Position X */
-						              TAILLE_CASE * cptLig  /* Position Y */
-						            );
-					}
-				}
-
-				catch (IOException e)
-				{
-					System.out.println(e);
-				}
+				g2.drawRect(
+				             TAILLE_CASE * cptCol, /*  Position X  */
+				             TAILLE_CASE * cptLig, /*  Position Y  */
+				             TAILLE_CASE,          /* LARGEUR CASE */
+				             TAILLE_CASE           /* LONGEUR CASE */
+				           );
 			}
 		}
 	}
-	
-	// Pas utiliser pour le Jeu
 	
 	private void affichageZones( Graphics2D g2 )
 	{
@@ -258,6 +248,20 @@ public class PanelPlateau extends JPanel
 	}
 	*/
 	
+	private void affichageExtremiteSelectionnee( Graphics2D g2 )
+	{
+		g2.setColor( new Color( 255, 0, 255 ) );
+		int posExSelcX = (int) this.posExtremiteSlct.getX() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
+		int posExSelcY = (int) this.posExtremiteSlct.getY() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
+		
+		// System.out.println( "Affichage de l'Extremité : " + (int) this.posExtremiteSlct.getX() + "/" + (int) this.posExtremiteSlct.getY() );
+		g2.fillOval( posExSelcX,
+		             posExSelcY,
+		             (int) TAILLE_CASE,
+		             (int) TAILLE_CASE
+		           );
+	}
+	
 	private void affichagePlanetes( Graphics2D g2 )
 	{
 		int nbLigne   = this.ctrl.getNbLignes();
@@ -326,19 +330,5 @@ public class PanelPlateau extends JPanel
 				}
 			}
 		}
-	}
-
-	private void affichageExtremiteSelectionnee( Graphics2D g2 )
-	{
-		g2.setColor( Color.RED );
-		int posExSelcX = (int) this.posExtremiteSlct.getX() * TAILLE_CASE + TAILLE_CASE / 2 ;
-		int posExSelcY = (int) this.posExtremiteSlct.getY() * TAILLE_CASE + TAILLE_CASE / 2 ;
-
-		System.out.println( "Affichage de l'Extremité : " + (int) this.posExtremiteSlct.getX() + "/" + (int) this.posExtremiteSlct.getY() );
-		g2.fillOval( posExSelcX,
-		             posExSelcY,
-		             (int) TAILLE_CASE / 4,
-		             (int) TAILLE_CASE / 4
-		           );
 	}
 }
