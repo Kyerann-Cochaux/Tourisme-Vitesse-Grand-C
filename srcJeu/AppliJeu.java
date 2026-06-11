@@ -34,6 +34,8 @@ public class AppliJeu
 	public Voyage getVoyage    (int indice   ) {return this.metier.getPlateau().getVoyage    (indice);}
 	
 	public Planete getPlanete( int indCol, int indLig ) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
+
+	public boolean getExtremite(int col, int lig) { return metier.getExtremite(col, lig);}
 	
 
 	/* ---------------------------------- */
