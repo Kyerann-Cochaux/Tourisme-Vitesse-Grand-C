@@ -35,8 +35,9 @@ public class Metier
 	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
-	public Plateau getPlateau() { return this.plateauJeu;}
-	public Manche  getManche () { return this.lstManches.get(this.mancheCourante);}
+	public Plateau getPlateau   () { return this.plateauJeu;}
+	public Manche  getManche    () { return this.lstManches.get(this.mancheCourante);}
+	public boolean getExtremiter(int col, int lig) { return this.lstManches.get(mancheCourante).getExtremiter(col, lig);}
 	
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
