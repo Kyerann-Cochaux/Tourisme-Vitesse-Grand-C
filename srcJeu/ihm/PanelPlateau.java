@@ -94,7 +94,7 @@ public class PanelPlateau extends JPanel
 		this.affichageDepartEspece(g2);
 
 		// Affichage de l'Extremité Selectionner
-		if ( this.posExtremiteSlct != null ) { this.affichageExtremiteSelectionnee( g2 ); System.out.println("On rentre dans la condition de dessin de selection"); }
+		if ( this.posExtremiteSlct != null ) { this.affichageExtremiteSelectionnee( g2 ); System.out.println("On rentre dans la condition de dessin de selecti"); }
 
 	}
 	
