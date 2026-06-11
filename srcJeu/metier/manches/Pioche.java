@@ -67,8 +67,8 @@ public class Pioche
 
 	public boolean decouvrirCarte()
 	{
-		if(this.pioche.size() == 1 ){return false;}
-		if(this.resteCartePremium()){return false;}
+		if(this.pioche.size() == 1 ) {return false;}
+		if(!this.resteCartePremium()){return false;}
 		
 		this.pioche.removeFirst();
 		return true;

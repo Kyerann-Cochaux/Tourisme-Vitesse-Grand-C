@@ -133,6 +133,8 @@ public class Metier
 				}
 			}
 			
+			this.lstManches = new ArrayList<Manche>(nbEspeces);
+
 			// fermeture du scanner
 			sc.close();
 		}
@@ -160,5 +162,19 @@ public class Metier
 
 		mancheCourante++;
 		return true;
+	}
+
+	public boolean ajouterManche(Manche manche)
+	{
+		if(manche == null)
+			return false;
+		this.lstManches.add(manche);
+		return true;
+	}
+
+	public String toString()
+	{
+		return "Plateau : \n" + this.plateauJeu + "\n" +
+		       "list Manche : " + this.lstManches;
 	}
 }
