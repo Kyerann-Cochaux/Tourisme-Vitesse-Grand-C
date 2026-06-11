@@ -9,6 +9,7 @@ import java.io.IOException ;
 import java.awt.Dimension ;
 import java.awt.Graphics ;
 import java.awt.Graphics2D ;
+import java.awt.Point;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -28,10 +29,19 @@ import srcJeu.AppliJeu ;
 public class PanelPlateau extends JPanel
 {
 	private static final int TAILLE_CASE = 50 ;
+
+	// Coloriage des voyages celons les espèces
+	private static final Color[] TAB_COUL_LIENS = { new Color(113,  65,  59), // Chlorophite
+	                                                new Color( 36, 159, 222), // Felinoïd
+	                                                new Color(255, 213,  65), // Azimae
+	                                                new Color( 50, 132, 100)  // Silikon
+	                                              };
 	
 	private AppliJeu ctrl ;
 	
 	private Dimension dimPlateau ;
+
+	private Point posExtremiteSlct ;
 	
 	public PanelPlateau( AppliJeu ctrl )
 	{
@@ -76,6 +86,10 @@ public class PanelPlateau extends JPanel
 		
 		// Affichage des Départs des Espèces
 		this.affichageDepartEspece(g2);
+
+		// Affichage de l'Extremité Selectionner
+
+
 	}
 	
 	/*----------------------*/
@@ -102,7 +116,7 @@ public class PanelPlateau extends JPanel
 					if ( image != null )
 					{
 						g2.drawImage( image               , /* L'image à afficher */
-						              null             , /* Traitement d'Image (Innutile ici) */
+						              null             ,    /* Traitement d'Image (Innutile ici) */
 						              TAILLE_CASE * cptCol, /* Position X */
 						              TAILLE_CASE * cptLig  /* Position Y */
 						            );
@@ -113,35 +127,11 @@ public class PanelPlateau extends JPanel
 				{
 					System.out.println(e);
 				}
-				
-				
 			}
 		}
 	}
 	
 	// Pas utiliser pour le Jeu
-	/*
-	private void affichageCases( Graphics2D g2 )
-	{
-		g2.setColor( new Color(194, 231, 242) );
-		
-		int nbLigne   = this.ctrl.getNbLignes  ();
-		int nbColonne = this.ctrl.getNbColonnes();
-		
-		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
-		{
-			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
-			{
-				g2.drawRect(
-				             TAILLE_CASE * cptCol,
-				             TAILLE_CASE * cptLig,
-				             TAILLE_CASE,
-				             TAILLE_CASE
-				           );
-			}
-		}
-	}
-	*/
 	
 	private void affichageZones( Graphics2D g2 )
 	{
@@ -217,7 +207,8 @@ public class PanelPlateau extends JPanel
 	private void affichageLiens( Graphics2D g2 )
 	{
 		g2.setStroke( new BasicStroke(3) );
-		
+		g2.setColor ( Color.WHITE        );
+
 		int nbVoyage = this.ctrl.getNbVoyages();
 		//System.out.println("NbVoyages -> " + nbVoyage);
 		
@@ -232,16 +223,14 @@ public class PanelPlateau extends JPanel
 				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE + TAILLE_CASE / 2 ;
 				
 				String especeVoyAct = this.ctrl.getVoyage(ind).getEspece() ;
-				switch ( especeVoyAct )
+	
+				for ( int cpt=0 ; cpt < this.ctrl.getNbTypeEspeces() ; cpt++ )
 				{
-					case "Chlorophite" -> g2.setColor( new Color(113,  65,  59) );
-					case "Felinoid"    -> g2.setColor( new Color( 36, 159, 222) );
-					case "Azimae"      -> g2.setColor( new Color(255, 213,  65) );
-					case "Silikon"     -> g2.setColor( new Color( 50, 132, 100) );
-					case null          -> g2.setColor( Color.WHITE              );
-					default            -> g2.setColor( Color.WHITE              );
+					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) { g2.setColor( TAB_COUL_LIENS[cpt] ); }
 				}
-				
+
+				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); }
+
 				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 			}

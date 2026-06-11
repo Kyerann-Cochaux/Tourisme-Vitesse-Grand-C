@@ -403,7 +403,9 @@ public class PanelEdition extends JPanel implements ActionListener
 
 				System.out.println(e.getModifiersEx() );
 				
-				if( e.getModifiersEx()  == 1024 && typeBtnSlct != null ) 
+				if( e.getModifiersEx()  == 1024 && typeBtnSlct != null && 
+					posLigClk >= 0 && posLigClk <  PanelEdition.this.ctrl.getNbColonnes() &&
+					posColClk >= 0 && posColClk < PanelEdition.this.ctrl.getNbLignes   () ) 
 				{
 
 					ajouterElement(e, posLigClk, posColClk);

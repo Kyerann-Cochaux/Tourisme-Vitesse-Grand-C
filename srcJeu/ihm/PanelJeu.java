@@ -3,11 +3,14 @@ package srcJeu.ihm;
 import srcJeu.AppliJeu;
 
 import javax.swing.*;
+import java.awt.event.*;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+
 
 public class PanelJeu extends JPanel
 {
@@ -23,6 +26,7 @@ public class PanelJeu extends JPanel
 	private JScrollPane  spPlateau;
 
 	private JLabel lblTexteEspece;
+	private JLabel lblTexteScore;
 
 	public PanelJeu(AppliJeu ctrl, FrameJeu frameJeu)
 	{
@@ -51,25 +55,23 @@ public class PanelJeu extends JPanel
 
 		this.panelPlateau = new PanelPlateau(ctrl);
 		panelCentre       = new JPanel(new GridBagLayout() );
-		panelScore        = new JPanel(new GridLayout(3,1) );
-		panelPioche       = new JPanel(new GridLayout(3,1) );
 
-		panelScoreEspeces    = new JPanel(new GridLayout(6,1) );
+		panelScore        = new JPanel(new GridLayout(4,1) );
+		panelScoreEspeces = new JPanel();
+
+		GridLayout gl = new GridLayout(5,1,0,9);
+		if (this.ctrl.getNbTypeEspeces() >= 3) gl.setRows(gl.getRows() + this.ctrl.getNbTypeEspeces() /2);
+		panelScoreEspeces.setLayout(gl);
+		
+		panelPioche          = new JPanel(new GridLayout(3,1) );
 		panelCartesStandards = new JPanel(new GridLayout(1,3) );
 		panelCartesPremium   = new JPanel(new GridLayout(1,3) );
+		
 
-		panelScoreLabels   = new JPanel(new GridLayout(2,1) );
+		panelScoreLabels  = new JPanel(new GridLayout(2,1) );
 
-		this.ensBtnCartes = new JButton     [10];
+		this.ensBtnCartes = new JButton[10];
 		btgEspeces        = new ButtonGroup();
-
-		/*for (int cpt = 0; cpt < ensRbEspeces.length; cpt++) 
-		{
-			this.ensRbEspeces[cpt] = new JRadioButton(this.ctrl.getNomEspece(cpt) );
-			this.ensRbEspeces[cpt].setEnabled(false);
-			this.ensRbEspeces[cpt].setOpaque(false         );
-			btgEspeces            .add      (this.ensRbEspeces[cpt] );
-		}*/
 	
 		this.spPlateau = new JScrollPane(panelCentre);
 
@@ -90,6 +92,8 @@ public class PanelJeu extends JPanel
 			+"</html>", SwingConstants.CENTER
 
 		);
+
+		this.lblTexteScore = new JLabel("Score des croisières : ");
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -98,6 +102,8 @@ public class PanelJeu extends JPanel
 		panelScore       .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 		panelScoreEspeces.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 		panelScoreLabels .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
+
+		panelCentre.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 
 
 		this.spPlateau.setBackground               (FrameJeu.COULEUR_FOND_FONCE               );
@@ -108,6 +114,13 @@ public class PanelJeu extends JPanel
 		this.lblTexteEspece.setForeground(FrameJeu.COULEUR_ZONE);
 		this.lblTexteEspece.setOpaque    (false       );
 
+		this.lblTexteScore.setForeground(FrameJeu.COULEUR_ZONE);
+		this.lblTexteScore.setOpaque    (false       );
+		this.lblTexteScore.setFont(new Font    ("Goldman", Font.BOLD, 17) );
+
+
+
+
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
@@ -115,16 +128,22 @@ public class PanelJeu extends JPanel
 		/* -------- Panels principaux ------- */
 
 		panelScoreLabels.add(this.lblTexteEspece);
-		//panelScoreLabels.add(new JLabel(new ImageIcon("../images/Tuiles/Espece-" + this.ctrl.getNomEspece(2)  + "-XL.png")  ) );
+		panelScoreLabels.add(new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getNomEspece(0)  + ".png")  ) );
+	
 
-		//PanelScoreEspeces
-		/*for (int cpt = 0; cpt < this.ensRbEspeces.length; cpt++) 
-			panelScoreEspeces.add(this.ensRbEspeces[cpt] );*/
+		panelScoreEspeces.add(new JLabel() );
+		panelScoreEspeces.add(this.lblTexteScore );
+		panelScoreEspeces.add(new JLabel() );
+
 
 		for (int cpt = 0; cpt < this.ctrl.getNbTypeEspeces(); cpt++) 
 		{
-			JLabel lbl = new JLabel(this.ctrl.getNomEspece(cpt), new ImageIcon("../images/Tuiles/Centre-Espece-" + this.ctrl.getNomEspece(cpt) + ".png" ), SwingConstants.CENTER ) ;
-			lbl.setFont      (FrameJeu.POLICE_TEXTE);
+			JLabel lbl = new JLabel
+			(String.format("%-11s",this.ctrl.getNomEspece(cpt) ) +" : " +
+			 String.format("%-3d", 99), 
+			new ImageIcon("../images/Tuiles/Centre-Espece-" + this.ctrl.getNomEspece(cpt) + ".png" ), SwingConstants.LEFT ) ;
+
+			lbl.setFont      (new Font    ("Monospaced", Font.BOLD, 17) );
 			lbl.setForeground(FrameJeu.COULEUR_ZONE);
 			lbl.setOpaque    (false       );
 
@@ -154,7 +173,29 @@ public class PanelJeu extends JPanel
 		/*      Activation des composants     */
 		/* ---------------------------------- */
 
+		// Activation du Panel Plateau
+		this.panelPlateau.addMouseListener( this.gererClic() );
 
-
+	}
+	
+	/*-----------------------------------------------------*/
+	/*    Gestion de l'ajout des Voyages sur le Plateau    */
+	/*-----------------------------------------------------*/
+	
+	private MouseAdapter gererClic()
+	{
+		return new MouseAdapter()
+		{
+			public void mousePressed(MouseEvent e)
+			{
+				int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
+				int posColClk = (int) ( e.getX() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
+				
+				if ( e.getButton() == MouseEvent.BUTTON1 /* && this.ctrl.estExtremite(posColClk,posLigClk) */ )
+				{
+					
+				}
+			}
+		};
 	}
 }
