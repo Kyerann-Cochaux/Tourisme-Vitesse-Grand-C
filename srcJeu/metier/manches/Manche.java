@@ -45,10 +45,10 @@ public class Manche
 	public Case       getPremier  ()           {return this.lstCases.getFirst();    }
 	public Case       getDernier  ()           {return this.lstCases.getLast() ;    }
 
-	public boolean    estExtremite(int col, int lig)
+	public boolean estExtremite(int col, int lig)
 	{
-		if(this.lstCases.getFirst().getPosX() == col && this.lstCases.getFirst().getPosY() == lig ||
-		   this.lstCases.getLast() .getPosX() == col && this.lstCases.getLast() .getPosY() == lig    )
+		if( this.lstCases.getFirst().getPosX() == col && this.lstCases.getFirst().getPosY() == lig ||
+		    this.lstCases.getLast() .getPosX() == col && this.lstCases.getLast() .getPosY() == lig    )
 			return true;
 		
 		return false;
@@ -77,8 +77,7 @@ public class Manche
 
 	public boolean ajouterCase(Case c)
 	{
-		if(c == null)
-			return false;
+		if( c == null ) { return false ; }
 		this.lstCases.add(c);
 		return true;
 	}

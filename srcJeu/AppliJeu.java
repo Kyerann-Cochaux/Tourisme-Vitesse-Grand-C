@@ -44,7 +44,7 @@ public class AppliJeu
 	
 	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
-		return this.metier.setEspece(xDep, yDep, xFin, yFin, espece);
+		return this.metier.effectuerVoyage(xDep, yDep, xFin, yFin, espece);
 	}
 	
 	/* ---------------------------------- */

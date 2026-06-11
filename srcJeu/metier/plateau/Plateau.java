@@ -99,7 +99,7 @@ public class Plateau
 		Case caseSource  = this.getCase(xDep, yDep);
 		Case caseDest    = this.getCase(xFin, yFin);
 		
-		System.out.println("ouou");
+		// System.out.println("ouou");
 		if (caseSource == null || caseDest == null) return false;
 
 		// 2. On cherche dans la liste des voyages du plateau celui qui correspond
