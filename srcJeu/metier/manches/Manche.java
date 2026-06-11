@@ -48,8 +48,9 @@ public class Manche
 	public boolean    estExtremite(int col, int lig)
 	{
 		if(this.lstCases.getFirst().getPosX() == col && this.lstCases.getFirst().getPosY() == lig ||
-	       this.lstCases.getLast().getPosX()  == col && this.lstCases.getLast().getPosY() == lig)
-		   return true;
+		   this.lstCases.getLast() .getPosX() == col && this.lstCases.getLast() .getPosY() == lig    )
+			return true;
+		
 		return false;
 	}
 

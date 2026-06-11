@@ -206,7 +206,8 @@ public class PanelPlateau extends JPanel
 				int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE + TAILLE_CASE / 2 ;
 				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE + TAILLE_CASE / 2 ;
 				
-				String especeVoyAct = this.ctrl.getVoyage(ind).getEspece() ;
+				String especeVoyAct = this.ctrl.getVoyage(ind).getEspece();
+				System.out.println(especeVoyAct);
 	
 				for ( int cpt=0 ; cpt < this.ctrl.getNbTypeEspeces() ; cpt++ )
 				{

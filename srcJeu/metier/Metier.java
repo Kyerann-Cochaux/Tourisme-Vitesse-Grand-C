@@ -36,7 +36,7 @@ public class Metier
 	/* ---------------------------------- */
 	
 	public Plateau getPlateau       () {return this.plateauJeu ;}
-	public Manche  getMancheCourante()           
+	public Manche  getMancheCourante()
 	{
 		return this.lstManches.get(this.mancheCourante - 1 );
 	}
@@ -46,16 +46,31 @@ public class Metier
 	
 	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
-		if(!this.getMancheCourante().estExtremite(xDep, yDep))
-			return false;
+		System.out.println("~~~~~~~~~~~");
+		System.out.println("Planete on top : " + this.getMancheCourante().getSommet().getSymbole());
 		
+		if ( this.plateauJeu.getCase(xFin, yFin).getPlanete() == null ) return false;
+		if (this.plateauJeu.getCase(xFin, yFin).getPlanete().getSymbole() != this.getMancheCourante().getSommet().getSymbole().charAt(0) && 
+		    this.getMancheCourante().getSommet().getSymbole().charAt(0) != 'J'                                                              )
+		{
+			System.out.println("Pas bonne planete : " + this.getMancheCourante().getSommet().getSymbole());
+			return false;
+		}
+		
+		if(!this.getMancheCourante().estExtremite(xDep, yDep))
+		{
+			System.out.println("Extremité pas bonne = " + this.getMancheCourante().getEspece() + " = " + xDep + ":" + yDep);
+			return false;
+		}
+		
+		System.out.println("C'est ok mec");
 		return this.plateauJeu.setEspece(xDep, yDep, xFin, yFin, espece);
 	}
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
 	
-	public boolean estExtremite     (int col, int lig) {return this.lstManches.get(mancheCourante).estExtremite(col, lig);}
+	public boolean estExtremite     (int col, int lig) {return this.getMancheCourante().estExtremite(col, lig);}
 	
 	public boolean chargerPlateau(String cheminSauvegarde)
 	{
