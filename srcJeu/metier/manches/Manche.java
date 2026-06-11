@@ -19,18 +19,19 @@ public class Manche
 		for (int cpt = 0; cpt < Metier.TAB_ESPECES.length; cpt++)
 		{
 			if ( Metier.TAB_ESPECES[cpt].equals(espece) )
-				return new Manche(espece);
+				return new Manche(espece, c);
 		}
 		
 		return null;
 	}
 
-	private Manche(String espece)
+	private Manche(String espece, Case c)
 	{
 		this.espece   = espece;
 		this.pioche   = new Pioche();
 		this.lstCases = new ArrayList<Case>();
 		this.lstCases.add(c);
+	}
 
 	/* ---------------------------------- */
 	/*            Accesseurs              */
