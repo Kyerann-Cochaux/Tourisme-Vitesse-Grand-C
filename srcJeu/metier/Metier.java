@@ -36,7 +36,9 @@ public class Metier
 			{
 				for(int lig = 0; lig < this.plateauJeu.getNbLignes(); lig++)
 				{
-					if(this.plateauJeu.getCase(col, lig).getPlanete().getEspece().equals(this.plateauJeu.getNomEspece(cpt)))
+					if(this.plateauJeu.getCase(col, lig).getPlanete() != null &&
+					   this.plateauJeu.getCase(col, lig).getPlanete().getEspece() != null &&
+					   this.plateauJeu.getCase(col, lig).getPlanete().getEspece().equals(this.plateauJeu.getNomEspece(cpt)))
 					{
 						Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt), this.plateauJeu.getCase(col, lig));
 						

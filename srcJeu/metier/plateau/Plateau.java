@@ -93,6 +93,31 @@ public class Plateau
 	/*         Modificateurs              */
 	/* ---------------------------------- */
 
+	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
+	{
+		// 1. On récupère la case de départ et la case d'arrivée
+		Case caseSource  = this.getCase(xDep, yDep);
+		Case caseDest    = this.getCase(xFin, yFin);
+
+		if (caseSource == null || caseDest == null) return false;
+
+		// 2. On cherche dans la liste des voyages du plateau celui qui correspond
+		for (int cpt = 0; cpt < this.getNbVoyages(); cpt++)
+		{
+			Voyage v = this.getVoyage(cpt);
+			
+			// Si le voyage va de Source à Destination (ou l'inverse selon votre règle)
+			if ( (v.getPlaneteSource() == caseSource && v.getPlaneteDestination() == caseDest) ||
+				(v.getPlaneteSource() == caseDest   && v.getPlaneteDestination() == caseSource) )
+			{
+				// 3. On applique l'espèce sur le voyage trouvé
+				return v.setEspece(espece);
+			}
+	}
+
+	return false; // Aucun voyage correspondant trouvé entre ces deux cases
+}
+
 	/*
 	 Cette méthode vérifie s'il est possible d'associer la case fournie en paramètre avec le numéro du système 
 	 Si le numéro du système existe déjà et qu'aucune Case portant ce dit numéro n'est à proximité de la case en paramètre,
