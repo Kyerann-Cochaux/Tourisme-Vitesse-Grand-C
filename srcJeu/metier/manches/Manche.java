@@ -86,8 +86,8 @@ public class Manche
 		int cartePremium = 0;
 		for(int cpt = 0; cpt < this.pioche.getTaillePioche(); cpt ++)
 		{
-			if(this.pioche.getCarte(cpt).getPremium())
-				cartePremium++;
+			if(this.pioche.getCarte(cpt).getPremium() )
+					cartePremium++;
 		}
 		return 5 - cartePremium;
 	}
@@ -98,7 +98,7 @@ public class Manche
 
 		for(int cpt = 0; cpt < this.pioche.getTaillePioche(); cpt ++)
 		{
-			if(this.pioche.getCarte(cpt).getStandard())
+			if(!this.pioche.getCarte(cpt).getPremium() )
 				carteStandard++;
 		}
 		return 5 - carteStandard;
