@@ -8,29 +8,43 @@ import srcJeu.metier.Metier;
 
 public class Pioche
 {
+	private static final Carte[] TAB_CARTES = { Carte.creerCarte(Metier.TAB_PLANETES[0],true),
+	                                            Carte.creerCarte(Metier.TAB_PLANETES[1],true),
+	                                            Carte.creerCarte(Metier.TAB_PLANETES[2],true),
+	                                            Carte.creerCarte(Metier.TAB_PLANETES[3],true),
+	                                            Carte.creerCarte("Joker"       ,true),
+	                                            Carte.creerCarte(Metier.TAB_PLANETES[0],false),
+	                                            Carte.creerCarte(Metier.TAB_PLANETES[1],false),
+	                                            Carte.creerCarte(Metier.TAB_PLANETES[2],false),
+	                                            Carte.creerCarte(Metier.TAB_PLANETES[3],false),
+	                                            Carte.creerCarte("Joker"       ,false),
+	                                        };
+
 	private List<Carte> pioche;
 	
 	public Pioche()
 	{
 		this.pioche = new ArrayList<Carte>();
 		
-		for (int cpt = 0; cpt < Metier.TAB_PLANETES.length; cpt++) 
+		for (int cpt = 0; cpt < Pioche.TAB_CARTES.length; cpt++) 
 		{
-			this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], false) );
-			this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], true ) );
+			this.pioche.add(Pioche.TAB_CARTES[cpt] );
 		}
 
-		this.pioche.add(Carte.creerCarte("Joker", false) );
-		this.pioche.add(Carte.creerCarte("Joker", true ) );
 
-		Collections.shuffle(this.pioche);
+		//Collections.shuffle(this.pioche);
 	}
 	
 	/* ---------------------------------- */
 	/*               Accesseurs           */
 	/* ---------------------------------- */
+
+	public Carte getCarte(int indice)
+	{
+		return this.pioche.get(indice);
+	}
 	
-	public Carte getCarte()
+	public Carte getSommet()
 	{
 		return this.pioche.getFirst();
 	}

@@ -6,10 +6,12 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Point;
 
 
 public class PanelJeu extends JPanel
@@ -18,8 +20,8 @@ public class PanelJeu extends JPanel
 	private AppliJeu ctrl;
 	private FrameJeu frameJeu;
 	
-	private JButton[] ensBtnCartes;
-	private JLabel [] ensLblEspeces; // À changer en JLabel
+	private JLabel[] ensLblCartes;
+	private JLabel[] ensLblEspeces; 
 
 
 	private PanelPlateau panelPlateau;
@@ -36,11 +38,13 @@ public class PanelJeu extends JPanel
 		JPanel panelPioche;
 		JPanel panelScore;
 
+		//sous panel du panelScore
 		JPanel panelScoreEspeces;
+		JPanel panelScoreLabels;
+
+		// sous panel du panelPioche
 		JPanel panelCartesStandards;
 		JPanel panelCartesPremium;
-
-		JPanel panelScoreLabels;
 
 		ButtonGroup btgEspeces;
 
@@ -65,20 +69,21 @@ public class PanelJeu extends JPanel
 		
 		panelPioche          = new JPanel(new GridLayout(3,1) );
 		panelCartesStandards = new JPanel(new GridLayout(1,3) );
+
 		panelCartesPremium   = new JPanel(new GridLayout(1,3) );
-		
 
 		panelScoreLabels  = new JPanel(new GridLayout(2,1) );
 
-		this.ensBtnCartes = new JButton[10];
+		this.ensLblCartes = new JLabel[10];
 		btgEspeces        = new ButtonGroup();
 	
 		this.spPlateau = new JScrollPane(panelCentre);
 
-		for (int cpt = 0; cpt < this.ensBtnCartes.length; cpt++) 
+		for (int cpt = 0; cpt < this.ensLblCartes.length; cpt++) 
 		{
-			this.ensBtnCartes[cpt] = new JButton(new ImageIcon("../images/Cartes/Carte-G.png") );
-			this.ensBtnCartes[cpt].setEnabled(false);
+			this.ensLblCartes[cpt] = new JLabel(new ImageIcon("../images/Cartes/Carte-" + 
+			                         this.ctrl.getCarte(cpt).getSymbole().charAt(0)+".png") );
+
 		}
 
 		this.lblTexteEspece = new JLabel
@@ -140,7 +145,7 @@ public class PanelJeu extends JPanel
 		{
 			JLabel lbl = new JLabel
 			(String.format("%-11s",this.ctrl.getNomEspece(cpt) ) +" : " +
-			 String.format("%-3d", 99), 
+			 String.format("%-3d", /*this.ctrl.calculerScore()*/ 99), 
 			new ImageIcon("../images/Tuiles/Centre-Espece-" + this.ctrl.getNomEspece(cpt) + ".png" ), SwingConstants.LEFT ) ;
 
 			lbl.setFont      (new Font    ("Monospaced", Font.BOLD, 17) );
@@ -154,14 +159,20 @@ public class PanelJeu extends JPanel
 		panelCentre.add( this.panelPlateau, new GridBagConstraints() );
 
 		// panelCartes
-		for (int cpt = 0; cpt < this.ensBtnCartes.length ; cpt++) 
+		for (int cpt = 0; cpt < this.ensLblCartes.length ; cpt++) 
 		{	
-			if (cpt < 5) panelCartesStandards.add(this.ensBtnCartes[cpt] );
-			else         panelCartesPremium  .add(this.ensBtnCartes[cpt] );
+			if (cpt < 5) panelCartesStandards.add(this.ensLblCartes[cpt] );
+			else         panelCartesPremium  .add(this.ensLblCartes[cpt] );
 		}
+		
 		
 		panelScore.add(panelScoreLabels );
 		panelScore.add(panelScoreEspeces);
+
+		panelPioche.add(new JLabel("PIOCHE") );
+
+		panelPioche.add(panelCartesPremium  , BorderLayout.CENTER);
+		panelPioche.add(panelCartesStandards);
 
 		this.add(panelScore    , BorderLayout.WEST  );
 		this.add(this.spPlateau, BorderLayout.CENTER);
@@ -188,13 +199,22 @@ public class PanelJeu extends JPanel
 		{
 			public void mousePressed(MouseEvent e)
 			{
-				int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 				int posColClk = (int) ( e.getX() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
+				int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 				
-				if ( e.getButton() == MouseEvent.BUTTON1 /* && this.ctrl.estExtremite(posColClk,posLigClk) */ )
+				// Gestion de la selection d'extremite
+				if ( e.getButton() == MouseEvent.BUTTON1  /* && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) */ )
 				{
-					
+					PanelJeu.this.panelPlateau.setExtremiteSlct( new Point( posColClk, posLigClk ) );
 				}
+
+				// Gestion de la création de Voyage
+				/*
+				if ( e.getButton() == MouseEvent.BUTTON1                  &&
+				     PanelJeu.this.plateauJeu.getPosExtremiteSlct != null &&
+				     PanelJeu.this.ctrl.
+				   )
+				*/
 			}
 		};
 	}

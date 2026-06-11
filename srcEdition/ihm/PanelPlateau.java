@@ -161,15 +161,9 @@ public class PanelPlateau extends JPanel
 				int zoneCaseADroite = -1;
 				int zoneCaseEnBas   = -1;
 				
-				if ( cptCol+1 < nbColonne )
-				{
-					zoneCaseADroite = this.ctrl.getCase( cptCol+1, cptLig ).getNumSysteme();
-				}
+				if ( cptCol+1 < nbColonne ) zoneCaseADroite = this.ctrl.getCase( cptCol+1, cptLig ).getNumSysteme();
+				if ( cptLig+1 < nbLigne   ) zoneCaseEnBas   = this.ctrl.getCase( cptCol, cptLig+1 ).getNumSysteme();
 				
-				if ( cptLig+1 < nbLigne )
-				{
-					zoneCaseEnBas   = this.ctrl.getCase( cptCol, cptLig+1 ).getNumSysteme();
-				}
 				
 				//Dessiner La ligne sur le côté droit de la case actuelle
 				if ( zoneCaseAct != zoneCaseADroite && cptCol+1 < nbColonne )

@@ -29,7 +29,7 @@ public class TestManches
 		// ETAPE 2 : Inspection de la pioche initiale
 		// ---------------------------------------------------------------
 		System.out.println("\n2. INSPECTION DE LA PIOCHE INITIALE");
-		Carte carteDuDessus = m.getCarte();
+		Carte carteDuDessus = m.getSommet();
 		System.out.println("   Carte actuellement visible : [ " + carteDuDessus + " ]");
 		System.out.println("   La manche est-elle finie ? " + (m.estMancheFinie() ? "Oui" : "Non (il reste des premiums)"));
 
@@ -70,7 +70,7 @@ public class TestManches
 
 		while (piocheEncoreValide) 
 		{
-			System.out.println("      * Carte n°" + cpt + " visible : [ " + m.getCarte() + " ]");
+			System.out.println("      * Carte n°" + cpt + " visible : [ " + m.getSommet() + " ]");
 			piocheEncoreValide = m.decouvrirCarte();
 			if (piocheEncoreValide) {
 				cpt++;
@@ -83,7 +83,7 @@ public class TestManches
 		// ETAPE 5 : Validation finale des scores
 		// ---------------------------------------------------------------
 		System.out.println("\n5. CONTROLE DE FIN DE MANCHE & SCORE");
-		System.out.println("   Carte finale figee dans la defausse : [ " + m.getCarte() + " ]");
+		System.out.println("   Carte finale figee dans la defausse : [ " + m.getSommet() + " ]");
 		System.out.println("   Calcul du score de la manche : " + m.calculerScore());
 	}
 }

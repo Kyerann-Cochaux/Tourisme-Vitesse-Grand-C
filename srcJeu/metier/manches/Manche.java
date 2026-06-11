@@ -30,13 +30,15 @@ public class Manche
 	/*            Accesseurs              */
 	/* ---------------------------------- */
 
-	public String     getEspece  () {return this.espece;              }
-	public Pioche     getPioche  () {return this.pioche;              }
-	public Carte      getCarte   () {return this.pioche.getCarte();   }
-	public List<Case> getlstCases() {return this.lstCases;            }
-	public Case       getPremier () {return this.lstCases.getFirst(); }
-	public Case       getDernier () {return this.lstCases.getLast() ; }
-	public boolean    getExtremite(int col, int lig)
+	public String     getEspece   ()           {return this.espece;                 }
+	public Pioche     getPioche   ()           {return this.pioche;                 }
+	public Carte      getSommet   ()           {return this.pioche.getSommet();     }
+	public Carte      getCarte    (int indice) {return this.pioche.getCarte(indice);}
+	public List<Case> getlstCases ()           {return this.lstCases;               }
+	public Case       getPremier  ()           {return this.lstCases.getFirst();    }
+	public Case       getDernier  ()           {return this.lstCases.getLast() ;    }
+
+	public boolean    estExtremite(int col, int lig)
 	{
 		if(this.lstCases.getFirst().getPosX() == col && this.lstCases.getFirst().getPosY() == lig ||
 	       this.lstCases.getLast().getPosX()  == col && this.lstCases.getLast().getPosY() == lig)

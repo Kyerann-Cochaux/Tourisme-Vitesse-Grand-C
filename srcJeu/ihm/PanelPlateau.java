@@ -38,10 +38,10 @@ public class PanelPlateau extends JPanel
 	                                              };
 	
 	private AppliJeu ctrl ;
-	
+
 	private Dimension dimPlateau ;
 
-	private Point posExtremiteSlct ;
+	private Point posExtremiteSlct ; // X=Col & Y=Lig dans le Plateau côté metier
 	
 	public PanelPlateau( AppliJeu ctrl )
 	{
@@ -53,13 +53,22 @@ public class PanelPlateau extends JPanel
 		
 		this.setPreferredSize( this.dimPlateau                  );
 		this.setBackground   ( FrameJeu.COULEUR_FOND_FONCE );
+		this.posExtremiteSlct = null ;
 	}
-	
-	public int getTailleCase()
+
+	// Accesseurs
+	public int getTailleCase() { return PanelPlateau.TAILLE_CASE ; }
+
+	public Point getPosExtremiteSlct() { return this.posExtremiteSlct ; }
+
+	// Modifieurs
+	public void setExtremiteSlct( Point posClk )
 	{
-		return PanelPlateau.TAILLE_CASE ;
+		System.out.println( "Nouvelle Extremité Selectionnée : " + (int) posClk.getX() + "/" + (int) posClk.getY() );
+		this.posExtremiteSlct = posClk ;
 	}
 	
+	// Autres Méthodes
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -67,7 +76,7 @@ public class PanelPlateau extends JPanel
 		Graphics2D g2 = (Graphics2D) g;
 		
 		// Affichage du Fond
-		this.affichageFond(g2);
+		// this.affichageFond(g2);
 		
 		// Affichage des Cases
 		// this.affichageCases(g2);
@@ -88,13 +97,13 @@ public class PanelPlateau extends JPanel
 		this.affichageDepartEspece(g2);
 
 		// Affichage de l'Extremité Selectionner
-
+		if ( this.posExtremiteSlct != null ) { this.affichageExtremiteSelectionnee( g2 ); }
 
 	}
 	
-	/*----------------------*/
-	/* Méthodes d'Affichage */
-	/*----------------------*/
+	/*-----------------------*/
+	/* Méthodes d'Affichages */
+	/*-----------------------*/
 	
 	private void affichageFond( Graphics2D g2 )
 	{
@@ -147,17 +156,6 @@ public class PanelPlateau extends JPanel
 			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				int zoneCaseAct = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
-				
-				int opacite = (int) ( (1.0 * zoneCaseAct / this.ctrl.getNbSysteme()) * 100 );
-				
-				g2.setColor( new Color( 255, 255, 255, opacite ) );
-				
-				g2.fillRect(
-				             TAILLE_CASE * cptCol,
-				             TAILLE_CASE * cptLig,
-				             TAILLE_CASE,
-				             TAILLE_CASE
-				           );
 				
 				// System.out.println( "Vérification de la case à " + cptLig + " Lig " + cptCol + " Col" );
 				g2.setColor( Color.RED );
@@ -331,5 +329,19 @@ public class PanelPlateau extends JPanel
 				}
 			}
 		}
+	}
+
+	private void affichageExtremiteSelectionnee( Graphics2D g2 )
+	{
+		g2.setColor( Color.RED );
+		int posExSelcX = (int) this.posExtremiteSlct.getX() * TAILLE_CASE + TAILLE_CASE / 2 ;
+		int posExSelcY = (int) this.posExtremiteSlct.getY() * TAILLE_CASE + TAILLE_CASE / 2 ;
+
+		System.out.println( "Affichage de l'Extremité : " + (int) this.posExtremiteSlct.getX() + "/" + (int) this.posExtremiteSlct.getY() );
+		g2.drawOval( posExSelcX,
+		             posExSelcY,
+		             TAILLE_CASE / 4,
+		             TAILLE_CASE / 4
+		           );
 	}
 }

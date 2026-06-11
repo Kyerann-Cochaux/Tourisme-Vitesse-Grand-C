@@ -29,20 +29,34 @@ public class Metier
 	{
 		this.plateauJeu = Plateau.creerPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 		this.lstManches = new ArrayList<Manche>(nbEspeces);
+
+		for (int cpt = 0; cpt < this.plateauJeu.getNbEspeces(); cpt++) 
+		{
+			Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt) );
+
+			System.out.println(m);
+			lstManches.add(m );
+			System.out.println("nbManches : " + lstManches.size());
+			
+		}
 	}
 	
 	/* ---------------------------------- */
 	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
-	public Plateau getPlateau   () { return this.plateauJeu;}
-	public Manche  getManche    () { return this.lstManches.get(this.mancheCourante);}
-	public boolean getExtremite(int col, int lig) { return this.lstManches.get(mancheCourante).getExtremite(col, lig);}
+	public Plateau getPlateau       ()           {return this.plateauJeu                                       ;}
+	public Manche  getMancheCourante()           
+	{
+		return this.lstManches         .get(this.mancheCourante - 1 );
+	}
+	public Carte   getCarte         (int indice) {return this.getMancheCourante().getCarte(indice)             ;}
 	
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
 	
+	public boolean estExtremite     (int col, int lig) {return this.lstManches.get(mancheCourante).estExtremite(col, lig);}
 	
 	public boolean chargerPlateau(String cheminSauvegarde)
 	{
@@ -134,7 +148,6 @@ public class Metier
 				}
 			}
 			
-			this.lstManches = new ArrayList<Manche>(nbEspeces);
 
 			// fermeture du scanner
 			sc.close();
@@ -158,7 +171,7 @@ public class Metier
 	{
 		if(mancheCourante + 1 >= this.lstManches.size())
 			return false;
-		if(!this.getManche().estMancheFinie())
+		if(!this.getMancheCourante().estMancheFinie())
 			return false;
 
 		mancheCourante++;
@@ -171,6 +184,11 @@ public class Metier
 			return false;
 		this.lstManches.add(manche);
 		return true;
+	}
+
+	public int calculerScore()
+	{
+		return this.getMancheCourante().calculerScore();
 	}
 
 	public String toString()

@@ -1,9 +1,8 @@
 package srcJeu;
 
 import srcJeu.metier.*;
-import srcJeu.metier.plateau.Case;
-import srcJeu.metier.plateau.Planete;
-import srcJeu.metier.plateau.Voyage;
+import srcJeu.metier.plateau.*;
+import srcJeu.metier.manches.*;
 import srcJeu.ihm.*;
 
 public class AppliJeu
@@ -13,7 +12,7 @@ public class AppliJeu
 
 	public AppliJeu()
 	{
-		this.metier        = new Metier           ();
+		this.metier   = new Metier  ();
 		this.frameJeu = new FrameJeu(this);
 	}
 
@@ -34,8 +33,7 @@ public class AppliJeu
 	public Voyage getVoyage    (int indice   ) {return this.metier.getPlateau().getVoyage    (indice);}
 	
 	public Planete getPlanete( int indCol, int indLig ) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
-
-	public boolean getExtremite(int col, int lig) { return metier.getExtremite(col, lig);}
+	public Carte   getCarte(int indice) { return this.metier.getCarte(indice);}
 	
 
 	/* ---------------------------------- */
@@ -51,13 +49,11 @@ public class AppliJeu
 		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
 	
-	public void supprimerEspece( int indCol, int indLig )
-	{
-		this.getPlanete( indCol, indLig ).setEspece(null);
-	}
-	
-	public void chargerPlateau         (String fichier)       { this.metier.chargerPlateau    (fichier)              ;}
+	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null);}
+	public void chargerPlateau (String fichier) { this.metier.chargerPlateau(fichier);}
+	public int calculerScore   (){return this.metier.calculerScore();}
 
+	public boolean estExtremite(int col, int lig){return this.metier.estExtremite(col, lig);}
 	public static void main(String[] args) 
 	{
 		new AppliJeu();
