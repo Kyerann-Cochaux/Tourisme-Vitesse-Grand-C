@@ -14,7 +14,7 @@ public class Manche
 	private List<Case> lstCases;
 
 	/*Factory pour vérifier si l'espèce en paramètre est une espèce valide  */
-	public static Manche creerManche(String espece)
+	public static Manche creerManche(String espece, Case c)
 	{
 		for (int cpt = 0; cpt < Metier.TAB_ESPECES.length; cpt++)
 		{
@@ -30,7 +30,7 @@ public class Manche
 		this.espece   = espece;
 		this.pioche   = new Pioche();
 		this.lstCases = new ArrayList<Case>();
-	}
+		this.lstCases.add(c);
 
 	/* ---------------------------------- */
 	/*            Accesseurs              */
