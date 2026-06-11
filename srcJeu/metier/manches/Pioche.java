@@ -46,6 +46,9 @@ public class Pioche
 		return this.pioche.getFirst();
 	}
 
+	public int   getTaillePioche(){return this.pioche.size();}
+	public Carte getCarte       (int indice){return this.pioche.get(indice);}
+
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
