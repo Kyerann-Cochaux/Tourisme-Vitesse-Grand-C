@@ -230,17 +230,15 @@ public class PanelJeu extends JPanel
 				int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 				
 				// Gestion de la création de Voyage
-				/*
-				if ( e.getButton() == MouseEvent.BUTTON1                  &&
-				     PanelJeu.this.plateauJeu.getPosExtremiteSlct != null
-				   )
+				
+				if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.plateauJeu.getPosExtremiteSlct() != null )
 				{
-					
+					effectuerVoyage( posColClk, posLigClk );
 				}
-				*/
+				
 				
 				// Gestion de la selection d'extremite
-				if ( e.getButton() == MouseEvent.BUTTON1  /* && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) */ )
+				if ( e.getButton() == MouseEvent.BUTTON1  && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) )
 				{
 					selectionnerExtremite( posColClk, posLigClk );
 				}
@@ -252,5 +250,20 @@ public class PanelJeu extends JPanel
 	{
 		this.panelPlateau.setExtremiteSlct( new Point( posColClk, posLigClk ) );
 		this.panelPlateau.repaint();
+	}
+	
+	private void effectuerVoyage( int posColClk, int posLigClk )
+	{
+		boolean voyageAjoute = false ;
+		
+		voyageAjoute = this.ctrl.setEspece(
+		                                    (int) this.panelPlateau.getPosExtremiteSlct().getX(),
+		                                    (int) this.panelPlateau.getPosExtremiteSlct().getY(),
+		                                    posColClk,
+		                                    posLigClk,
+		                                    this.ctrl.getEspCroisiereCrt()
+		                                  );
+		
+		if ( voyageAjoute ) { this.panelPlateau.repaint(); }
 	}
 }
