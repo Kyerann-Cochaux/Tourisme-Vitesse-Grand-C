@@ -100,7 +100,6 @@ public class PanelPlateau extends JPanel
 		
 		// Affichage des Départs des Espèces
 		this.affichageDepartEspece(g2);
-
 	}
 	
 	/*-----------------------*/

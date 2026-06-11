@@ -81,6 +81,30 @@ public class Manche
 		return true;
 	}
 
+	public int nbPremiumRestant()
+	{
+		int cartePremium = 0;
+		for(int cpt = 0; cpt < this.pioche.getTaillePioche(); cpt ++)
+		{
+			if(this.pioche.getCarte(cpt).getPremium())
+				cartePremium++;
+		}
+		return 5 - cartePremium;
+	}
+
+	public int nbStandartRestant()
+	{
+		int carteStandard = 0;
+
+		for(int cpt = 0; cpt < this.pioche.getTaillePioche(); cpt ++)
+		{
+			if(this.pioche.getCarte(cpt).getStandard())
+				carteStandard++;
+		}
+		return 5 - carteStandard;
+	}
+
+
 	/* ---------------------------------- */
 	/*          Méthodes standard         */
 	/* ---------------------------------- */

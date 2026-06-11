@@ -30,6 +30,9 @@ public class PanelJeu extends JPanel
 	private JLabel lblTexteEspece;
 	private JLabel lblTexteScore;
 
+	private JPanel panelCartesStandards;
+	private JPanel panelCartesPremium;
+
 	public PanelJeu(AppliJeu ctrl, FrameJeu frameJeu)
 	{
 		/* -------- Panels principaux ------- */
@@ -38,16 +41,9 @@ public class PanelJeu extends JPanel
 		JPanel panelPioche;
 		JPanel panelScore;
 
-		//sous panel du panelScore
+		//sous panels du panelScore
 		JPanel panelScoreEspeces;
 		JPanel panelScoreLabels;
-
-		// sous panel du panelPioche
-
-		JPanel panelCartesStandardsA;
-		JPanel panelCartesStandardsB;
-		JPanel panelCartesPremiumA;
-		JPanel panelCartesPremiumB;
 
 		ButtonGroup btgEspeces;
 
@@ -59,24 +55,21 @@ public class PanelJeu extends JPanel
 		/* ---------------------------------- */
 		/*       Création des composants      */
 		/* ---------------------------------- */
-
-		this.panelPlateau = new PanelPlateau(ctrl);
-		panelCentre       = new JPanel(new GridBagLayout() );
-
+		
 		panelScore        = new JPanel(new GridLayout(4,1) );
 		panelScoreLabels  = new JPanel(new GridLayout(2,1) );
 		panelScoreEspeces = new JPanel();
+		
+		this.panelPlateau = new PanelPlateau(ctrl);
+		panelCentre       = new JPanel(new GridBagLayout() );
 
 		GridLayout gl1 = new GridLayout(5,1,0,9);
 		if (this.ctrl.getNbTypeEspeces() >= 3) gl1.setRows(gl1.getRows() + this.ctrl.getNbTypeEspeces() /2);
 		panelScoreEspeces.setLayout(gl1);
 		
-		panelPioche           = new JPanel(new GridLayout(3,1) );
-		panelCartesStandardsA = new JPanel();
-		panelCartesStandardsB = new JPanel();
-		panelCartesPremiumA   = new JPanel();
-		panelCartesPremiumB   = new JPanel();
-
+		panelPioche               = new JPanel(new GridLayout(10,1) );
+		this.panelCartesPremium   = new JPanel(new GridLayout(2,1 ) );
+		this.panelCartesStandards = new JPanel(new GridLayout(2,1 ) );
 
 		this.ensLblCartes = new JLabel[10];
 		btgEspeces        = new ButtonGroup();
@@ -84,10 +77,7 @@ public class PanelJeu extends JPanel
 		this.spPlateau = new JScrollPane(panelCentre);
 
 		for (int cpt = 0; cpt < this.ensLblCartes.length; cpt++) 
-		{
 			this.ensLblCartes[cpt] = new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") );
-
-		}
 
 		this.lblTexteEspece = new JLabel
 		(
@@ -112,7 +102,7 @@ public class PanelJeu extends JPanel
 		panelScoreLabels .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 
 		panelCentre.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
-
+		panelPioche.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 
 		this.spPlateau.setBackground               (FrameJeu.COULEUR_FOND_FONCE               );
 		this.spPlateau.setVerticalScrollBarPolicy  (JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED  );
@@ -124,7 +114,7 @@ public class PanelJeu extends JPanel
 
 		this.lblTexteScore.setForeground(FrameJeu.COULEUR_ZONE);
 		this.lblTexteScore.setOpaque    (false       );
-		this.lblTexteScore.setFont(new Font    ("Goldman", Font.BOLD, 17) );
+		this.lblTexteScore.setFont(new Font("Goldman", Font.BOLD, 17) );
 
 
 
@@ -161,26 +151,17 @@ public class PanelJeu extends JPanel
 
 		panelCentre.add( this.panelPlateau, new GridBagConstraints() );
 
-		// panelCartes
-		for (int cpt = 0; cpt < this.ensLblCartes.length ; cpt++) 
-		{	
-			if (cpt < 3)              panelCartesPremiumA.add(this.ensLblCartes[cpt] );
-			if (cpt == 3 || cpt == 4) panelCartesPremiumB.add(this.ensLblCartes[cpt] );
-			if (cpt > 4  ||cpt < 8)   panelCartesStandardsA.add(this.ensLblCartes[cpt] );
-			if (cpt >=8)              panelCartesStandardsB.add(this.ensLblCartes[cpt] );
-		}
-		
 		
 		panelScore.add(panelScoreLabels );
 		panelScore.add(panelScoreEspeces);
 
-		panelPioche.add(new JLabel(new ImageIcon() ) );
+		panelPioche.add(new JLabel("PIOCHE") );
+		panelPioche.add(new JLabel("IMAGE PIOCHE") );
 
-		panelPioche.add(panelCartesPremiumA  , BorderLayout.CENTER);
-		panelPioche.add(panelCartesPremiumB  , BorderLayout.CENTER);
-		panelPioche.add(panelCartesStandardsA, BorderLayout.CENTER);
-		panelPioche.add(panelCartesStandardsB, BorderLayout.CENTER);
-		panelPioche.add(panelCartesStandardsA);
+		panelPioche.add(new JLabel("LABEL PREMIUM") );
+
+		panelPioche.add(new JLabel("LABEL STANDARDS") );
+
 
 		this.add(panelScore    , BorderLayout.WEST  );
 		this.add(this.spPlateau, BorderLayout.CENTER);
@@ -195,6 +176,11 @@ public class PanelJeu extends JPanel
 		// Activation du Panel Plateau
 		this.panelPlateau.addMouseListener( this.gererClic() );
 
+	}
+
+	private JPanel creerPanelCarte(char typeCarte)
+	{
+		return null;
 	}
 	
 	/*-----------------------------------------------------*/
