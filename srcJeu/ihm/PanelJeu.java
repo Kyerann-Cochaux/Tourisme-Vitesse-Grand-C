@@ -240,7 +240,7 @@ public class PanelJeu extends JPanel
 				
 				// Gestion de la création de Voyage
 				
-				if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.plateauJeu.getPosExtremiteSlct() != null )
+				if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null )
 				{
 					effectuerVoyage( posColClk, posLigClk );
 				}
