@@ -11,13 +11,12 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Panel;
 import java.awt.Point;
 
 
 public class PanelJeu extends JPanel
 {
-
-	private static final int NB_CARTE_MINI = 6;
 
 	private AppliJeu ctrl;
 	private FrameJeu frameJeu;
@@ -30,6 +29,10 @@ public class PanelJeu extends JPanel
 
 	private JLabel lblTexteEspece;
 	private JLabel lblTexteScore;
+	private JLabel lblTextePioche;
+	private JLabel lblTexteStandards;
+	private JLabel lblTextePremium;
+	private JLabel lblActionPioche;
 
 	private JPanel panelCartesStandards;
 	private JPanel panelCartesPremium;
@@ -43,14 +46,10 @@ public class PanelJeu extends JPanel
 		JPanel panelScore;
 
 		//sous panels du panelScore
-		JPanel panelScoreEspeces;
 		JPanel panelScoreLabels;
-
-		//sous panels du panelCartes
+		JPanel panelScoreEspeces;
 		JPanel panelPioche;
 
-
-		ButtonGroup btgEspeces;
 
 		this.ctrl     = ctrl;
 		this.frameJeu = frameJeu;
@@ -67,22 +66,19 @@ public class PanelJeu extends JPanel
 
 		this.panelPlateau = new PanelPlateau(ctrl);
 		panelCentre       = new JPanel(new GridBagLayout() );
+		
 
-		this.ensLblCartes = new JLabel[this.ctrl.getNbTypeEspeces() +2];
+		this.ensLblCartes = new JLabel[this.ctrl.getNbTypePlanetes() * 2 +2];
 
 		GridLayout gl1 = new GridLayout(5,1,0,9);
-		if (this.ctrl.getNbTypeEspeces() >= 3) 
-		{
-			gl1.setRows(gl1.getRows() + this.ctrl.getNbTypeEspeces() /2);
 
-		}
+		if (this.ctrl.getNbTypeEspeces() >= 3) gl1.setRows(gl1.getRows() + this.ctrl.getNbTypeEspeces() /2);
 
 		panelScoreEspeces.setLayout(gl1);
 	
 		panelCartes = new JPanel(new GridLayout(4,1) );
+		panelPioche = new JPanel(new GridLayout(2,1) );
 
-		btgEspeces  = new ButtonGroup();
-	
 		this.spPlateau = new JScrollPane(panelCentre);
 
 		for (int cpt = 0; cpt < this.ensLblCartes.length; cpt++) 
@@ -105,7 +101,21 @@ public class PanelJeu extends JPanel
 
 		);
 
-		this.lblTexteScore = new JLabel("Score des croisières : ");
+		this.lblTexteScore     = new JLabel("Score des croisières : ");
+		this.lblTextePremium   = new JLabel("Cartes Premium : "      );
+		this.lblTexteStandards = new JLabel("Cartes Standards : "    );
+		this.lblTextePioche    = new JLabel
+		(
+			"<html>" + 
+				"<body> " +
+					"<h1 style='text-align : center;'>" + 
+						"Destination <br> Actuelle : " + 
+					"</h1>"+
+				"</body>"+
+			"</html>", SwingConstants.CENTER  
+		);
+
+		this.lblActionPioche = new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") );
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -130,6 +140,18 @@ public class PanelJeu extends JPanel
 		this.lblTexteScore.setOpaque    (false       );
 		this.lblTexteScore.setFont(new Font("Goldman", Font.BOLD, 17) );
 
+		this.lblTexteStandards.setForeground(FrameJeu.COULEUR_ZONE);
+		this.lblTexteStandards.setOpaque    (false       );
+		this.lblTexteStandards.setFont(new Font("Goldman", Font.BOLD, 17) );
+
+		this.lblTextePremium.setForeground(FrameJeu.COULEUR_ZONE);
+		this.lblTextePremium.setOpaque    (false       );
+		this.lblTextePremium.setFont(new Font("Goldman", Font.BOLD, 17) );
+
+		this.lblTextePioche.setFont      (FrameJeu.POLICE_TEXTE );
+		this.lblTextePioche.setForeground(FrameJeu.COULEUR_ZONE);
+		this.lblTextePioche.setOpaque    (false       );
+
 
 
 
@@ -140,7 +162,7 @@ public class PanelJeu extends JPanel
 		/* -------- Panels principaux ------- */
 
 		panelScoreLabels.add(this.lblTexteEspece);
-		panelScoreLabels.add(new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getNomEspece(0)  + ".png")  ) );
+		panelScoreLabels.add(new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getNomEspece(1)  + ".png")  ) );
 	
 
 		panelScoreEspeces.add(new JLabel() );
@@ -168,16 +190,14 @@ public class PanelJeu extends JPanel
 		
 		panelScore.add(panelScoreLabels );
 		panelScore.add(panelScoreEspeces);
+		panelScore.add(this.lblTextePioche );
+		panelScore.add( this.lblActionPioche );
 
-		panelCartes.add(new JButton("PIOCHE") );
-		panelCartes.add(this.panelCartesPremium);
-		panelCartes.add(new JLabel() );
+
+		panelCartes.add( this.lblTextePremium    );
+		panelCartes.add(this.panelCartesPremium  );
+		panelCartes.add(this.lblTexteStandards   );
 		panelCartes.add(this.panelCartesStandards);
-
-
-		//panelCartes.add(new JLabel("LABEL PREMIUM", SwingConstants.CENTER) );
-
-		//panelCartes.add(new JLabel("LABEL STANDARD", SwingConstants.CENTER) );
 
 
 		this.add(panelScore    , BorderLayout.WEST  );
@@ -191,7 +211,8 @@ public class PanelJeu extends JPanel
 		/* ---------------------------------- */
 
 		// Activation du Panel Plateau
-		this.panelPlateau.addMouseListener( this.gererClic() );
+		this.panelPlateau.addMouseListener   (this.gererClic() );
+		this.lblActionPioche.addMouseListener(this.gererClic() );
 
 	}
 
@@ -202,18 +223,18 @@ public class PanelJeu extends JPanel
 
 
 		panelPrc = new JPanel(new GridLayout(2,1) );
-		panel1 = new JPanel();
-		panel2 = new JPanel();
+		panel1   = new JPanel();
+		panel2   = new JPanel();
 
 		panelPrc.setOpaque(false);
-		panel1.setOpaque(false);
-		panel2.setOpaque(false);
+		panel1  .setOpaque(false);
+		panel2  .setOpaque(false);
 
 
 		for (int cpt = 0; cpt < this.ensLblCartes.length /2; cpt++) 
 		{
-				if (cpt < 3) panel1.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ) );
-				else         panel2.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ));
+			if (cpt < 3) panel1.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ) );
+			else         panel2.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ));
 			
 		}
 
@@ -235,21 +256,30 @@ public class PanelJeu extends JPanel
 		{
 			public void mousePressed(MouseEvent e)
 			{
-				int posColClk = (int) ( e.getX() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
-				int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
-				
-				// Gestion de la création de Voyage
-				
-				if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null )
+				if (e.getSource() == PanelJeu.this.panelPlateau)
 				{
-					effectuerVoyage( posColClk, posLigClk );
+
+					int posColClk = (int) ( e.getX() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
+					int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
+					
+					// Gestion de la création de Voyage
+					
+					if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null )
+					{
+						PanelJeu.this.effectuerVoyage( posColClk, posLigClk );
+					}
+					
+					
+					// Gestion de la selection d'extremite
+					if ( e.getButton() == MouseEvent.BUTTON1  && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) )
+					{
+						PanelJeu.this.selectionnerExtremite( posColClk, posLigClk );
+					}
 				}
-				
-				
-				// Gestion de la selection d'extremite
-				if ( e.getButton() == MouseEvent.BUTTON1  && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) )
+
+				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					selectionnerExtremite( posColClk, posLigClk );
+					System.out.println(PanelJeu.this.lblActionPioche.getText() );
 				}
 			}
 		};

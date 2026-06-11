@@ -194,9 +194,7 @@ public class PanelPlateau extends JPanel
 		g2.setColor ( Color.WHITE        );
 
 		int nbVoyage = this.ctrl.getNbVoyages();
-		//System.out.println("NbVoyages -> " + nbVoyage);
-		
-		// System.out.println("Nombre de Voyage à render : " + nbVoyage);
+
 		if (nbVoyage >= 1)
 		{
 			for( int ind = 0 ; ind < nbVoyage ; ind++ )
@@ -207,7 +205,6 @@ public class PanelPlateau extends JPanel
 				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE + TAILLE_CASE / 2 ;
 				
 				String especeVoyAct = this.ctrl.getVoyage(ind).getEspece();
-				System.out.println(especeVoyAct);
 	
 				for ( int cpt=0 ; cpt < this.ctrl.getNbTypeEspeces() ; cpt++ )
 				{
