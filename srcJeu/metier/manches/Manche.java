@@ -125,30 +125,40 @@ public class Manche
 		}
 		
 		
-		// parcours de tout les voyaes du plateau
+		// parcours de tout les voyages du plateau
 		for (int indVoyage = 0; indVoyage < this.metier.getVoyages().size(); indVoyage++)
 		{
 			Voyage voyageTemp = this.metier.getVoyages().get(indVoyage);
-			
-			// si on es dans la bonne espece 
-			if ( voyageTemp.getEspece() != null && voyageTemp.getEspece().equals(this.espece) )
+			System.out.println(this.lstCases.size());
+			// si le voyage es de la bonne espece
+			if (voyageTemp.getEspece() != null && voyageTemp.getEspece().equals(this.espece) ||
+			      this.lstCases.size() <= 1 )
 			{
-				
-				if ( this.lstCases.getFirst().getPosX() == cDep.getPosX() && 
-				     this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
+				System.out.println("bonne SP");
+				if (
+					(voyageTemp.getPlaneteSource().getPosX()      == cDep.getPosX() &&
+					 voyageTemp.getPlaneteSource().getPosY()      == cDep.getPosY() )   ||
+					(voyageTemp.getPlaneteDestination().getPosX() == cDep.getPosX() &&
+					 voyageTemp.getPlaneteDestination().getPosY() == cDep.getPosY() )
+					)
 				{
-					this.lstCases.addFirst(cFin);
-					return true;
+					System.out.println("bonne POs");
+					if ( this.lstCases.getFirst().getPosX() == cDep.getPosX() && 
+						this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
+					{
+						this.lstCases.addFirst(cFin);
+						return true;
+					}
+					
+					
+					if ( this.lstCases.getLast().getPosX() == cDep.getPosX() && 
+						this.lstCases.getLast().getPosY() == cDep.getPosY()    )
+					{
+						this.lstCases.addLast(cFin);
+						return true;
+					}
+					
 				}
-				
-				
-				if ( this.lstCases.getLast().getPosX() == cDep.getPosX() && 
-				     this.lstCases.getLast().getPosY() == cDep.getPosY()    )
-				{
-					this.lstCases.addLast(cFin);
-					return true;
-				}
-				
 			}
 		}
 		

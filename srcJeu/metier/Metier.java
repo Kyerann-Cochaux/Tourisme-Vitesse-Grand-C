@@ -77,7 +77,7 @@ public class Metier
 		
 		if ( !this.getMancheCourante().estExtremite(xDep, yDep) )
 		{
-			 System.out.println("Extremité pas bonne = " + this.getMancheCourante().getEspece() + " = " + xDep + ":" + yDep);
+			System.out.println("Extremité pas bonne = " + this.getMancheCourante().getEspece() + " = " + xDep + ":" + yDep);
 			return false;
 		}
 		

@@ -75,12 +75,13 @@ public class Voyage
 		// si les deux voyages sont paralelles (memes pentes)
 		if ( this.pente == voyage.getPente() ) return false;
 		
+		
 		// si il y as une espece sur ce voyage
 		if ( this.espece != null ) return false;
 		
-		// si les deux voyages n'ont pas d'espece ca ne sert a rien de tester le reste
-		if ( this.espece == null && voyage.getEspece() == null ) return false;
 		
+		// si les deux voyages n'ont pas d'espece ca ne sert a rien de tester le reste
+		// if ( this.espece != null && voyage.getEspece() != null ) return false;
 		
 		double intersectionX =  1.0 * ( voyage.getHauteur() - this.hauteur ) / ( this.pente - voyage.getPente() );
 		//double intersectionY = (1.0 * this.pente * intersectionX + this.hauteur);

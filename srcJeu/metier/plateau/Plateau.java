@@ -145,13 +145,18 @@ public class Plateau
 			}
 		}
 		
+		
 		for (int indVoyage = 0; indVoyage < lstVoyages.size(); indVoyage++)
 		{
 			Voyage voyTestCoupe = lstVoyages.get(indVoyage);
 			
-			if ( voyAColorer.coupe(voyTestCoupe) )
-				return false;
+			if ( voyAColorer != null )
+				if ( voyAColorer.coupe(voyTestCoupe) )
+					return false;
 		}
+		if ( voyAColorer == null ) return false;
+		
+		voyAColorer.setEspece(espece);
 		
 		return true;
 	}
