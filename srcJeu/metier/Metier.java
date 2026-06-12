@@ -70,9 +70,8 @@ public class Metier
 		// On colore le lien de la couleur de l'espèce
 		this.plateauJeu.setEspece(xDep, yDep, xFin, yFin, espece);
 		// On ajoute la destionation à la liste des cases
-		this.getMancheCourante().ajouterCase( this.plateauJeu.getCase(xFin, yFin) );
 		
-		return true ;
+		return this.getMancheCourante().ajouterCase( this.plateauJeu.getCase(xFin, yFin) );
 	}
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
