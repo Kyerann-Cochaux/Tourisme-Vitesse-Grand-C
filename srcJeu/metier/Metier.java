@@ -56,13 +56,13 @@ public class Metier
 		if ( this.plateauJeu.getCase(xFin, yFin).getPlanete().getSymbole() != this.getMancheCourante().getSommet().getSymbole().charAt(0) && 
 		     this.getMancheCourante().getSommet().getSymbole().charAt(0)   != 'J'                                                            )
 		{
-			// System.out.println("Pas bonne planete : " + this.getMancheCourante().getSommet().getSymbole());
+			 System.out.println("Pas bonne planete : " + this.getMancheCourante().getSommet().getSymbole());
 			return false;
 		}
 		
 		if(!this.getMancheCourante().estExtremite(xDep, yDep))
 		{
-			// System.out.println("Extremité pas bonne = " + this.getMancheCourante().getEspece() + " = " + xDep + ":" + yDep);
+			 System.out.println("Extremité pas bonne = " + this.getMancheCourante().getEspece() + " = " + xDep + ":" + yDep);
 			return false;
 		}
 		
@@ -70,7 +70,8 @@ public class Metier
 		// On colore le lien de la couleur de l'espèce
 		this.plateauJeu.setEspece(xDep, yDep, xFin, yFin, espece);
 		// On ajoute la destionation à la liste des cases
-		// this.getMancheCourante().ajouterCase( this.plateauJeu.getCase(xFin, yFin) );
+		this.getMancheCourante().ajouterCase( this.plateauJeu.getCase(xFin, yFin) );
+		
 		return true ;
 	}
 	/* ---------------------------------- */

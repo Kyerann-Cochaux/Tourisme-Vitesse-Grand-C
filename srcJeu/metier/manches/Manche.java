@@ -60,20 +60,51 @@ public class Manche
 
 	public int calculerScore()
 	{
-		return -1;
+		// Je met la valeur à 11 pour éviter un problème d'indice si on visite 10 
+		int[] tabZoneDiff = new int[11];
+		int  nbPlaneteMax = 0;
+		int  nbZonesDiff  = 0;
+
+		for (int cpt = 0; cpt < tabZoneDiff.length; cpt++) 
+			// On initialise à 0, ce qui correspond à aucune valeur
+			tabZoneDiff[cpt] = 0;
+			
+		// On parcours toute nos Case de notre croisière
+		for (int cpt = 0; cpt < this.lstCases.size(); cpt++) 
+		{
+			// On regarde toutes les valeurs présentes dans le tableau d'entier
+			for (int cptVal = 0; cptVal < tabZoneDiff.length; cptVal++)
+			{
+
+				// Si le numSysteme de la case est identique à la valeur au même indice (ex : numSysteme == 1 et nbZoneDiff[cptVal] == 1)
+				if (this.lstCases.get(cpt).getNumSysteme() == tabZoneDiff[cptVal] )
+					// On incrémente la valeur
+					tabZoneDiff[cptVal ]++;
+
+				else 
+					// Sinon on met la valeur différente à l'indice suivant
+					tabZoneDiff[this.lstCases.get(cpt).getNumSysteme()] = tabZoneDiff[cptVal++]++;
+				
+			}
+		}
+
+		// Ensuite... On regarde combien de zones ont été visité
+		nbPlaneteMax = tabZoneDiff[0];
+
+		for (int cpt = 0; cpt < tabZoneDiff.length; cpt++) 
+		{
+			if (tabZoneDiff[cpt] != 0) 
+			{
+				if (tabZoneDiff[cpt] > nbPlaneteMax) nbPlaneteMax = tabZoneDiff[cpt];
+				nbZonesDiff++;
+			}
+		}
+
+		return nbZonesDiff * nbPlaneteMax;
 	}
 
-	public boolean estMancheFinie()
-	{
-		if(this.pioche.resteCartePremium())
-			return false;
-		return true;
-	}
-
-	public boolean decouvrirCarte()
-	{
-		return this.pioche.decouvrirCarte();
-	}
+	public boolean estMancheFinie() { return (this.pioche.resteCartePremium() );}
+	public boolean decouvrirCarte() { return this.pioche.decouvrirCarte();}
 
 	public boolean ajouterCase(Case c)
 	{

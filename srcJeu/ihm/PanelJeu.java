@@ -94,7 +94,7 @@ public class PanelJeu extends JPanel
 			"<html>"+
 				"<body> "+
 					"<h1 style='text-align : center;'>"+ 
-						"Croisière des <br> " + this.ctrl.getNomEspece(0) + 
+						"Croisière des <br> " + this.ctrl.getEspCroisiereCrt() + 
 					"</h1>"+
 				" </body> "
 			+"</html>", SwingConstants.CENTER
@@ -162,7 +162,7 @@ public class PanelJeu extends JPanel
 		/* -------- Panels principaux ------- */
 
 		panelScoreLabels.add(this.lblTexteEspece);
-		panelScoreLabels.add(new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getNomEspece(1)  + ".png")  ) );
+		panelScoreLabels.add(new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png")  ) );
 	
 
 		panelScoreEspeces.add(new JLabel() );
@@ -303,6 +303,11 @@ public class PanelJeu extends JPanel
 		                                    this.ctrl.getEspCroisiereCrt()
 		                                  );
 		
-		if ( voyageAjoute ) { this.panelPlateau.repaint(); }
+		if ( voyageAjoute ) 
+		{ 
+			this.panelPlateau.setExtremiteSlct(null);
+
+			this.panelPlateau.repaint(); 
+		}
 	}
 }
