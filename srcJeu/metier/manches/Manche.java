@@ -163,7 +163,7 @@ public class Manche
 			if(this.pioche.getCarte(cpt).getPremium() )
 					cartePremium++;
 		}
-		return 5 - cartePremium;
+		return cartePremium;
 	}
 
 	public int nbStandartRestant()
@@ -175,7 +175,7 @@ public class Manche
 			if(!this.pioche.getCarte(cpt).getPremium() )
 				carteStandard++;
 		}
-		return 5 - carteStandard;
+		return carteStandard;
 	}
 
 
