@@ -9,3 +9,5 @@ cd ../class
 
 echo Execution...
 java srcJeu.AppliJeu
+
+cd ../lanceursJeu
