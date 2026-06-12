@@ -33,7 +33,7 @@ public class AppliJeu
 	public Voyage getVoyage    (int indice   ) {return this.metier.getPlateau().getVoyage    (indice);}
 	
 	public Planete getPlanete  (int indCol, int indLig) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
-	public Carte   getCarteInit(int indice)             {return this.metier.getCarteInit(indice)                            ;}
+	//public Carte   getCarteInit(int indice)             {return this.metier.getCarteInit(indice)                            ;}
 	public String  getSommet   ()                       
 	{
 		String symbole = "";
@@ -61,7 +61,7 @@ public class AppliJeu
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
-	public boolean decouvrirCarte(){return this.metier.decouvrirCarte();}
+	public boolean decouvrirCarte() { return this.metier.enleverCarte() ; }
 
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)

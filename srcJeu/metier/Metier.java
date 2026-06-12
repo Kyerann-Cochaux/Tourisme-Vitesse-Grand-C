@@ -48,21 +48,35 @@ public class Metier
 	public Carte        getSommet () { return this.getMancheCourante().getSommet(); }
 	public List<Voyage> getVoyages() { return this.plateauJeu.getVoyages(); }
 	
-	public Carte getCarteInit(int indice) {return this.getMancheCourante().getCarteInit(indice);}
+	//public Carte getCarteInit(int indice) {return this.getMancheCourante().getCarteInit(indice);}
 	
 	
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
 
-	public boolean decouvrirCarte(){return this.getMancheCourante().decouvrirCarte();}
+	public boolean enleverCarte()
+	{
+		boolean carteEnleve = false ;
+		carteEnleve = this.getMancheCourante().enleverCarte();
+		System.out.println( "Nombre Carte Restante dans la Pioche : " + this.getMancheCourante().getPioche().getTaillePioche() );
+
+		if ( ! this.getMancheCourante().getPioche().resteCartePremium() )
+		{
+			this.mancheSuivante();
+			return true;
+		}
+
+		return carteEnleve ;
+	}
 
 
 	public boolean effectuerVoyage(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
 		System.out.println("~~~ effectuer voyage ~~~~");
-		System.out.println("Espèce de Départ de la Manche Actuelle : " + this.lstManches.get( this.mancheCourante ).getEspece());
-		System.out.println("Planète on top : " + this.getMancheCourante().getSommet().getSymbole());
+		System.out.println( "Espèce de Départ de la Manche Actuelle : " + this.lstManches.get( this.mancheCourante ).getEspece());
+		System.out.println( "Nombre Carte Restante dans la Pioche : " + this.getMancheCourante().getPioche().getTaillePioche() );
+		System.out.println( "Planète on top : " + this.getMancheCourante().getSommet().getSymbole() );
 		
 		// Check si c'est une Planète que l'on clique
 		if ( this.plateauJeu.getCase(xFin, yFin).getPlanete() == null ) return false ;
@@ -86,10 +100,11 @@ public class Metier
 		// On colore le lien de la couleur de l'espèce
 		if ( this.plateauJeu.setEspece(xDep, yDep, xFin, yFin, espece) )
 		{
+			// Si c'est possible, On passe à la carte suivante & on ajoute la destionation à la liste des cases
+			this.getMancheCourante().enleverCarte(); // Commenté ceci pour ne pas passer à la Carte destination suivante si un voyage est effectuer
 			return this.getMancheCourante().ajouterCase( this.plateauJeu.getCase(xDep, yDep), this.plateauJeu.getCase(xFin, yFin) );
 		}
 
-		// On ajoute la destionation à la liste des cases
 		return false;
 	}
 	
@@ -228,15 +243,9 @@ public class Metier
 	}
 	
 	
-	public boolean mancheSuivante()
+	public void mancheSuivante()
 	{
-		if(mancheCourante + 1 >= this.lstManches.size())
-			return false;
-		if(!this.getMancheCourante().estMancheFinie())
-			return false;
-
-		mancheCourante++;
-		return true;
+		mancheCourante++ ;
 	}
 
 	public boolean ajouterManche(Manche manche)

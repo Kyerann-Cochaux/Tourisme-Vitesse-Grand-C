@@ -38,8 +38,8 @@ public class PanelJeu extends JPanel
 	private JPanel panelCartesStandards;
 	private JPanel panelCartesPremium;
 
-	private List<String> lstStandardsPosee;
-	private List<String> lstPremiumPosee;
+	private String[] tabStandardsPosee;
+	private String[] tabPremiumPosee;
 
 	//Panel Carte
 
@@ -92,11 +92,17 @@ public class PanelJeu extends JPanel
 		for (int cpt = 0; cpt < this.ensLblCartes.length; cpt++) 
 			this.ensLblCartes[cpt] = new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") );
 
-		this.lstStandardsPosee = new ArrayList<String>();
-		this.lstPremiumPosee   = new ArrayList<String>();
+		this.tabStandardsPosee = new String[this.ensLblCartes.length /2];
+		this.tabPremiumPosee   = new String[this.ensLblCartes.length /2];
 
-		this.panelCartesPremium   = this.creerPanelCarte(this.lstPremiumPosee  );
-		this.panelCartesStandards = this.creerPanelCarte(this.lstStandardsPosee);
+		for (int cpt = 0; cpt < this.tabStandardsPosee.length; cpt++) 
+		{
+			this.tabStandardsPosee[cpt] = null;
+			this.tabPremiumPosee  [cpt] = null;
+		}
+
+		this.panelCartesPremium   = this.creerPanelCarte(true );
+		this.panelCartesStandards = this.creerPanelCarte(false);
 
 		this.panelCartesPremium.setPreferredSize(this.panelCartes.getPreferredSize() );
 
@@ -228,10 +234,41 @@ public class PanelJeu extends JPanel
 
 	}
 
-	private JPanel creerPanelCarte(List<String> lstCartePosee)
+	private int getNbCartesDos(String[] tabCartesPosees)
+	{
+		int nbCarteNeutre = 0;
+
+
+		for (int cpt = 0; cpt < tabCartesPosees.length; cpt++) 
+			if (tabCartesPosees[cpt] == null) 
+				
+				nbCarteNeutre++;
+		
+		return nbCarteNeutre;
+	}
+
+	private int getNbCartesFace(String[] tabCartesPosees)
+	{
+		int nbCarteFace = 0;
+
+
+		for (int cpt = 0; cpt < tabCartesPosees.length; cpt++) 
+			if (tabCartesPosees[cpt] != null) 
+				
+				nbCarteFace++;
+		
+		return nbCarteFace;
+
+	}
+
+	private JPanel creerPanelCarte(boolean premium)
 	{
 		JPanel panel1, panel2;
 		JPanel panelPrc;
+
+		
+
+		//String fic = "../images/Cartes/Carte-";
 
 
 		panelPrc = new JPanel(new GridLayout(2,1) );
@@ -243,31 +280,33 @@ public class PanelJeu extends JPanel
 		panel2  .setOpaque(false);
 
 
-		for (int cpt = 0; cpt < this.ensLblCartes.length /2; cpt++) 
+
+		for (int cpt = 0; cpt < this.tabPremiumPosee.length; cpt++) 
 		{
-			String fic = "../images/Cartes/Carte";
-			for (String nomCarte : lstCartePosee) 
-			{
-				if (nomCarte != null && nomCarte.contains("Prem") )
-				{
-					this.lstPremiumPosee.add(fic);
-				}
-				
-			}
-			if (cpt < 3) 
-			{
+			String fic = "../images/Cartes/Carte-";
 
-				panel1.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ) );
-
+			if (premium)
+			{
+				if (this.tabPremiumPosee[cpt] == null) fic += "Dos";
+				else                                   fic += this.tabPremiumPosee[cpt];
 			}
-			else         panel2.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ));
-			
+
+			else
+			{
+				if (this.tabStandardsPosee[cpt] == null) fic += "Dos";
+				else                                     fic += this.tabStandardsPosee[cpt];
+			}
+
+			fic += ".png";
+
+			if (cpt < 3) panel1.add(new JLabel(new ImageIcon(fic) ) );
+			else         panel2.add(new JLabel(new ImageIcon(fic) ) );
 		}
 
 		panelPrc.add(panel1);
 		panelPrc.add(panel2);
 
-		System.out.println("nbElt ->" + panelPrc.getComponentCount() );
+		//System.out.println("nbElt ->" + panelPrc.getComponentCount() );
 
 		return panelPrc;
 	}
@@ -288,18 +327,16 @@ public class PanelJeu extends JPanel
 					int posColClk = (int) ( e.getX() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 					int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 					
-					// Gestion de la création de Voyage
-					
-					if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null )
-					{
-						PanelJeu.this.effectuerVoyage( posColClk, posLigClk );
-					}
-					
-					
 					// Gestion de la selection d'extremite
 					if ( e.getButton() == MouseEvent.BUTTON1  && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) )
 					{
 						PanelJeu.this.selectionnerExtremite( posColClk, posLigClk );
+					}
+
+					// Gestion de la création de Voyage
+					if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null )
+					{
+						PanelJeu.this.effectuerVoyage( posColClk, posLigClk );
 					}
 				}
 				
@@ -307,21 +344,26 @@ public class PanelJeu extends JPanel
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
 					String carteJouee = PanelJeu.this.ctrl.getSommet();
-					//PanelJeu.this.pa
+					String[] tab = null;
+					tab = PanelJeu.this.tabPremiumPosee;
+					System.out.println(tab[PanelJeu.this.getNbCartesDos(tab) - PanelJeu.this.getNbCartesFace(tab) -1]);
 
 					if (PanelJeu.this.ctrl.sommetPremium() )
 					{
-						PanelJeu.this.lstPremiumPosee.add(carteJouee);
-						
-						//PanelJeu.this.l
+					
+
+						//tab[PanelJeu.this.getNbCartesDos(tab) - PanelJeu.this.getNbCartesFace(tab) -1] = carteJouee;
 					}
 					else
 					{
-						PanelJeu.this.lstStandardsPosee.add(carteJouee);
+						//PanelJeu.this.tabStandardsPosee.add(carteJouee);
 					}
 
 					PanelJeu.this.ctrl.decouvrirCarte();
 					PanelJeu.this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
+
+					PanelJeu.this.panelCartesPremium   = PanelJeu.this.creerPanelCarte(true);
+					PanelJeu.this.panelCartesStandards = PanelJeu.this.creerPanelCarte(false);
 				}
 			}
 		};
@@ -347,8 +389,11 @@ public class PanelJeu extends JPanel
 		
 		if ( voyageAjoute )
 		{
-			System.out.println( "IHM PanelJeu : Voyage Ajouté vers la Planete " + posColClk + "/" + posLigClk ); 
-			this.panelPlateau.setExtremiteSlct(null); 
+			//System.out.println( "IHM PanelJeu : Voyage Ajouté vers la Planete " + posColClk + "/" + posLigClk ); 
+			this.panelPlateau.setExtremiteSlct(null);
+
+			// On passe à la Destination Suivante 
+			PanelJeu.this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
 		}
 		
 		this.panelPlateau.repaint();

@@ -94,7 +94,7 @@ public class Plateau
 	/*         Modificateurs              */
 	/* ---------------------------------- */
 
-	/*public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
+	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
 		// 1. On récupère la case de départ et la case d'arrivée
 		Case caseSource  = this.getCase(xDep, yDep);
@@ -115,9 +115,9 @@ public class Plateau
 				return v.setEspece(espece);
 			}
 		}
+		return false; // Aucun voyage correspondant trouvé entre ces deux cases
 	}
 
-	return false; // Aucun voyage correspondant trouvé entre ces deux cases*/
 
 
 	/*
@@ -127,7 +127,7 @@ public class Plateau
 	 
 	*/
 
-	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
+	/*public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
 		Voyage voyAColorer = null;
 		
@@ -154,7 +154,7 @@ public class Plateau
 		}
 		
 		return true;
-	}
+	}*/
 	 
 	
 	private void corrigerDecoupeZone(int x, int y)

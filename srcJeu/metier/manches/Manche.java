@@ -29,7 +29,7 @@ public class Manche
 	private Manche(String espece, Case c, Metier metier)
 	{
 		this.espece   = espece;
-		this.pioche   = new Pioche();
+		this.pioche   = new Pioche(metier);
 		this.pioche.melangerCarte(); // On mélange la pioche ici
 		this.lstCases = new ArrayList<Case>();
 		this.metier = metier;
@@ -43,7 +43,7 @@ public class Manche
 	public String     getEspece   ()           {return this.espece;                 }
 	public Pioche     getPioche   ()           {return this.pioche;                 }
 	public Carte      getSommet   ()           {return this.pioche.getSommet();     }
-	public Carte      getCarteInit(int indice) {return this.pioche.getCarteInit(indice);}
+//public Carte      getCarteInit(int indice) {return this.pioche.getCarteInit(indice);}
 	public List<Case> getlstCases ()           {return this.lstCases;               }
 	public Case       getPremier  ()           {return this.lstCases.getFirst();    }
 	public Case       getDernier  ()           {return this.lstCases.getLast() ;    }
@@ -106,8 +106,12 @@ public class Manche
 		return nbZonesDiff * nbPlaneteMax;
 	}
 
-	public boolean estMancheFinie() { return (this.pioche.resteCartePremium() );}
-	public boolean decouvrirCarte() { return this.pioche.decouvrirCarte();}
+	public boolean estMancheFinie() { return this.pioche.resteCartePremium() ; }
+
+	public boolean enleverCarte() 
+	{
+		return this.pioche.enleverCarte();
+	}
 
 	public boolean ajouterCase(Case cDep, Case cFin)
 	{
