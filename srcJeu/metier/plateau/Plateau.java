@@ -81,8 +81,9 @@ public class Plateau
 	public String[] getEnsPlanetes() { return this.ensPlanetes; }
 	public String[] getEnsEspeces () { return this.ensEspeces ; }
 	
-	public Voyage getVoyage   (int indice) { return this.lstVoyages .get(indice); }
-	public int    getNbVoyages()           { return this.lstVoyages.size()      ; }
+	public Voyage       getVoyage   (int indice) { return this.lstVoyages .get(indice)           ;}
+	public int          getNbVoyages()           { return this.lstVoyages.size()                 ;}
+	public List<Voyage> getVoyages  ()           { return new ArrayList<Voyage> (this.lstVoyages);}
 	
 	public Case     getCase    (int x, int y) { return this.ensCases[y][x]; }
 	public Case[][] getEnsCases()             { return this.ensCases      ; }
@@ -93,13 +94,12 @@ public class Plateau
 	/*         Modificateurs              */
 	/* ---------------------------------- */
 
-	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
+	/*public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
 		// 1. On récupère la case de départ et la case d'arrivée
 		Case caseSource  = this.getCase(xDep, yDep);
 		Case caseDest    = this.getCase(xFin, yFin);
 		
-		// System.out.println("ouou");
 		if (caseSource == null || caseDest == null) return false;
 
 		// 2. On cherche dans la liste des voyages du plateau celui qui correspond
@@ -114,10 +114,11 @@ public class Plateau
 				// 3. On applique l'espèce sur le voyage trouvé
 				return v.setEspece(espece);
 			}
+		}
 	}
 
-	return false; // Aucun voyage correspondant trouvé entre ces deux cases
-}
+	return false; // Aucun voyage correspondant trouvé entre ces deux cases*/
+
 
 	/*
 	 Cette méthode vérifie s'il est possible d'associer la case fournie en paramètre avec le numéro du système 
@@ -125,9 +126,7 @@ public class Plateau
 	 on ne peut pas attribuer ce numéro du système à la case en paramètre.
 	 
 	*/
-	
-	
-	/*
+
 	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
 		Voyage voyAColorer = null;
@@ -156,8 +155,7 @@ public class Plateau
 		
 		return true;
 	}
-	 */
-	
+	 
 	
 	private void corrigerDecoupeZone(int x, int y)
 	{

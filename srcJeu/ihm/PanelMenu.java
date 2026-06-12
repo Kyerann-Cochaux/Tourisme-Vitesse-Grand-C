@@ -53,8 +53,8 @@ public class PanelMenu extends JPanel implements ActionListener
 		this.panelAccueil.add(this.lblMenu       );
 		this.panelAccueil.add(new JLabel()       );
 		this.panelAccueil.add(this.btnSolo       );
-		this.panelAccueil.add(this.btnLocal      );
-		this.panelAccueil.add(this.btnMultijoueur);
+		// this.panelAccueil.add(this.btnLocal      );
+		// this.panelAccueil.add(this.btnMultijoueur);
 		this.panelAccueil.add(this.btnQuitter    );
 		
 		

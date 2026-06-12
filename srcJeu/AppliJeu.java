@@ -34,6 +34,16 @@ public class AppliJeu
 	
 	public Planete getPlanete  (int indCol, int indLig) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
 	public Carte   getCarteInit(int indice)             {return this.metier.getCarteInit(indice)                            ;}
+	public String  getSommet   ()                       
+	{
+		String symbole = "";
+		if (this.metier.getSommet().getPremium() ) symbole += "Prem-";
+
+		return symbole + this.metier.getSommet().getSymbole().charAt(0);
+	}
+
+	public boolean sommetPremium() { return this.metier.getSommet().getPremium();}
+
 	
 	// Retourne le nom de l'espèce en croisières dans la manche actuelle
 	public String getEspCroisiereCrt() { return this.metier.getMancheCourante().getEspece() ; }
@@ -42,7 +52,7 @@ public class AppliJeu
 	/*            Modificateurs           */
 	/* ---------------------------------- */
 	
-	public boolean setEspece(int xDep, int yDep, int xFin, int yFin, String espece)
+	public boolean effectuerVoyage(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
 		return this.metier.effectuerVoyage(xDep, yDep, xFin, yFin, espece);
 	}
@@ -50,6 +60,9 @@ public class AppliJeu
 	/* ---------------------------------- */
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
+
+	public boolean decouvrirCarte(){return this.metier.decouvrirCarte();}
+
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{

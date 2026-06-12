@@ -1,7 +1,7 @@
 package srcJeu.metier.manches;
 
 import srcJeu.metier.Metier;
-import srcJeu.metier.plateau.Case;
+import srcJeu.metier.plateau.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,24 +12,27 @@ public class Manche
 	private Pioche pioche;
 	private String espece;
 	private List<Case> lstCases;
+	private Metier metier;
 
 	/*Factory pour vérifier si l'espèce en paramètre est une espèce valide  */
-	public static Manche creerManche(String espece, Case c)
+	public static Manche creerManche(String espece, Case c, Metier metier) // Case ici doit être le départ de l'espèce de la manche actuelle
 	{
 		for (int cpt = 0; cpt < Metier.TAB_ESPECES.length; cpt++)
 		{
 			if ( Metier.TAB_ESPECES[cpt].equals(espece) )
-				return new Manche(espece, c);
+				return new Manche(espece, c, metier);
 		}
 		
 		return null;
 	}
 
-	private Manche(String espece, Case c)
+	private Manche(String espece, Case c, Metier metier)
 	{
 		this.espece   = espece;
 		this.pioche   = new Pioche();
+		this.pioche.melangerCarte(); // On mélange la pioche ici
 		this.lstCases = new ArrayList<Case>();
+		this.metier = metier;
 		this.lstCases.add(c);
 	}
 
@@ -47,8 +50,8 @@ public class Manche
 
 	public boolean estExtremite(int col, int lig)
 	{
-		if( this.lstCases.getFirst().getPosX() == col && this.lstCases.getFirst().getPosY() == lig ||
-		    this.lstCases.getLast() .getPosX() == col && this.lstCases.getLast() .getPosY() == lig    )
+		if( (this.lstCases.getFirst().getPosX() == col && this.lstCases.getFirst().getPosY() == lig) ||
+		    (this.lstCases.getLast() .getPosX() == col && this.lstCases.getLast() .getPosY() == lig)    )
 			return true;
 		
 		return false;
@@ -106,11 +109,50 @@ public class Manche
 	public boolean estMancheFinie() { return (this.pioche.resteCartePremium() );}
 	public boolean decouvrirCarte() { return this.pioche.decouvrirCarte();}
 
-	public boolean ajouterCase(Case c)
+	public boolean ajouterCase(Case cDep, Case cFin)
 	{
-		if( c == null ) { return false ; }
-		this.lstCases.add(c);
-		return true;
+		if( cDep == null ) return false;
+		if( cFin == null ) return false;
+		
+		// si cette case as deja été visitée 
+		for (int indCase = 0; indCase < this.lstCases.size(); indCase++)
+		{
+			if ( this.lstCases.get(indCase).getPosX() == cFin.getPosX() && 
+			     this.lstCases.get(indCase).getPosY() == cFin.getPosY()     )
+			{
+				return false;
+			}
+		}
+		
+		
+		// parcours de tout les voyaes du plateau
+		for (int indVoyage = 0; indVoyage < this.metier.getVoyages().size(); indVoyage++)
+		{
+			Voyage voyageTemp = this.metier.getVoyages().get(indVoyage);
+			
+			// si on es dans la bonne espece 
+			if ( voyageTemp.getEspece() != null && voyageTemp.getEspece().equals(this.espece) )
+			{
+				
+				if ( this.lstCases.getFirst().getPosX() == cDep.getPosX() && 
+				     this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
+				{
+					this.lstCases.addFirst(cFin);
+					return true;
+				}
+				
+				
+				if ( this.lstCases.getLast().getPosX() == cDep.getPosX() && 
+				     this.lstCases.getLast().getPosY() == cDep.getPosY()    )
+				{
+					this.lstCases.addLast(cFin);
+					return true;
+				}
+				
+			}
+		}
+		
+		return false;
 	}
 
 	public int nbPremiumRestant()

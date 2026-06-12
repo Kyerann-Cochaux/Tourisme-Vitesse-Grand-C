@@ -4,7 +4,8 @@ import srcJeu.AppliJeu;
 
 import javax.swing.*;
 import java.awt.event.*;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -37,12 +38,19 @@ public class PanelJeu extends JPanel
 	private JPanel panelCartesStandards;
 	private JPanel panelCartesPremium;
 
+	private List<String> lstStandardsPosee;
+	private List<String> lstPremiumPosee;
+
+	//Panel Carte
+
+	private JPanel panelCartes;
+
 	public PanelJeu(AppliJeu ctrl, FrameJeu frameJeu)
 	{
 		/* -------- Panels principaux ------- */
 
 		JPanel panelCentre;
-		JPanel panelCartes;
+
 		JPanel panelScore;
 
 		//sous panels du panelScore
@@ -76,7 +84,7 @@ public class PanelJeu extends JPanel
 
 		panelScoreEspeces.setLayout(gl1);
 	
-		panelCartes = new JPanel(new GridLayout(4,1) );
+		this.panelCartes = new JPanel(new GridLayout(4,1) );
 		panelPioche = new JPanel(new GridLayout(2,1) );
 
 		this.spPlateau = new JScrollPane(panelCentre);
@@ -84,13 +92,17 @@ public class PanelJeu extends JPanel
 		for (int cpt = 0; cpt < this.ensLblCartes.length; cpt++) 
 			this.ensLblCartes[cpt] = new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") );
 
-		this.panelCartesPremium   = this.creerPanelCarte();
-		this.panelCartesStandards = this.creerPanelCarte();
+		this.lstStandardsPosee = new ArrayList<String>();
+		this.lstPremiumPosee   = new ArrayList<String>();
 
-		this.panelCartesPremium.setPreferredSize(panelCartes.getPreferredSize() );
+		this.panelCartesPremium   = this.creerPanelCarte(this.lstPremiumPosee  );
+		this.panelCartesStandards = this.creerPanelCarte(this.lstStandardsPosee);
+
+		this.panelCartesPremium.setPreferredSize(this.panelCartes.getPreferredSize() );
 
 		this.lblTexteEspece = new JLabel
 		(
+
 			"<html>"+
 				"<body> "+
 					"<h1 style='text-align : center;'>"+ 
@@ -115,7 +127,7 @@ public class PanelJeu extends JPanel
 			"</html>", SwingConstants.CENTER  
 		);
 
-		this.lblActionPioche = new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") );
+		this.lblActionPioche = new JLabel(new ImageIcon("../images/Cartes/Carte-" +  this.ctrl.getSommet() +".png") );
 		
 		/* ---------------------------------- */
 		/*    Configuration des composants    */
@@ -194,10 +206,10 @@ public class PanelJeu extends JPanel
 		panelScore.add( this.lblActionPioche );
 
 
-		panelCartes.add( this.lblTextePremium    );
-		panelCartes.add(this.panelCartesPremium  );
-		panelCartes.add(this.lblTexteStandards   );
-		panelCartes.add(this.panelCartesStandards);
+		this.panelCartes.add( this.lblTextePremium    );
+		this.panelCartes.add(this.panelCartesPremium  );
+		this.panelCartes.add(this.lblTexteStandards   );
+		this.panelCartes.add(this.panelCartesStandards);
 
 
 		this.add(panelScore    , BorderLayout.WEST  );
@@ -216,7 +228,7 @@ public class PanelJeu extends JPanel
 
 	}
 
-	private JPanel creerPanelCarte()
+	private JPanel creerPanelCarte(List<String> lstCartePosee)
 	{
 		JPanel panel1, panel2;
 		JPanel panelPrc;
@@ -233,7 +245,21 @@ public class PanelJeu extends JPanel
 
 		for (int cpt = 0; cpt < this.ensLblCartes.length /2; cpt++) 
 		{
-			if (cpt < 3) panel1.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ) );
+			String fic = "../images/Cartes/Carte";
+			for (String nomCarte : lstCartePosee) 
+			{
+				if (nomCarte != null && nomCarte.contains("Prem") )
+				{
+					this.lstPremiumPosee.add(fic);
+				}
+				
+			}
+			if (cpt < 3) 
+			{
+
+				panel1.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ) );
+
+			}
 			else         panel2.add(new JLabel(new ImageIcon("../images/Cartes/Carte-Dos.png") ));
 			
 		}
@@ -276,10 +302,26 @@ public class PanelJeu extends JPanel
 						PanelJeu.this.selectionnerExtremite( posColClk, posLigClk );
 					}
 				}
-
+				
+				// Gestion de l'affichage des Cartes Destionnations
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					System.out.println(PanelJeu.this.lblActionPioche.getText() );
+					String carteJouee = PanelJeu.this.ctrl.getSommet();
+					//PanelJeu.this.pa
+
+					if (PanelJeu.this.ctrl.sommetPremium() )
+					{
+						PanelJeu.this.lstPremiumPosee.add(carteJouee);
+						
+						//PanelJeu.this.l
+					}
+					else
+					{
+						PanelJeu.this.lstStandardsPosee.add(carteJouee);
+					}
+
+					PanelJeu.this.ctrl.decouvrirCarte();
+					PanelJeu.this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
 				}
 			}
 		};
@@ -294,20 +336,21 @@ public class PanelJeu extends JPanel
 	private void effectuerVoyage( int posColClk, int posLigClk )
 	{
 		boolean voyageAjoute = false ;
-		
-		voyageAjoute = this.ctrl.setEspece(
-		                                    (int) this.panelPlateau.getPosExtremiteSlct().getX(),
-		                                    (int) this.panelPlateau.getPosExtremiteSlct().getY(),
-		                                    posColClk,
-		                                    posLigClk,
-		                                    this.ctrl.getEspCroisiereCrt()
-		                                  );
-		
-		if ( voyageAjoute ) 
-		{ 
-			this.panelPlateau.setExtremiteSlct(null);
 
-			this.panelPlateau.repaint(); 
+		voyageAjoute = this.ctrl.effectuerVoyage(
+		                                          (int) this.panelPlateau.getPosExtremiteSlct().getX(),
+		                                          (int) this.panelPlateau.getPosExtremiteSlct().getY(),
+		                                          posColClk,
+		                                          posLigClk,
+		                                          this.ctrl.getEspCroisiereCrt()
+		                                        );
+		
+		if ( voyageAjoute )
+		{
+			System.out.println( "IHM PanelJeu : Voyage Ajouté vers la Planete " + posColClk + "/" + posLigClk ); 
+			this.panelPlateau.setExtremiteSlct(null); 
 		}
+		
+		this.panelPlateau.repaint();
 	}
 }

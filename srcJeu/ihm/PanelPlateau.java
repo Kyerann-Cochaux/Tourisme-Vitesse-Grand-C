@@ -170,6 +170,7 @@ public class PanelPlateau extends JPanel
 						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Arrivé X */
 						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE  /* Arrivé Y */
 					);
+
 				}
 				
 				// Dessiner La ligne sur le côté bas de la case actuelle
@@ -208,10 +209,10 @@ public class PanelPlateau extends JPanel
 	
 				for ( int cpt=0 ; cpt < this.ctrl.getNbTypeEspeces() ; cpt++ )
 				{
-					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) { g2.setColor( TAB_COUL_LIENS[cpt] ); }
+					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) { g2.setColor( TAB_COUL_LIENS[cpt] ); g2.setStroke( new BasicStroke(4) ); }
 				}
 				
-				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); }
+				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); g2.setStroke( new BasicStroke(3) ); }
 				
 				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );

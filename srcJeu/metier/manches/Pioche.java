@@ -27,9 +27,8 @@ public class Pioche
 		this.pioche = new ArrayList<Carte>();
 		
 		for (int cpt = 0; cpt < Pioche.TAB_CARTES.length; cpt++) 
-			this.pioche.add(Pioche.TAB_CARTES[cpt] );
+			this.pioche.add( Pioche.TAB_CARTES[cpt] );
 		
-		Collections.shuffle(this.pioche);
 	}
 	
 	/* ---------------------------------- */
@@ -88,6 +87,11 @@ public class Pioche
 		return true;
 	}
 	
+	public void melangerCarte()
+	{
+		Collections.shuffle(this.pioche);
+	}
+
 	/* ---------------------------------- */
 	/*          Méthodes standard         */
 	/* ---------------------------------- */
