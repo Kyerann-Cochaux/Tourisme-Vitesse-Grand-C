@@ -17,9 +17,9 @@ public class Manche
 	/*Factory pour vérifier si l'espèce en paramètre est une espèce valide  */
 	public static Manche creerManche(String espece, Case c, Metier metier) // Case ici doit être le départ de l'espèce de la manche actuelle
 	{
-		for (int cpt = 0; cpt < Metier.TAB_ESPECES.length; cpt++)
+		for (int cpt = 0; cpt < metier.getPlateau().getNbEspeces() ; cpt++)
 		{
-			if ( Metier.TAB_ESPECES[cpt].equals(espece) )
+			if (  metier.getPlateau().getNomEspece(cpt).equals(espece) )
 				return new Manche(espece, c, metier);
 		}
 		
