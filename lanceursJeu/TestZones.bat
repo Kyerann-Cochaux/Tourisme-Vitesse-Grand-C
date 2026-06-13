@@ -10,3 +10,5 @@ cd ../class
 
 echo Execution...
 java srcJeu.TestZone
+
+cd ../lanceursJeu

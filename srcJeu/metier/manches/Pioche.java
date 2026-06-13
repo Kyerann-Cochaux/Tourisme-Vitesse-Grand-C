@@ -44,7 +44,7 @@ public class Pioche
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 	
-	public boolean enleverCarte()
+	public boolean decouvrirCarte()
 	{
 		if ( ! this.pioche.isEmpty() )
 		{

@@ -53,10 +53,10 @@ public class Metier
 	/*          Autres méthodes           */
 	/* ---------------------------------- */
 	
-	public boolean enleverCarte()
+	public boolean decouvrirCarte()
 	{
 		boolean carteEnleve = false ;
-		carteEnleve = this.getMancheCourante().enleverCarte();
+		carteEnleve = this.getMancheCourante().decouvrirCarte();
 		System.out.println( "Nombre Carte Restante dans la Pioche : " + this.getMancheCourante().getPioche().getTaillePioche() );
 		
 		// Si on a plus de carte Premium dans la pioche on passe à la manche suivante
@@ -76,6 +76,7 @@ public class Metier
 			System.out.println( "\n==="   );
 			System.out.println(   "On Passe à la Manche " + (this.mancheCourante+2) + " !"   );
 			System.out.println(   "===\n" );
+			
 			this.mancheCourante++ ;
 			
 			System.out.println( "Espèce en Croisière : " + this.lstManches.get( this.mancheCourante ).getEspece());
@@ -99,11 +100,11 @@ public class Metier
 	
 	public boolean effectuerVoyage(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
-		System.out.println("\n~~~ Effectuer Voyage ~~~");
-		System.out.println( "Espèce en Croisière             : " + this.lstManches.get( this.mancheCourante ).getEspece());
-		System.out.println( "Cartes Restantes dans la Pioche : " + this.getMancheCourante().getPioche().getTaillePioche() );
-		System.out.println( "Destination Actuelle            : " + this.getMancheCourante().getSommet().getSymbole() );
-		System.out.println();
+		//System.out.println("\n~~~ Effectuer Voyage ~~~");
+		//System.out.println( "Espèce en Croisière             : " + this.lstManches.get( this.mancheCourante ).getEspece());
+		//System.out.println( "Cartes Restantes dans la Pioche : " + this.getMancheCourante().getPioche().getTaillePioche() );
+		//System.out.println( "Destination Actuelle            : " + this.getMancheCourante().getSommet().getSymbole() );
+		//System.out.println();
 		
 		// On regarde si c'est une Planète que l'on a cliqué
 		if ( this.plateauJeu.getCase(xFin, yFin).getPlanete() == null ) return false ;
@@ -111,7 +112,7 @@ public class Metier
 		// On regarde si la Planète de laquelle on part est bien une extremité
 		if ( ! this.getMancheCourante().estExtremite(xDep, yDep) )
 		{
-			System.out.println("Exception - On ne part pas d'une Extrémité : " + this.getMancheCourante().getEspece() + " = " + xDep + ":" + yDep);
+			//System.out.println("Exception - On ne part pas d'une Extrémité : " + this.getMancheCourante().getEspece() + " = " + xDep + ":" + yDep);
 			return false;
 		}
 		
@@ -119,14 +120,14 @@ public class Metier
 		if ( this.plateauJeu.getCase(xFin, yFin).getPlanete().getSymbole() != this.getMancheCourante().getSommet().getSymbole().charAt(0) && 
 		     this.getMancheCourante().getSommet().getSymbole().charAt(0)   != 'J'                                                            )
 		{
-			 System.out.println("Exception - Pas le Bon Type de Planète : " + this.getMancheCourante().getSommet().getSymbole());
+			//System.out.println("Exception - Pas le Bon Type de Planète : " + this.getMancheCourante().getSommet().getSymbole());
 			return false;
 		}
 		
 		// On regarde si la Planète sur laquelle on s'apprète à voyager n'as pas déjà été visité
 		if ( this.getMancheCourante().estCaseVisitee( xFin, yFin ) )
 		{
-			System.out.println( "Exception - La Planète à " + xFin + "/" + yFin + " à déjà été visité durant cette croisière !" );
+			//System.out.println( "Exception - La Planète à " + xFin + "/" + yFin + " à déjà été visité durant cette croisière !" );
 			return false ;
 		}
 		
@@ -134,16 +135,16 @@ public class Metier
 		if ( this.plateauJeu.setEspece(xDep, yDep, xFin, yFin, espece) )
 		{
 			// On passe à la carte suivante
-			this.getMancheCourante().enleverCarte(); // Commenté ceci pour ne pas passer à la Carte destination suivante si un voyage est effectuer
+			//this.getMancheCourante().decouvrirCarte(); // Commenté ceci pour ne pas passer à la Carte destination suivante si un voyage est effectuer
 			
-			System.out.println("Pas d'Exception aux Règles Trouvé ! On Passe à la Destionation Suivante !");
+			//System.out.println("Pas d'Exception aux Règles Trouvé ! On Passe à la Destionation Suivante !");
 			System.out.println();
 			
 			// On ajoute à la liste des Cases visités la case vers laquelle on vient de voyager
 			return this.getMancheCourante().ajouterCase( this.plateauJeu.getCase(xDep, yDep), this.plateauJeu.getCase(xFin, yFin) );
 		}
 		
-		System.out.println( "Exception - setEspece Invalide" );
+		//System.out.println( "Exception - setEspece Invalide" );
 		return false ;
 	}
 	

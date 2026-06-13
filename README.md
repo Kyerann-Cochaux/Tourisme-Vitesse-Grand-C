@@ -4,7 +4,7 @@
 
 ### Lancer l'Application de Création de Plateaux
 #### Sur Windows : 
-Allez dans le répertoire `/lancerEdition`, puis, executer LancerCreation.bat avec la commande `./LancerCreation.bat`
+Allez dans le répertoire `/lancerEdition`, puis, executer LancerCreation.bat avec la commande `LancerCreation.bat`
 #### Sur Linux : 
 Allez dans le répertoire `/lancerEdition`, puis, executer LancerCreation.sh avec la commande `./LancerCreation.sh`
 <br>

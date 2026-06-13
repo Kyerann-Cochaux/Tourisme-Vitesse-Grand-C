@@ -34,7 +34,6 @@ public class AppliJeu
 	public Voyage getVoyage    (int indice   ) {return this.metier.getPlateau().getVoyage    (indice);}
 	
 	public Planete getPlanete  (int indCol, int indLig) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
-	//public Carte   getCarteInit(int indice)           {return this.metier.getCarteInit(indice);}
 	
 	public int getTaillePioche() { return this.metier.getMancheCourante().getPioche().getTaillePioche() ; }
 	
@@ -65,7 +64,8 @@ public class AppliJeu
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
-	public boolean enleverCarte() { return this.metier.enleverCarte() ; }
+	public boolean decouvrirCarte() { return this.metier.decouvrirCarte() ; }
+
 
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
@@ -73,9 +73,9 @@ public class AppliJeu
 		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
 	
-	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null);}
-	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)                      ;}
-	public int  calculerScore   ()                         {return this.metier.calculerScore()                        ;}
+	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null) ; }
+	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)               ; }
+	public int  calculerScore  ()                         { return this.metier.calculerScore()                ; }
 
 	public boolean estExtremite(int col, int lig) {return this.metier.estExtremite(col, lig);}
 	public static void main(String[] args) 

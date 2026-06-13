@@ -43,7 +43,6 @@ public class Manche
 	public String     getEspece   ()           {return this.espece;                 }
 	public Pioche     getPioche   ()           {return this.pioche;                 }
 	public Carte      getSommet   ()           {return this.pioche.getSommet();     }
-//public Carte      getCarteInit(int indice) {return this.pioche.getCarteInit(indice);}
 	public List<Case> getlstCases ()           {return this.lstCases;               }
 	public Case       getPremier  ()           {return this.lstCases.getFirst();    }
 	public Case       getDernier  ()           {return this.lstCases.getLast() ;    }
@@ -52,7 +51,7 @@ public class Manche
 	/*           Autres Méthodes          */
 	/* ---------------------------------- */
 	
-	public boolean estMancheFinie() { return this.pioche.resteCartePremium() ; }
+	public boolean estMancheFinie() { return this.pioche.resteCartePremium() || this.getPioche().getTaillePioche() == 0 ; }
 	
 	public int calculerScore()
 	{
@@ -100,9 +99,9 @@ public class Manche
 	}
 	
 	
-	public boolean enleverCarte() 
+	public boolean decouvrirCarte() 
 	{
-		return this.pioche.enleverCarte();
+		return this.pioche.decouvrirCarte();
 	}
 	
 	
