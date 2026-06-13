@@ -42,6 +42,7 @@ public class Metier
 	
 	public Plateau      getPlateau       () { return this.plateauJeu                            ; }
 	public Manche       getMancheCourante() { return this.lstManches.get( this.mancheCourante ) ; }
+	public int          getNumManche     () { return this.mancheCourante                        ; }
 	public Carte        getSommet        () { return this.getMancheCourante().getSommet()       ; }
 	public List<Voyage> getVoyages       () { return this.plateauJeu.getVoyages()               ; }
 	
@@ -70,12 +71,14 @@ public class Metier
 	
 	public void mancheSuivante()
 	{
-		if (  this.mancheCourante < this.lstManches.size() )
+		if (  this.mancheCourante < this.lstManches.size()-1 )
 		{
 			System.out.println( "\n==="   );
-			System.out.println(   "On Passe à la Manche " + (this.mancheCourante+1) + " !"   );
+			System.out.println(   "On Passe à la Manche " + (this.mancheCourante+2) + " !"   );
 			System.out.println(   "===\n" );
 			this.mancheCourante++ ;
+			
+			System.out.println( "Espèce en Croisière : " + this.lstManches.get( this.mancheCourante ).getEspece());
 		}
 	}
 	

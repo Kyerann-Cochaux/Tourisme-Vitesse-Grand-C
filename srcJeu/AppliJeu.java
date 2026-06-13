@@ -20,6 +20,7 @@ public class AppliJeu
 	/*             Accesseurs             */
 	/* ---------------------------------- */
 	
+	public int getNumManche     () {return this.metier.getNumManche()              ;}
 	public int getNbLignes      () {return this.metier.getPlateau().getNbLignes  ();}
 	public int getNbColonnes    () {return this.metier.getPlateau().getNbColonnes();}
 	public int getNbTypePlanetes() {return this.metier.getPlateau().getNbPlanetes();}
@@ -33,13 +34,16 @@ public class AppliJeu
 	public Voyage getVoyage    (int indice   ) {return this.metier.getPlateau().getVoyage    (indice);}
 	
 	public Planete getPlanete  (int indCol, int indLig) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
-	//public Carte   getCarteInit(int indice)             {return this.metier.getCarteInit(indice)                            ;}
-	public String  getSommet   ()                       
+	//public Carte   getCarteInit(int indice)           {return this.metier.getCarteInit(indice);}
+	
+	public int getTaillePioche() { return this.metier.getMancheCourante().getPioche().getTaillePioche() ; }
+	
+	public String getSommet()
 	{
-		String symbole = "";
-		if (this.metier.getSommet().getPremium() ) symbole += "Prem-";
-
-		return symbole + this.metier.getSommet().getSymbole().charAt(0);
+			String symbole = "";
+			if (this.metier.getSommet().getPremium() ) symbole += "Prem-";
+			
+			return symbole + this.metier.getSommet().getSymbole().charAt(0);
 	}
 
 	public boolean sommetPremium() { return this.metier.getSommet().getPremium();}
@@ -61,7 +65,7 @@ public class AppliJeu
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
-	public boolean decouvrirCarte() { return this.metier.enleverCarte() ; }
+	public boolean enleverCarte() { return this.metier.enleverCarte() ; }
 
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)

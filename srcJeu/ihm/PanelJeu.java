@@ -345,29 +345,31 @@ public class PanelJeu extends JPanel
 				}
 				
 				// Gestion de l'affichage des Cartes Destionnations
-				if (e.getSource() == PanelJeu.this.lblActionPioche)
+				if ( e.getSource() == PanelJeu.this.lblActionPioche && PanelJeu.this.ctrl.getTaillePioche() > 0 )
 				{
 					String carteJouee = PanelJeu.this.ctrl.getSommet();
 					String[] tab = null;
 					tab = PanelJeu.this.tabPremiumPosee;
-					System.out.println(tab[PanelJeu.this.getNbCartesDos(tab) - PanelJeu.this.getNbCartesFace(tab) -1]);
+					System.out.println("Carte Premiums Posée : " + tab[PanelJeu.this.getNbCartesDos(tab) - PanelJeu.this.getNbCartesFace(tab) -1]);
 
 					if (PanelJeu.this.ctrl.sommetPremium() )
 					{
 					
-
 						//tab[PanelJeu.this.getNbCartesDos(tab) - PanelJeu.this.getNbCartesFace(tab) -1] = carteJouee;
 					}
 					else
 					{
 						//PanelJeu.this.tabStandardsPosee.add(carteJouee);
 					}
-
-					PanelJeu.this.ctrl.decouvrirCarte();
-					PanelJeu.this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
-
-					PanelJeu.this.panelCartesPremium   = PanelJeu.this.creerPanelCarte(true);
-					PanelJeu.this.panelCartesStandards = PanelJeu.this.creerPanelCarte(false);
+					
+					PanelJeu.this.ctrl.enleverCarte();
+					
+					if ( PanelJeu.this.ctrl.getTaillePioche() > 0 ) 
+					{
+						PanelJeu.this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
+						PanelJeu.this.panelCartesPremium   = PanelJeu.this.creerPanelCarte(true);
+						PanelJeu.this.panelCartesStandards = PanelJeu.this.creerPanelCarte(false);
+					}
 				}
 			}
 		};
