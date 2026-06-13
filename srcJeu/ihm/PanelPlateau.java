@@ -212,7 +212,7 @@ public class PanelPlateau extends JPanel
 					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) { g2.setColor( TAB_COUL_LIENS[cpt] ); g2.setStroke( new BasicStroke(4) ); }
 				}
 				
-				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); g2.setStroke( new BasicStroke(1) ); }
+				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); g2.setStroke( new BasicStroke(2) ); }
 				
 				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
