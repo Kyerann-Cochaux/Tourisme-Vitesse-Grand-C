@@ -45,6 +45,16 @@ public class Metier
 	public int          getNumManche     () { return this.mancheCourante                        ; }
 	public Carte        getSommet        () { return this.getMancheCourante().getSommet()       ; }
 	public List<Voyage> getVoyages       () { return this.plateauJeu.getVoyages()               ; }
+	public Manche       getManche(String espece)
+	{
+		for (Manche manche : this.lstManches) 
+		{
+			if (manche.getEspece().equals(espece) ) 
+				return manche;
+			
+		}
+		return null;
+	}
 	
 	//public Carte getCarteInit(int indice) {return this.getMancheCourante().getCarteInit(indice);}
 	
@@ -294,9 +304,9 @@ public class Metier
 		return true;
 	}
 
-	public int calculerScore()
+	public int calculerScore(String espece)
 	{
-		return this.getMancheCourante().calculerScore();
+		return this.getManche(espece).calculerScore();
 	}
 
 	public String toString()

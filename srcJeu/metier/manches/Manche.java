@@ -5,6 +5,9 @@ import srcJeu.metier.plateau.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class Manche
@@ -55,47 +58,62 @@ public class Manche
 	
 	public int calculerScore()
 	{
-		// Je met la valeur à 11 pour éviter un problème d'indice si on visite 10 
-		int[] tabZoneDiff = new int[11];
-		int  nbPlaneteMax = 0;
-		int  nbZonesDiff  = 0;
 
-		for (int cpt = 0; cpt < tabZoneDiff.length; cpt++) 
-			// On initialise à 0, ce qui correspond à aucune valeur
-			tabZoneDiff[cpt] = 0;
-			
-		// On parcours toute nos Case de notre croisière
-		for (int cpt = 0; cpt < this.lstCases.size(); cpt++) 
+		int[] tabCase = new int[11];
+
+		int nbSystemes   = 1;
+		int nbPlanetes   = 1;
+		int nbPlaneteMax = 1;
+
+		// Init à -1
+		for (int cpt = 0; cpt < tabCase.length; cpt++) 
+			tabCase[cpt] = -1;
+
+		// On ajoute le numéro de la zone au tabCases
+
+		for (Case caseVisitee : this.lstCases)
+			tabCase[this.lstCases.indexOf(caseVisitee) ] = caseVisitee.getNumSysteme();
+
+
+		// Tri des systèmes
+		ArrayList<Integer> lstCases = new ArrayList<Integer>();
+
+		for (int cpt = 0; cpt < tabCase.length; cpt++) 
+			if (tabCase[cpt] != -1)
+				lstCases.add(tabCase[cpt]);
+
+		Collections.sort(lstCases);
+
+		for (int cpt = 0; cpt < lstCases.size(); cpt++) 
+			tabCase[cpt] = lstCases.get(cpt);
+
+
+		for (int cpt = 1; cpt < tabCase.length; cpt++)
 		{
-			// On regarde toutes les valeurs présentes dans le tableau d'entier
-			for (int cptVal = 0; cptVal < tabZoneDiff.length; cptVal++)
+			if (tabCase[cpt ] != -1)
 			{
 
-				// Si le numSysteme de la case est identique à la valeur au même indice (ex : numSysteme == 1 et nbZoneDiff[cptVal] == 1)
-				if (this.lstCases.get(cpt).getNumSysteme() == tabZoneDiff[cptVal] )
-					// On incrémente la valeur
-					tabZoneDiff[cptVal ]++;
-
-				else 
-					// Sinon on met la valeur différente à l'indice suivant
-					tabZoneDiff[this.lstCases.get(cpt).getNumSysteme()] = tabZoneDiff[cptVal++]++;
-				
+				if (tabCase[cpt] != tabCase[cpt-1])
+				{
+					nbSystemes++;
+					nbPlaneteMax = Math.max(nbPlaneteMax, nbPlanetes);
+					nbPlanetes   = 1;
+				}
+				else nbPlanetes++;
 			}
-		}
-
-		// Ensuite... On regarde combien de zones ont été visité
-		nbPlaneteMax = tabZoneDiff[0];
-
-		for (int cpt = 0; cpt < tabZoneDiff.length; cpt++) 
-		{
-			if (tabZoneDiff[cpt] != 0) 
-			{
-				if (tabZoneDiff[cpt] > nbPlaneteMax) nbPlaneteMax = tabZoneDiff[cpt];
-				nbZonesDiff++;
 			}
-		}
 
-		return nbZonesDiff * nbPlaneteMax;
+		nbPlaneteMax = Math.max(nbPlaneteMax, nbPlanetes);
+
+		/*System.out.print(String.format("%-20s", this.espece));
+
+		for (int cpt = 0; cpt < lstCases.size(); cpt++)
+			System.out.print(" | " + String.format("%-3d", tabCase[cpt]));
+
+		System.out.println("\nNbSystemes   -> " + nbSystemes);
+		System.out.println("NbPlaneteMax -> " + nbPlaneteMax);*/
+
+		return (nbSystemes * nbPlaneteMax) ;
 	}
 	
 	

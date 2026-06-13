@@ -88,6 +88,9 @@ public class PanelPlateau extends JPanel
 		
 		// Affichage des Zones
 		this.affichageZones(g2);
+
+		// Affichage des Zones
+		//this.affichageNumeroZone(g2);
 		
 		// Affichage des Liens
 		this.affichageLiens(g2);
@@ -191,9 +194,6 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageLiens( Graphics2D g2 )
 	{
-		g2.setStroke( new BasicStroke(3) );
-		g2.setColor ( Color.WHITE        );
-
 		int nbVoyage = this.ctrl.getNbVoyages();
 
 		if (nbVoyage >= 1)
@@ -212,7 +212,7 @@ public class PanelPlateau extends JPanel
 					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) { g2.setColor( TAB_COUL_LIENS[cpt] ); g2.setStroke( new BasicStroke(4) ); }
 				}
 				
-				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); g2.setStroke( new BasicStroke(3) ); }
+				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); g2.setStroke( new BasicStroke(1) ); }
 				
 				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
@@ -221,7 +221,7 @@ public class PanelPlateau extends JPanel
 	}
 	
 	// Pas utiliser pour le Jeu
-	/*
+	
 	private void affichageNumeroZone( Graphics2D g2 )
 	{
 		g2.setColor( Color.YELLOW );
@@ -244,7 +244,7 @@ public class PanelPlateau extends JPanel
 			}
 		}
 	}
-	*/
+	
 	
 	private void affichageExtremiteSelectionnee( Graphics2D g2 )
 	{

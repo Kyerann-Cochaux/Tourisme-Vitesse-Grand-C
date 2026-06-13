@@ -73,9 +73,9 @@ public class AppliJeu
 		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
 	
-	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null) ; }
-	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)               ; }
-	public int  calculerScore  ()                         { return this.metier.calculerScore()                ; }
+	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null);}
+	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)                      ;}
+	public int  calculerScore   (String espece)           {return this.metier.calculerScore(espece)                  ;}
 
 	public boolean estExtremite(int col, int lig) {return this.metier.estExtremite(col, lig);}
 	public static void main(String[] args) 
