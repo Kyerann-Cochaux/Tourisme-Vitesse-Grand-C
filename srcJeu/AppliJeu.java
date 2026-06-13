@@ -61,7 +61,7 @@ public class AppliJeu
 	/*           Autres méthodes          */
 	/* ---------------------------------- */
 
-	public boolean decouvrirCarte() { return this.metier.enleverCarte() ; }
+	public boolean decouvrirCarte() { return this.metier.decouvrirCarte() ; }
 
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)

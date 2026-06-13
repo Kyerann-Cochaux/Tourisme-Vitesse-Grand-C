@@ -52,7 +52,7 @@ public class Manche
 	/*           Autres Méthodes          */
 	/* ---------------------------------- */
 	
-	public boolean estMancheFinie() { return this.pioche.resteCartePremium() ; }
+	public boolean estMancheFinie() { return this.pioche.resteCartePremium() || this.getPioche().getTaillePioche() == 0 ; }
 	
 	public int calculerScore()
 	{
@@ -100,9 +100,9 @@ public class Manche
 	}
 	
 	
-	public boolean enleverCarte() 
+	public boolean decouvrirCarte() 
 	{
-		return this.pioche.enleverCarte();
+		return this.pioche.decouvrirCarte();
 	}
 	
 	
@@ -159,7 +159,7 @@ public class Manche
 			if (voyageTemp.getEspece() != null && voyageTemp.getEspece().equals(this.espece) ||
 			      this.lstCases.size() <= 1 )
 			{
-				System.out.println("Voyage " + indVoyage + " de l'espèce attendu" ); // anciennement "bonne SP"
+				//System.out.println("Voyage " + indVoyage + " de l'espèce attendu" ); // anciennement "bonne SP"
 				if (
 					(voyageTemp.getPlaneteSource().getPosX()      == cDep.getPosX() &&
 					 voyageTemp.getPlaneteSource().getPosY()      == cDep.getPosY() )   ||
@@ -167,7 +167,7 @@ public class Manche
 					 voyageTemp.getPlaneteDestination().getPosY() == cDep.getPosY() )
 					)
 				{
-					System.out.println("Voyage " + indVoyage + " à la bonne position" ); // anciennement "bonne POs"
+					//System.out.println("Voyage " + indVoyage + " à la bonne position" ); // anciennement "bonne POs"
 					if ( this.lstCases.getFirst().getPosX() == cDep.getPosX() && 
 						this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
 					{
