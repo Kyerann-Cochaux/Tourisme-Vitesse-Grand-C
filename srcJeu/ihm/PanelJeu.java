@@ -81,7 +81,7 @@ public class PanelJeu extends JPanel
 
 		this.ensLblCartes = new JLabel[this.ctrl.getNbTypePlanetes() * 2 +2];
 
-		GridLayout gl1 = new GridLayout(5,1,0,9);
+		GridLayout gl1 = new GridLayout(6,1,0,9);
 
 		if (this.ctrl.getNbTypeEspeces() >= 3) gl1.setRows(gl1.getRows() + this.ctrl.getNbTypeEspeces() /2);
 
@@ -343,21 +343,14 @@ public class PanelJeu extends JPanel
 		if (cartePosee.contains("Prem") ) 
 		{
 			tab = this.tabPremiumPosee;
-
 			this.tabPremiumPosee[tab.length - this.getNbCartesDos(tab)]  = cartePosee;
-			//System.out.println("Carte Dos  -> " + this.getNbCartesDos (tab) );
-			//System.out.println("Carte Face -> " + this.getNbCartesFace(tab) );
 		}
 		else
 		{
      		tab = this.tabStandardsPosee;
-			
 			this.tabStandardsPosee[tab.length - this.getNbCartesDos(tab)]  = cartePosee;
-			//System.out.println("Carte Dos  -> " + this.getNbCartesDos (tab) );
-			//System.out.println("Carte Face -> " + this.getNbCartesFace(tab) );
+		} 
 
-		}                            
-		//this.tabPremiumPosee = tab;
 		this.ctrl.decouvrirCarte();
 
 	}
@@ -365,7 +358,6 @@ public class PanelJeu extends JPanel
 	private void majImages()
 	{
 		
-
 		this.majDefausse();
 		this.majScoreEspece();
 
@@ -393,7 +385,7 @@ public class PanelJeu extends JPanel
 		this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" + this.ctrl.getSommet() +".png") );
 
 		this.iconeCroisiereActuelle.setIcon( new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png") );
-		System.out.println("espece Actuelle -> " + this.ctrl.getEspCroisiereCrt() );
+
 		this.lblTexteEspece.setText
 		(
 
@@ -422,20 +414,34 @@ public class PanelJeu extends JPanel
 		this.panelScoreEspeces.add(this.lblTexteScore );
 		this.panelScoreEspeces.add(new JLabel() );
 
-		for (int cpt = 0; cpt < this.ctrl.getNbTypeEspeces(); cpt++) 
+		for (int cpt = 0; cpt < this.ctrl.getNbTypeEspeces() +1; cpt++) 
 		{
-			JLabel lbl = new JLabel
-			(String.format("%-11s",this.ctrl.getNomEspece(cpt) )                          +" : " +
-			 String.format("%-3d", this.ctrl.calculerScore(this.ctrl.getNomEspece(cpt) ) ), 
-			new ImageIcon("../images/Tuiles/Centre-Espece-"      + this.ctrl.getNomEspece(cpt) + ".png" ), SwingConstants.LEFT ) ;
 
-			lbl.setFont      (new Font ("Monospaced", Font.BOLD, 17) );
-			lbl.setForeground(FrameJeu.COULEUR_ZONE                             );
-			lbl.setOpaque    (false                                   );
+			JLabel lblScore = new JLabel();
 
-			this.panelScoreEspeces.add(lbl);
+			lblScore.setFont      (new Font ("Monospaced", Font.BOLD, 17) );
+			lblScore.setForeground(FrameJeu.COULEUR_ZONE                             );
+			lblScore.setOpaque    (false                                   );
+
+			if (cpt < this.ctrl.getNbTypeEspeces() )
+			{
+				lblScore.setText (String.format("%-11s",this.ctrl.getNomEspece(cpt) )+" : " +
+				                  String.format("%-3d", this.ctrl.calculerScore(this.ctrl.getNomEspece(cpt) ) ) );
+				
+				lblScore.setIcon(new ImageIcon("../images/Tuiles/Centre-Espece-"      + this.ctrl.getNomEspece(cpt) + ".png" ))  ;
+	
+			}
+			else
+			{
+				lblScore.setText(String.format("%-16s","     Total ") +" : "+ this.ctrl.getScoreTotal() ) ;
+
+			}
+
+			this.panelScoreEspeces.add(lblScore);
 			
 		}
+
+		
 		
 	}
 

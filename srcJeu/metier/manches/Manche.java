@@ -74,7 +74,6 @@ public class Manche
 		for (Case caseVisitee : this.lstCases)
 			tabCase[this.lstCases.indexOf(caseVisitee) ] = caseVisitee.getNumSysteme();
 
-
 		// Tri des systèmes
 		ArrayList<Integer> lstCases = new ArrayList<Integer>();
 

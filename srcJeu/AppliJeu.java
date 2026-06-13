@@ -76,6 +76,7 @@ public class AppliJeu
 	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null);}
 	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)                      ;}
 	public int  calculerScore   (String espece)           {return this.metier.calculerScore(espece)                  ;}
+	public int  getScoreTotal()                           { return this.metier.getScoreTotal();}
 
 	public boolean estExtremite(int col, int lig) {return this.metier.estExtremite(col, lig);}
 	public static void main(String[] args) 

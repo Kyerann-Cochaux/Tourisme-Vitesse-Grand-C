@@ -110,7 +110,7 @@ public class PanelPlateau extends JPanel
 	/*-----------------------*/
 	
 	// |!| NE PAS UTILISER DANS LA VERSION FINAL  |!|
-	private void affichageCases( Graphics2D g2 )
+	/*private void affichageCases( Graphics2D g2 )
 	{
 		g2.setColor( new Color(194, 231, 242) );
 		
@@ -123,13 +123,13 @@ public class PanelPlateau extends JPanel
 			{
 				g2.drawRect(
 				             TAILLE_CASE * cptCol, /*  Position X  */
-				             TAILLE_CASE * cptLig, /*  Position Y  */
-				             TAILLE_CASE,          /* LARGEUR CASE */
-				             TAILLE_CASE           /* LONGEUR CASE */
+				            /*  TAILLE_CASE * cptLig, /*  Position Y  */
+				            /*  TAILLE_CASE,          /* LARGEUR CASE */
+				             /*TAILLE_CASE           /* LONGEUR CASE *//*
 				           );
 			}
 		}
-	}
+	} */
 	
 	private void affichageZones( Graphics2D g2 )
 	{

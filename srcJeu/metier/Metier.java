@@ -308,6 +308,14 @@ public class Metier
 	{
 		return this.getManche(espece).calculerScore();
 	}
+	public int getScoreTotal()
+	{
+		int scoreTotal = 0;
+		for (Manche m : this.lstManches) 
+			scoreTotal += m.calculerScore();
+		
+		return scoreTotal;
+	}
 
 	public String toString()
 	{
