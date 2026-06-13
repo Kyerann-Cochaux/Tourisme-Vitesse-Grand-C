@@ -36,7 +36,7 @@ public class Carte
 	/* ---------------------------------- */
 	
 	public String  getSymbole() {return this.symbole;}
-	public boolean getPremium () {return this.premium;}
+	public boolean getPremium() {return this.premium;}
 	
 	/* ---------------------------------- */
 	/*          Méthodes standard         */

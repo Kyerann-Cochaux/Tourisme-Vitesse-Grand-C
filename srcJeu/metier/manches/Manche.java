@@ -47,20 +47,13 @@ public class Manche
 	public List<Case> getlstCases ()           {return this.lstCases;               }
 	public Case       getPremier  ()           {return this.lstCases.getFirst();    }
 	public Case       getDernier  ()           {return this.lstCases.getLast() ;    }
-
-	public boolean estExtremite(int col, int lig)
-	{
-		if( (this.lstCases.getFirst().getPosX() == col && this.lstCases.getFirst().getPosY() == lig) ||
-		    (this.lstCases.getLast() .getPosX() == col && this.lstCases.getLast() .getPosY() == lig)    )
-			return true;
-		
-		return false;
-	}
-
+	
 	/* ---------------------------------- */
 	/*           Autres Méthodes          */
 	/* ---------------------------------- */
-
+	
+	public boolean estMancheFinie() { return this.pioche.resteCartePremium() ; }
+	
 	public int calculerScore()
 	{
 		// Je met la valeur à 11 pour éviter un problème d'indice si on visite 10 
@@ -105,20 +98,49 @@ public class Manche
 
 		return nbZonesDiff * nbPlaneteMax;
 	}
-
-	public boolean estMancheFinie() { return this.pioche.resteCartePremium() ; }
-
+	
+	
 	public boolean enleverCarte() 
 	{
 		return this.pioche.enleverCarte();
 	}
-
+	
+	
+	public boolean estCaseVisitee( int posCol, int posLig ) // Retourne vrai si la case a déjà été visité
+	{
+		for ( int cpt=0 ; cpt < this.lstCases.size() ; cpt++ )
+		{
+			if ( this.lstCases.get(cpt).getPosX() == posCol && this.lstCases.get(cpt).getPosY() == posLig )
+			{
+				return true ;
+			}
+		}
+		
+		return false ;
+	}
+	
+	public boolean estExtremite(int col, int lig)
+	{
+		if(
+		    (this.lstCases.getFirst().getPosX() == col && this.lstCases.getFirst().getPosY() == lig) ||
+		    (this.lstCases.getLast() .getPosX() == col && this.lstCases.getLast() .getPosY() == lig) 
+		  )
+		{
+			return true ;
+		}
+		
+		return false;
+	}
+	
 	public boolean ajouterCase(Case cDep, Case cFin)
 	{
 		if( cDep == null ) return false;
 		if( cFin == null ) return false;
 		
-		// si cette case as deja été visitée 
+		System.out.println("\n~~~ ajouterCase() ~~~");
+		System.out.println( "Nombre de Planètes visité : " + this.lstCases.size() );
+		
+		// On regarde si cette case as deja été visitée
 		for (int indCase = 0; indCase < this.lstCases.size(); indCase++)
 		{
 			if ( this.lstCases.get(indCase).getPosX() == cFin.getPosX() && 
@@ -128,17 +150,16 @@ public class Manche
 			}
 		}
 		
-		
 		// parcours de tout les voyages du plateau
 		for (int indVoyage = 0; indVoyage < this.metier.getVoyages().size(); indVoyage++)
 		{
 			Voyage voyageTemp = this.metier.getVoyages().get(indVoyage);
-			System.out.println(this.lstCases.size());
+			
 			// si le voyage es de la bonne espece
 			if (voyageTemp.getEspece() != null && voyageTemp.getEspece().equals(this.espece) ||
 			      this.lstCases.size() <= 1 )
 			{
-				System.out.println("bonne SP");
+				System.out.println("Voyage " + indVoyage + " de l'espèce attendu" ); // anciennement "bonne SP"
 				if (
 					(voyageTemp.getPlaneteSource().getPosX()      == cDep.getPosX() &&
 					 voyageTemp.getPlaneteSource().getPosY()      == cDep.getPosY() )   ||
@@ -146,7 +167,7 @@ public class Manche
 					 voyageTemp.getPlaneteDestination().getPosY() == cDep.getPosY() )
 					)
 				{
-					System.out.println("bonne POs");
+					System.out.println("Voyage " + indVoyage + " à la bonne position" ); // anciennement "bonne POs"
 					if ( this.lstCases.getFirst().getPosX() == cDep.getPosX() && 
 						this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
 					{
@@ -166,6 +187,7 @@ public class Manche
 			}
 		}
 		
+		System.out.println("ajouterCase : Case pas Ajouté");
 		return false;
 	}
 
