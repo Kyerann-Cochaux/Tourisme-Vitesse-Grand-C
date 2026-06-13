@@ -281,34 +281,37 @@ public class PanelJeu extends JPanel
 		panel1  .setOpaque(false);
 		panel2  .setOpaque(false);
 
-
+		//System.out.println("taille premiumPosé -> " + this.tabPremiumPosee.length);
 
 		for (int cpt = 0; cpt < this.tabPremiumPosee.length; cpt++) 
 		{
+
+			//System.out.println(this.tabPremiumPosee[cpt]);
+			//System.out.println(this.tabStaPosee[cpt]);
 			String fic = "../images/Cartes/Carte-";
 
 			if (premium)
 			{
 				if (this.tabPremiumPosee[cpt] == null) fic += "Dos";
 				else                                   fic += this.tabPremiumPosee[cpt];
-			}
 
+			}
+			
 			else
 			{
 				if (this.tabStandardsPosee[cpt] == null) fic += "Dos";
 				else                                     fic += this.tabStandardsPosee[cpt];
 			}
-
+			
 			fic += ".png";
-
+			System.out.println(fic);
+			
 			if (cpt < 3) panel1.add(new JLabel(new ImageIcon(fic) ) );
 			else         panel2.add(new JLabel(new ImageIcon(fic) ) );
 		}
 
 		panelPrc.add(panel1);
 		panelPrc.add(panel2);
-
-		//System.out.println("nbElt ->" + panelPrc.getComponentCount() );
 
 		return panelPrc;
 	}
@@ -336,9 +339,7 @@ public class PanelJeu extends JPanel
 					}
 
 					// Gestion de la création de Voyage
-					if ( e.getButton() == MouseEvent.BUTTON1                      &&
-					     PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null
-					   )
+					if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null)
 					{
 						PanelJeu.this.effectuerVoyage( posColClk, posLigClk );
 					}
@@ -347,32 +348,31 @@ public class PanelJeu extends JPanel
 				// Gestion de l'affichage des Cartes Destionnations
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					String carteJouee = PanelJeu.this.ctrl.getSommet();
-					String[] tab = null;
-					tab = PanelJeu.this.tabPremiumPosee;
-					System.out.println(tab[PanelJeu.this.getNbCartesDos(tab) - PanelJeu.this.getNbCartesFace(tab) -1]);
-
-					if (PanelJeu.this.ctrl.sommetPremium() )
-					{
-					
-
-						//tab[PanelJeu.this.getNbCartesDos(tab) - PanelJeu.this.getNbCartesFace(tab) -1] = carteJouee;
-					}
-					else
-					{
-						//PanelJeu.this.tabStandardsPosee.add(carteJouee);
-					}
-
+					PanelJeu.this.tabPremiumPosee[0] = PanelJeu.this.ctrl.getSommet();
 					PanelJeu.this.ctrl.decouvrirCarte();
-					PanelJeu.this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
-
-					PanelJeu.this.panelCartesPremium   = PanelJeu.this.creerPanelCarte(true);
-					PanelJeu.this.panelCartesStandards = PanelJeu.this.creerPanelCarte(false);
+					PanelJeu.this.majImages();
+					
 				}
 			}
 		};
 	}
-	
+
+	private void majImages()
+	{
+		
+		this.panelCartesPremium = this.creerPanelCarte(true);
+
+		this.panelCartes.remove(1);
+		this.panelCartes.add(PanelJeu.this.panelCartesPremium,1);
+		this.panelCartes.revalidate();
+		
+
+		this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" + this.ctrl.getSommet() +".png") );
+
+		this.iconeCrosiereActuelle.setIcon( new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png") );
+
+
+	}
 	private void selectionnerExtremite( int posColClk, int posLigClk )
 	{
 		this.panelPlateau.setExtremiteSlct( new Point( posColClk, posLigClk ) );
@@ -395,15 +395,12 @@ public class PanelJeu extends JPanel
 		{
 			//System.out.println( "IHM PanelJeu : Voyage Ajouté vers la Planete " + posColClk + "/" + posLigClk ); 
 			this.panelPlateau.setExtremiteSlct(null);
-			
-			// On passe à la Destination Suivante 
-			this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
-			
-			// On vérifie si la croisières de la manche courante s'est terminer
-			this.iconeCrosiereActuelle.setIcon( new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png") );
+			PanelJeu.this.ctrl.decouvrirCarte();
+			this.majImages();
 		}
 		
 		this.frameJeu.revalidate();
 		this.panelPlateau.repaint();
+
 	}
 }

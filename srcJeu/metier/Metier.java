@@ -262,9 +262,9 @@ public class Metier
 					{
 						Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt), this.plateauJeu.getCase(col, lig), this);
 						
-						System.out.println(m);
+						//System.out.println(m);
 						lstManches.add(m);
-						System.out.println("nbManches : " + lstManches.size());
+						//System.out.println("nbManches : " + lstManches.size());
 					}
 				}
 			}
