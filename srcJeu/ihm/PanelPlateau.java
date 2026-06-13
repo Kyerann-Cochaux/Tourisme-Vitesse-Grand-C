@@ -31,8 +31,8 @@ public class PanelPlateau extends JPanel
 	private static final int TAILLE_CASE = 50 ;
 
 	// Coloriage des voyages celons les espèces
-	private static final Color[] TAB_COUL_LIENS = { new Color(113,  65,  59), // Chlorophite
-	                                                new Color( 36, 159, 222), // Felinoïd
+	private static final Color[] TAB_COUL_LIENS = { new Color(163, 115,  67), // Chlorophite
+	                                                new Color( 99, 182, 224), // Felinoïd
 	                                                new Color(255, 213,  65), // Azimae
 	                                                new Color( 50, 132, 100)  // Silikon
 	                                              };
@@ -54,7 +54,7 @@ public class PanelPlateau extends JPanel
 		                                 this.ctrl.getNbLignes  () * PanelPlateau.TAILLE_CASE + 1 );
 		
 		this.setPreferredSize( this.dimPlateau                  );
-		this.setBackground   ( FrameJeu.COULEUR_FOND_FONCE );
+		this.setBackground   ( FrameJeu.COULEUR_FOND_PLATEAU );
 		this.posExtremiteSlct = null ;
 	}
 

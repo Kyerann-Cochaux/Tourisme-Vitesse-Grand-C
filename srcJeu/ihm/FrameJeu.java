@@ -14,9 +14,10 @@ public class FrameJeu extends JFrame
 	protected static final Color COULEUR_TITRE       = Color.decode("#f1c232");
 	protected static final Color COULEUR_ZONE        = Color.decode("#f3f3f3");
 
-	protected static final Color COULEUR_FOND_FONCE  = new Color (85, 64, 98);
-	protected static final Color COULEUR_FOND_CLAIRE = new Color (70, 70, 70);
-
+	protected static final Color COULEUR_FOND_FONCE   = new Color (85, 64, 98);
+	protected static final Color COULEUR_FOND_CLAIRE  = new Color (70, 70, 70);
+	protected static final Color COULEUR_FOND_PLATEAU = new Color (31, 31, 31);
+	
 	protected static final int PANEL_JEU = 1;
 	
 	private AppliJeu ctrl;
