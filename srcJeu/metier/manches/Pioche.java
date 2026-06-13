@@ -73,12 +73,12 @@ public class Pioche
 
 	public boolean resteCartePremium()
 	{
-		for (Carte c : this.pioche)
+		for ( Carte c : this.pioche )
 		{
-			if(c.getPremium ())
-				return true;
+			if ( c.getPremium() == true ) { return true ; }
 		}
-		return false;
+		
+		return false ;
 	}
 	
 	public void melangerCarte()

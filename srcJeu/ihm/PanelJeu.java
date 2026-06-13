@@ -27,7 +27,9 @@ public class PanelJeu extends JPanel
 
 	private PanelPlateau panelPlateau;
 	private JScrollPane  spPlateau;
-
+	
+	private JLabel iconeCrosiereActuelle;
+	
 	private JLabel lblTexteEspece;
 	private JLabel lblTexteScore;
 	private JLabel lblTextePioche;
@@ -180,7 +182,7 @@ public class PanelJeu extends JPanel
 		/* -------- Panels principaux ------- */
 
 		panelScoreLabels.add(this.lblTexteEspece);
-		panelScoreLabels.add(new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png")  ) );
+		panelScoreLabels.add( this.iconeCrosiereActuelle = new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png")  ) );
 	
 
 		panelScoreEspeces.add(new JLabel() );
@@ -323,18 +325,20 @@ public class PanelJeu extends JPanel
 			{
 				if (e.getSource() == PanelJeu.this.panelPlateau)
 				{
-
+					// Position Cliqué traduit en Colonne & Ligne du Plateau
 					int posColClk = (int) ( e.getX() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 					int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 					
 					// Gestion de la selection d'extremite
-					if ( e.getButton() == MouseEvent.BUTTON1  && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) )
+					if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) )
 					{
 						PanelJeu.this.selectionnerExtremite( posColClk, posLigClk );
 					}
 
 					// Gestion de la création de Voyage
-					if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null )
+					if ( e.getButton() == MouseEvent.BUTTON1                      &&
+					     PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null
+					   )
 					{
 						PanelJeu.this.effectuerVoyage( posColClk, posLigClk );
 					}
@@ -378,7 +382,7 @@ public class PanelJeu extends JPanel
 	private void effectuerVoyage( int posColClk, int posLigClk )
 	{
 		boolean voyageAjoute = false ;
-
+		
 		voyageAjoute = this.ctrl.effectuerVoyage(
 		                                          (int) this.panelPlateau.getPosExtremiteSlct().getX(),
 		                                          (int) this.panelPlateau.getPosExtremiteSlct().getY(),
@@ -391,11 +395,15 @@ public class PanelJeu extends JPanel
 		{
 			//System.out.println( "IHM PanelJeu : Voyage Ajouté vers la Planete " + posColClk + "/" + posLigClk ); 
 			this.panelPlateau.setExtremiteSlct(null);
-
+			
 			// On passe à la Destination Suivante 
-			PanelJeu.this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
+			this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" +  PanelJeu.this.ctrl.getSommet() +".png") );
+			
+			// On vérifie si la croisières de la manche courante s'est terminer
+			this.iconeCrosiereActuelle.setIcon( new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png") );
 		}
 		
+		this.frameJeu.revalidate();
 		this.panelPlateau.repaint();
 	}
 }
