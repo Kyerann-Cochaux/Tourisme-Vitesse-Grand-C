@@ -61,6 +61,9 @@ public class PanelJeu extends JPanel
 		JPanel panelScoreLabels;
 		JPanel panelPioche;
 
+		// RGB utilisé pour la couleur du texte de l'espèce
+		int r, g, b;
+
 
 		this.ctrl     = ctrl;
 		this.frameJeu = frameJeu;
@@ -71,8 +74,8 @@ public class PanelJeu extends JPanel
 		/*       Création des composants      */
 		/* ---------------------------------- */
 		
-		panelScore        = new JPanel(new GridLayout(4,1) );
-		panelScoreLabels  = new JPanel(new GridLayout(2,1) );
+		panelScore             = new JPanel(new GridLayout(4,1) );
+		panelScoreLabels       = new JPanel(new GridLayout(2,1) );
 		this.panelScoreEspeces = new JPanel();
 
 		this.panelPlateau = new PanelPlateau(ctrl);
@@ -88,7 +91,7 @@ public class PanelJeu extends JPanel
 		this.panelScoreEspeces.setLayout(gl1);
 	
 		this.panelCartes = new JPanel(new GridLayout(4,1) );
-		panelPioche = new JPanel(new GridLayout(2,1) );
+		panelPioche      = new JPanel(new GridLayout(2,1) );
 
 		this.spPlateau = new JScrollPane(panelCentre);
 
@@ -109,26 +112,25 @@ public class PanelJeu extends JPanel
 
 		this.panelCartesPremium.setPreferredSize(this.panelCartes.getPreferredSize() );
 
+
+		r = FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getRed  ();
+		g = FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getGreen();
+		b = FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getBlue ();
+		
 		this.lblTexteEspece = new JLabel
 		(
 
 			"<html>"+
 				"<body> "+
-					"<h1 style='text-align : center;'>"+ 
-						"Croisière des <br> <p style='text-align : center; color:"+
-						" rgb("+FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getRed()  + ","   + 
-						        FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getGreen()+ ","   + 
-								FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getBlue() +");'>" + 
-								this.ctrl.getEspCroisiereCrt() + 
+					"<h1 style='text-align : center;'>"                                         + 
+						"Croisière des <br> <p style='text-align : center; color:"              +
+						" rgb("+ r + ","  +g + "," + b +");'>" + this.ctrl.getEspCroisiereCrt() + 
 					"</p></h1>"+
 				" </body> "
 			+"</html>", SwingConstants.CENTER
 
 		);
-
 		
-
-		System.out.println(this.ctrl.getNumManche() );
 
 		this.lblTexteScore     = new JLabel("Score des croisières : ");
 		this.lblTextePremium   = new JLabel("Cartes Premium : "      );
@@ -138,7 +140,7 @@ public class PanelJeu extends JPanel
 			"<html>" + 
 				"<body> " +
 					"<h1 style='text-align : center;'>" + 
-						"Destination <br> Actuelle : " + 
+						"Destination <br> Actuelle : "  + 
 					"</h1>"+
 				"</body>"+
 			"</html>", SwingConstants.CENTER  
@@ -150,11 +152,12 @@ public class PanelJeu extends JPanel
 		/*    Configuration des composants    */
 		/* ---------------------------------- */
 
-		panelScore       .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
+		panelScore            .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 		this.panelScoreEspeces.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
-		panelScoreLabels .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
+		panelScoreLabels      .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 
 		panelCentre.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
+
 		panelCartes.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
 
 		this.spPlateau.setBackground               (FrameJeu.COULEUR_FOND_FONCE               );
@@ -163,26 +166,23 @@ public class PanelJeu extends JPanel
 
 		this.lblTexteEspece.setFont      (FrameJeu.POLICE_TEXTE);
 		this.lblTexteEspece.setForeground(FrameJeu.COULEUR_ZONE);
-		this.lblTexteEspece.setOpaque    (false       );
+		this.lblTexteEspece.setOpaque    (false                );
 
-		this.lblTexteScore.setForeground(FrameJeu.COULEUR_ZONE);
-		this.lblTexteScore.setOpaque    (false       );
-		this.lblTexteScore.setFont(new Font("Goldman", Font.BOLD, 17) );
+		this.lblTexteScore.setForeground(FrameJeu.COULEUR_ZONE              );
+		this.lblTexteScore.setOpaque    (false                              );
+		this.lblTexteScore.setFont      (new Font("Goldman", Font.BOLD, 17) );
 
-		this.lblTexteStandards.setForeground(FrameJeu.COULEUR_ZONE);
-		this.lblTexteStandards.setOpaque    (false       );
-		this.lblTexteStandards.setFont(new Font("Goldman", Font.BOLD, 17) );
+		this.lblTexteStandards.setForeground(FrameJeu.COULEUR_ZONE              );
+		this.lblTexteStandards.setOpaque    (false                              );
+		this.lblTexteStandards.setFont      (new Font("Goldman", Font.BOLD, 17) );
 
-		this.lblTextePremium.setForeground(FrameJeu.COULEUR_ZONE);
-		this.lblTextePremium.setOpaque    (false       );
-		this.lblTextePremium.setFont(new Font("Goldman", Font.BOLD, 17) );
+		this.lblTextePremium.setForeground(FrameJeu.COULEUR_ZONE              );
+		this.lblTextePremium.setOpaque    (false                              );
+		this.lblTextePremium.setFont      (new Font("Goldman", Font.BOLD, 17) );
 
-		this.lblTextePioche.setFont      (FrameJeu.POLICE_TEXTE );
+		this.lblTextePioche.setFont      (FrameJeu.POLICE_TEXTE);
 		this.lblTextePioche.setForeground(FrameJeu.COULEUR_ZONE);
-		this.lblTextePioche.setOpaque    (false       );
-
-
-
+		this.lblTextePioche.setOpaque    (false                );
 
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
@@ -191,16 +191,16 @@ public class PanelJeu extends JPanel
 		/* -------- Panels principaux ------- */
 
 		panelScoreLabels.add(this.lblTexteEspece);
-		panelScoreLabels.add( this.iconeCroisiereActuelle = new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png")  ) );
+		panelScoreLabels.add( this.iconeCroisiereActuelle = 
+			new JLabel(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png")  ) );
 		
 		this.majScoreEspece();
 
 		panelCentre.add( this.panelPlateau, new GridBagConstraints() );
 
-		
-		panelScore.add(panelScoreLabels );
+		panelScore.add(panelScoreLabels      );
 		panelScore.add(this.panelScoreEspeces);
-		panelScore.add(this.lblTextePioche );
+		panelScore.add(this.lblTextePioche   );
 		panelScore.add( this.lblActionPioche );
 
 
@@ -209,19 +209,16 @@ public class PanelJeu extends JPanel
 		this.panelCartes.add(this.lblTexteStandards   );
 		this.panelCartes.add(this.panelCartesStandards);
 
-
 		this.add(panelScore    , BorderLayout.WEST  );
 		this.add(this.spPlateau, BorderLayout.CENTER);
 		this.add(panelCartes   , BorderLayout.EAST  );
-
-
 
 		/* ---------------------------------- */
 		/*      Activation des composants     */
 		/* ---------------------------------- */
 
 		// Activation du Panel Plateau
-		this.panelPlateau.addMouseListener   (this.gererClic() );
+		this.panelPlateau   .addMouseListener(this.gererClic() );
 		this.lblActionPioche.addMouseListener(this.gererClic() );
 
 	}
@@ -263,8 +260,6 @@ public class PanelJeu extends JPanel
 		panelPrc.setOpaque(false);
 		panel1  .setOpaque(false);
 		panel2  .setOpaque(false);
-
-		//System.out.println("taille premiumPosé -> " + this.tabPremiumPosee.length);
 
 		for (int cpt = 0; cpt < this.tabPremiumPosee.length; cpt++) 
 		{
@@ -312,8 +307,7 @@ public class PanelJeu extends JPanel
 					int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 					
 					// Gestion de la selection d'extremite
-					if ( 
-					     e.getButton() == MouseEvent.BUTTON1                  &&
+					if ( e.getButton() == MouseEvent.BUTTON1                  &&
 					     PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) &&
 					     PanelJeu.this.ctrl.getSommet() != null
 					   )
@@ -322,10 +316,9 @@ public class PanelJeu extends JPanel
 					}
 
 					// Gestion de la création de Voyage
-					if (
-					       e.getButton() == MouseEvent.BUTTON1                      && 
-					       PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null &&
-					     ! PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk)
+					if ( e.getButton() == MouseEvent.BUTTON1                      && 
+					     PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null &&
+					     !PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk)
 					   )
 					{
 						PanelJeu.this.effectuerVoyage( posColClk, posLigClk );
@@ -335,7 +328,7 @@ public class PanelJeu extends JPanel
 				// Gestion de l'affichage des Cartes Destionnations
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					if ( PanelJeu.this.ctrl.getNumManche()   <= PanelJeu.this.ctrl.getNbTypeEspeces() &&
+					if ( PanelJeu.this.ctrl.getNumManche()    <= PanelJeu.this.ctrl.getNbTypeEspeces() &&
 					     PanelJeu.this.ctrl.getTaillePioche() > 0                                        )
 					{
 						PanelJeu.this.majImages();
@@ -368,8 +361,9 @@ public class PanelJeu extends JPanel
 
 	private void majImages()
 	{
+		int r, g, b;
 		
-		this.majDefausse();
+		this.majDefausse   ();
 		this.majScoreEspece();
 		
 		if (this.getNbCartesFace(tabPremiumPosee) == tabPremiumPosee.length)
@@ -385,12 +379,12 @@ public class PanelJeu extends JPanel
 		this.panelCartesPremium   = this.creerPanelCarte(true);
 		this.panelCartesStandards = this.creerPanelCarte(false);
 
-		this.panelCartes.remove(1);
-		this.panelCartes.add(PanelJeu.this.panelCartesPremium,1);
-		this.panelCartes.remove(3);
-		this.panelCartes.add(PanelJeu.this.panelCartesStandards,3);
-		this.panelCartes.revalidate();
-
+		this.panelCartes.remove    (                   1                  );
+		this.panelCartes.add       (PanelJeu.this.panelCartesPremium  , 1 );
+		this.panelCartes.remove    (                   3                  );
+		this.panelCartes.add       (PanelJeu.this.panelCartesStandards, 3 );
+		this.panelCartes.revalidate(                                      );
+		
 		this.panelScoreEspeces.revalidate();
 		
 		this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" + this.ctrl.getSommet() +".png") );
@@ -398,38 +392,37 @@ public class PanelJeu extends JPanel
 		this.iconeCroisiereActuelle.setIcon( new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png") );
 		
 		// Affichage lors de la fin du Jeu
-		if ( 
-		     this.ctrl.getSommet() == null ||
-		     ( this.ctrl.getNumManche() == this.ctrl.getNbTypeEspeces() && this.ctrl.estMancheFinie() )
-		   )
+		if ( this.ctrl.getSommet    () == null ||
+		      this.ctrl.getNumManche() == this.ctrl.getNbTypeEspeces() && this.ctrl.estMancheFinie() )
 		{
 			this.lblActionPioche.setIcon(null);
 			this.lblActionPioche.setText
 			(
 				"<html>"+
 					"<body> "+
-						"<h1 style='text-align : center; color : rgb(255,255,255)'>"+
+						"<h1 style='text-align : center;'>"+
 							"Partie Terminé !"
 						+"</h1>"
 					+" </body> "
 				+"</html>"
 			);
 		}
+
+		r = FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getRed  ();
+		g = FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getGreen();
+		b = FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getBlue ();
 		
 		this.lblTexteEspece.setText
-		(
-
+		(	
 			"<html>"+
 				"<body> "+
-					"<h1 style='text-align : center;'>"+ 
-						"Croisière des <br> <p style='text-align : center; color:"+
-						" rgb("+FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getRed()  + ","   + 
-						        FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getGreen()+ ","   + 
-								FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getBlue() +");'>" + 
-								this.ctrl.getEspCroisiereCrt() + 
+					"<h1 style='text-align : center;'>"                                         + 
+						"Croisière des <br> <p style='text-align : center; color:"              +
+						" rgb("+ r + "," + g + "," + b +");'>" + this.ctrl.getEspCroisiereCrt() + 
 					"</p></h1>"+
 				" </body> "
 			+"</html>"
+
 
 		);
 
@@ -437,46 +430,38 @@ public class PanelJeu extends JPanel
 
 		this.lblTexteEspece.revalidate();
 		this.revalidate();
-		this.repaint();
+		this.repaint   ();
 	}
 
 	private void majScoreEspece()
 	{
 		this.panelScoreEspeces.removeAll();
 
-		this.panelScoreEspeces.add(new JLabel() );
+		this.panelScoreEspeces.add(new JLabel()       );
 		this.panelScoreEspeces.add(this.lblTexteScore );
-		this.panelScoreEspeces.add(new JLabel() );
+		this.panelScoreEspeces.add(new JLabel()       );
 
 		for (int cpt = 0; cpt < this.ctrl.getNbTypeEspeces() +1; cpt++) 
 		{
-
 			JLabel lblScore = new JLabel();
 
 			lblScore.setFont      (new Font ("Monospaced", Font.BOLD, 17) );
-			lblScore.setForeground(FrameJeu.COULEUR_ZONE                             );
-			lblScore.setOpaque    (false                                   );
+			lblScore.setForeground(FrameJeu.COULEUR_ZONE                  );
+			lblScore.setOpaque    (false                                  );
 
 			if (cpt < this.ctrl.getNbTypeEspeces() )
 			{
 				lblScore.setText (String.format("%-11s",this.ctrl.getNomEspece(cpt) )+" : " +
 				                  String.format("%-3d", this.ctrl.calculerScore(this.ctrl.getNomEspece(cpt) ) ) );
 				
-				lblScore.setIcon(new ImageIcon("../images/Tuiles/Centre-Espece-"      + this.ctrl.getNomEspece(cpt) + ".png" ))  ;
+				lblScore.setIcon(new ImageIcon("../images/Tuiles/Centre-Espece-" + this.ctrl.getNomEspece(cpt) + ".png" ) )  ;
 	
 			}
-			else
-			{
-				lblScore.setText(String.format("%-16s","     Total ") +" : "+ this.ctrl.getScoreTotal() ) ;
-
-			}
+			else lblScore.setText(String.format("%-16s","     Total ") +" : "+ this.ctrl.getScoreTotal() ) ;
 
 			this.panelScoreEspeces.add(lblScore);
 			
 		}
-
-		
-		
 	}
 
 	private void selectionnerExtremite( int posColClk, int posLigClk )
@@ -503,8 +488,8 @@ public class PanelJeu extends JPanel
 			this.majImages();
 		}
 		
-		this.frameJeu.revalidate();
-		this.panelPlateau.repaint();
+		this.frameJeu    .revalidate();
+		this.panelPlateau.repaint   ();
 
 	}
 }

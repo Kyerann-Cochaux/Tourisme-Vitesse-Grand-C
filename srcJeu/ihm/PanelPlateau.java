@@ -65,11 +65,7 @@ public class PanelPlateau extends JPanel
 	/*            Modificateurs           */
 	/* ---------------------------------- */
 
-	public void setExtremiteSlct( Point posClk )
-	{
-		// System.out.println( "Nouvelle Extremité Selectionnée : " + (int) posClk.getX() + "/" + (int) posClk.getY() );
-		this.posExtremiteSlct = posClk ;
-	}
+	public void setExtremiteSlct( Point posClk ) { this.posExtremiteSlct = posClk ;}
 	
 	// Autres Méthodes
 	public void paintComponent(Graphics g)
@@ -134,15 +130,12 @@ public class PanelPlateau extends JPanel
 		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
 		
-		// System.out.println( "Taille du Plateau : " + nbLigne + " Lignes et " + nbColonne + " Colonnes" );
-		
 		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
 			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				int zoneCaseAct = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
 				
-				// System.out.println( "Vérification de la case à " + cptLig + " Lig " + cptCol + " Col" );
 				g2.setColor( Color.RED );
 				
 				int zoneCaseADroite = -1;
@@ -160,9 +153,7 @@ public class PanelPlateau extends JPanel
 				
 				//Dessiner La ligne sur le côté droit de la case actuelle
 				if ( zoneCaseAct != zoneCaseADroite && cptCol+1 < nbColonne )
-				{
-					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite à sa droite." );
-					
+				{	
 					g2.drawLine(
 						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ X */
 						cptLig * PanelPlateau.TAILLE_CASE,                            /* Départ Y */
@@ -174,9 +165,7 @@ public class PanelPlateau extends JPanel
 				
 				// Dessiner La ligne sur le côté bas de la case actuelle
 				if ( zoneCaseAct != zoneCaseEnBas && cptLig+1 < nbLigne )
-				{
-					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite en bas." );
-					
+				{	
 					g2.drawLine(
 						cptCol * PanelPlateau.TAILLE_CASE,                            /* Départ X */
 						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ Y */
@@ -250,7 +239,6 @@ public class PanelPlateau extends JPanel
 		int posExSelcX = (int) this.posExtremiteSlct.getX() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
 		int posExSelcY = (int) this.posExtremiteSlct.getY() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
 		
-		// System.out.println( "Affichage de l'Extremité : " + (int) this.posExtremiteSlct.getX() + "/" + (int) this.posExtremiteSlct.getY() );
 		g2.fillOval( posExSelcX,
 		             posExSelcY,
 		             (int) TAILLE_CASE,

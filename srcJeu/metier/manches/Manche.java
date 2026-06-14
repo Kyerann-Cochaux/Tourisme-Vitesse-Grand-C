@@ -103,7 +103,7 @@ public class Manche
 			}
 
 		nbPlaneteMax = Math.max(nbPlaneteMax, nbPlanetes);
-		
+
 		return (nbSystemes * nbPlaneteMax) ;
 	}
 	
@@ -145,9 +145,6 @@ public class Manche
 		if( cDep == null ) return false;
 		if( cFin == null ) return false;
 		
-		// System.out.println("\n~~~ ajouterCase() ~~~");
-		// System.out.println( "Nombre de Planètes visité : " + this.lstCases.size() );
-		
 		// On regarde si cette case as deja été visitée
 		for (int indCase = 0; indCase < this.lstCases.size(); indCase++)
 		{
@@ -167,25 +164,21 @@ public class Manche
 			if (voyageTemp.getEspece() != null && voyageTemp.getEspece().equals(this.espece) ||
 			      this.lstCases.size() <= 1 )
 			{
-				// System.out.println("Voyage " + indVoyage + " de l'espèce attendu" ); // anciennement "bonne SP"
-				if (
-					(voyageTemp.getPlaneteSource().getPosX()      == cDep.getPosX() &&
-					 voyageTemp.getPlaneteSource().getPosY()      == cDep.getPosY() )   ||
-					(voyageTemp.getPlaneteDestination().getPosX() == cDep.getPosX() &&
-					 voyageTemp.getPlaneteDestination().getPosY() == cDep.getPosY() )
+				if (  voyageTemp.getPlaneteSource     ().getPosX() == cDep.getPosX() &&
+					  voyageTemp.getPlaneteSource     ().getPosY() == cDep.getPosY() ||
+					  voyageTemp.getPlaneteDestination().getPosX() == cDep.getPosX() &&
+					  voyageTemp.getPlaneteDestination().getPosY() == cDep.getPosY() 
 					)
 				{
-					// System.out.println("Voyage " + indVoyage + " à la bonne position" ); // anciennement "bonne POs"
 					if ( this.lstCases.getFirst().getPosX() == cDep.getPosX() && 
-						this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
+						 this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
 					{
 						this.lstCases.addFirst(cFin);
 						return true;
 					}
 					
-					
 					if ( this.lstCases.getLast().getPosX() == cDep.getPosX() && 
-						this.lstCases.getLast().getPosY() == cDep.getPosY()    )
+						 this.lstCases.getLast().getPosY() == cDep.getPosY()    )
 					{
 						this.lstCases.addLast(cFin);
 						return true;
@@ -195,7 +188,6 @@ public class Manche
 			}
 		}
 		
-		System.out.println("ajouterCase : Case pas Ajouté");
 		return false;
 	}
 

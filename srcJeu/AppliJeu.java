@@ -67,10 +67,8 @@ public class AppliJeu
 		ArrayList<String> lstEspece = new ArrayList<String>();
 
 		for (String string : this.metier.getPlateau().getEnsEspeces() ) 
-		{
 			lstEspece.add(string);
 			
-		}
 		return lstEspece;
 	}
 

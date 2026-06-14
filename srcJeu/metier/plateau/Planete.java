@@ -48,13 +48,8 @@ public class Planete
 			return true;
 		}
 
-		if ( !especeValide(espece) )
-		{
-			System.out.println("Espece invalide : " + espece);
-			return false;
-		}
-		// System.out.println("Espece valide : " + espece);
-
+		if ( !especeValide(espece) ) return false;
+		
 		this.espece = espece;
 		return true;
 	} 
