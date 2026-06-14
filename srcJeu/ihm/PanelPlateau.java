@@ -1,5 +1,7 @@
 package srcJeu.ihm;
 
+import srcJeu.AppliJeu ;
+
 import javax.swing.*;
 import javax.imageio.ImageIO ;
 
@@ -15,7 +17,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage ;
 
-import srcJeu.AppliJeu ;
 
 /**
  * Panel Plateau
@@ -48,8 +49,9 @@ public class PanelPlateau extends JPanel
 		this.dimPlateau = new Dimension( this.ctrl.getNbColonnes() * PanelPlateau.TAILLE_CASE + 1,
 		                                 this.ctrl.getNbLignes  () * PanelPlateau.TAILLE_CASE + 1 );
 		
-		this.setPreferredSize( this.dimPlateau                  );
-		this.setBackground   ( FrameJeu.COULEUR_FOND_PLATEAU );
+		this.setPreferredSize ( this.dimPlateau               );
+		this.setBackground    ( FrameJeu.COULEUR_FOND_PLATEAU );
+
 		this.posExtremiteSlct = null ;
 		
 	}
@@ -74,15 +76,8 @@ public class PanelPlateau extends JPanel
 		
 		Graphics2D g2 = (Graphics2D) g;
 		
-		// Affichage des Cases
-		// |!| NE PAS UTILISER DANS LA VERSION FINAL  |!|
-		// this.affichageCases(g2);
-		
 		// Affichage des Zones
 		this.affichageZones(g2);
-
-		// Affichage des Zones
-		//this.affichageNumeroZone(g2);
 		
 		// Affichage des Liens
 		this.affichageLiens(g2);
@@ -101,28 +96,6 @@ public class PanelPlateau extends JPanel
 	/* Méthodes d'Affichages */
 	/*-----------------------*/
 	
-	// |!| NE PAS UTILISER DANS LA VERSION FINAL  |!|
-	/*private void affichageCases( Graphics2D g2 )
-	{
-		g2.setColor( new Color(194, 231, 242) );
-		
-		int nbLigne   = this.ctrl.getNbLignes  ();
-		int nbColonne = this.ctrl.getNbColonnes();
-		
-		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
-		{
-			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
-			{
-				g2.drawRect(
-				             TAILLE_CASE * cptCol, /*  Position X  */
-				            /*  TAILLE_CASE * cptLig, /*  Position Y  */
-				            /*  TAILLE_CASE,          /* LARGEUR CASE */
-				             /*TAILLE_CASE           /* LONGEUR CASE *//*
-				           );
-			}
-		}
-	} */
-	
 	private void affichageZones( Graphics2D g2 )
 	{
 		g2.setStroke(new BasicStroke(3) );
@@ -130,9 +103,9 @@ public class PanelPlateau extends JPanel
 		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
 		
-		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
+		for( int cptLig = 0; cptLig < nbLigne ; cptLig++ )
 		{
-			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
+			for( int cptCol = 0; cptCol < nbColonne; cptCol++ )
 			{
 				int zoneCaseAct = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
 				
@@ -141,32 +114,26 @@ public class PanelPlateau extends JPanel
 				int zoneCaseADroite = -1;
 				int zoneCaseEnBas   = -1;
 				
-				if ( cptCol+1 < nbColonne )
-				{
-					zoneCaseADroite = this.ctrl.getCase( cptCol+1, cptLig ).getNumSysteme();
-				}
-				
-				if ( cptLig+1 < nbLigne )
-				{
-					zoneCaseEnBas   = this.ctrl.getCase( cptCol, cptLig+1 ).getNumSysteme();
-				}
+				if ( cptCol + 1 < nbColonne ) zoneCaseADroite = this.ctrl.getCase( cptCol+1, cptLig ).getNumSysteme();
+				if ( cptLig + 1 < nbLigne   ) zoneCaseEnBas   = this.ctrl.getCase( cptCol, cptLig+1 ).getNumSysteme();
 				
 				//Dessiner La ligne sur le côté droit de la case actuelle
-				if ( zoneCaseAct != zoneCaseADroite && cptCol+1 < nbColonne )
+				if ( zoneCaseAct != zoneCaseADroite && cptCol + 1 < nbColonne )
 				{	
-					g2.drawLine(
+					g2.drawLine
+					(
 						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ X */
 						cptLig * PanelPlateau.TAILLE_CASE,                            /* Départ Y */
 						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Arrivé X */
 						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE  /* Arrivé Y */
 					);
-
 				}
 				
 				// Dessiner La ligne sur le côté bas de la case actuelle
 				if ( zoneCaseAct != zoneCaseEnBas && cptLig+1 < nbLigne )
 				{	
-					g2.drawLine(
+					g2.drawLine
+					(
 						cptCol * PanelPlateau.TAILLE_CASE,                            /* Départ X */
 						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ Y */
 						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Arrivé X */
@@ -185,10 +152,10 @@ public class PanelPlateau extends JPanel
 		{
 			for( int ind = 0 ; ind < nbVoyage ; ind++ )
 			{
-				int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE + TAILLE_CASE / 2 ;
-				int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE + TAILLE_CASE / 2 ;
-				int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE + TAILLE_CASE / 2 ;
-				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE + TAILLE_CASE / 2 ;
+				int departPosX  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosX() * TAILLE_CASE + TAILLE_CASE / 2;
+				int departPosY  = this.ctrl.getVoyage(ind).getPlaneteSource     ().getPosY() * TAILLE_CASE + TAILLE_CASE / 2;
+				int arriverPosX = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosX() * TAILLE_CASE + TAILLE_CASE / 2;
+				int arriverPosY = this.ctrl.getVoyage(ind).getPlaneteDestination().getPosY() * TAILLE_CASE + TAILLE_CASE / 2;
 				
 				String especeVoyAct = this.ctrl.getVoyage(ind).getEspece();
 	
@@ -206,33 +173,7 @@ public class PanelPlateau extends JPanel
 			}
 		}
 	}
-	
-	// Pas utiliser pour le Jeu
-	
-	private void affichageNumeroZone( Graphics2D g2 )
-	{
-		g2.setColor( Color.YELLOW );
-		g2.setFont(new Font("default", Font.BOLD, 14));
-		
-		int nbLigne   = this.ctrl.getNbLignes  ();
-		int nbColonne = this.ctrl.getNbColonnes();
-		
-		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
-		{
-			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
-			{
-				int zoneCaseAct = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
-				
-				// Dessin du Numéro de la Zone dans la case
-				g2.drawString( String.format("%3d", zoneCaseAct),
-				               cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE - 25,
-				               cptLig * PanelPlateau.TAILLE_CASE + 15
-				             );
-			}
-		}
-	}
-	
-	
+
 	private void affichageExtremiteSelectionnee( Graphics2D g2 )
 	{
 		g2.setColor( new Color( 255, 0, 255 ) );

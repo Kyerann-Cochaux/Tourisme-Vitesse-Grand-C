@@ -6,7 +6,10 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -14,6 +17,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Panel;
 import java.awt.Point;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 
 public class PanelJeu extends JPanel
@@ -91,7 +96,7 @@ public class PanelJeu extends JPanel
 		this.panelScoreEspeces.setLayout(gl1);
 	
 		this.panelCartes = new JPanel(new GridLayout(4,1) );
-		panelPioche      = new JPanel(new GridLayout(2,1) );
+		panelPioche      = new JPanel();
 
 		this.spPlateau = new JScrollPane(panelCentre);
 
@@ -152,13 +157,15 @@ public class PanelJeu extends JPanel
 		/*    Configuration des composants    */
 		/* ---------------------------------- */
 
-		panelScore            .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
-		this.panelScoreEspeces.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
-		panelScoreLabels      .setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
+		panelScore            .setBackground(FrameJeu.COULEUR_FOND_CLAIR);
+		this.panelScoreEspeces.setBackground(FrameJeu.COULEUR_FOND_CLAIR);
+		panelScoreLabels      .setBackground(FrameJeu.COULEUR_FOND_CLAIR);
 
-		panelCentre.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
+		panelPioche.setOpaque(false);
 
-		panelCartes.setBackground(FrameJeu.COULEUR_FOND_CLAIRE);
+		panelCentre.setBackground(FrameJeu.COULEUR_FOND_CLAIR);
+
+		panelCartes.setBackground(FrameJeu.COULEUR_FOND_CLAIR);
 
 		this.spPlateau.setBackground               (FrameJeu.COULEUR_FOND_FONCE               );
 		this.spPlateau.setVerticalScrollBarPolicy  (JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED  );
@@ -196,13 +203,15 @@ public class PanelJeu extends JPanel
 		
 		this.majScoreEspece();
 
-		panelCentre.add( this.panelPlateau, new GridBagConstraints() );
+		panelPioche.add(this.lblActionPioche);
+		
 
 		panelScore.add(panelScoreLabels      );
 		panelScore.add(this.panelScoreEspeces);
 		panelScore.add(this.lblTextePioche   );
-		panelScore.add( this.lblActionPioche );
-
+		panelScore.add( panelPioche );
+		
+		panelCentre.add( this.panelPlateau, new GridBagConstraints() );
 
 		this.panelCartes.add( this.lblTextePremium    );
 		this.panelCartes.add(this.panelCartesPremium  );
@@ -220,6 +229,7 @@ public class PanelJeu extends JPanel
 		// Activation du Panel Plateau
 		this.panelPlateau   .addMouseListener(this.gererClic() );
 		this.lblActionPioche.addMouseListener(this.gererClic() );
+		this.lblActionPioche.addMouseMotionListener(this.gererClic() );
 
 	}
 
@@ -298,6 +308,7 @@ public class PanelJeu extends JPanel
 	{
 		return new MouseAdapter()
 		{
+			
 			public void mousePressed(MouseEvent e)
 			{
 				if (e.getSource() == PanelJeu.this.panelPlateau)
@@ -334,6 +345,48 @@ public class PanelJeu extends JPanel
 						PanelJeu.this.majImages();
 					}
 				}
+			}
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+				Graphics2D g2 = (Graphics2D) PanelJeu.this.getGraphics();
+
+				if (e.getSource() == PanelJeu.this.lblActionPioche)
+				{
+					int x, y, w, h;
+
+					x = PanelJeu.this.lblActionPioche.getX();
+					w = PanelJeu.this.lblActionPioche.getWidth ();
+					h = PanelJeu.this.lblActionPioche.getHeight();
+
+					g2.setStroke(new BasicStroke(4) );
+					g2.setColor(Color.BLACK);
+					g2.drawRect(x -20,685,w + 40,h + 40);	
+
+					PanelJeu.this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR) );
+				}
+				
+
+			}
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+				Graphics2D g2 = (Graphics2D) PanelJeu.this.getGraphics();
+				if (e.getSource() == PanelJeu.this.lblActionPioche)
+				{
+					int x = PanelJeu.this.lblActionPioche.getX();
+					int w = PanelJeu.this.lblActionPioche.getWidth ();
+					int h = PanelJeu.this.lblActionPioche.getHeight();
+
+					g2.setStroke(new BasicStroke(4) );
+					g2.setColor(FrameJeu.COULEUR_FOND_CLAIR);
+					g2.drawRect(x -20,685,w + 40,h + 40);	
+					
+					PanelJeu.this.setCursor(Cursor.getDefaultCursor() );
+
+				}
+				
+
 			}
 		};
 	}
@@ -376,7 +429,7 @@ public class PanelJeu extends JPanel
 
 		}
 		
-		this.panelCartesPremium   = this.creerPanelCarte(true);
+		this.panelCartesPremium   = this.creerPanelCarte(true );
 		this.panelCartesStandards = this.creerPanelCarte(false);
 
 		this.panelCartes.remove    (                   1                  );
@@ -387,9 +440,8 @@ public class PanelJeu extends JPanel
 		
 		this.panelScoreEspeces.revalidate();
 		
-		this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" + this.ctrl.getSommet() +".png") );
-
-		this.iconeCroisiereActuelle.setIcon( new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png") );
+		this.lblActionPioche       .setIcon(new ImageIcon("../images/Cartes/Carte-"     + this.ctrl.getSommet         () + ".png") );
+		this.iconeCroisiereActuelle.setIcon(new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt() + ".png") );
 		
 		// Affichage lors de la fin du Jeu
 		if ( this.ctrl.getSommet    () == null ||
@@ -400,7 +452,7 @@ public class PanelJeu extends JPanel
 			(
 				"<html>"+
 					"<body> "+
-						"<h1 style='text-align : center;'>"+
+						"<h1 style='text-align : center; color : #ffffff'>"+
 							"Partie Terminé !"
 						+"</h1>"
 					+" </body> "
@@ -445,19 +497,24 @@ public class PanelJeu extends JPanel
 		{
 			JLabel lblScore = new JLabel();
 
-			lblScore.setFont      (new Font ("Monospaced", Font.BOLD, 17) );
-			lblScore.setForeground(FrameJeu.COULEUR_ZONE                  );
+			lblScore.setFont      (new Font ("Monospaced", Font.BOLD, 18) );
 			lblScore.setOpaque    (false                                  );
-
+			
 			if (cpt < this.ctrl.getNbTypeEspeces() )
 			{
+				lblScore.setForeground(FrameJeu.COULEUR_ZONE                  );
+
 				lblScore.setText (String.format("%-11s",this.ctrl.getNomEspece(cpt) )+" : " +
 				                  String.format("%-3d", this.ctrl.calculerScore(this.ctrl.getNomEspece(cpt) ) ) );
 				
 				lblScore.setIcon(new ImageIcon("../images/Tuiles/Centre-Espece-" + this.ctrl.getNomEspece(cpt) + ".png" ) )  ;
 	
 			}
-			else lblScore.setText(String.format("%-16s","     Total ") +" : "+ this.ctrl.getScoreTotal() ) ;
+			else 
+			{
+				lblScore.setForeground(Color.decode("#e24242"));
+				lblScore.setText(String.format("%-16s","     Total ") +" : "+ this.ctrl.getScoreTotal() ) ;
+			}
 
 			this.panelScoreEspeces.add(lblScore);
 			
