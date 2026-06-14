@@ -312,13 +312,21 @@ public class PanelJeu extends JPanel
 					int posLigClk = (int) ( e.getY() / PanelJeu.this.panelPlateau.getTailleCase() ) ;
 					
 					// Gestion de la selection d'extremite
-					if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) )
+					if ( 
+					     e.getButton() == MouseEvent.BUTTON1                  &&
+					     PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk) &&
+					     PanelJeu.this.ctrl.getSommet() != null
+					   )
 					{
 						PanelJeu.this.selectionnerExtremite( posColClk, posLigClk );
 					}
 
 					// Gestion de la création de Voyage
-					if ( e.getButton() == MouseEvent.BUTTON1 && PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null)
+					if (
+					       e.getButton() == MouseEvent.BUTTON1                      && 
+					       PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null &&
+					     ! PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk)
+					   )
 					{
 						PanelJeu.this.effectuerVoyage( posColClk, posLigClk );
 					}
@@ -327,11 +335,11 @@ public class PanelJeu extends JPanel
 				// Gestion de l'affichage des Cartes Destionnations
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					if (PanelJeu.this.ctrl.getNumManche() <= PanelJeu.this.ctrl.getNbTypeEspeces() &&
-				        PanelJeu.this.ctrl.getTaillePioche() > 0)
-						
-					PanelJeu.this.majImages();
-					
+					if ( PanelJeu.this.ctrl.getNumManche()   <= PanelJeu.this.ctrl.getNbTypeEspeces() &&
+					     PanelJeu.this.ctrl.getTaillePioche() > 0                                        )
+					{
+						PanelJeu.this.majImages();
+					}
 				}
 			}
 		};
@@ -363,7 +371,7 @@ public class PanelJeu extends JPanel
 		
 		this.majDefausse();
 		this.majScoreEspece();
-
+		
 		if (this.getNbCartesFace(tabPremiumPosee) == tabPremiumPosee.length)
 		{
 			for (int cpt = 0; cpt < this.tabPremiumPosee.length; cpt++) 
@@ -388,7 +396,26 @@ public class PanelJeu extends JPanel
 		this.lblActionPioche.setIcon(new ImageIcon("../images/Cartes/Carte-" + this.ctrl.getSommet() +".png") );
 
 		this.iconeCroisiereActuelle.setIcon( new ImageIcon("../images/Tuiles/XL-Espece-" + this.ctrl.getEspCroisiereCrt()  + ".png") );
-
+		
+		// Affichage lors de la fin du Jeu
+		if ( 
+		     this.ctrl.getSommet() == null ||
+		     ( this.ctrl.getNumManche() == this.ctrl.getNbTypeEspeces() && this.ctrl.estMancheFinie() )
+		   )
+		{
+			this.lblActionPioche.setIcon(null);
+			this.lblActionPioche.setText
+			(
+				"<html>"+
+					"<body> "+
+						"<h1 style='text-align : center; color : rgb(255,255,255)'>"+
+							"Partie Terminé !"
+						+"</h1>"
+					+" </body> "
+				+"</html>"
+			);
+		}
+		
 		this.lblTexteEspece.setText
 		(
 

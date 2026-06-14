@@ -107,9 +107,13 @@ public class Plateau
 		{
 			Voyage v = this.getVoyage(cpt);
 			
+			
 			// Si le voyage va de Source à Destination (ou l'inverse selon votre règle)
-			if ( (v.getPlaneteSource() == caseSource && v.getPlaneteDestination() == caseDest) ||
-				(v.getPlaneteSource() == caseDest   && v.getPlaneteDestination() == caseSource) )
+			if ( 
+			     ( (v.getPlaneteSource() == caseSource && v.getPlaneteDestination() == caseDest   ) ||
+			       (v.getPlaneteSource() == caseDest   && v.getPlaneteDestination() == caseSource )    ) &&
+			        v.getEspece() == null // On regarde bien que le voyage n'as pas déjà été fait.
+			   )
 			{
 				// 3. On applique l'espèce sur le voyage trouvé
 				return v.setEspece(espece);

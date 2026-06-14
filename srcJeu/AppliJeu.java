@@ -44,7 +44,14 @@ public class AppliJeu
 	public String getSommet()
 	{
 			String symbole = "";
-			if (this.metier.getSommet().getPremium() ) symbole += "Prem-";
+			
+			// Si il n'y a plus de sommet on renvoie rien.
+			if ( this.metier.getSommet() == null )
+			{
+				return null ;
+			}
+			
+			if ( this.metier.getSommet().getPremium() ) symbole += "Prem-";
 			
 			return symbole + this.metier.getSommet().getSymbole().charAt(0);
 	}
@@ -93,7 +100,9 @@ public class AppliJeu
 	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)                      ;}
 	public int  calculerScore  (String espece)            {return this.metier.calculerScore(espece)                  ;}
 	public int  getScoreTotal()                           { return this.metier.getScoreTotal();}
-
+	
+	public boolean estMancheFinie() { return this.metier.getMancheCourante().estMancheFinie() ; }
+	
 	public boolean estExtremite(int col, int lig) {return this.metier.estExtremite(col, lig);}
 	public static void main(String[] args) 
 	{
