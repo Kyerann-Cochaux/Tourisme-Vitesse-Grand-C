@@ -3,6 +3,10 @@ package srcJeu;
 import srcJeu.metier.*;
 import srcJeu.metier.plateau.*;
 import srcJeu.metier.manches.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import srcJeu.ihm.*;
 
 public class AppliJeu
@@ -51,6 +55,18 @@ public class AppliJeu
 	// Retourne le nom de l'espèce en croisières dans la manche actuelle
 	public String getEspCroisiereCrt() { return this.metier.getMancheCourante().getEspece() ; }
 
+	public ArrayList<String> getEnsEspece()     
+	{ 
+		ArrayList<String> lstEspece = new ArrayList<String>();
+
+		for (String string : this.metier.getPlateau().getEnsEspeces() ) 
+		{
+			lstEspece.add(string);
+			
+		}
+		return lstEspece;
+	}
+
 	/* ---------------------------------- */
 	/*            Modificateurs           */
 	/* ---------------------------------- */
@@ -75,7 +91,7 @@ public class AppliJeu
 	
 	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null);}
 	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)                      ;}
-	public int  calculerScore   (String espece)           {return this.metier.calculerScore(espece)                  ;}
+	public int  calculerScore  (String espece)            {return this.metier.calculerScore(espece)                  ;}
 	public int  getScoreTotal()                           { return this.metier.getScoreTotal();}
 
 	public boolean estExtremite(int col, int lig) {return this.metier.estExtremite(col, lig);}

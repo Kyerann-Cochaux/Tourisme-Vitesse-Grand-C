@@ -31,11 +31,6 @@ public class PanelPlateau extends JPanel
 	private static final int TAILLE_CASE = 50 ;
 
 	// Coloriage des voyages celons les espèces
-	private static final Color[] TAB_COUL_LIENS = { new Color(163, 115,  67), // Chlorophite
-	                                                new Color( 99, 182, 224), // Felinoïd
-	                                                new Color(255, 213,  65), // Azimae
-	                                                new Color( 50, 132, 100)  // Silikon
-	                                              };
 	
 	private static final int TAILLE_CURSEUR = 1 ; // Plus ce chiffre est grand plus le curseur est petit
 	
@@ -56,6 +51,7 @@ public class PanelPlateau extends JPanel
 		this.setPreferredSize( this.dimPlateau                  );
 		this.setBackground   ( FrameJeu.COULEUR_FOND_PLATEAU );
 		this.posExtremiteSlct = null ;
+		
 	}
 
 	 /* ---------------------------------- */
@@ -209,12 +205,14 @@ public class PanelPlateau extends JPanel
 	
 				for ( int cpt=0 ; cpt < this.ctrl.getNbTypeEspeces() ; cpt++ )
 				{
-					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) { g2.setColor( TAB_COUL_LIENS[cpt] ); g2.setStroke( new BasicStroke(4) ); }
+					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) 
+					{ 
+						g2.setColor( FrameJeu.TAB_COUL_LIENS[cpt] ); g2.setStroke( new BasicStroke(4) ); 
+					}
 				}
 				
 				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); g2.setStroke( new BasicStroke(2) ); }
-				
-				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
+			
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 			}
 		}

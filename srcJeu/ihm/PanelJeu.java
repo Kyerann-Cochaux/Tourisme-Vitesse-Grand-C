@@ -115,12 +115,20 @@ public class PanelJeu extends JPanel
 			"<html>"+
 				"<body> "+
 					"<h1 style='text-align : center;'>"+ 
-						"Croisière des <br> " + this.ctrl.getEspCroisiereCrt() + 
-					"</h1>"+
+						"Croisière des <br> <p style='text-align : center; color:"+
+						" rgb("+FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getRed()  + ","   + 
+						        FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getGreen()+ ","   + 
+								FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getBlue() +");'>" + 
+								this.ctrl.getEspCroisiereCrt() + 
+					"</p></h1>"+
 				" </body> "
 			+"</html>", SwingConstants.CENTER
 
 		);
+
+		
+
+		System.out.println(this.ctrl.getNumManche() );
 
 		this.lblTexteScore     = new JLabel("Score des croisières : ");
 		this.lblTextePremium   = new JLabel("Cartes Premium : "      );
@@ -247,11 +255,6 @@ public class PanelJeu extends JPanel
 	{
 		JPanel panel1, panel2;
 		JPanel panelPrc;
-
-		
-
-		//String fic = "../images/Cartes/Carte-";
-
 
 		panelPrc = new JPanel(new GridLayout(2,1) );
 		panel1   = new JPanel();
@@ -392,8 +395,12 @@ public class PanelJeu extends JPanel
 			"<html>"+
 				"<body> "+
 					"<h1 style='text-align : center;'>"+ 
-						"Croisière des <br> " + this.ctrl.getEspCroisiereCrt() + 
-					"</h1>"+
+						"Croisière des <br> <p style='text-align : center; color:"+
+						" rgb("+FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getRed()  + ","   + 
+						        FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getGreen()+ ","   + 
+								FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getBlue() +");'>" + 
+								this.ctrl.getEspCroisiereCrt() + 
+					"</p></h1>"+
 				" </body> "
 			+"</html>"
 

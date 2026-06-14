@@ -103,15 +103,7 @@ public class Manche
 			}
 
 		nbPlaneteMax = Math.max(nbPlaneteMax, nbPlanetes);
-
-		/*System.out.print(String.format("%-20s", this.espece));
-
-		for (int cpt = 0; cpt < lstCases.size(); cpt++)
-			System.out.print(" | " + String.format("%-3d", tabCase[cpt]));
-
-		System.out.println("\nNbSystemes   -> " + nbSystemes);
-		System.out.println("NbPlaneteMax -> " + nbPlaneteMax);*/
-
+		
 		return (nbSystemes * nbPlaneteMax) ;
 	}
 	
