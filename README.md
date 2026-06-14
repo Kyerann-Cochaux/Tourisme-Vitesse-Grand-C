@@ -4,30 +4,57 @@
 
 ### Lancer l'Application de Création de Plateaux
 #### Sur Windows : 
-Allez dans le répertoire `/lancerEdition`, puis, executer LancerCreation.bat avec la commande `LancerCreation.bat`
+Aller dans le répertoire `/lanceursEdition`, puis lancer l'application avec la commande `LancerCreation.bat`
 #### Sur Linux : 
-Allez dans le répertoire `/lancerEdition`, puis, executer LancerCreation.sh avec la commande `./LancerCreation.sh`
+Aller dans le répertoire `/lanceursEdition`, puis lancer l'application avec la commande `./LancerCreation.sh`
 <br>
 <br>
-Vous pouvez ouvrir un plateau déjà existant ou en créer un nouveau.
+Vous pouvez soit ouvrir un plateau déjà existant pour le modifier, soit en créer un de toute pièce.
 
+### Création d'un nouveau plateau
+
+• Entrez dans les champs de texte le nom de votre plateau, sa taille ainsi que le nombre de planètes et d'espèces
+• Une fois ces champs renseignés, cliquer sur Lancer pour arriver sur le menu d'édition
+• Vous ne pouvez pas enregistrer un plateau possédant un nom identique à un plateau déjà existant
 
 ### Contrôle de la Fenêtre d'Edition d'un Plateau
 
 #### Comment modifier l'emplacement des zones ?
-Séléctionnez la zone souhaitée grâce aux boutons `-` et `+` sur la droite de l'écran.<br>
-Vous pouvez placer la zone selectionnée en faisant un clic gauche sur la case souhaité.
+Séléctionner la zone souhaitée grâce aux boutons `-` et `+` en haut à droite de l'écran.<br>
+Placer la zone sélectionnée sur le plateau en faisant un clic gauche sur la case souhaité.
 <br>
+
 #### Comment modifier l'emplacement des planètes ?
-Selectionnez le type de planète souhaitée grâce aux boutons sur la gauche en haut de l'écran.<br>
-Vous pouvez placer la planète de vôtre choix sur le plateau en faisant un clic gauche sur la case souhaité.
+Sélectionner le type de planète souhaitée grâce aux boutons en haut à gauche de l'écran.<br>
+Placer la planète de votre choix sur le plateau en faisant un clic gauche sur la case souhaitée.
 <br>
+
+#### Comment modifier l'emplacement des planètes ?
+Pour supprimer une planète, faite un clic droit sur la planète à supprimer.
 <br>
-Pour supprimer une planète il vous suffit de faire un clic droit sur la planète à supprimer.
-<br>
+
 #### Comment modifier le placement des départ des espèces ?
-Selectionnez l'espèce souhaitée grâce aux boutons sur la gauche au milieu de l'écran.<br>
-Vous pouvez placer le départ de l'espèce de vôtre choix sur le plateau en faisant un clic gauche sur la planète souhaité.
+Sélectionner l'espèce souhaitée grâce aux boutons en bas à gauche de l'écran.<br>
+Placer le départ de l'espèce de votre choix sur le plateau en faisant un clic gauche sur la planète souhaitée.
 <br>
 <br>
-Pour supprimer un départ il vous suffir de faire un clic droit sur le départ à supprimer.
+Pour supprimer un départ, faite un clic droit sur le départ à supprimer.
+<br>
+
+#### Informations utiles 
+
+• Chaque zone possèdant un numéro ne peut être uniquement placer à côté d'une zone ayant ce même numéro<br><br>
+• Si toutes les zones ne possèdent pas de numéro, pas de panique ! L'application les remplira automatiquement avec les prochains numéros<br><br>
+• Le plateau doit posséder un départ de chaque espèce pour pouvoir être enregistré <br><br>
+• Vous pouvez maintenir le clic enfoncé pour "peindre" le plateau avec les éléments de votre choix<br>
+Il est également possible de supprimer les éléments de cette façon, à l'exception des zones 
+
+## Comment Jouer ?
+
+### Lancer l'Application de Jeu
+#### Sur Windows : 
+Aller dans le répertoire `/lanceursJeu`, puis lancer l'application avec la commande `LancerJeu.bat`
+#### Sur Linux : 
+Aller dans le répertoire `/lanceursJeu`, puis lancer l'application avec la commande `./LancerJeu.sh`
+
+

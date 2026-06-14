@@ -31,11 +31,6 @@ public class PanelPlateau extends JPanel
 	private static final int TAILLE_CASE = 50 ;
 
 	// Coloriage des voyages celons les espèces
-	private static final Color[] TAB_COUL_LIENS = { new Color(113,  65,  59), // Chlorophite
-	                                                new Color( 36, 159, 222), // Felinoïd
-	                                                new Color(255, 213,  65), // Azimae
-	                                                new Color( 50, 132, 100)  // Silikon
-	                                              };
 	
 	private static final int TAILLE_CURSEUR = 1 ; // Plus ce chiffre est grand plus le curseur est petit
 	
@@ -54,8 +49,9 @@ public class PanelPlateau extends JPanel
 		                                 this.ctrl.getNbLignes  () * PanelPlateau.TAILLE_CASE + 1 );
 		
 		this.setPreferredSize( this.dimPlateau                  );
-		this.setBackground   ( FrameJeu.COULEUR_FOND_FONCE );
+		this.setBackground   ( FrameJeu.COULEUR_FOND_PLATEAU );
 		this.posExtremiteSlct = null ;
+		
 	}
 
 	 /* ---------------------------------- */
@@ -69,11 +65,7 @@ public class PanelPlateau extends JPanel
 	/*            Modificateurs           */
 	/* ---------------------------------- */
 
-	public void setExtremiteSlct( Point posClk )
-	{
-		// System.out.println( "Nouvelle Extremité Selectionnée : " + (int) posClk.getX() + "/" + (int) posClk.getY() );
-		this.posExtremiteSlct = posClk ;
-	}
+	public void setExtremiteSlct( Point posClk ) { this.posExtremiteSlct = posClk ;}
 	
 	// Autres Méthodes
 	public void paintComponent(Graphics g)
@@ -88,6 +80,9 @@ public class PanelPlateau extends JPanel
 		
 		// Affichage des Zones
 		this.affichageZones(g2);
+
+		// Affichage des Zones
+		//this.affichageNumeroZone(g2);
 		
 		// Affichage des Liens
 		this.affichageLiens(g2);
@@ -107,7 +102,7 @@ public class PanelPlateau extends JPanel
 	/*-----------------------*/
 	
 	// |!| NE PAS UTILISER DANS LA VERSION FINAL  |!|
-	private void affichageCases( Graphics2D g2 )
+	/*private void affichageCases( Graphics2D g2 )
 	{
 		g2.setColor( new Color(194, 231, 242) );
 		
@@ -120,13 +115,13 @@ public class PanelPlateau extends JPanel
 			{
 				g2.drawRect(
 				             TAILLE_CASE * cptCol, /*  Position X  */
-				             TAILLE_CASE * cptLig, /*  Position Y  */
-				             TAILLE_CASE,          /* LARGEUR CASE */
-				             TAILLE_CASE           /* LONGEUR CASE */
+				            /*  TAILLE_CASE * cptLig, /*  Position Y  */
+				            /*  TAILLE_CASE,          /* LARGEUR CASE */
+				             /*TAILLE_CASE           /* LONGEUR CASE *//*
 				           );
 			}
 		}
-	}
+	} */
 	
 	private void affichageZones( Graphics2D g2 )
 	{
@@ -135,15 +130,12 @@ public class PanelPlateau extends JPanel
 		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
 		
-		// System.out.println( "Taille du Plateau : " + nbLigne + " Lignes et " + nbColonne + " Colonnes" );
-		
 		for( int cptLig=0 ; cptLig < nbLigne ; cptLig++ )
 		{
 			for( int cptCol=0 ; cptCol < nbColonne ; cptCol++ )
 			{
 				int zoneCaseAct = this.ctrl.getCase( cptCol, cptLig ).getNumSysteme();
 				
-				// System.out.println( "Vérification de la case à " + cptLig + " Lig " + cptCol + " Col" );
 				g2.setColor( Color.RED );
 				
 				int zoneCaseADroite = -1;
@@ -161,9 +153,7 @@ public class PanelPlateau extends JPanel
 				
 				//Dessiner La ligne sur le côté droit de la case actuelle
 				if ( zoneCaseAct != zoneCaseADroite && cptCol+1 < nbColonne )
-				{
-					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite à sa droite." );
-					
+				{	
 					g2.drawLine(
 						cptCol * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ X */
 						cptLig * PanelPlateau.TAILLE_CASE,                            /* Départ Y */
@@ -175,9 +165,7 @@ public class PanelPlateau extends JPanel
 				
 				// Dessiner La ligne sur le côté bas de la case actuelle
 				if ( zoneCaseAct != zoneCaseEnBas && cptLig+1 < nbLigne )
-				{
-					// System.out.println( "\tLimite Trouvé ! La Case [" + cptLig + "/" + cptCol + "|Z:" + zoneCaseAct + "] a une Limite en bas." );
-					
+				{	
 					g2.drawLine(
 						cptCol * PanelPlateau.TAILLE_CASE,                            /* Départ X */
 						cptLig * PanelPlateau.TAILLE_CASE + PanelPlateau.TAILLE_CASE, /* Départ Y */
@@ -191,9 +179,6 @@ public class PanelPlateau extends JPanel
 	
 	private void affichageLiens( Graphics2D g2 )
 	{
-		g2.setStroke( new BasicStroke(3) );
-		g2.setColor ( Color.WHITE        );
-
 		int nbVoyage = this.ctrl.getNbVoyages();
 
 		if (nbVoyage >= 1)
@@ -209,19 +194,21 @@ public class PanelPlateau extends JPanel
 	
 				for ( int cpt=0 ; cpt < this.ctrl.getNbTypeEspeces() ; cpt++ )
 				{
-					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) { g2.setColor( TAB_COUL_LIENS[cpt] ); g2.setStroke( new BasicStroke(4) ); }
+					if ( especeVoyAct == this.ctrl.getNomEspece(cpt) ) 
+					{ 
+						g2.setColor( FrameJeu.TAB_COUL_LIENS[cpt] ); g2.setStroke( new BasicStroke(4) ); 
+					}
 				}
 				
-				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); g2.setStroke( new BasicStroke(3) ); }
-				
-				// System.out.println("Affichage du Voyage " + ind + "  depX:"+ departPosX + "/depY:" + departPosY + " | arrX:" + arriverPosX + "/arrY:" + arriverPosY );
+				if ( especeVoyAct == null ) { g2.setColor( Color.WHITE ); g2.setStroke( new BasicStroke(2) ); }
+			
 				g2.drawLine( departPosX, departPosY, arriverPosX, arriverPosY );
 			}
 		}
 	}
 	
 	// Pas utiliser pour le Jeu
-	/*
+	
 	private void affichageNumeroZone( Graphics2D g2 )
 	{
 		g2.setColor( Color.YELLOW );
@@ -244,7 +231,7 @@ public class PanelPlateau extends JPanel
 			}
 		}
 	}
-	*/
+	
 	
 	private void affichageExtremiteSelectionnee( Graphics2D g2 )
 	{
@@ -252,7 +239,6 @@ public class PanelPlateau extends JPanel
 		int posExSelcX = (int) this.posExtremiteSlct.getX() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
 		int posExSelcY = (int) this.posExtremiteSlct.getY() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
 		
-		// System.out.println( "Affichage de l'Extremité : " + (int) this.posExtremiteSlct.getX() + "/" + (int) this.posExtremiteSlct.getY() );
 		g2.fillOval( posExSelcX,
 		             posExSelcY,
 		             (int) TAILLE_CASE,

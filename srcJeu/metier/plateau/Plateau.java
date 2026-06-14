@@ -108,8 +108,11 @@ public class Plateau
 			Voyage v = this.getVoyage(cpt);
 			
 			// Si le voyage va de Source à Destination
-			if ( ( v.getPlaneteSource() == caseSource && v.getPlaneteDestination() == caseDest   ) || 
-			     ( v.getPlaneteSource() == caseDest   && v.getPlaneteDestination() == caseSource )    )
+			if ( 
+			     ( (v.getPlaneteSource() == caseSource && v.getPlaneteDestination() == caseDest   ) ||
+			       (v.getPlaneteSource() == caseDest   && v.getPlaneteDestination() == caseSource )    ) &&
+			        v.getEspece() == null // On regarde bien que le voyage n'as pas déjà été fait.
+			   )
 			{
 				boolean coupeUnVoyage = false;
 				

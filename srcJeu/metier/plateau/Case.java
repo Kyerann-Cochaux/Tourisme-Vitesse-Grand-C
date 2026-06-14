@@ -40,7 +40,9 @@ public class Case
 	
 	public String toString()
 	{
-		return "Case : " + ( this.estVide() ? "Aucun" : this.getPlanete().getSymbole() ) + " [" + this.posX + ":" + this.posY + "]";
+		return "Case : " + ( this.estVide() ? "Aucun" : this.getPlanete().getSymbole() ) + 
+		                  " [" + this.posX + ":" + this.posY + "] "                      +
+						    "(" +this.numSysteme + ")";
 	}
 	
 }

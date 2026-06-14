@@ -5,6 +5,9 @@ import srcJeu.metier.plateau.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class Manche
@@ -43,7 +46,6 @@ public class Manche
 	public String     getEspece   ()           {return this.espece;                 }
 	public Pioche     getPioche   ()           {return this.pioche;                 }
 	public Carte      getSommet   ()           {return this.pioche.getSommet();     }
-//public Carte      getCarteInit(int indice) {return this.pioche.getCarteInit(indice);}
 	public List<Case> getlstCases ()           {return this.lstCases;               }
 	public Case       getPremier  ()           {return this.lstCases.getFirst();    }
 	public Case       getDernier  ()           {return this.lstCases.getLast() ;    }
@@ -56,47 +58,53 @@ public class Manche
 	
 	public int calculerScore()
 	{
-		// Je met la valeur à 11 pour éviter un problème d'indice si on visite 10 
-		int[] tabZoneDiff = new int[11];
-		int  nbPlaneteMax = 0;
-		int  nbZonesDiff  = 0;
 
-		for (int cpt = 0; cpt < tabZoneDiff.length; cpt++) 
-			// On initialise à 0, ce qui correspond à aucune valeur
-			tabZoneDiff[cpt] = 0;
-			
-		// On parcours toute nos Case de notre croisière
-		for (int cpt = 0; cpt < this.lstCases.size(); cpt++) 
+		int[] tabCase = new int[11];
+
+		int nbSystemes   = 1;
+		int nbPlanetes   = 1;
+		int nbPlaneteMax = 1;
+
+		// Init à -1
+		for (int cpt = 0; cpt < tabCase.length; cpt++) 
+			tabCase[cpt] = -1;
+
+		// On ajoute le numéro de la zone au tabCases
+
+		for (Case caseVisitee : this.lstCases)
+			tabCase[this.lstCases.indexOf(caseVisitee) ] = caseVisitee.getNumSysteme();
+
+		// Tri des systèmes
+		ArrayList<Integer> lstCases = new ArrayList<Integer>();
+
+		for (int cpt = 0; cpt < tabCase.length; cpt++) 
+			if (tabCase[cpt] != -1)
+				lstCases.add(tabCase[cpt]);
+
+		Collections.sort(lstCases);
+
+		for (int cpt = 0; cpt < lstCases.size(); cpt++) 
+			tabCase[cpt] = lstCases.get(cpt);
+
+
+		for (int cpt = 1; cpt < tabCase.length; cpt++)
 		{
-			// On regarde toutes les valeurs présentes dans le tableau d'entier
-			for (int cptVal = 0; cptVal < tabZoneDiff.length; cptVal++)
+			if (tabCase[cpt ] != -1)
 			{
 
-				// Si le numSysteme de la case est identique à la valeur au même indice (ex : numSysteme == 1 et nbZoneDiff[cptVal] == 1)
-				if (this.lstCases.get(cpt).getNumSysteme() == tabZoneDiff[cptVal] )
-					// On incrémente la valeur
-					tabZoneDiff[cptVal ]++;
-
-				else 
-					// Sinon on met la valeur différente à l'indice suivant
-					tabZoneDiff[this.lstCases.get(cpt).getNumSysteme()] = tabZoneDiff[cptVal++]++;
-				
+				if (tabCase[cpt] != tabCase[cpt-1])
+				{
+					nbSystemes++;
+					nbPlaneteMax = Math.max(nbPlaneteMax, nbPlanetes);
+					nbPlanetes   = 1;
+				}
+				else nbPlanetes++;
 			}
-		}
-
-		// Ensuite... On regarde combien de zones ont été visité
-		nbPlaneteMax = tabZoneDiff[0];
-
-		for (int cpt = 0; cpt < tabZoneDiff.length; cpt++) 
-		{
-			if (tabZoneDiff[cpt] != 0) 
-			{
-				if (tabZoneDiff[cpt] > nbPlaneteMax) nbPlaneteMax = tabZoneDiff[cpt];
-				nbZonesDiff++;
 			}
-		}
 
-		return nbZonesDiff * nbPlaneteMax;
+		nbPlaneteMax = Math.max(nbPlaneteMax, nbPlanetes);
+
+		return (nbSystemes * nbPlaneteMax) ;
 	}
 	
 	
@@ -137,9 +145,6 @@ public class Manche
 		if( cDep == null ) return false;
 		if( cFin == null ) return false;
 		
-		System.out.println("\n~~~ ajouterCase() ~~~");
-		System.out.println( "Nombre de Planètes visité : " + this.lstCases.size() );
-		
 		// On regarde si cette case as deja été visitée
 		for (int indCase = 0; indCase < this.lstCases.size(); indCase++)
 		{
@@ -159,25 +164,21 @@ public class Manche
 			if (voyageTemp.getEspece() != null && voyageTemp.getEspece().equals(this.espece) ||
 			      this.lstCases.size() <= 1 )
 			{
-				//System.out.println("Voyage " + indVoyage + " de l'espèce attendu" ); // anciennement "bonne SP"
-				if (
-					(voyageTemp.getPlaneteSource().getPosX()      == cDep.getPosX() &&
-					 voyageTemp.getPlaneteSource().getPosY()      == cDep.getPosY() )   ||
-					(voyageTemp.getPlaneteDestination().getPosX() == cDep.getPosX() &&
-					 voyageTemp.getPlaneteDestination().getPosY() == cDep.getPosY() )
+				if (  voyageTemp.getPlaneteSource     ().getPosX() == cDep.getPosX() &&
+					  voyageTemp.getPlaneteSource     ().getPosY() == cDep.getPosY() ||
+					  voyageTemp.getPlaneteDestination().getPosX() == cDep.getPosX() &&
+					  voyageTemp.getPlaneteDestination().getPosY() == cDep.getPosY() 
 					)
 				{
-					//System.out.println("Voyage " + indVoyage + " à la bonne position" ); // anciennement "bonne POs"
 					if ( this.lstCases.getFirst().getPosX() == cDep.getPosX() && 
-						this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
+						 this.lstCases.getFirst().getPosY() == cDep.getPosY()     )
 					{
 						this.lstCases.addFirst(cFin);
 						return true;
 					}
 					
-					
 					if ( this.lstCases.getLast().getPosX() == cDep.getPosX() && 
-						this.lstCases.getLast().getPosY() == cDep.getPosY()    )
+						 this.lstCases.getLast().getPosY() == cDep.getPosY()    )
 					{
 						this.lstCases.addLast(cFin);
 						return true;
@@ -187,7 +188,6 @@ public class Manche
 			}
 		}
 		
-		System.out.println("ajouterCase : Case pas Ajouté");
 		return false;
 	}
 

@@ -34,7 +34,13 @@ public class Pioche
 	
 	public Carte getSommet()
 	{
-		return this.pioche.getFirst();
+		// Si il n'y a plus de cartes dans la pioche on retourne null
+		if ( this.pioche.size() > 0 )
+		{
+			return this.pioche.getFirst();
+		}
+		
+		return null ;
 	}
 
 	public int   getTaillePioche()    { return this.pioche.size()      ; }
