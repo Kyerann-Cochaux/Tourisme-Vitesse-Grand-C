@@ -120,7 +120,7 @@ public class Plateau
 				for (int indVoyage = 0; indVoyage < this.getNbVoyages(); indVoyage++)
 					coupeUnVoyage |= v.coupe(this.lstVoyages.get(indVoyage));
 				
-				// System.out.println("++++++++++++++++++++++ coupe : " + coupeUnVoyage);
+				System.out.println("++++++++++++++++++++++ coupe : " + coupeUnVoyage);
 				
 				if ( !coupeUnVoyage )
 				{

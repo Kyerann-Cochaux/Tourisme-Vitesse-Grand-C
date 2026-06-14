@@ -7,13 +7,15 @@ import javax.imageio.ImageIO ;
 
 import java.io.File;
 import java.io.IOException ;
-
 import java.awt.Dimension ;
 import java.awt.Graphics ;
 import java.awt.Graphics2D ;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.image.BufferedImage ;
 
@@ -53,6 +55,8 @@ public class PanelPlateau extends JPanel
 		this.setBackground    ( FrameJeu.COULEUR_FOND_PLATEAU );
 
 		this.posExtremiteSlct = null ;
+
+		//this.addMouseMotionListener(this);
 		
 	}
 
@@ -177,8 +181,11 @@ public class PanelPlateau extends JPanel
 	private void affichageExtremiteSelectionnee( Graphics2D g2 )
 	{
 		g2.setColor( new Color( 255, 0, 255 ) );
+
 		int posExSelcX = (int) this.posExtremiteSlct.getX() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
 		int posExSelcY = (int) this.posExtremiteSlct.getY() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
+
+		System.out.println("PosExtremité -> (" + posExSelcX + ":" + posExSelcY + ")");
 		
 		g2.fillOval( posExSelcX,
 		             posExSelcY,
@@ -189,7 +196,7 @@ public class PanelPlateau extends JPanel
 	
 	private void affichagePlanetes( Graphics2D g2 )
 	{
-		int nbLigne   = this.ctrl.getNbLignes();
+		int nbLigne   = this.ctrl.getNbLignes  ();
 		int nbColonne = this.ctrl.getNbColonnes();
 		
 		for( int cptLig= 0 ; cptLig < nbLigne ; cptLig++ )
@@ -212,7 +219,7 @@ public class PanelPlateau extends JPanel
 					{
 						g2.drawImage(
 						              image,                /* L'image à afficher */
-						              null,                 /* Traitement d'Image (Innutile ici) */
+						              null,                 /* Traitement d'Image (Inutile ici) */
 						              TAILLE_CASE * cptCol, /* Position X */
 						              TAILLE_CASE * cptLig  /* Position Y */
 						            );
@@ -256,4 +263,48 @@ public class PanelPlateau extends JPanel
 			}
 		}
 	}
+
+	/*@Override
+	public void mouseDragged(MouseEvent e) 
+	{
+		
+	}*/
+
+	/*@Override
+	/*public void mouseMoved(MouseEvent e) 
+	{
+		
+		int sourisX = (int) e.getX() /* TAILLE_CASE*/;
+	/* 	int sourisY = (int) e.getY() /* TAILLE_CASE*/;
+	/* /	int caseX   = 0;
+		int caseY   = 0;
+
+		boolean planetePresente = false;
+
+
+		for ( int cptCol= 0 ; cptCol < this.ctrl.getNbLignes() ; cptCol++ )
+		{
+			for( int cptLig= 0 ; cptLig < this.ctrl.getNbColonnes(); cptLig++ )
+			{
+				if ( this.ctrl.getPlanete(cptCol, cptLig) != null )
+				{
+					caseY = cptCol * TAILLE_CASE + 25;
+					caseX = cptLig * TAILLE_CASE + 25;
+
+					if (sourisX >= caseX -25 && sourisX  <= caseX + 25 && 
+						sourisY >= caseY - 25 && sourisY <= caseY + 25)
+						planetePresente = true;
+				}
+			}
+		}
+
+		if (planetePresente) this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR) );
+		else                 this.setCursor(Cursor.getDefaultCursor() );
+
+		
+
+		System.out.print  ("(" + sourisX + ":" + sourisY + ")");
+		System.out.println("\t (" + caseX + ":" + caseY + ")");
+		
+	}*/
 }

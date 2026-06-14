@@ -89,7 +89,7 @@ public class PanelJeu extends JPanel
 
 		this.ensLblCartes = new JLabel[this.ctrl.getNbTypePlanetes() * 2 +2];
 
-		GridLayout gl1 = new GridLayout(6,1,0,9);
+		GridLayout gl1 = new GridLayout(6,1,0,8);
 
 		if (this.ctrl.getNbTypeEspeces() >= 3) gl1.setRows(gl1.getRows() + this.ctrl.getNbTypeEspeces() /2);
 
@@ -137,7 +137,7 @@ public class PanelJeu extends JPanel
 		);
 		
 
-		this.lblTexteScore     = new JLabel("Score des croisières : ");
+		this.lblTexteScore     = new JLabel("Score des croisières : ", SwingConstants.CENTER);
 		this.lblTextePremium   = new JLabel("Cartes Premium : "      );
 		this.lblTexteStandards = new JLabel("Cartes Standards : "    );
 		this.lblTextePioche    = new JLabel
@@ -177,7 +177,7 @@ public class PanelJeu extends JPanel
 
 		this.lblTexteScore.setForeground(FrameJeu.COULEUR_ZONE              );
 		this.lblTexteScore.setOpaque    (false                              );
-		this.lblTexteScore.setFont      (new Font("Goldman", Font.BOLD, 17) );
+		this.lblTexteScore.setFont      (new Font("Goldman", Font.BOLD, 21) );
 
 		this.lblTexteStandards.setForeground(FrameJeu.COULEUR_ZONE              );
 		this.lblTexteStandards.setOpaque    (false                              );
@@ -339,13 +339,14 @@ public class PanelJeu extends JPanel
 				// Gestion de l'affichage des Cartes Destionnations
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					if ( PanelJeu.this.ctrl.getNumManche()    <= PanelJeu.this.ctrl.getNbTypeEspeces() &&
+					if ( PanelJeu.this.ctrl.getNumManche   () <= PanelJeu.this.ctrl.getNbTypeEspeces() &&
 					     PanelJeu.this.ctrl.getTaillePioche() > 0                                        )
 					{
 						PanelJeu.this.majImages();
 					}
 				}
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent e)
 			{
@@ -353,15 +354,15 @@ public class PanelJeu extends JPanel
 
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					int x, y, w, h;
+					int x, w, h;
 
-					x = PanelJeu.this.lblActionPioche.getX();
+					x = PanelJeu.this.lblActionPioche.getX     ();
 					w = PanelJeu.this.lblActionPioche.getWidth ();
 					h = PanelJeu.this.lblActionPioche.getHeight();
 
 					g2.setStroke(new BasicStroke(4) );
-					g2.setColor(Color.BLACK);
-					g2.drawRect(x -20,685,w + 40,h + 40);	
+					g2.setColor(Color.decode("#eff31d"));
+					g2.drawRect(x -20,655,w + 40,h + 40);	
 
 					PanelJeu.this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR) );
 				}
@@ -372,15 +373,16 @@ public class PanelJeu extends JPanel
 			public void mouseExited(MouseEvent e)
 			{
 				Graphics2D g2 = (Graphics2D) PanelJeu.this.getGraphics();
+
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					int x = PanelJeu.this.lblActionPioche.getX();
+					int x = PanelJeu.this.lblActionPioche.getX     ();
 					int w = PanelJeu.this.lblActionPioche.getWidth ();
 					int h = PanelJeu.this.lblActionPioche.getHeight();
 
-					g2.setStroke(new BasicStroke(4) );
-					g2.setColor(FrameJeu.COULEUR_FOND_CLAIR);
-					g2.drawRect(x -20,685,w + 40,h + 40);	
+					g2.setStroke(new BasicStroke (4)         );
+					g2.setColor (FrameJeu.COULEUR_FOND_CLAIR );
+					g2.drawRect (x -20,655,w + 40,h + 40     );
 					
 					PanelJeu.this.setCursor(Cursor.getDefaultCursor() );
 
@@ -497,14 +499,24 @@ public class PanelJeu extends JPanel
 		{
 			JLabel lblScore = new JLabel();
 
-			lblScore.setFont      (new Font ("Monospaced", Font.BOLD, 18) );
-			lblScore.setOpaque    (false                                  );
+			lblScore.setOpaque(false);
 			
 			if (cpt < this.ctrl.getNbTypeEspeces() )
 			{
-				lblScore.setForeground(FrameJeu.COULEUR_ZONE                  );
 
-				lblScore.setText (String.format("%-11s",this.ctrl.getNomEspece(cpt) )+" : " +
+				if (cpt == this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) )
+				{
+
+					lblScore.setForeground(Color.decode("#28f31d") );
+					lblScore.setFont(new Font("Monospaced", Font.BOLD, 21) );
+				}
+				else
+				{
+					lblScore.setForeground(FrameJeu.COULEUR_ZONE);
+					lblScore.setFont(new Font("Monospaced", Font.BOLD, 19) );
+				}
+
+				lblScore.setText (String.format("%-11s",this.ctrl.getNomEspece(cpt) ) +" : " +
 				                  String.format("%-3d", this.ctrl.calculerScore(this.ctrl.getNomEspece(cpt) ) ) );
 				
 				lblScore.setIcon(new ImageIcon("../images/Tuiles/Centre-Espece-" + this.ctrl.getNomEspece(cpt) + ".png" ) )  ;
@@ -512,7 +524,9 @@ public class PanelJeu extends JPanel
 			}
 			else 
 			{
-				lblScore.setForeground(Color.decode("#e24242"));
+				lblScore.setFont(new Font("Monospaced", Font.BOLD, 19) );
+				lblScore.setForeground(Color.decode("#0ba8d3"));
+
 				lblScore.setText(String.format("%-16s","     Total ") +" : "+ this.ctrl.getScoreTotal() ) ;
 			}
 

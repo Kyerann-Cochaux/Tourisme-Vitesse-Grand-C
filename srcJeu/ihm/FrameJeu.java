@@ -55,7 +55,7 @@ public class FrameJeu extends JFrame
 		/* ---------------------------------- */
 		
 		this.setVisible              (true);
-		this.setResizable            (false);
+		//this.setResizable            (false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
