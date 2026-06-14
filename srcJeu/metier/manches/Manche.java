@@ -18,22 +18,23 @@ public class Manche
 	private Metier metier;
 
 	/*Factory pour vérifier si l'espèce en paramètre est une espèce valide  */
-	public static Manche creerManche(String espece, Case c, Metier metier) // Case ici doit être le départ de l'espèce de la manche actuelle
+	// Case ici doit être le départ de l'espèce de la manche actuelle
+	public static Manche creerManche(String espece, Case c, Metier metier, boolean demo) 
 	{
 		for (int cpt = 0; cpt < metier.getPlateau().getNbEspeces() ; cpt++)
 		{
 			if (  metier.getPlateau().getNomEspece(cpt).equals(espece) )
-				return new Manche(espece, c, metier);
+				return new Manche(espece, c, metier, demo);
 		}
 		
 		return null;
 	}
 
-	private Manche(String espece, Case c, Metier metier)
+	private Manche(String espece, Case c, Metier metier, boolean demo)
 	{
 		this.espece   = espece;
 		this.pioche   = new Pioche(metier);
-		this.pioche.melangerCarte(); // On mélange la pioche ici
+		if (!demo) this.pioche.melangerCarte(); // On mélange la pioche ici
 		this.lstCases = new ArrayList<Case>();
 		this.metier = metier;
 		this.lstCases.add(c);

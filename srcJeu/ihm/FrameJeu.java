@@ -5,9 +5,14 @@ import srcJeu.AppliJeu;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.Locale;
 
-public class FrameJeu extends JFrame
+public class FrameJeu extends JFrame implements ActionListener
 {
 	protected static final Font  POLICE_TEXTE  = new Font    ("Goldman", Font.BOLD, 25);
 
@@ -30,6 +35,10 @@ public class FrameJeu extends JFrame
 	private JPanel   panelActuel;
 
 	private String nomSauvegardeChargee;
+
+	private JMenuBar  menub;
+	private JMenu     menu ;
+	private JMenuItem menui;
 	
 	public FrameJeu(AppliJeu ctrl)
 	{
@@ -43,10 +52,17 @@ public class FrameJeu extends JFrame
 		
 		this.ctrl        = ctrl;
 		this.panelActuel = new PanelMenu(this.ctrl, this);
+
+		this.menub = new JMenuBar ();
+		this.menu  = new JMenu    ();
+		this.menui = new JMenuItem();
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
+		
+		this.menu .add(menui);
+		this.menub.add(menu );
 		
 		this.add(this.panelActuel);
 		
@@ -54,9 +70,13 @@ public class FrameJeu extends JFrame
 		/*      Activation des composants     */
 		/* ---------------------------------- */
 		
-		this.setVisible              (true);
-		//this.setResizable            (false);
+		this.setVisible              (true                );
+		//this.setResizable            (false               );
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+
+		menui.addActionListener(this);
+
 	}
 
 	public void ouvrirPanel(int numeroPanel)
@@ -67,12 +87,25 @@ public class FrameJeu extends JFrame
 		{
 			this.add             (new PanelJeu(ctrl, this) );
 			this.setExtendedState(JFrame.MAXIMIZED_BOTH    );
+
+			this.menui.setAccelerator(KeyStroke .getKeyStroke(KeyEvent.VK_D, 
+				                      InputEvent.CTRL_DOWN_MASK + InputEvent.ALT_DOWN_MASK + InputEvent.SHIFT_DOWN_MASK)); 
+			this.setJMenuBar(menub);
 		}
 	}
 
 	public String chargerFichier()
 	{
-		JFileChooser explorateur  = new JFileChooser();
+		UIManager.put("FileChooser.openButtonText"         , "Ouvrir"      );
+		UIManager.put("FileChooser.cancelButtonText"       , "Annuler"     );
+		UIManager.put("FileChooser.lookInLabelText"        , "Chercher"    );
+		UIManager.put("FileChooser.fileNameLabelText"      , "Fichier"     );
+		UIManager.put("FileChooser.filesOfTypeLabelText"   , "Type"        );
+		UIManager.put("FileChooser.openButtonToolTipText"  , "Ouvrir"      );
+		UIManager.put("FileChooser.acceptAllFileFilterText", "type fichier");
+
+		JFileChooser explorateur = new JFileChooser();
+
 		String retFichier         = "";
 		this.nomSauvegardeChargee = "";
 		
@@ -88,7 +121,29 @@ public class FrameJeu extends JFrame
 				
 			retFichier = explorateur.getSelectedFile().getAbsolutePath();
 		}
+
+		this.nomSauvegardeChargee = retFichier;
 		return retFichier;
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		int res = JOptionPane.showConfirmDialog
+						(this, "Voulez vous activer le mode démo ?",
+						"Mode démo", JOptionPane.YES_NO_OPTION);
+
+		if (res == JOptionPane.YES_OPTION) 
+		{
+			//this.ctrl.chargerPlateau(this.nomSauvegardeChargee, true);
+			//this.ouvrirPanel        (FrameJeu.PANEL_JEU             );
+			
+
+			//this.setTitle("COUCOU");
+			//this.revalidate();
+			//this.repaint();
+		}
+		
 	}
 }

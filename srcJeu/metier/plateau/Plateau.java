@@ -117,8 +117,8 @@ public class Plateau
 				boolean coupeUnVoyage = false;
 				
 				// parcours de tout les voyages
-				for (int indVoyage = 0; indVoyage < this.getNbVoyages(); indVoyage++)
-					coupeUnVoyage |= v.coupe(this.lstVoyages.get(indVoyage));
+				//for (int indVoyage = 0; indVoyage < this.getNbVoyages(); indVoyage++)
+				//	coupeUnVoyage |= v.coupe(this.lstVoyages.get(indVoyage));
 				
 				System.out.println("++++++++++++++++++++++ coupe : " + coupeUnVoyage);
 				
@@ -127,7 +127,7 @@ public class Plateau
 					// 3. On applique l'espèce sur le voyage trouvé
 					if ( v.setEspece(espece) )
 					{
-						// remetre le voyage a la fin de la liste
+						// remettre le voyage a la fin de la liste
 						this.lstVoyages.remove(cpt);
 						this.lstVoyages.addLast(v);
 						return true;

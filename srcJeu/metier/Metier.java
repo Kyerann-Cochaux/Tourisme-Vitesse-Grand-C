@@ -40,24 +40,31 @@ public class Metier
 	/*               Accesseurs           */
 	/* ---------------------------------- */
 	
-	public Plateau      getPlateau       () { return this.plateauJeu                            ; }
-	public Manche       getMancheCourante() { return this.lstManches.get( this.mancheCourante ) ; }
-	public int          getNumManche     () { return this.mancheCourante                        ; }
-	public Carte        getSommet        () { return this.getMancheCourante().getSommet()       ; }
-	public List<Voyage> getVoyages       () { return this.plateauJeu.getVoyages()               ; }
-	public Manche       getManche(String espece)
+	public Plateau      getPlateau       () { return this.plateauJeu                           ;}
+	public int          getNumManche     () { return this.mancheCourante                       ;}
+	public Manche       getMancheCourante() { return this.lstManches.get( this.mancheCourante );}
+	public Carte        getSommet        () { return this.getMancheCourante().getSommet()      ;}
+	public List<Voyage> getVoyages       () { return this.plateauJeu.getVoyages        ()      ;}
+
+	public Manche getManche(String espece)
 	{
 		for (Manche manche : this.lstManches) 
 		{
 			if (manche.getEspece().equals(espece) ) 
-				return manche;
-			
+				return manche;	
 		}
+
 		return null;
 	}
-	
-	//public Carte getCarteInit(int indice) {return this.getMancheCourante().getCarteInit(indice);}
-	
+
+	public int getScoreTotal()
+	{
+		int scoreTotal = 0;
+		for (Manche m : this.lstManches) 
+			scoreTotal += m.calculerScore();
+		
+		return scoreTotal;
+	}
 	
 	/* ---------------------------------- */
 	/*          Autres méthodes           */
@@ -80,8 +87,8 @@ public class Metier
 	
 	public void mancheSuivante()
 	{
-		if (  this.mancheCourante < this.lstManches.size()-1 )
-			this.mancheCourante++ ;
+		if (this.mancheCourante < this.lstManches.size()-1 )
+			this.mancheCourante++;
 			
 	}
 	
@@ -104,15 +111,13 @@ public class Metier
 	{
 		
 		// On regarde si il nous reste une Destination
-		if ( this.getMancheCourante().getSommet() == null )
-			return false;
+		if ( this.getMancheCourante().getSommet() == null ) return false;
 		
 		// On regarde si c'est une Planète que l'on a cliqué
 		if ( this.plateauJeu.getCase(xFin, yFin).getPlanete() == null ) return false ;
 		
 		// On regarde si la Planète de laquelle on part est bien une extremité
-		if ( ! this.getMancheCourante().estExtremite(xDep, yDep) )
-			return false;
+		if ( ! this.getMancheCourante().estExtremite(xDep, yDep) ) return false;
 		
 		
 		// On regarde si on clique sur la Planète du bon Type sauf si on a un Joker
@@ -140,7 +145,7 @@ public class Metier
 	
 	public boolean estExtremite (int col, int lig) { return this.getMancheCourante().estExtremite(col, lig); }
 	
-	public boolean chargerPlateau(String cheminSauvegarde)
+	public boolean chargerPlateau(String cheminSauvegarde, boolean demo)
 	{
 		int nbLignes   = 0;
 		int nbColonnes = 0;
@@ -246,11 +251,11 @@ public class Metier
 			{
 				for(int lig = 0; lig < this.plateauJeu.getNbLignes(); lig++)
 				{
-					if(this.plateauJeu.getCase(col, lig).getPlanete() != null &&
+					if(this.plateauJeu.getCase(col, lig).getPlanete()             != null &&
 					   this.plateauJeu.getCase(col, lig).getPlanete().getEspece() != null &&
 					   this.plateauJeu.getCase(col, lig).getPlanete().getEspece().equals(this.plateauJeu.getNomEspece(cpt)))
 					{
-						Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt), this.plateauJeu.getCase(col, lig), this);	
+						Manche m = Manche.creerManche(this.plateauJeu.getNomEspece(cpt), this.plateauJeu.getCase(col, lig), this,demo);	
 						lstManches.add(m);
 					}
 				}
@@ -259,8 +264,16 @@ public class Metier
 		
 		this.plateauJeu.actualiserVoyages();
 		
-		// melanges des manches
-		Collections.shuffle( this.lstManches );
+		// melanges des manches en cas de partie normal
+		if (!demo) Collections.shuffle( this.lstManches );
+		else 
+		{
+			for (Manche m : this.lstManches) 
+			{
+				System.out.println(m.getPioche() );
+				
+			}
+		}
 		
 		return true;
 	}
@@ -281,14 +294,7 @@ public class Metier
 	{
 		return this.getManche(espece).calculerScore();
 	}
-	public int getScoreTotal()
-	{
-		int scoreTotal = 0;
-		for (Manche m : this.lstManches) 
-			scoreTotal += m.calculerScore();
-		
-		return scoreTotal;
-	}
+
 
 	public String toString()
 	{

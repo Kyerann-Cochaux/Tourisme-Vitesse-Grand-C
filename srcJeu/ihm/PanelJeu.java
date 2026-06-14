@@ -163,7 +163,7 @@ public class PanelJeu extends JPanel
 
 		panelPioche.setOpaque(false);
 
-		panelCentre.setBackground(FrameJeu.COULEUR_FOND_CLAIR);
+		panelCentre.setBackground(FrameJeu.COULEUR_FOND_PLATEAU);
 
 		panelCartes.setBackground(FrameJeu.COULEUR_FOND_CLAIR);
 
@@ -230,6 +230,8 @@ public class PanelJeu extends JPanel
 		this.panelPlateau   .addMouseListener(this.gererClic() );
 		this.lblActionPioche.addMouseListener(this.gererClic() );
 		this.lblActionPioche.addMouseMotionListener(this.gererClic() );
+
+
 
 	}
 
@@ -354,15 +356,19 @@ public class PanelJeu extends JPanel
 
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					int x, w, h;
+					int x, y, w, h;
 
 					x = PanelJeu.this.lblActionPioche.getX     ();
 					w = PanelJeu.this.lblActionPioche.getWidth ();
 					h = PanelJeu.this.lblActionPioche.getHeight();
 
+					if (!PanelJeu.this.frameJeu.isResizable() ) y = 685;
+					else                                       y = 645;
+					
+
 					g2.setStroke(new BasicStroke(4) );
 					g2.setColor(Color.decode("#eff31d"));
-					g2.drawRect(x -20,655,w + 40,h + 40);	
+					g2.drawRect(x -20,y,w + 40,h + 40);	
 
 					PanelJeu.this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR) );
 				}
@@ -379,10 +385,14 @@ public class PanelJeu extends JPanel
 					int x = PanelJeu.this.lblActionPioche.getX     ();
 					int w = PanelJeu.this.lblActionPioche.getWidth ();
 					int h = PanelJeu.this.lblActionPioche.getHeight();
+					int y;
+
+					if (!PanelJeu.this.frameJeu.isResizable() ) y = 685;
+					else                                       y = 645;
 
 					g2.setStroke(new BasicStroke (4)         );
 					g2.setColor (FrameJeu.COULEUR_FOND_CLAIR );
-					g2.drawRect (x -20,655,w + 40,h + 40     );
+					g2.drawRect (x -20,y,w + 40,h + 40     );
 					
 					PanelJeu.this.setCursor(Cursor.getDefaultCursor() );
 
@@ -562,5 +572,17 @@ public class PanelJeu extends JPanel
 		this.frameJeu    .revalidate();
 		this.panelPlateau.repaint   ();
 
+	}
+
+	protected void viderDefausse()
+	{
+		for (int cpt = 0; cpt < this.tabPremiumPosee.length; cpt++) 
+		{
+			this.tabPremiumPosee  [cpt] = null;
+			this.tabStandardsPosee[cpt] = null;	
+		}	
+
+		this.repaint();
+		this.revalidate();
 	}
 }

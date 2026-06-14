@@ -39,26 +39,22 @@ public class AppliJeu
 	
 	public Planete getPlanete  (int indCol, int indLig) {return this.metier.getPlateau().getCase(indCol,indLig).getPlanete();}
 	
-	public int getTaillePioche() { return this.metier.getMancheCourante().getPioche().getTaillePioche() ; }
+	public int getTaillePioche()  {return this.metier.getMancheCourante().getPioche().getTaillePioche();}
+	public int getScoreTotal  ()  {return this.metier.getScoreTotal    ()                              ;}
 	
 	public String getSommet()
 	{
-			String symbole = "";
-			
-			// Si il n'y a plus de sommet on renvoie rien.
-			if ( this.metier.getSommet() == null )
-			{
-				return null ;
-			}
-			
-			if ( this.metier.getSommet().getPremium() ) symbole += "Prem-";
-			
-			return symbole + this.metier.getSommet().getSymbole().charAt(0);
+		String symbole = "";
+		
+		// Si il n'y a plus de sommet on renvoie rien.
+		if ( this.metier.getSommet() == null ) return null ;
+		if ( this.metier.getSommet().getPremium() ) symbole += "Prem-";
+		
+		return symbole + this.metier.getSommet().getSymbole().charAt(0);
 	}
 
 	public boolean sommetPremium() { return this.metier.getSommet().getPremium();}
 
-	
 	// Retourne le nom de l'espèce en croisières dans la manche actuelle
 	public String getEspCroisiereCrt() { return this.metier.getMancheCourante().getEspece() ; }
 
@@ -76,32 +72,30 @@ public class AppliJeu
 	/*            Modificateurs           */
 	/* ---------------------------------- */
 	
+	/* ---------------------------------- */
+	/*           Autres méthodes          */
+	/* ---------------------------------- */
+	
 	public boolean effectuerVoyage(int xDep, int yDep, int xFin, int yFin, String espece)
 	{
 		return this.metier.effectuerVoyage(xDep, yDep, xFin, yFin, espece);
 	}
 	
-	/* ---------------------------------- */
-	/*           Autres méthodes          */
-	/* ---------------------------------- */
-
 	public boolean decouvrirCarte() { return this.metier.decouvrirCarte() ; }
-
-
 
 	public void initialiserPlateau(int nbLignes, int nbColonnes, int nbFormes, int nbEspeces)
 	{
 		this.metier.initialiserPlateau(nbLignes, nbColonnes, nbFormes, nbEspeces);
 	}
 	
-	public void supprimerEspece( int indCol, int indLig ) { this.getPlanete( indCol, indLig ).setEspece(null);}
-	public void chargerPlateau (String fichier          ) { this.metier.chargerPlateau(fichier)                      ;}
-	public int  calculerScore  (String espece)            {return this.metier.calculerScore(espece)                  ;}
-	public int  getScoreTotal()                           { return this.metier.getScoreTotal();}
-	
-	public boolean estMancheFinie() { return this.metier.getMancheCourante().estMancheFinie() ; }
-	
-	public boolean estExtremite(int col, int lig) {return this.metier.estExtremite(col, lig);}
+	public void    supprimerEspece( int indCol, int indLig )    {       this       .getPlanete( indCol, indLig ).setEspece(null);}
+	public void    chargerPlateau (String fichier,boolean demo) {       this.metier.chargerPlateau(fichier,demo)                ;}
+	public int     calculerScore  (String espece)               {return this.metier.calculerScore (espece )                     ;}
+	public boolean estMancheFinie ()                            {return this.metier.getMancheCourante().estMancheFinie()        ;}
+	public boolean estExtremite   (int col, int lig)            {return this.metier.estExtremite(col, lig)                      ;}
+
+
+
 	public static void main(String[] args) 
 	{
 		new AppliJeu();

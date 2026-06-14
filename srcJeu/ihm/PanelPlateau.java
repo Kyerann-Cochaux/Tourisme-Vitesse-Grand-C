@@ -146,6 +146,12 @@ public class PanelPlateau extends JPanel
 				}
 			}
 		}
+		g2.setStroke(new BasicStroke(7) );
+		g2.setColor(Color.decode("#0592de"));
+		//g2.setColor(Color.decode("#2c4db2"));
+		//g2.setColor(Color.decode("#3930e5"));
+		//g2.setColor(Color.decode("#09b4f7"));
+		g2.drawRect(0, 0, this.ctrl.getNbColonnes() * PanelPlateau.TAILLE_CASE, this.ctrl.getNbLignes() * PanelPlateau.TAILLE_CASE);
 	}
 	
 	private void affichageLiens( Graphics2D g2 )

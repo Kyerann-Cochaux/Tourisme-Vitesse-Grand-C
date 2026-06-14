@@ -78,8 +78,8 @@ public class PanelMenu extends JPanel implements ActionListener
 
 			if (fichier != null && !fichier.equals("") )
 			{
-				this.ctrl    .chargerPlateau( fichier);
-				this.frameJeu.ouvrirPanel(FrameJeu.PANEL_JEU);
+				this.ctrl    .chargerPlateau( fichier, false   );
+				this.frameJeu.ouvrirPanel   (FrameJeu.PANEL_JEU);
 
 			}
 		}
