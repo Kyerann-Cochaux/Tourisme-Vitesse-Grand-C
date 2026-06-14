@@ -107,15 +107,38 @@ public class Plateau
 		{
 			Voyage v = this.getVoyage(cpt);
 			
-			// Si le voyage va de Source à Destination (ou l'inverse selon votre règle)
-			if ( (v.getPlaneteSource() == caseSource && v.getPlaneteDestination() == caseDest) ||
-				(v.getPlaneteSource() == caseDest   && v.getPlaneteDestination() == caseSource) )
+			// Si le voyage va de Source à Destination
+			if ( ( v.getPlaneteSource() == caseSource && v.getPlaneteDestination() == caseDest   ) || 
+			     ( v.getPlaneteSource() == caseDest   && v.getPlaneteDestination() == caseSource )    )
 			{
-				// 3. On applique l'espèce sur le voyage trouvé
-				return v.setEspece(espece);
+				boolean coupeUnVoyage = false;
+				
+				// parcours de tout les voyages
+				for (int indVoyage = 0; indVoyage < this.getNbVoyages(); indVoyage++)
+					coupeUnVoyage |= v.coupe(this.lstVoyages.get(indVoyage));
+				
+				System.out.println("++++++++++++++++++++++ coupe : " + coupeUnVoyage);
+				
+				if ( !coupeUnVoyage )
+				{
+					// 3. On applique l'espèce sur le voyage trouvé
+					if ( v.setEspece(espece) )
+					{
+						// remetre le voyage a la fin de la liste
+						this.lstVoyages.remove(cpt);
+						this.lstVoyages.addLast(v);
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+				}
+				
 			}
 		}
-		return false; // Aucun voyage correspondant trouvé entre ces deux cases
+		
+		return false; // Aucun voyage correct trouvé entre ces deux cases
 	}
 
 

@@ -61,7 +61,6 @@ public class Voyage
 	public boolean setEspece(String espece)
 	{
 		if( espece == null || espece.equals("") ) return false;
-		//if( this.voyagesCoupe()                 ) return false;
 		
 		this.espece = espece;
 		
@@ -104,7 +103,6 @@ public class Voyage
 		double y = voyage.getPlaneteDestination().getPosY() - Math.max(this.planeteDestination.getPosY(), this.planeteSource.getPosY());
 		
 		double hauteurRel = 1.0 * ( voyage.getPente() * ( x ) - ( y ) );
-		
 		
 		return hauteurRel < Math.max(this.planeteDestination.getPosY(), this.planeteSource.getPosY()) -
 		                    Math.min(this.planeteDestination.getPosY(), this.planeteSource.getPosY())   &&
