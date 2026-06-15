@@ -1,6 +1,5 @@
 package srcJeu.metier.manches;
 
-import java.lang.classfile.instruction.TableSwitchInstruction;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -41,8 +40,11 @@ public class Pioche
 		{
 			for (int cpt = 0; cpt < metier.getPlateau().getNbPlanetes() ; cpt++) 
 			{
-				this.pioche.add(TAB_CARTES_DEMO[cpt]);
+				this.pioche.add(TAB_CARTES_DEMO[cpt+cpt]);
+				this.pioche.add(TAB_CARTES_DEMO[cpt+cpt+1]);
 			}
+			this.pioche.add(TAB_CARTES_DEMO[8]);
+			this.pioche.add(TAB_CARTES_DEMO[9]);
 		}
 	}
 	
