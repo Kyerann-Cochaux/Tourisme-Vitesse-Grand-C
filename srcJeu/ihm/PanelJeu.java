@@ -362,8 +362,8 @@ public class PanelJeu extends JPanel
 					w = PanelJeu.this.lblActionPioche.getWidth ();
 					h = PanelJeu.this.lblActionPioche.getHeight();
 
-					if (!PanelJeu.this.frameJeu.isResizable() ) y = 685;
-					else                                       y = 645;
+					if (!PanelJeu.this.frameJeu.isResizable() ) y = 675;
+					else                                        y = 645;
 					
 
 					g2.setStroke(new BasicStroke(4) );
@@ -397,33 +397,20 @@ public class PanelJeu extends JPanel
 					PanelJeu.this.setCursor(Cursor.getDefaultCursor() );
 
 				}
-				
-
+		
 			}
 		};
 	}
 
-	private void majDefausse()
-	{
-		String cartePosee = this.ctrl.getSommet();
 
-		String[] tab = null;
-
-		if (cartePosee.contains("Prem") ) 
-		{
-			tab = this.tabPremiumPosee;
-			this.tabPremiumPosee[tab.length - this.getNbCartesDos(tab)]  = cartePosee;
-		}
-		else
-		{
-     		tab = this.tabStandardsPosee;
-			this.tabStandardsPosee[tab.length - this.getNbCartesDos(tab)]  = cartePosee;
-		} 
-
-		this.ctrl.decouvrirCarte();
-
-	}
-
+	/**
+	 * Maj Images
+	 * 
+	 * Méthode de mise à jour des éléments graphiques du l'interface.
+	 * Cette méthode appelle majDefausse et majScore avant de mettre à jours les éléments 
+	 * dont l'état dépend des changements fait par les méthodes cité ci-dessus.
+	 * 
+	 */
 	private void majImages()
 	{
 		int r, g, b;
@@ -437,7 +424,7 @@ public class PanelJeu extends JPanel
 			{
 				this.tabPremiumPosee  [cpt] = null;
 				this.tabStandardsPosee[cpt] = null;	
-			}	
+			}
 
 		}
 		
@@ -470,6 +457,13 @@ public class PanelJeu extends JPanel
 					+" </body> "
 				+"</html>"
 			);
+
+			JOptionPane.showMessageDialog (
+			    this,  
+			    "Fin de la partie, votre score est de " + this.ctrl.getScoreTotal(),
+			    "Fin de partie", JOptionPane.INFORMATION_MESSAGE);
+				
+			this.frameJeu.ouvrirPanel(FrameJeu.PANEL_MENU);
 		}
 
 		r = FrameJeu.TAB_COUL_LIENS[ this.ctrl.getEnsEspece().indexOf(this.ctrl.getEspCroisiereCrt() ) ].getRed  ();
@@ -497,6 +491,40 @@ public class PanelJeu extends JPanel
 		this.repaint   ();
 	}
 
+	/**
+	 * Maj Défausse
+	 * 
+	 * Met à jour les cartes défaussé avant de tiré la prochaine carte.
+	 * C'et cette méthode qui est utilisé pour passé à la destination suivante.
+	 * 
+	 */
+	private void majDefausse()
+	{
+		String cartePosee = this.ctrl.getSommet();
+
+		String[] tab = null;
+
+		if (cartePosee.contains("Prem") ) 
+		{
+			tab = this.tabPremiumPosee;
+			this.tabPremiumPosee[tab.length - this.getNbCartesDos(tab)]  = cartePosee;
+		}
+		else
+		{
+			tab = this.tabStandardsPosee;
+			this.tabStandardsPosee[tab.length - this.getNbCartesDos(tab)]  = cartePosee;
+		} 
+
+		this.ctrl.decouvrirCarte();
+
+	}
+
+	/**
+	 * Maj Score Espèce
+	 * 
+	 * Met à jour la partie Score du plateau, elle permet aussi d'ajouté un retour visuel sur quelle espèce est en cours de croisière
+	 * 
+	 */
 	private void majScoreEspece()
 	{
 		this.panelScoreEspeces.removeAll();
@@ -534,8 +562,8 @@ public class PanelJeu extends JPanel
 			}
 			else 
 			{
-				lblScore.setFont(new Font("Monospaced", Font.BOLD, 19) );
-				lblScore.setForeground(Color.decode("#0ba8d3"));
+				lblScore.setFont      (new Font("Monospaced", Font.BOLD, 19) );
+				lblScore.setForeground(Color.decode("#0ba8d3"            ) );
 
 				lblScore.setText(String.format("%-16s","     Total ") +" : "+ this.ctrl.getScoreTotal() ) ;
 			}
@@ -545,6 +573,7 @@ public class PanelJeu extends JPanel
 		}
 	}
 
+	
 	private void selectionnerExtremite( int posColClk, int posLigClk )
 	{
 		this.panelPlateau.setExtremiteSlct( new Point( posColClk, posLigClk ) );

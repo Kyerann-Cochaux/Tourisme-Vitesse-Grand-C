@@ -20,7 +20,7 @@ public class FrameJeu extends JFrame implements ActionListener
 	protected static final Color COULEUR_ZONE  = Color.decode("#f3f3f3");
 
 	protected static final Color COULEUR_FOND_FONCE   = new Color (85, 64, 98);
-	protected static final Color COULEUR_FOND_CLAIR  = new Color (70, 70, 70);
+	protected static final Color COULEUR_FOND_CLAIR   = new Color (70, 70, 70);
 	protected static final Color COULEUR_FOND_PLATEAU = new Color (31, 31, 31);
 
 	protected static final Color[] TAB_COUL_LIENS = { Color.decode("#a37343"), // Chlorophite
@@ -29,16 +29,19 @@ public class FrameJeu extends JFrame implements ActionListener
 	                                                  Color.decode("#56e4ae")  // Silikon
 	                                                };
 	
-	protected static final int PANEL_JEU = 1;
+	protected static final int PANEL_JEU  = 1;
+	protected static final int PANEL_MENU = 2;
 	
 	private AppliJeu ctrl;
 	private JPanel   panelActuel;
 
 	private String nomSauvegardeChargee;
 
-	private JMenuBar  menub;
-	private JMenu     menu ;
-	private JMenuItem menui;
+	private JMenuBar  menubDemo;
+	private JMenu     menuDemo ;
+	private JMenuItem menuiDemo;
+
+	private JFileChooser explorateur;
 	
 	public FrameJeu(AppliJeu ctrl)
 	{
@@ -53,19 +56,24 @@ public class FrameJeu extends JFrame implements ActionListener
 		this.ctrl        = ctrl;
 		this.panelActuel = new PanelMenu(this.ctrl, this);
 
-		this.menub = new JMenuBar ();
-		this.menu  = new JMenu    ();
-		this.menui = new JMenuItem();
+		this.menubDemo = new JMenuBar ();
+		this.menuDemo  = new JMenu    ();
+		this.menuiDemo = new JMenuItem();
+
+		this.explorateur = new JFileChooser(new File("../sauvegardes/"));
 		
 		/* ---------------------------------- */
 		/*    Positionnement des composants   */
 		/* ---------------------------------- */
 		
-		this.menu .add(menui);
-		this.menub.add(menu );
-		
-		this.add(this.panelActuel);
-		
+		this.menuDemo .add(menuiDemo);
+		this.menubDemo.add(menuDemo );
+
+		this.menuiDemo.setAccelerator(KeyStroke .getKeyStroke(KeyEvent.VK_D, 
+			InputEvent.CTRL_DOWN_MASK + InputEvent.ALT_DOWN_MASK + InputEvent.SHIFT_DOWN_MASK)); 
+
+		this.setJMenuBar(    menubDemo   );	
+		this.add        (this.panelActuel);
 		/* ---------------------------------- */
 		/*      Activation des composants     */
 		/* ---------------------------------- */
@@ -73,9 +81,17 @@ public class FrameJeu extends JFrame implements ActionListener
 		this.setVisible              (true                );
 		//this.setResizable            (false               );
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		UIManager.put("FileChooser.openButtonText"         , "Ouvrir"      );
+		UIManager.put("FileChooser.cancelButtonText"       , "Annuler"     );
+		UIManager.put("FileChooser.lookInLabelText"        , "Chercher"    );
+		UIManager.put("FileChooser.fileNameLabelText"      , "Fichier"     );
+		UIManager.put("FileChooser.filesOfTypeLabelText"   , "Type"        );
+		UIManager.put("FileChooser.openButtonToolTipText"  , "Ouvrir"      );
+		UIManager.put("FileChooser.acceptAllFileFilterText", "type fichier");
 		
 
-		menui.addActionListener(this);
+		menuiDemo.addActionListener(this);
 
 	}
 
@@ -85,32 +101,36 @@ public class FrameJeu extends JFrame implements ActionListener
 
 		if (numeroPanel == FrameJeu.PANEL_JEU)
 		{
-			this.add             (new PanelJeu(ctrl, this) );
+			this.panelActuel = new PanelJeu(ctrl, this);
+			this.add             (this.panelActuel );
 			this.setExtendedState(JFrame.MAXIMIZED_BOTH    );
 
-			this.menui.setAccelerator(KeyStroke .getKeyStroke(KeyEvent.VK_D, 
-				                      InputEvent.CTRL_DOWN_MASK + InputEvent.ALT_DOWN_MASK + InputEvent.SHIFT_DOWN_MASK)); 
-			this.setJMenuBar(menub);
+			//this.setJMenuBar(null);
+		}
+
+		this.revalidate      ();
+
+
+		if (numeroPanel == FrameJeu.PANEL_MENU)
+		{
+			this.panelActuel = new PanelMenu(ctrl, this);
+			this.add             (this.panelActuel );
+			this.setSize    (500, 350                    );
+			this.setLocation(675, 400                    );
+
+			//this.setJMenuBar(null);
 		}
 	}
 
 	public String chargerFichier()
 	{
-		UIManager.put("FileChooser.openButtonText"         , "Ouvrir"      );
-		UIManager.put("FileChooser.cancelButtonText"       , "Annuler"     );
-		UIManager.put("FileChooser.lookInLabelText"        , "Chercher"    );
-		UIManager.put("FileChooser.fileNameLabelText"      , "Fichier"     );
-		UIManager.put("FileChooser.filesOfTypeLabelText"   , "Type"        );
-		UIManager.put("FileChooser.openButtonToolTipText"  , "Ouvrir"      );
-		UIManager.put("FileChooser.acceptAllFileFilterText", "type fichier");
 
-		JFileChooser explorateur = new JFileChooser();
 
 		String retFichier         = "";
 		this.nomSauvegardeChargee = "";
 		
 		explorateur.setDialogTitle     ("Ouvrir plateau..."          );
-		explorateur.setCurrentDirectory(new File ("../sauvegardes/") );
+		//explorateur.setCurrentDirectory(new File ("../sauvegardes/") );
 		
 		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
 		{
@@ -121,7 +141,6 @@ public class FrameJeu extends JFrame implements ActionListener
 				
 			retFichier = explorateur.getSelectedFile().getAbsolutePath();
 		}
-
 		this.nomSauvegardeChargee = retFichier;
 		return retFichier;
 
@@ -136,8 +155,20 @@ public class FrameJeu extends JFrame implements ActionListener
 
 		if (res == JOptionPane.YES_OPTION) 
 		{
-			//this.ctrl.chargerPlateau(this.nomSauvegardeChargee, true);
-			//this.ouvrirPanel        (FrameJeu.PANEL_JEU             );
+			this.explorateur = new JFileChooser(new File("../sauvegardes/demo/"));
+			String       fichier     = "";
+
+			if (this.explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+
+			{
+				fichier = this.explorateur.getSelectedFile().getAbsolutePath();
+				this.menubDemo = new MenuBarreDemo(this.ctrl, this); // On change la MenuBar vers une MenuBar similaire au mode Edition
+				this.setJMenuBar(this.menubDemo);
+				this.ctrl.chargerPlateau(fichier, true);
+				this.ouvrirPanel        (FrameJeu.PANEL_JEU);
+			}
+			
+			//System.out.println(this.nomSauvegardeChargee);
 			
 
 			//this.setTitle("COUCOU");

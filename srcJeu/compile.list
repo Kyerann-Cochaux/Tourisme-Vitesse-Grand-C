@@ -2,6 +2,7 @@
 ./ihm/PanelMenu.java
 ./ihm/PanelPlateau.java
 ./ihm/PanelJeu.java
+./ihm/MenuBarreDemo.java
 
 
 ./metier/Metier.java

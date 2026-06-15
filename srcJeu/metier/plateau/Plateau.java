@@ -117,8 +117,8 @@ public class Plateau
 				boolean coupeUnVoyage = false;
 				
 				// parcours de tout les voyages
-				//for (int indVoyage = 0; indVoyage < this.getNbVoyages(); indVoyage++)
-				//	coupeUnVoyage |= v.coupe(this.lstVoyages.get(indVoyage));
+				for (int indVoyage = 0; indVoyage < this.getNbVoyages(); indVoyage++)
+					coupeUnVoyage |= v.coupe(this.lstVoyages.get(indVoyage));
 				
 				System.out.println("++++++++++++++++++++++ coupe : " + coupeUnVoyage);
 				
