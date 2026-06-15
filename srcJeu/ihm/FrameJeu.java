@@ -130,7 +130,7 @@ public class FrameJeu extends JFrame implements ActionListener
 		this.nomSauvegardeChargee = "";
 		
 		explorateur.setDialogTitle     ("Ouvrir plateau..."          );
-		//explorateur.setCurrentDirectory(new File ("../sauvegardes/") );
+		explorateur.setCurrentDirectory(new File ("../sauvegardes/") );
 		
 		if (explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
 		{
@@ -156,6 +156,7 @@ public class FrameJeu extends JFrame implements ActionListener
 		if (res == JOptionPane.YES_OPTION) 
 		{
 			this.explorateur = new JFileChooser(new File("../sauvegardes/demo/"));
+			this.explorateur.setCurrentDirectory(new File ("../sauvegardes/demo") );
 			String       fichier     = "";
 
 			if (this.explorateur.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
