@@ -33,7 +33,7 @@ public class Manche
 	private Manche(String espece, Case c, Metier metier, boolean demo)
 	{
 		this.espece   = espece;
-		this.pioche   = new Pioche(metier);
+		this.pioche   = new Pioche(metier, demo);
 		if (!demo) this.pioche.melangerCarte(); // On mélange la pioche ici
 		this.lstCases = new ArrayList<Case>();
 		this.metier = metier;

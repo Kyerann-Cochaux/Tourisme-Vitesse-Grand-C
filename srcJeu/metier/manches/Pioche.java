@@ -1,5 +1,6 @@
 package srcJeu.metier.manches;
 
+import java.lang.classfile.instruction.TableSwitchInstruction;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,19 +9,41 @@ import srcJeu.metier.Metier;
 
 public class Pioche
 {
+	private static Carte[] TAB_CARTES_DEMO = {Carte.creerCarte("Joker", false) ,
+											  Carte.creerCarte("Joker", true ) ,
+											  Carte.creerCarte("Joker", false) ,
+											  Carte.creerCarte("Joker", true ) ,
+											  Carte.creerCarte("Joker", false) ,
+											  Carte.creerCarte("Joker", true ) ,
+											  Carte.creerCarte("Joker", false) ,
+											  Carte.creerCarte("Joker", true ) ,
+											  Carte.creerCarte("Joker", false) ,
+											  Carte.creerCarte("Joker", true ) ,
+											 };
+
 	private List<Carte> pioche;
 
-	public Pioche(Metier metier)
+	public Pioche(Metier metier, boolean demo)
 	{
 		this.pioche = new ArrayList<Carte>();
-		
-		for (int cpt = 0; cpt < metier.getPlateau().getNbPlanetes() ; cpt++) 
+		if(!demo)
 		{
-			this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], false) );
-			this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], true ) );
+
+			for (int cpt = 0; cpt < metier.getPlateau().getNbPlanetes() ; cpt++) 
+			{
+				this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], false) );
+				this.pioche.add(Carte.creerCarte(Metier.TAB_PLANETES[cpt], true ) );
+			}
+				this.pioche.add(Carte.creerCarte("Joker", false) );
+				this.pioche.add(Carte.creerCarte("Joker", true ) );
 		}
-			this.pioche.add(Carte.creerCarte("Joker", false) );
-			this.pioche.add(Carte.creerCarte("Joker", true ) );	
+		else
+		{
+			for (int cpt = 0; cpt < metier.getPlateau().getNbPlanetes() ; cpt++) 
+			{
+				this.pioche.add(TAB_CARTES_DEMO[cpt]);
+			}
+		}
 	}
 	
 	/* ---------------------------------- */
