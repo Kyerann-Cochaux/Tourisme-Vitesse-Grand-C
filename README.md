@@ -67,12 +67,3 @@ Pour supprimer un départ, faite un clic droit sur le départ à supprimer.
 • Vous pouvez maintenir le clic enfoncé pour "peindre" le plateau avec les éléments de votre choix<br>
 Il est également possible de supprimer les éléments de cette façon, à l'exception des zones 
 
-## Comment Jouer ?
-
-### Lancer l'Application de Jeu
-#### Sur Windows : 
-Aller dans le répertoire `/lanceursJeu`, puis lancer l'application avec la commande `LancerJeu.bat`
-#### Sur Linux : 
-Aller dans le répertoire `/lanceursJeu`, puis lancer l'application avec la commande `./LancerJeu.sh`
-
-
