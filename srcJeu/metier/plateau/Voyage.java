@@ -71,45 +71,42 @@ public class Voyage
 	// retourne si ce voyage coupe un autre voyage qui as une espece
 	public boolean coupe(Voyage voyage)
 	{
-		// si les deux voyages sont paralelles (memes pentes)
-		if ( this.pente == voyage.getPente() ) return false;
+		int xA = this.getPlaneteDestination().getPosX();
+		int yA = this.getPlaneteDestination().getPosY();
+
+		int xB = this.getPlaneteSource().getPosX();
+		int yB = this.getPlaneteSource().getPosY();
+
+		int xC = voyage.getPlaneteDestination().getPosX();
+		int yC = voyage.getPlaneteDestination().getPosY();
+
+		int xD = voyage.getPlaneteSource().getPosX();
+		int yD = voyage.getPlaneteSource().getPosY();
+
+		int ori1 = calculOrientation(yA, xA, yB, xB, yC, xC);
+		int ori2 = calculOrientation(yA, xA, yB, xB, yD, xD);
+		int ori3 = calculOrientation(yC, xC, yD, xD, yA, xA);
+		int ori4 = calculOrientation(yC, xC, yD, xD, yB, xB);
 		
-		
-		// si il y as une espece sur ce voyage
-		if ( this.espece != null ) return false;
-		
-		
-		// si les deux voyages n'ont pas d'espece ca ne sert a rien de tester le reste
-		// if ( this.espece != null && voyage.getEspece() != null ) return false;
-		
-		double intersectionX =  1.0 * ( voyage.getHauteur() - this.hauteur ) / ( this.pente - voyage.getPente() );
-		//double intersectionY = (1.0 * this.pente * intersectionX + this.hauteur);
-		
-		// si la pente n'es pas parfaitement verticale 
-		if ( !Double.isInfinite(this.pente) )
-		{
-			if ( intersectionX > Math.min(this.planeteDestination.getPosX(), this.planeteSource.getPosX()) && 
-				intersectionX < Math.max(this.planeteDestination.getPosX(), this.planeteSource.getPosX()) && 
-				
-				intersectionX > Math.min(voyage.getPlaneteDestination().getPosX(), voyage.getPlaneteSource().getPosX()) && 
-				intersectionX < Math.max(voyage.getPlaneteDestination().getPosX(), voyage.getPlaneteSource().getPosX())
-			) {
-				return voyage.getEspece() != null;
-			}
-		}
-		
-		
-		double x = voyage.getPlaneteDestination().getPosX() - Math.max(this.planeteDestination.getPosX(), this.planeteSource.getPosX());
-		double y = voyage.getPlaneteDestination().getPosY() - Math.max(this.planeteDestination.getPosY(), this.planeteSource.getPosY());
-		
-		double hauteurRel = 1.0 * ( voyage.getPente() * ( x ) - ( y ) );
-		
-		return hauteurRel < Math.max(this.planeteDestination.getPosY(), this.planeteSource.getPosY()) -
-		                    Math.min(this.planeteDestination.getPosY(), this.planeteSource.getPosY())   &&
-		       hauteurRel > 0                                                                           &&
+		// Les segments se croisent si et seulement si :
+		// - C et D sont de côtés opposés de la droite (AB) (l'un est horaire, l'autre anti-horaire)
+		// - A et B sont de côtés opposés de la droite (CD)
+		return ((ori1 == 1 && ori2 == 2) || (ori1 == 2 && ori2 == 1)) &&
+		       ((ori3 == 1 && ori4 == 2) || (ori3 == 2 && ori4 == 1)) && 
 		       voyage.getEspece() != null;
 	}
-	
+
+	/**
+	 * Détermine l'orientation de trois points (1 = Horaire, 2 = Anti-horaire, 0 = Alignés)
+	 */
+	private int calculOrientation(int lig1, int col1, int lig2, int col2, int lig3, int col3)
+	{
+		// Calcul du produit en croix (en considérant col comme X et lig comme Y)
+		long sens = (long)(lig2 - lig1) * (col3 - col2) - (long)(col2 - col1) * (lig3 - lig2);
+		
+		if     (sens == 0) return 0; // Les points sont alignés
+		return (sens >  0) ? 1 : 2; // 1 = Sens horaire, 2 = Sens anti-horaire
+	}
 	
 	/* ---------------------------------- */
 	/*          Méthodes standard         */
