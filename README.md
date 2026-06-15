@@ -1,5 +1,23 @@
 # Tourisme à Vitesse Grand C
 
+## Comment Jouer ?
+
+### Lancer l'Application de Jeu
+#### Sur Windows : 
+Aller dans le répertoire `/lanceursJeu`, puis lancer l'application avec la commande `LancerJeu.bat`
+#### Sur Linux : 
+Aller dans le répertoire `/lanceursJeu`, puis lancer l'application avec la commande `./LancerJeu.sh`
+<br>
+<br>
+Vous pouvez ensuite Ouvrir un plateau de jeu présent dans votre fichier de sauvegarde
+
+### Contrôles du Plateau
+#### Effectué des voyages
+Cliquez sur une des extrémitié de votre voyage actuelle, l'extrémité selectionner sera indiqué par un halo mangenta.
+Ensuite, cliquez sur la planète déstination de votre choix, tant que le voyage voulu réspècte les règles, il sera effecuté !
+#### Passer sont tour
+Cliquez sur la carte Destination Actuelle en bas à gauche de l'écran pour passer à la déstination suivante
+
 ## Comment Editer un Plateau ?
 
 ### Lancer l'Application de Création de Plateaux
