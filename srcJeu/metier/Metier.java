@@ -270,7 +270,7 @@ public class Metier
 		{
 			for (Manche m : this.lstManches) 
 			{
-				System.out.println(m.getPioche() );
+				//System.out.println(m.getPioche() );
 				
 			}
 		}

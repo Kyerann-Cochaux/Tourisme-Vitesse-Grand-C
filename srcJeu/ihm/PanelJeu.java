@@ -9,6 +9,7 @@ import java.util.List;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -54,6 +55,8 @@ public class PanelJeu extends JPanel
 	private String[] tabStandardsPosee;
 	private String[] tabPremiumPosee;
 
+	private JPanel panelPioche;
+
 
 	public PanelJeu(AppliJeu ctrl, FrameJeu frameJeu)
 	{
@@ -64,7 +67,7 @@ public class PanelJeu extends JPanel
 
 		//sous panels du panelScore
 		JPanel panelScoreLabels;
-		JPanel panelPioche;
+
 
 		// RGB utilisé pour la couleur du texte de l'espèce
 		int r, g, b;
@@ -96,7 +99,7 @@ public class PanelJeu extends JPanel
 		this.panelScoreEspeces.setLayout(gl1);
 	
 		this.panelCartes = new JPanel(new GridLayout(4,1) );
-		panelPioche      = new JPanel();
+		this.panelPioche      = new JPanel();
 
 		this.spPlateau = new JScrollPane(panelCentre);
 
@@ -138,8 +141,8 @@ public class PanelJeu extends JPanel
 		
 
 		this.lblTexteScore     = new JLabel("Score des croisières : ", SwingConstants.CENTER);
-		this.lblTextePremium   = new JLabel("Cartes Premium : "      );
-		this.lblTexteStandards = new JLabel("Cartes Standards : "    );
+		this.lblTextePremium   = new JLabel("    Cartes Premium : "      );
+		this.lblTexteStandards = new JLabel("    Cartes Standards : "    );
 		this.lblTextePioche    = new JLabel
 		(
 			"<html>" + 
@@ -161,7 +164,7 @@ public class PanelJeu extends JPanel
 		this.panelScoreEspeces.setBackground(FrameJeu.COULEUR_FOND_CLAIR);
 		panelScoreLabels      .setBackground(FrameJeu.COULEUR_FOND_CLAIR);
 
-		panelPioche.setOpaque(false);
+		this.panelPioche.setOpaque(false);
 
 		panelCentre.setBackground(FrameJeu.COULEUR_FOND_PLATEAU);
 
@@ -181,11 +184,11 @@ public class PanelJeu extends JPanel
 
 		this.lblTexteStandards.setForeground(FrameJeu.COULEUR_ZONE              );
 		this.lblTexteStandards.setOpaque    (false                              );
-		this.lblTexteStandards.setFont      (new Font("Goldman", Font.BOLD, 17) );
+		this.lblTexteStandards.setFont      (new Font("Goldman", Font.BOLD, 19) );
 
 		this.lblTextePremium.setForeground(FrameJeu.COULEUR_ZONE              );
 		this.lblTextePremium.setOpaque    (false                              );
-		this.lblTextePremium.setFont      (new Font("Goldman", Font.BOLD, 17) );
+		this.lblTextePremium.setFont      (new Font("Goldman", Font.BOLD, 19) );
 
 		this.lblTextePioche.setFont      (FrameJeu.POLICE_TEXTE);
 		this.lblTextePioche.setForeground(FrameJeu.COULEUR_ZONE);
@@ -203,13 +206,13 @@ public class PanelJeu extends JPanel
 		
 		this.majScoreEspece();
 
-		panelPioche.add(this.lblActionPioche);
+		this.panelPioche.add(this.lblActionPioche);
 		
 
 		panelScore.add(panelScoreLabels      );
 		panelScore.add(this.panelScoreEspeces);
 		panelScore.add(this.lblTextePioche   );
-		panelScore.add( panelPioche );
+		panelScore.add( this.panelPioche );
 		
 		panelCentre.add( this.panelPlateau, new GridBagConstraints() );
 
@@ -227,12 +230,9 @@ public class PanelJeu extends JPanel
 		/* ---------------------------------- */
 
 		// Activation du Panel Plateau
-		this.panelPlateau   .addMouseListener(this.gererClic() );
-		this.lblActionPioche.addMouseListener(this.gererClic() );
+		this.panelPlateau   .addMouseListener      (this.gererClic() );
+		this.lblActionPioche.addMouseListener      (this.gererClic() );
 		this.lblActionPioche.addMouseMotionListener(this.gererClic() );
-
-
-
 	}
 
 	private int getNbCartesDos(String[] tabCartesPosees)
@@ -329,8 +329,8 @@ public class PanelJeu extends JPanel
 					}
 
 					// Gestion de la création de Voyage
-					if ( e.getButton() == MouseEvent.BUTTON1                      && 
-					     PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null &&
+					if ( e.getButton() == MouseEvent.BUTTON1                       && 
+					      PanelJeu.this.panelPlateau.getPosExtremiteSlct() != null &&
 					     !PanelJeu.this.ctrl.estExtremite(posColClk,posLigClk)
 					   )
 					{
@@ -362,13 +362,20 @@ public class PanelJeu extends JPanel
 					w = PanelJeu.this.lblActionPioche.getWidth ();
 					h = PanelJeu.this.lblActionPioche.getHeight();
 
+					JLabel lblPioche;
+
+					for (Component comp : PanelJeu.this.panelPioche.getComponents() ) 
+					{
+					//	System.out.println( "(" + ((JLabel)comp).ge  +")");	
+					} 
+
 					if (!PanelJeu.this.frameJeu.isResizable() ) y = 675;
 					else                                        y = 645;
 					
 
-					g2.setStroke(new BasicStroke(4) );
-					g2.setColor(Color.decode("#eff31d"));
-					g2.drawRect(x -20,y,w + 40,h + 40);	
+					//g2.setStroke(new BasicStroke(4) );
+					//g2.setColor(Color.decode("#eff31d"));
+					///g2.drawRect(x -20,y,w + 40,h + 40);	
 
 					PanelJeu.this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR) );
 				}
@@ -383,17 +390,17 @@ public class PanelJeu extends JPanel
 
 				if (e.getSource() == PanelJeu.this.lblActionPioche)
 				{
-					int x = PanelJeu.this.lblActionPioche.getX     ();
-					int w = PanelJeu.this.lblActionPioche.getWidth ();
-					int h = PanelJeu.this.lblActionPioche.getHeight();
-					int y;
+					//int x = PanelJeu.this.lblActionPioche.getX     ();
+					//int w = PanelJeu.this.lblActionPioche.getWidth ();
+					//int h = PanelJeu.this.lblActionPioche.getHeight();
+					//int y;
 
-					if (!PanelJeu.this.frameJeu.isResizable() ) y = 685;
-					else                                       y = 645;
+					//if (!PanelJeu.this.frameJeu.isResizable() ) y = 685;
+					//else                                       y = 645;
 
-					g2.setStroke(new BasicStroke (4)         );
-					g2.setColor (FrameJeu.COULEUR_FOND_CLAIR );
-					g2.drawRect (x -20,y,w + 40,h + 40     );
+					//g2.setStroke(new BasicStroke (4)         );
+					//g2.setColor (FrameJeu.COULEUR_FOND_CLAIR );
+					//g2.drawRect (x -20,y,w + 40,h + 40     );
 					
 					PanelJeu.this.setCursor(Cursor.getDefaultCursor() );
 

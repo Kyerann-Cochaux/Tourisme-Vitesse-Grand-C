@@ -191,7 +191,7 @@ public class PanelPlateau extends JPanel
 		int posExSelcX = (int) this.posExtremiteSlct.getX() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
 		int posExSelcY = (int) this.posExtremiteSlct.getY() * TAILLE_CASE + TAILLE_CASE / 2 - TAILLE_CASE / ( 1 * 2 ) ;
 
-		System.out.println("PosExtremité -> (" + posExSelcX + ":" + posExSelcY + ")");
+		//System.out.println("PosExtremité -> (" + posExSelcX + ":" + posExSelcY + ")");
 		
 		g2.fillOval( posExSelcX,
 		             posExSelcY,
